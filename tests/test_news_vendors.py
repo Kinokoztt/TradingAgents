@@ -10,6 +10,7 @@ import pytest
 
 from tradingagents.dataflows import fmp, massive
 from tradingagents.market_tools.us import news as news_tools
+from tradingagents.market_tools.us import prices as prices_tool
 from tradingagents.market_tools.us import splits as splits_tool
 
 pytestmark = pytest.mark.unit
@@ -96,6 +97,21 @@ def test_massive_fetch_splits_paginates():
         "split_from": 1,
         "split_to": 10,
     }
+
+
+def test_latest_trading_day_uses_partition_filter():
+    captured = {}
+
+    def fake_run_query(sql, params=None, project=None):
+        captured["sql"] = sql
+        return pd.DataFrame({"d": [pd.Timestamp("2026-06-05")]})
+
+    with patch.object(prices_tool, "run_query", side_effect=fake_run_query):
+        out = prices_tool.latest_trading_day("2026-06-09")
+
+    assert out == "2026-06-05"
+    # day_aggs_di requires a partition filter; the query must bound trade_date
+    assert "trade_date BETWEEN" in captured["sql"]
 
 
 def test_load_splits_filters_to_universe():

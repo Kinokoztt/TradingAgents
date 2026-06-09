@@ -6,25 +6,39 @@ concept_graph/sources/comovement.py and concept-graph-design.md §4.2).
 
 from __future__ import annotations
 
+from datetime import date, datetime, timedelta
+
 import pandas as pd
 
 from ._bigquery import DAY_TABLE, MINUTE_TABLE, fq, run_query
 
 
-def latest_trading_day(as_of: str | None = None) -> str:
-    """Most recent trade_date in day_aggs_di (<= as_of if given), as YYYY-MM-DD.
+def latest_trading_day(as_of: str | None = None, lookback_days: int = 14) -> str:
+    """Most recent trade_date in day_aggs_di (<= as_of), as YYYY-MM-DD.
 
     Used by the pre-market batch: the graph is built as of the last completed
     session, since the current day's bars don't exist yet pre-open.
+
+    day_aggs_di requires a partition filter on trade_date, so we bound the
+    scan to the last ``lookback_days`` (enough to span weekends/holidays).
     """
     from google.cloud import bigquery
 
-    where, params = "", None
-    if as_of:
-        where = "WHERE trade_date <= @as_of"
-        params = [bigquery.ScalarQueryParameter("as_of", "DATE", as_of)]
-    df = run_query(f"SELECT MAX(trade_date) AS d FROM {fq(DAY_TABLE)} {where}", params)
-    return pd.to_datetime(df["d"].iloc[0]).strftime("%Y-%m-%d")
+    upper = as_of or date.today().strftime("%Y-%m-%d")
+    lower = (datetime.fromisoformat(upper) - timedelta(days=lookback_days)).strftime("%Y-%m-%d")
+    sql = f"""
+        SELECT MAX(trade_date) AS d
+        FROM {fq(DAY_TABLE)}
+        WHERE trade_date BETWEEN @lower AND @upper
+    """
+    params = [
+        bigquery.ScalarQueryParameter("lower", "DATE", lower),
+        bigquery.ScalarQueryParameter("upper", "DATE", upper),
+    ]
+    d = run_query(sql, params)["d"].iloc[0]
+    if pd.isna(d):
+        raise ValueError(f"no trading day in day_aggs_di within {lower}..{upper}")
+    return pd.to_datetime(d).strftime("%Y-%m-%d")
 
 
 def load_daily_close(

@@ -14,7 +14,7 @@ set -euo pipefail
 
 REPO="${CG_REPO:-/Users/wangzetian/Projects/TradingAgents}"
 PY="${CG_PY:-/opt/anaconda3/envs/py10/bin/python}"
-BUCKET="${CG_GCS_BUCKET:?set CG_GCS_BUCKET to your GCS bucket name}"
+BUCKET="${CG_GCS_BUCKET:-trading_agent}"
 PREFIX="${CG_GCS_PREFIX:-concept_graph}"
 LOG_DIR="${CG_LOG_DIR:-$REPO/logs}"
 
