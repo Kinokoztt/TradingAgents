@@ -11,12 +11,12 @@
       "XOM",
       "CVX"
     ],
-    "label": "\u77f3\u6cb9\u5929\u7136\u6c14"
+    "label": "Integrated Oil & Gas"
   },
   "TH_5": {
     "cluster_id": "TH_5",
     "level": "theme",
-    "parent_sector": "Consumer Staples",
+    "parent_sector": "Consumer Discretionary",
     "members": [
       "COST",
       "WMT"
@@ -25,12 +25,12 @@
       "WMT",
       "COST"
     ],
-    "label": "\u96f6\u552e"
+    "label": "Retail & Consumer Staples"
   },
   "TH_1": {
     "cluster_id": "TH_1",
     "level": "theme",
-    "parent_sector": "Semiconductor",
+    "parent_sector": "Technology",
     "members": [
       "AMD",
       "INTC",
@@ -41,7 +41,7 @@
       "MU",
       "INTC"
     ],
-    "label": "\u534a\u5bfc\u4f53"
+    "label": "Semiconductors"
   },
   "TH_2": {
     "cluster_id": "TH_2",
@@ -57,12 +57,12 @@
       "BAC",
       "GS"
     ],
-    "label": "\u91d1\u878d\u670d\u52a1"
+    "label": "Banking & Financial Services"
   },
   "TH_6": {
     "cluster_id": "TH_6",
     "level": "theme",
-    "parent_sector": "Consumer Staples",
+    "parent_sector": "Consumer Discretionary",
     "members": [
       "AAPL",
       "KO",
@@ -73,12 +73,12 @@
       "KO",
       "AAPL"
     ],
-    "label": "\u65e5\u5e38\u6d88\u8d39\u4e0e\u79d1\u6280"
+    "label": "Consumer Goods & Tech"
   },
   "TH_0": {
     "cluster_id": "TH_0",
     "level": "theme",
-    "parent_sector": "Communication Services",
+    "parent_sector": "Technology",
     "members": [
       "AMZN",
       "GOOGL",
@@ -89,7 +89,7 @@
       "META",
       "GOOGL"
     ],
-    "label": "\u4e92\u8054\u7f51\u5de8\u5934"
+    "label": "Internet & Digital Platforms"
   },
   "TH_7": {
     "cluster_id": "TH_7",
@@ -103,7 +103,7 @@
       "LLY",
       "PFE"
     ],
-    "label": "\u751f\u7269\u5236\u836f"
+    "label": "Pharmaceuticals"
   },
   "TH_3": {
     "cluster_id": "TH_3",
@@ -117,12 +117,12 @@
       "MSFT",
       "NFLX"
     ],
-    "label": "\u8f6f\u4ef6\u4e0e\u6d41\u5a92\u4f53"
+    "label": "Software & Digital Media"
   },
   "TH_8": {
     "cluster_id": "TH_8",
     "level": "theme",
-    "parent_sector": "Semiconductor",
+    "parent_sector": "Technology",
     "members": [
       "AVGO",
       "NVDA"
@@ -131,6 +131,6 @@
       "NVDA",
       "AVGO"
     ],
-    "label": "\u4eba\u5de5\u667a\u80fd\u82af\u7247"
+    "label": "AI Chips & Hardware"
   }
 }
