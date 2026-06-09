@@ -11,6 +11,22 @@ import pandas as pd
 from ._bigquery import DAY_TABLE, MINUTE_TABLE, fq, run_query
 
 
+def latest_trading_day(as_of: str | None = None) -> str:
+    """Most recent trade_date in day_aggs_di (<= as_of if given), as YYYY-MM-DD.
+
+    Used by the pre-market batch: the graph is built as of the last completed
+    session, since the current day's bars don't exist yet pre-open.
+    """
+    from google.cloud import bigquery
+
+    where, params = "", None
+    if as_of:
+        where = "WHERE trade_date <= @as_of"
+        params = [bigquery.ScalarQueryParameter("as_of", "DATE", as_of)]
+    df = run_query(f"SELECT MAX(trade_date) AS d FROM {fq(DAY_TABLE)} {where}", params)
+    return pd.to_datetime(df["d"].iloc[0]).strftime("%Y-%m-%d")
+
+
 def load_daily_close(
     tickers: list[str],
     start_date: str,

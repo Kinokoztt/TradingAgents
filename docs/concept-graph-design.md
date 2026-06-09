@@ -269,7 +269,7 @@ scripts/
 | G5 | 簇命名（Gemini 结构化输出 → 填充 label/parent_sector）✅ 已实现（`naming.py`，默认 gemini-3.1-flash-lite） | P2 | 0.5d | G4 |
 | G6 | 催化剂图传导 `propagate.py` | P2 | 0.5d | G3 |
 | G7 | 持久化（本地 JSON `store.py`）+ `service.py` 接口（get_cluster_map/label/neighbors）✅ 已实现 | P1 | 0.5d | G3,G4 |
-| G8 | `scripts/rebuild_concept_graph.py` 离线重算（CLI + 日志抑制 + 可选命名）✅ 已实现；调度待接 | P2 | 0.5d | G7 |
+| G8 | `scripts/rebuild_concept_graph.py` 离线重算（CLI + 日志抑制 + 命名 + `--as-of latest` + `--gcs-bucket` 上传）✅ 已实现；`scripts/run_concept_graph_daily.sh` 每日 wrapper；调度器配置待用户确认 | P2 | 0.5d | G7 |
 
 > 备注（G-Q3）：G2 开发新闻 vendor 时，**增加历史回溯深度测试**——验证 Massive/FMP 新闻接口能否拉到 ≥2024 的历史（co-mention 90 天窗口需足够历史冷启动）；若某接口历史不足，则该信号的建图起点相应顺延，或先用较短窗口启动。
 

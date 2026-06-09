@@ -36,7 +36,7 @@ from tradingagents.dataflows.secrets import load_secrets_to_env
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--as-of", required=True, help="As-of date YYYY-MM-DD")
+    p.add_argument("--as-of", required=True, help="As-of date YYYY-MM-DD, or 'latest' for the last completed session")
     grp = p.add_mutually_exclusive_group(required=True)
     grp.add_argument("--tickers", help="Comma-separated universe subset")
     grp.add_argument("--all", action="store_true", help="Use the full candidate universe")
@@ -58,9 +58,20 @@ def main() -> int:
     p.add_argument("--name", action="store_true", help="Run LLM cluster naming after detection")
     p.add_argument("--naming-model", default=None)
 
+    # durable storage (GCS)
+    p.add_argument("--gcs-bucket", default=None, help="If set, upload the snapshot to this bucket")
+    p.add_argument("--gcs-prefix", default="concept_graph")
+
     args = p.parse_args()
 
     load_secrets_to_env()
+
+    as_of = args.as_of
+    if as_of == "latest":
+        from tradingagents.market_tools import get_market_tools
+
+        as_of = get_market_tools(args.market).latest_trading_day()
+        print(f"resolved --as-of latest -> {as_of}")
 
     universe = None if args.all else [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
     gcfg = GraphConfig(comovement_window=args.comovement_window, prune_top_k=args.prune_top_k)
@@ -73,14 +84,14 @@ def main() -> int:
     )
 
     edges, g, memberships, clusters = build_detect_save(
-        args.as_of, universe=universe, config=gcfg, community_config=ccfg,
+        as_of, universe=universe, config=gcfg, community_config=ccfg,
         market=args.market, out_dir=args.out_dir,
     )
     print(f"nodes={g.number_of_nodes()} edges={g.number_of_edges()} clusters={len(clusters)}")
 
     if args.name:
         clusters = name_and_save_clusters(
-            args.as_of, out_dir=args.out_dir,
+            as_of, out_dir=args.out_dir,
             **({"model": args.naming_model} if args.naming_model else {}),
         )
         print("named clusters:")
@@ -90,7 +101,15 @@ def main() -> int:
         for cid, c in clusters.items():
             print(f"  {cid} (sector={c.parent_sector}): {c.members}")
 
-    print(f"\nsnapshot written to {args.out_dir}/{args.as_of}/")
+    print(f"\nsnapshot written to {args.out_dir}/{as_of}/")
+
+    if args.gcs_bucket:
+        from tradingagents.concept_graph.gcs import upload_snapshot
+
+        uris = upload_snapshot(as_of, args.gcs_bucket, args.gcs_prefix, out_dir=args.out_dir)
+        print("uploaded to GCS:")
+        for u in uris:
+            print(f"  {u}")
     return 0
 
 

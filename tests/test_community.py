@@ -119,6 +119,40 @@ def test_name_clusters_fills_label_and_sector():
     assert out["TH_9"].parent_sector == "SEC_3"
 
 
+def test_gcs_upload_snapshot(tmp_path):
+    from unittest.mock import MagicMock, patch
+
+    from tradingagents.concept_graph import gcs
+
+    snap = tmp_path / "2026-06-05"
+    snap.mkdir(parents=True)
+    for name in ("edges.json", "memberships.json", "clusters.json"):
+        (snap / name).write_text("{}")
+
+    blobs = []
+    fake_bucket = MagicMock()
+    fake_bucket.blob.side_effect = lambda p: blobs.append(p) or MagicMock()
+    fake_client = MagicMock()
+    fake_client.bucket.return_value = fake_bucket
+
+    fake_storage = MagicMock()
+    fake_storage.Client.return_value = fake_client
+    # the function does `from google.cloud import storage`; override that submodule
+    with patch.dict("sys.modules", {"google.cloud.storage": fake_storage}):
+        uris = gcs.upload_snapshot("2026-06-05", "my-bucket", prefix="cg", out_dir=str(tmp_path))
+
+    assert uris == [
+        "gs://my-bucket/cg/2026-06-05/edges.json",
+        "gs://my-bucket/cg/2026-06-05/memberships.json",
+        "gs://my-bucket/cg/2026-06-05/clusters.json",
+    ]
+    assert blobs == [
+        "cg/2026-06-05/edges.json",
+        "cg/2026-06-05/memberships.json",
+        "cg/2026-06-05/clusters.json",
+    ]
+
+
 def test_store_roundtrip(tmp_path):
     edges = pd.DataFrame(
         {"src": ["A", "A"], "dst": ["B", "C"], "weight": [0.8, 0.5],

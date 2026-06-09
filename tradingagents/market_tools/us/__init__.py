@@ -14,7 +14,7 @@ from .news import (
     get_stock_news,
     load_news_articles,
 )
-from .prices import load_daily_close, load_minute_close
+from .prices import latest_trading_day, load_daily_close, load_minute_close
 from .splits import load_splits
 from .universe import load_candidate_universe
 
@@ -25,6 +25,7 @@ __all__ = [
     "get_economic_calendar",
     "load_daily_close",
     "load_minute_close",
+    "latest_trading_day",
     "load_splits",
     "load_macro_daily",
     "get_macro_summary",
