@@ -17,8 +17,8 @@ DEFAULT_NAMING_MODEL = "gemini-3.1-flash-lite"
 
 class _ClusterName(BaseModel):
     cluster_id: str
-    label: str = Field(description="Concise theme name, e.g. 'HBM/存储' or 'AI 推理芯片'")
-    parent_sector: str = Field(description="Broad sector, e.g. 'Semiconductor', 'Energy'")
+    label: str = Field(description="Concise English theme name, e.g. 'HBM/Storage' or 'AI Inference Chips'")
+    parent_sector: str = Field(description="Broad English sector, e.g. 'Semiconductor', 'Energy'")
 
 
 class _ClusterNames(BaseModel):
@@ -28,8 +28,9 @@ class _ClusterNames(BaseModel):
 def _build_prompt(clusters: dict[str, Cluster]) -> str:
     lines = [
         "You label stock-market concept clusters. For each cluster below, give a",
-        "concise theme `label` (the specific sub-theme its members share) and a",
-        "broad `parent_sector`. Return every cluster_id exactly once.",
+        "concise English theme `label` (the specific sub-theme its members share)",
+        "and a broad English `parent_sector`. Use English only. Return every",
+        "cluster_id exactly once.",
         "",
         "Clusters (cluster_id: representative tickers | all members):",
     ]

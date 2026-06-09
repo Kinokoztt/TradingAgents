@@ -32,11 +32,12 @@ def save_snapshot(
     path = _snapshot_dir(as_of_date, out_dir)
     path.mkdir(parents=True, exist_ok=True)
 
-    edges.to_json(path / "edges.json", orient="records", indent=2)
+    edges.to_json(path / "edges.json", orient="records", indent=2, force_ascii=False)
     (path / "memberships.json").write_text(
         json.dumps(
             {tkr: [m.model_dump() for m in ms] for tkr, ms in memberships.items()},
             indent=2,
+            ensure_ascii=False,
         )
     )
     save_clusters(as_of_date, clusters, out_dir)
@@ -52,7 +53,7 @@ def save_clusters(
     path = _snapshot_dir(as_of_date, out_dir)
     path.mkdir(parents=True, exist_ok=True)
     (path / "clusters.json").write_text(
-        json.dumps({cid: c.model_dump() for cid, c in clusters.items()}, indent=2)
+        json.dumps({cid: c.model_dump() for cid, c in clusters.items()}, indent=2, ensure_ascii=False)
     )
 
 
