@@ -1,0 +1,266 @@
+{
+  "CVX": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1484,
+      "is_primary": false
+    }
+  ],
+  "XOM": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1596,
+      "is_primary": false
+    }
+  ],
+  "COST": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.4281,
+      "is_primary": false
+    }
+  ],
+  "WMT": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.4407,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1592,
+      "is_primary": false
+    }
+  ],
+  "AMD": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.348,
+      "is_primary": false
+    }
+  ],
+  "INTC": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BAC": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "JPM": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KO": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4624,
+      "is_primary": false
+    }
+  ],
+  "PEP": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3188,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1675,
+      "is_primary": false
+    }
+  ],
+  "MU": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.3634,
+      "is_primary": false
+    }
+  ],
+  "AMZN": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.3864,
+      "is_primary": false
+    }
+  ],
+  "GOOGL": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.2069,
+      "is_primary": false
+    }
+  ],
+  "META": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.2634,
+      "is_primary": false
+    }
+  ],
+  "GS": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "LLY": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3563,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.2035,
+      "is_primary": false
+    }
+  ],
+  "PFE": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.3365,
+      "is_primary": false
+    }
+  ],
+  "MSFT": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.5901,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.1911,
+      "is_primary": false
+    }
+  ],
+  "AVGO": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.6682,
+      "is_primary": false
+    }
+  ],
+  "NFLX": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.4603,
+      "is_primary": false
+    }
+  ],
+  "NVDA": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.451,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.2619,
+      "is_primary": false
+    }
+  ],
+  "AAPL": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ]
+}

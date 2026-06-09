@@ -1,0 +1,136 @@
+{
+  "TH_4": {
+    "cluster_id": "TH_4",
+    "level": "theme",
+    "parent_sector": "SEC_4",
+    "members": [
+      "CVX",
+      "XOM"
+    ],
+    "representatives": [
+      "XOM",
+      "CVX"
+    ],
+    "label": null
+  },
+  "TH_5": {
+    "cluster_id": "TH_5",
+    "level": "theme",
+    "parent_sector": "SEC_0",
+    "members": [
+      "COST",
+      "WMT"
+    ],
+    "representatives": [
+      "WMT",
+      "COST"
+    ],
+    "label": null
+  },
+  "TH_1": {
+    "cluster_id": "TH_1",
+    "level": "theme",
+    "parent_sector": "SEC_2",
+    "members": [
+      "AMD",
+      "INTC",
+      "MU"
+    ],
+    "representatives": [
+      "AMD",
+      "MU",
+      "INTC"
+    ],
+    "label": null
+  },
+  "TH_2": {
+    "cluster_id": "TH_2",
+    "level": "theme",
+    "parent_sector": "SEC_3",
+    "members": [
+      "BAC",
+      "GS",
+      "JPM"
+    ],
+    "representatives": [
+      "JPM",
+      "BAC",
+      "GS"
+    ],
+    "label": null
+  },
+  "TH_6": {
+    "cluster_id": "TH_6",
+    "level": "theme",
+    "parent_sector": "SEC_0",
+    "members": [
+      "AAPL",
+      "KO",
+      "PEP"
+    ],
+    "representatives": [
+      "PEP",
+      "KO",
+      "AAPL"
+    ],
+    "label": null
+  },
+  "TH_0": {
+    "cluster_id": "TH_0",
+    "level": "theme",
+    "parent_sector": "SEC_1",
+    "members": [
+      "AMZN",
+      "GOOGL",
+      "META"
+    ],
+    "representatives": [
+      "AMZN",
+      "META",
+      "GOOGL"
+    ],
+    "label": null
+  },
+  "TH_7": {
+    "cluster_id": "TH_7",
+    "level": "theme",
+    "parent_sector": "SEC_0",
+    "members": [
+      "LLY",
+      "PFE"
+    ],
+    "representatives": [
+      "LLY",
+      "PFE"
+    ],
+    "label": null
+  },
+  "TH_3": {
+    "cluster_id": "TH_3",
+    "level": "theme",
+    "parent_sector": "SEC_1",
+    "members": [
+      "MSFT",
+      "NFLX"
+    ],
+    "representatives": [
+      "MSFT",
+      "NFLX"
+    ],
+    "label": null
+  },
+  "TH_8": {
+    "cluster_id": "TH_8",
+    "level": "theme",
+    "parent_sector": "SEC_2",
+    "members": [
+      "AVGO",
+      "NVDA"
+    ],
+    "representatives": [
+      "NVDA",
+      "AVGO"
+    ],
+    "label": null
+  }
+}

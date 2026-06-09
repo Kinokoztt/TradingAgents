@@ -32,6 +32,18 @@ dependencies = [
     "yfinance>=0.2.63",
 ]
 
+[project.optional-dependencies]
+# Regime gate + concept graph subsystem (docs/regime-gate-design.md,
+# docs/concept-graph-design.md). Kept optional so the core framework and
+# its tests do not pull in GCP/graph deps unless this layer is used.
+regime = [
+    "google-cloud-bigquery>=3.25.0",
+    "google-cloud-secret-manager>=2.20.0",
+    "networkx>=3.3",
+    "leidenalg>=0.10.2",
+    "python-igraph>=0.11.3",
+]
+
 [project.scripts]
 tradingagents = "cli.main:app"
 
