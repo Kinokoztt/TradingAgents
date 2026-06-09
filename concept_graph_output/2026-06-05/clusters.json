@@ -2,7 +2,7 @@
   "TH_4": {
     "cluster_id": "TH_4",
     "level": "theme",
-    "parent_sector": "SEC_4",
+    "parent_sector": "Energy",
     "members": [
       "CVX",
       "XOM"
@@ -11,12 +11,12 @@
       "XOM",
       "CVX"
     ],
-    "label": null
+    "label": "\u77f3\u6cb9\u5929\u7136\u6c14"
   },
   "TH_5": {
     "cluster_id": "TH_5",
     "level": "theme",
-    "parent_sector": "SEC_0",
+    "parent_sector": "Consumer Staples",
     "members": [
       "COST",
       "WMT"
@@ -25,12 +25,12 @@
       "WMT",
       "COST"
     ],
-    "label": null
+    "label": "\u96f6\u552e"
   },
   "TH_1": {
     "cluster_id": "TH_1",
     "level": "theme",
-    "parent_sector": "SEC_2",
+    "parent_sector": "Semiconductor",
     "members": [
       "AMD",
       "INTC",
@@ -41,12 +41,12 @@
       "MU",
       "INTC"
     ],
-    "label": null
+    "label": "\u534a\u5bfc\u4f53"
   },
   "TH_2": {
     "cluster_id": "TH_2",
     "level": "theme",
-    "parent_sector": "SEC_3",
+    "parent_sector": "Financials",
     "members": [
       "BAC",
       "GS",
@@ -57,12 +57,12 @@
       "BAC",
       "GS"
     ],
-    "label": null
+    "label": "\u91d1\u878d\u670d\u52a1"
   },
   "TH_6": {
     "cluster_id": "TH_6",
     "level": "theme",
-    "parent_sector": "SEC_0",
+    "parent_sector": "Consumer Staples",
     "members": [
       "AAPL",
       "KO",
@@ -73,12 +73,12 @@
       "KO",
       "AAPL"
     ],
-    "label": null
+    "label": "\u65e5\u5e38\u6d88\u8d39\u4e0e\u79d1\u6280"
   },
   "TH_0": {
     "cluster_id": "TH_0",
     "level": "theme",
-    "parent_sector": "SEC_1",
+    "parent_sector": "Communication Services",
     "members": [
       "AMZN",
       "GOOGL",
@@ -89,12 +89,12 @@
       "META",
       "GOOGL"
     ],
-    "label": null
+    "label": "\u4e92\u8054\u7f51\u5de8\u5934"
   },
   "TH_7": {
     "cluster_id": "TH_7",
     "level": "theme",
-    "parent_sector": "SEC_0",
+    "parent_sector": "Healthcare",
     "members": [
       "LLY",
       "PFE"
@@ -103,12 +103,12 @@
       "LLY",
       "PFE"
     ],
-    "label": null
+    "label": "\u751f\u7269\u5236\u836f"
   },
   "TH_3": {
     "cluster_id": "TH_3",
     "level": "theme",
-    "parent_sector": "SEC_1",
+    "parent_sector": "Technology",
     "members": [
       "MSFT",
       "NFLX"
@@ -117,12 +117,12 @@
       "MSFT",
       "NFLX"
     ],
-    "label": null
+    "label": "\u8f6f\u4ef6\u4e0e\u6d41\u5a92\u4f53"
   },
   "TH_8": {
     "cluster_id": "TH_8",
     "level": "theme",
-    "parent_sector": "SEC_2",
+    "parent_sector": "Semiconductor",
     "members": [
       "AVGO",
       "NVDA"
@@ -131,6 +131,6 @@
       "NVDA",
       "AVGO"
     ],
-    "label": null
+    "label": "\u4eba\u5de5\u667a\u80fd\u82af\u7247"
   }
 }
