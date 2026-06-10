@@ -213,9 +213,9 @@ flowchart TD
   - 本地零存储：vendor 模块仍只读 env，真实 key 仅在内存中存在。
   - **已实测**：`load_secrets_to_env` + Massive/FMP 实时接口在 py10 环境跑通（行情新闻、个股新闻、全球新闻、经济日历）。
 
-### 5.2 模块 B：LLM 输出契约（三层 Pydantic Schema）
+### 5.2 模块 B：LLM 输出契约（三层 Pydantic Schema）✅ 已实现
 
-新建 `tradingagents/regime/schemas.py`：
+`tradingagents/regime/schemas.py`（含 `RegimeReport.long_whitelist/short_whitelist/block_list` 便捷派生），单测 `tests/test_regime_schemas.py` 通过：
 
 ```python
 from enum import Enum
@@ -261,26 +261,51 @@ class RegimeReport(BaseModel):
 
 > 复用 `agents/utils/structured.py` 的 `bind_structured()` + `invoke_structured_or_freetext()`，弱模型/异常优雅回退；Gemini 原生 `response_schema` 保证 JSON 稳定。
 
-### 5.3 模块 C：三层编排 Agent
+### 5.3 模块 C：四级分层级联编排（自底向上）
+
+利用 concept graph 已算出的两级层次（粗粒度 `sector` + 细粒度 `theme`），把判别做成**自底向上的 LLM 级联**：个股 → 主题簇 → 板块 → 大盘，逐级汇聚 + LLM 判别。**贯穿"安静即跳过"的降本原则**：每一级只对"下层有活跃信号"的节点触发 LLM，安静节点走 `Neutral` 默认、不调用 LLM。
+
+```
+S0 选股   select_news_tickers   有新闻个股 ∩ 候选池
+S1 个股   analyze_stocks (L1)   → StockSignal[]（仅活跃个股）
+   ──门──  aggregate_concepts    纯数值聚合：筛出活跃 theme 簇 + 安静簇兜底 Neutral
+S2 主题簇 judge_clusters         活跃簇：成员信号 + 簇级聚合新闻 → LLM → ConceptSignal(level=theme)
+S3 板块   judge_sectors          按 parent_sector 分组簇判别 → LLM → ConceptSignal(level=sector)
+S4 大盘   analyze_regime (L3)    板块判别 + 宏观/日历/全球新闻 → LLM → RegimeReport + 断路器
+```
 
 新建 `tradingagents/regime/`：
-- `l1_stock.py`：对候选池逐票（或分批）调用，绑定个股新闻工具（Massive/Benzinga）+ 基本面，产出 `StockSignal`。复用 analyst 节点风格。
-- `l2_concept.py`：**调用概念图谱子系统** `concept_graph.service.get_cluster_map()` 取动态概念集（替代静态映射），聚合 L1 信号产出 `ConceptSignal`；并可用 `get_neighbors()` 对 L1 做催化剂图传导。详见 `concept-graph-design.md`。
-- `l3_regime.py`：绑定 `get_macro_daily` / `get_economic_calendar` / `get_global_news`，结合 L2 信号产出 `RegimeReport`，并执行**断路器**（regime=Bearish/Range 时收紧或否决 long）。
-- `commander.py`：LangGraph 编排上述三层节点。
+- `l1_stock.py`✅ 已实现：
+  - `select_news_tickers()`：取窗口内 `load_news_articles` 的 ticker，∩ 候选池（仅 CS），按提及频次降序，`max_tickers` 可截断——**只分析近期有新闻/催化剂的名字**，安静的大多数不触发 LLM。
+  - `analyze_stocks()`：每票上下文 = 个股新闻(`get_stock_news`) + 基本面(`get_fundamentals`，经 vendor 路由)；多票打包进 `batch_size` 组，组间 `ThreadPoolExecutor(max_workers)` **并发**调 `gemini-3.1-pro` 结构化返回 `StockSignal` 列表；输出按输入顺序、按 ticker 去重（首条胜出）。
+  - `tools`/`llm` 均可注入，单测 `tests/test_regime_l1.py` 通过（选股、打包顺序、去重、空输入）。
+  - 基本面经 `market_tools/us/fundamentals.py` → `route_to_vendor("get_fundamentals")`（vendor=yfinance/alpha_vantage，可配置）。
+- `l2_concept.py`✅ 已实现：
+  - `aggregate_concepts()`（数值门）：把 L1 信号按簇成员权重聚合为 `ConceptSignal`（含 `direction`/`confidence`/`strength`），用于**筛出活跃 theme 簇**（≥`min_members` 个 actionable 成员）并给安静簇兜底，决定哪些簇值得上 LLM。
+  - `judge_clusters()`（S2，LLM 级联）：对活跃 theme 簇，上下文 = 成员 `StockSignal`（方向/置信/理由）+ **额外拉取的簇级聚合新闻**（活跃成员 `get_stock_news`，capped），并发调 LLM → `ConceptSignal(level="theme", direction, strength, confidence, parent_sector, rationale)`。
+  - `judge_sectors()`（S3，LLM 级联）：按 `parent_sector` 分组 theme 判别，并发调 LLM → `ConceptSignal(level="sector")`；安静板块走 Neutral 默认。
+  - `propagate_catalysts()`：经 `get_neighbors()` 把强催化剂以 `conf*weight*decay`（封顶 `max_boost`）传导给**无信号**邻居。
+  - 全部可注入，单测 `tests/test_regime_l2.py` 通过。
+- `l3_regime.py`✅ 已实现：`analyze_regime()` 吃**板块判别** + `get_macro_summary`/`get_economic_calendar`/`get_market_news`，`gemini-3.1-pro` 结构化产出大盘 regime + 宏观综述，组装 `RegimeReport`；`apply_circuit_breaker()` 执行**断路器**（Bearish→所有 Long 转 Block；Range→低置信 Long 转 Block；Bullish 放行）。单测 `tests/test_regime_l3.py` 通过。
+- `commander.py`✅ 已实现：`run_regime_gate()` 顺序编排 S0→S4（线性管线，无分支/循环），透传 `as_of_date`/工具/LLM，产出最终 `RegimeReport`（`concept_signals` 含 sector+theme 全量便于追溯）。`use_llm_concepts=False` 可退回纯数值门直喂 L3（更省）；`propagate` 开关催化剂传导。单测 `tests/test_regime_cascade.py` 端到端通过（schema 分派 fake LLM）。
 
-**Prompt 设计要点**：角色=战略指挥官+断路器；先宏观后微观；双向；置信度 0–1 给明确锚点；大盘 regime 对个股/概念有最终否决权。
+**Prompt 设计要点**：每级角色=该层级分析师（个股催化剂 / 簇主题 / 板块 / 大盘指挥官+断路器）；上层只看下层判别的汇总；双向；置信度 0–1 给明确锚点；大盘 regime 对下层有最终否决权。
 
-### 5.4 模块 D：批处理调度
+**Schema 扩展**（§5.2）：`ConceptSignal` 增加 `direction: Direction`（Long=看多/Short=看空/Block=无明确方向）、`confidence: float`、`level: str`（theme/sector）、`parent_sector: str | None`，默认值保证向后兼容。
 
-- 新建 `scripts/run_regime_gate.py`：
-  1. Secret Manager 注入凭证。
-  2. 取候选池（BQ）+ 宏观结构化（BQ）+ 日历/新闻（FMP/Massive）。
-  3. 运行三层 commander → `RegimeReport`。
-  4. 写**本地 JSON**（如 `~/.tradingagents/regime/<date>.json`）。
-- 调度：
-  - **盘前**：Cloud Scheduler / cron 每日定时。
-  - **盘中特殊触发**：财报、美联储讲话等事件触发（可由 Benzinga 实时流或事件回调驱动单票/单概念的增量重算）。
+### 5.4 模块 D：批处理调度 ✅ 已实现
+
+- `scripts/run_regime_gate.py`：Secret Manager 注入 → `--as-of`(或 `latest`) → `run_regime_gate()` 跑 S0–S4 → 写本地 JSON（`regime_gate_output/<date>/regime_report.json`，`tradingagents/regime/store.py`）→ 可选上传 GCS（`tradingagents/regime/gcs.py`，`gs://<bucket>/regime_gate/<date>/regime_report.json`）。提供 `--no-fundamentals/--no-propagate/--no-llm-concepts` 与并发/批量旋钮。
+- `scripts/run_regime_gate_daily.sh`：盘前 wrapper，美东工作日闸门；先 `rebuild_concept_graph.py --as-of latest`（上传 `concept_graph/`），再 `run_regime_gate.py --as-of latest`（上传 `regime_gate/`），同 bucket（默认 `trading_agent`）。
+- **盘前无 look-ahead 语义（交易会话日命名 + 精确盘前可见）**：`--as-of` 是**交易会话日**（即将交易的当天），产物以它命名；`latest` = 今日（美东）。各数据源各自保证盘前可见：
+  - **价格/聚类**：concept graph 用 `previous_trading_day(session)`（上一收盘）取数，但快照以 **session** 命名（`build_detect_save(..., label_date=session)`）。即使盘后 session 当日日线已入库也不会被取用（`upper=session-1`）。
+  - **macro_daily**：取 `trade_date = session` 行（pipeline 已 shift(+1)，该行=上一交易日收盘，盘前可见）。
+  - **个股新闻**（regime L1/簇判别）：截至 **session 当天 09:00 ET** 的盘前 cutoff（09:00 而非开盘 09:30，确保纳入 08:30 宏观数据公布又不卡开盘）。Massive 走精确 UTC 时刻 `published_utc.lte`。
+  - **共现新闻**（concept graph 聚类）：与价格窗一致，截至 **data_date(06-08) 收盘**（聚类是历史结构，不吃 session 当天盘前新闻）。
+  - **大盘新闻**（L3，FMP general news）：同 09:00 cutoff，`_visible_premarket()` 带回滚安全——带时间戳的按时刻比较；仅日期且为 session 当天的（无法区分盘前盘后）在回滚时丢弃，实时部署不受影响。
+  - `premarket_cutoffs(session)` 同时给出 UTC 时刻（Massive）与 ET 墙钟（FMP）两种 cutoff。
+  - 例：模拟 2026-06-09 盘前 → `--as-of 2026-06-09`，价格/聚类取 06-08 收盘、macro 取 06-09 行(=06-08 收盘)、个股/大盘新闻 ≤06-09 09:00 ET，输出 `2026-06-09/`。
+- **盘中特殊触发**（待办）：财报、美联储讲话等事件触发增量重算。
 
 ### 5.5 模块 E（可选）：与下游打通
 
@@ -296,13 +321,13 @@ class RegimeReport(BaseModel):
 | T0 | Secret Manager 接入模块 ✅ | A3 | P0 | 0.5d | 已完成并实测 |
 | T1 | 切换 Gemini 3.1 Pro（配置/env） | LLM | P0 | 0.5h | T0 |
 | T2 | `market_tools/us`：macro_daily + 候选池 + 日/分钟价格 ✅ | A2 | P0 | 1d | 已完成并实测 |
-| T3 | `regime/schemas.py`（三层 Schema） | B | P0 | 0.5d | - |
+| T3 | `regime/schemas.py`（三层 Schema） | B | P0 | 0.5d | ✅ 已实现 |
 | T4 | FMP vendor（日历 + general news） | A1 | P1 | 0.5d | P1 字段文档 |
 | T5 | Massive vendor（个股 + Benzinga） | A1 | P1 | 0.5d | P2 字段文档 |
 | T6 | 概念集接入（消费知识图谱子系统） | A2/A1 | P1 | 0.5d | 概念图谱子方案 M2 |
-| T7 | L1/L2/L3 + commander 编排 | C | P1 | 2d | T2–T6 |
-| T8 | `run_regime_gate.py` + 本地 JSON 落盘 | D | P1 | 0.5d | T7 |
-| T9 | 盘前调度 + 盘中事件触发 | D | P2 | 1d | T8 |
+| T7 | 四级级联（L1/judge_clusters/judge_sectors/L3）+ commander | C | P1 | 2d | ✅ 已实现 |
+| T8 | `run_regime_gate.py` + 本地 JSON + GCS(`regime_gate/`) | D | P1 | 0.5d | ✅ 已实现 |
+| T9 | 盘前 wrapper(`run_regime_gate_daily.sh`) ✅ + 盘中事件触发(待办) | D | P2 | 1d | T8 |
 | T10 | 与现有逐票 graph 打通 | E | P2 | 0.5d | T8 |
 
 ---

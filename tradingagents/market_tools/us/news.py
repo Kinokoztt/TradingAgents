@@ -39,9 +39,13 @@ def get_stock_news(ticker: str, start_date: str, end_date: str) -> str:
     return massive.get_news(ticker, start_date, end_date)
 
 
-def get_market_news(curr_date: str, look_back_days: int = 3) -> str:
-    """LLM-ready market/macro news block (FMP general news)."""
-    return fmp.get_global_news(curr_date, look_back_days=look_back_days)
+def get_market_news(curr_date: str, look_back_days: int = 3, end_datetime: str | None = None) -> str:
+    """LLM-ready market/macro news block (FMP general news).
+
+    ``end_datetime`` ("YYYY-MM-DD HH:MM:SS") drops items published after it, for
+    pre-market cutoff (best-effort; see fmp.get_global_news).
+    """
+    return fmp.get_global_news(curr_date, look_back_days=look_back_days, end_datetime=end_datetime)
 
 
 def get_economic_calendar(start_date: str, end_date: str) -> str:

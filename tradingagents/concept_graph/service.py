@@ -81,14 +81,16 @@ def detect_and_save(
     graph,
     community_config: CommunityConfig | None = None,
     out_dir: str = store.DEFAULT_OUT_DIR,
+    label_date: str | None = None,
 ):
     """Run community detection on ``graph`` and persist the snapshot.
 
     Returns ``(memberships, clusters)`` and writes edges/memberships/clusters
-    under ``{out_dir}/{as_of_date}/``.
+    under ``{out_dir}/{label_date or as_of_date}/`` — ``label_date`` lets the
+    snapshot be named by the trading session while ``as_of_date`` is the data date.
     """
     memberships, clusters = detect_communities(graph, community_config or CommunityConfig())
-    store.save_snapshot(as_of_date, edges, memberships, clusters, out_dir)
+    store.save_snapshot(label_date or as_of_date, edges, memberships, clusters, out_dir)
     return memberships, clusters
 
 
@@ -99,11 +101,13 @@ def build_detect_save(
     community_config: CommunityConfig | None = None,
     market: str = "US",
     out_dir: str = store.DEFAULT_OUT_DIR,
+    label_date: str | None = None,
 ):
-    """Full M1+M2 batch: build graph, detect clusters, persist. Returns
+    """Full M1+M2 batch: build graph (data as of ``as_of_date``), detect clusters,
+    persist under ``label_date or as_of_date``. Returns
     ``(edges, graph, memberships, clusters)``."""
     edges, graph = build_concept_graph(as_of_date, universe=universe, config=config, market=market)
-    memberships, clusters = detect_and_save(as_of_date, edges, graph, community_config, out_dir)
+    memberships, clusters = detect_and_save(as_of_date, edges, graph, community_config, out_dir, label_date)
     return edges, graph, memberships, clusters
 
 

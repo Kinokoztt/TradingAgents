@@ -30,8 +30,31 @@ def _get(endpoint: str, params: dict):
     return response.json()
 
 
-def get_global_news(curr_date: str, look_back_days: int = 7, limit: int = 20) -> str:
-    """Formatted macro/market news over the lookback window (vendor interface)."""
+def _visible_premarket(published: str, end_datetime: str) -> bool:
+    """Whether a news item published at ``published`` is visible at ``end_datetime``.
+
+    Pre-market cutoff with backfill safety:
+    - timestamped (has time-of-day): keep iff ``published <= end_datetime``.
+    - date-only (can't tell pre/post open): keep only if it's a *strictly prior*
+      day; a same-day date-only item is ambiguous on a backfill, so it's dropped.
+    """
+    pub = str(published or "")
+    if not pub:
+        return False
+    if len(pub) <= 10:  # date only
+        return pub[:10] < end_datetime[:10]
+    return pub[:19] <= end_datetime
+
+
+def get_global_news(
+    curr_date: str, look_back_days: int = 7, limit: int = 20, end_datetime: str | None = None
+) -> str:
+    """Formatted macro/market news over the lookback window (vendor interface).
+
+    ``end_datetime`` ("YYYY-MM-DD HH:MM:SS") enforces a pre-market cutoff (see
+    ``_visible_premarket``). Live pre-market runs are unaffected (future items
+    don't exist yet); on a backfill it prevents post-open leakage.
+    """
     end = datetime.strptime(curr_date, "%Y-%m-%d")
     start = end - timedelta(days=look_back_days)
     data = _get(
@@ -40,6 +63,9 @@ def get_global_news(curr_date: str, look_back_days: int = 7, limit: int = 20) ->
     )
     if not isinstance(data, list) or not data:
         return f"No FMP general news found around {curr_date}."
+
+    if end_datetime:
+        data = [it for it in data if _visible_premarket(it.get("publishedDate", it.get("date", "")), end_datetime)]
 
     lines = [f"## FMP market news ({start:%Y-%m-%d} to {curr_date})", ""]
     for item in data[:limit]:

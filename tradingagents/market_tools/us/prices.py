@@ -41,6 +41,17 @@ def latest_trading_day(as_of: str | None = None, lookback_days: int = 14) -> str
     return pd.to_datetime(d).strftime("%Y-%m-%d")
 
 
+def previous_trading_day(session_date: str, lookback_days: int = 14) -> str:
+    """The last completed session strictly before ``session_date`` (YYYY-MM-DD).
+
+    This is the data basis visible at ``session_date`` pre-open: prices/clustering
+    must use the prior close, never ``session_date``'s own bars (which may already
+    be in BQ if run post-close).
+    """
+    prev = (datetime.fromisoformat(session_date[:10]) - timedelta(days=1)).strftime("%Y-%m-%d")
+    return latest_trading_day(prev, lookback_days=lookback_days)
+
+
 def load_daily_close(
     tickers: list[str],
     start_date: str,
