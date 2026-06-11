@@ -5,6 +5,7 @@ import pytest
 from tradingagents.regime import (
     ConceptSignal,
     Direction,
+    HorizonOutlook,
     MarketRegime,
     RegimeReport,
     StockSignal,
@@ -102,3 +103,20 @@ def test_analyze_regime_preserves_raw_signals_and_records_rule():
     assert report.block_list == []                     # nothing recoded to Block
     assert report.tradable_long_whitelist == []        # bearish vetoes all longs
     assert set(report.regime_blocked_longs) == {"HIGH", "LOW"}
+
+
+def test_analyze_regime_carries_multi_horizon_outlook():
+    verdict = _L3Verdict(
+        market_state=MarketRegime.RANGE, macro_summary="Choppy.", key_drivers=["CPI ahead"],
+        outlook=[
+            HorizonOutlook(horizon="1d", direction=MarketRegime.RANGE, confidence=0.7, rationale="event risk"),
+            HorizonOutlook(horizon="3d", direction=MarketRegime.BULLISH, confidence=0.6, rationale="post-print relief"),
+            HorizonOutlook(horizon="5d", direction=MarketRegime.BULLISH, confidence=0.55, rationale="trend resumes"),
+        ],
+    )
+    report = analyze_regime("2026-06-08", llm=_FakeLLM(verdict), tools=_FakeTools())
+    assert [o.horizon for o in report.outlook] == ["1d", "3d", "5d"]
+    assert report.outlook_for(1).direction is MarketRegime.RANGE
+    assert report.outlook_for(5).direction is MarketRegime.BULLISH
+    # near-term anchor unchanged; outlook is forecast-only and doesn't touch whitelists.
+    assert report.market_state is MarketRegime.RANGE

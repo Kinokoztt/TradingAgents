@@ -19,6 +19,7 @@ from .l3_regime import analyze_regime
 from .schemas import (
     ConceptSignal,
     Direction,
+    HorizonOutlook,
     MarketRegime,
     RegimeReport,
     StockSignal,
@@ -31,6 +32,7 @@ __all__ = [
     "Strength",
     "StockSignal",
     "ConceptSignal",
+    "HorizonOutlook",
     "RegimeReport",
     "analyze_regime",
     "aggregate_concepts",

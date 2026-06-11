@@ -6,6 +6,7 @@ from pydantic import ValidationError
 from tradingagents.regime import (
     ConceptSignal,
     Direction,
+    HorizonOutlook,
     MarketRegime,
     RegimeReport,
     StockSignal,
@@ -75,3 +76,34 @@ def test_concept_signal_directional_neutral_coerced_by_confidence():
 def test_concept_signal_explicit_strength_preserved():
     cs = ConceptSignal(concept="X", direction=Direction.LONG, strength=Strength.WEAK, confidence=0.9)
     assert cs.strength is Strength.WEAK
+
+
+def test_horizon_outlook_days_parse():
+    assert HorizonOutlook(horizon="1d", direction=MarketRegime.BULLISH).horizon_days == 1
+    assert HorizonOutlook(horizon="3D", direction=MarketRegime.RANGE).horizon_days == 3
+    assert HorizonOutlook(horizon=" 5d ", direction=MarketRegime.BEARISH).horizon_days == 5
+
+
+def test_outlook_for_looks_up_by_horizon_days():
+    r = RegimeReport(
+        as_of_date="2026-06-08", market_state=MarketRegime.RANGE, macro_summary="x",
+        outlook=[
+            HorizonOutlook(horizon="1d", direction=MarketRegime.RANGE, confidence=0.7),
+            HorizonOutlook(horizon="3d", direction=MarketRegime.BULLISH, confidence=0.6),
+            HorizonOutlook(horizon="5d", direction=MarketRegime.BULLISH, confidence=0.5),
+        ],
+    )
+    assert r.outlook_for(1).direction is MarketRegime.RANGE
+    assert r.outlook_for(3).direction is MarketRegime.BULLISH
+    assert r.outlook_for(3).confidence == pytest.approx(0.6)
+    assert r.outlook_for(2) is None  # no 2d call emitted
+
+
+def test_outlook_roundtrip_json():
+    r = RegimeReport(
+        as_of_date="2026-06-08", market_state=MarketRegime.BULLISH, macro_summary="x",
+        outlook=[HorizonOutlook(horizon="3d", direction=MarketRegime.BEARISH, confidence=0.4, rationale="CPI risk")],
+    )
+    restored = RegimeReport.model_validate_json(r.model_dump_json())
+    assert restored.outlook_for(3).direction is MarketRegime.BEARISH
+    assert restored.outlook_for(3).rationale == "CPI risk"

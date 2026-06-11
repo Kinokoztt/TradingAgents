@@ -40,6 +40,26 @@ class StockSignal(BaseModel):
     reason: str
 
 
+class HorizonOutlook(BaseModel):
+    """B (multi-horizon): the commander's market call for one forward horizon.
+
+    Forecast-only: the tradable whitelists stay anchored to the near-term
+    ``market_state`` to avoid long-horizon overconfidence (design §3.4). The
+    evaluator (module A) grades each horizon's ``direction`` against that
+    horizon's realized path, so calibration can be tracked per holding period.
+    """
+
+    horizon: str = Field(description="'1d' | '3d' | '5d' (trading days, session counts as day 1)")
+    direction: MarketRegime
+    confidence: float = Field(default=0.0, ge=0.0, le=1.0)
+    rationale: str = ""
+
+    @property
+    def horizon_days(self) -> int:
+        """Trading-day count parsed from ``horizon`` ('3d' -> 3)."""
+        return int(self.horizon.strip().lower().rstrip("d"))
+
+
 class ConceptSignal(BaseModel):
     """L2: verdict on a dynamic concept node (theme cluster or sector).
 
@@ -104,8 +124,20 @@ class RegimeReport(BaseModel):
         description="Consumption rule param: in a Range regime, Long permits below this "
         "catalyst_confidence are vetoed (tradable_* views); recorded so the rule is reproducible.",
     )
+    outlook: list[HorizonOutlook] = Field(
+        default_factory=list,
+        description="B: multi-horizon (1/3/5d) market outlook. Forecast only — the near-term "
+        "market_state still drives the whitelists; the evaluator grades each horizon separately.",
+    )
     concept_signals: list[ConceptSignal] = Field(default_factory=list)
     stock_signals: list[StockSignal] = Field(default_factory=list)
+
+    def outlook_for(self, horizon_days: int) -> HorizonOutlook | None:
+        """The multi-horizon call matching ``horizon_days`` trading days, if emitted."""
+        for o in self.outlook:
+            if o.horizon_days == horizon_days:
+                return o
+        return None
 
     # --- raw layer views (un-gated, as each layer decided) ---
     @property

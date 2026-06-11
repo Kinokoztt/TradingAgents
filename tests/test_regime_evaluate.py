@@ -6,6 +6,7 @@ import pytest
 from tradingagents.regime import (
     ConceptSignal,
     Direction,
+    HorizonOutlook,
     MarketRegime,
     RegimeReport,
     StockSignal,
@@ -195,6 +196,37 @@ def test_slope_metric_beats_endpoint_on_reversal():
 
     sc_ep = evaluate_report(rpt, df, horizons=(3,), band_mode="fixed", range_band=0.01, trend_metric="endpoint")
     assert sc_ep.horizons[0].market_hit is False         # endpoint metric misfires on the +2% close
+
+
+def test_per_horizon_outlook_is_graded_separately():
+    # SPY rises steadily (+2%/+4%/+6%). The report's near-term market_state is
+    # Range, but the multi-horizon outlook calls 1d=Range, 3d/5d=Bullish. Each
+    # horizon must be graded against ITS OWN call, not the near-term anchor.
+    rpt = RegimeReport(
+        as_of_date="2026-06-08", market_state=MarketRegime.RANGE, macro_summary="x",
+        outlook=[
+            HorizonOutlook(horizon="1d", direction=MarketRegime.RANGE, confidence=0.7),
+            HorizonOutlook(horizon="3d", direction=MarketRegime.BULLISH, confidence=0.6),
+            HorizonOutlook(horizon="5d", direction=MarketRegime.BULLISH, confidence=0.5),
+        ],
+    )
+    sc = evaluate_report(rpt, _price_df(), horizons=(1, 3, 5), band_mode="fixed", range_band=0.01)
+    h1, h3, h5 = sc.horizons
+    assert (h1.graded_state, h1.from_outlook) == ("Range", True)
+    assert h1.outlook_confidence == pytest.approx(0.7)
+    assert h1.market_hit is False                 # +2% drift clears the 1% band, not Range
+    assert (h3.graded_state, h3.market_hit) == ("Bullish", True)
+    assert (h5.graded_state, h5.market_hit) == ("Bullish", True)
+
+
+def test_missing_outlook_falls_back_to_market_state():
+    # No outlook on the report => every horizon grades the near-term market_state.
+    sc = evaluate_report(_report(), _price_df(), horizons=(1, 3), band_mode="fixed", range_band=0.01)
+    for h in sc.horizons:
+        assert h.from_outlook is False
+        assert h.graded_state == "Bullish"        # _report() is Bullish
+        assert h.outlook_confidence is None
+        assert h.market_hit is True               # SPY rises -> Bullish hits
 
 
 def test_atr_band_from_presession_bars():

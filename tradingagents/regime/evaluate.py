@@ -35,7 +35,13 @@ The regime "circuit breaker" is evaluated as a **rule, not an overwrite**: raw
 L1 Longs stay Long in the report; we ask ``report.regime_blocked_longs`` which
 Longs the regime vetoes and check whether those vetoed names actually fell.
 
-See docs/regime-gate-feedback-design.md §2 (Module A).
+**Multi-horizon (module B):** when the report carries a per-horizon ``outlook``
+(a separate Bullish/Range/Bearish call for 1d/3d/5d), each horizon is graded
+against *its own* call (``graded_state``, ``from_outlook=True``); horizons with no
+outlook fall back to the near-term ``market_state``. This lets calibration be
+tracked per holding period instead of grading one near-term call across windows.
+
+See docs/regime-gate-feedback-design.md §2 (Module A) and §3 (Module B).
 """
 
 from __future__ import annotations
@@ -70,10 +76,13 @@ class HorizonScore(BaseModel):
     horizon: int                       # trading days held (session counts as day 1)
     target_date: str | None            # exit close date; None if not elapsed yet
     evaluable: bool
+    graded_state: str                  # regime graded here: this horizon's outlook, else market_state
+    from_outlook: bool                 # True if a per-horizon outlook (B) supplied graded_state
+    outlook_confidence: float | None   # the outlook's stated confidence (for calibration), if any
     market_return: float | None        # endpoint: proxy close(exit)/open(session)-1 (buy-hold P&L)
     market_trend: float | None         # path-aware: fitted drift of proxy log-price over the window
     market_trend_r2: float | None      # 0-1; how trend-like (high) vs choppy (low) the path was
-    market_hit: bool | None            # did market_state match the graded trend (see trend_metric)
+    market_hit: bool | None            # did graded_state match the graded trend (see trend_metric)
     range_band_used: float             # flat-zone half-width applied at this horizon
     long: WhitelistScore
     short: WhitelistScore
@@ -202,6 +211,21 @@ def _trend(prices: list[float]) -> tuple[float | None, float | None]:
     return drift, r2
 
 
+def _grade_regime(state: MarketRegime, graded: float | None, band: float) -> bool | None:
+    """Did the regime call match the realized (path-aware or endpoint) move?
+
+    Bullish hits when the move clears +band, Bearish when it clears -band, Range
+    when it stays inside the flat band. None if the move is unavailable.
+    """
+    if graded is None:
+        return None
+    if state is MarketRegime.BULLISH:
+        return graded > band
+    if state is MarketRegime.BEARISH:
+        return graded < -band
+    return abs(graded) <= band
+
+
 def _whitelist_score(rets: list[float], mkt: float | None, *, short: bool) -> WhitelistScore:
     """Aggregate forward returns for one directional bucket.
 
@@ -240,17 +264,15 @@ def _score_horizon(
     evaluable = exit_i < len(calendar)
     target_date = calendar[exit_i].strftime("%Y-%m-%d") if evaluable else None
 
-    # Grade market_state against the path-aware fitted drift (default), falling
-    # back to the endpoint return if the slope is unavailable (e.g. <2 points).
+    # B (multi-horizon): grade this horizon against its own outlook call if the
+    # commander emitted one; otherwise fall back to the near-term market_state.
+    outlook = report.outlook_for(n)
+    graded_state = outlook.direction if outlook else report.market_state
+
+    # Grade against the path-aware fitted drift (default), falling back to the
+    # endpoint return if the slope is unavailable (e.g. <2 points).
     graded = market_trend if (trend_metric == "slope" and market_trend is not None) else mkt
-    market_hit: bool | None = None
-    if graded is not None:
-        if report.market_state is MarketRegime.BULLISH:
-            market_hit = graded > band
-        elif report.market_state is MarketRegime.BEARISH:
-            market_hit = graded < -band
-        else:  # Range
-            market_hit = abs(graded) <= band
+    market_hit = _grade_regime(graded_state, graded, band)
 
     # per-stock returns + confusion matrix (raw L1 directions, un-gated)
     confusion = {d.value: {"up": 0, "down": 0} for d in Direction}
@@ -293,6 +315,9 @@ def _score_horizon(
         horizon=n,
         target_date=target_date,
         evaluable=evaluable,
+        graded_state=graded_state.value,
+        from_outlook=outlook is not None,
+        outlook_confidence=outlook.confidence if outlook else None,
         market_return=mkt,
         market_trend=market_trend,
         market_trend_r2=market_trend_r2,

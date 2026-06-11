@@ -20,9 +20,10 @@ from pydantic import BaseModel, Field
 
 from tradingagents.market_tools import MarketDataTools, get_market_tools
 
-from .schemas import ConceptSignal, MarketRegime, RegimeReport, StockSignal
+from .schemas import ConceptSignal, HorizonOutlook, MarketRegime, RegimeReport, StockSignal
 
 DEFAULT_REGIME_MODEL = "gemini-3.1-pro-preview"  # deep thinking for the commander
+OUTLOOK_HORIZONS = ("1d", "3d", "5d")  # B: forward windows the commander forecasts
 
 
 class _L3Verdict(BaseModel):
@@ -31,6 +32,10 @@ class _L3Verdict(BaseModel):
     market_state: MarketRegime
     macro_summary: str = Field(description="Macro/fundamental synthesis, micro-noise stripped")
     key_drivers: list[str] = Field(default_factory=list, description="Top regime drivers")
+    outlook: list[HorizonOutlook] = Field(
+        default_factory=list,
+        description="Multi-horizon market call: one HorizonOutlook per 1d/3d/5d forward window",
+    )
 
 
 def _build_prompt(
@@ -50,6 +55,13 @@ Decide the short-term US market regime as of {as_of_date}. Reason macro-first,
 strip micro-noise, and be willing to call Bearish/Range when systemic risk is
 present. Output `market_state` (Bullish/Range/Bearish), a concise `macro_summary`,
 and the `key_drivers`.
+
+Also give a multi-horizon `outlook`: a separate Bullish/Range/Bearish call for
+each of the 1d, 3d, and 5d forward windows (trading days, the session itself
+counts as day 1), each with a 0-1 `confidence` and a one-line `rationale`. These
+horizons can diverge — e.g. an overnight CPI print is a hard 1d constraint but
+may be digested by 5d; a slow earnings-season drift may only show up at 3d/5d.
+`market_state` is the near-term anchor and should align with the 1d call.
 
 ## Macro structured snapshot
 {macro_summary}
@@ -119,6 +131,7 @@ def analyze_regime(
         macro_snapshot=macro_summary,
         economic_calendar=calendar,
         range_min_confidence=range_min_confidence,
+        outlook=verdict.outlook,
         concept_signals=concept_signals,
         stock_signals=stock_signals,
     )

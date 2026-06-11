@@ -23,6 +23,8 @@ wheels/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
+regime_gate_output/
+concept_graph_output/
 *.egg
 MANIFEST
 

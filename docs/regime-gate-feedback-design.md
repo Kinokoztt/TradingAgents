@@ -263,7 +263,7 @@ class HorizonOutlook(BaseModel):
 ## 7. 实施顺序与里程碑
 
 1. **F1 — 评估器最小版（A）✅ 已实现**：`regime/evaluate.py`（纯函数 `evaluate_report` + `Scorecard` schema）+ `scripts/evaluate_regime.py`（读已落盘报告 + BQ 日 OHLC → `scorecard.json`，可选上传 GCS）。**无 LLM 成本**。**开盘锚点、含当日**：基准=`open(D)`，h1=当日开→收、h3=`close(D+2)`、h5=`close(D+4)`；未到期的时域记 `null` 且 `complete=false`，可重跑。**波动率自适应带**：大盘三态判定用 `atr_k×proxyATR%×√N`（ATR 取盘前 bar，无前视）替代硬编 ±1%，按时域 √N 缩放、并落 `range_band_used`。指标：大盘三态命中、多/空白名单命中率/alpha/胜率、方向混淆矩阵与精确率、`catalyst_confidence` 的 Brier 校准、**regime 否决**事后收益（`regime_blocked_longs`，规则非覆盖）、概念/板块层命中率。测试见 `tests/test_regime_evaluate.py`。
-2. **F2 — 多时域输出（B）**：扩展 schema/prompt，输出 1/3/5 日展望；评估器同步按时域打分。
+2. **F2 — 多时域输出（B）✅ 已实现**：走「轻量档」——大盘层一次性输出 1/3/5 日展望。`schemas.py` 新增 `HorizonOutlook{horizon, direction(MarketRegime), confidence, rationale}` + `RegimeReport.outlook` 列表与 `outlook_for(days)` 查询；`l3_regime.py` 的 `_L3Verdict` 与 prompt 要求 LLM 分别判断 1/3/5 日（说明不同时域可背离，如隔夜 CPI 是 1 日硬约束但 5 日可能已消化）。**守则**：`market_state` 仍是近端锚点、驱动白名单与断路器；`outlook` 仅作展望，不参与白名单否决（避免长时域过度自信）。评估器 `evaluate.py` 同步按时域打分：每个时域用其**对应展望**评（`HorizonScore.graded_state` / `from_outlook` / `outlook_confidence`），无展望则回退 `market_state`（向后兼容）；沿用既有的路径斜率 + ATR 自适应带口径。测试见 `tests/test_regime_schemas.py`（展望解析/查询/roundtrip）、`tests/test_regime_l3.py`（展望透传、近端锚点不变）、`tests/test_regime_evaluate.py`（分时域独立打分、缺失回退）。
 3. **F3 — 深度审议（D）**：先用辩论模式重写 L3 指挥官（可控、合时间语义）；再视效果对 L1 决赛圈选择性接入原生图。
 4. **F4 — 知识库自反思（C 内部源）**：在 F1/F2/F3 产出的对错标签 + 事前依据（含辩论论证）之上做蒸馏、晋升、回注。先 few-shot，再视效果上 RAG。
 5. **F5 — 知识库外部源（C 外部）**：接 Reddit/StockTwits 抽取可证伪预测 → 结算 → 作者信誉 + 多源印证 → 汇入同一蒸馏管线。
