@@ -113,7 +113,8 @@ def test_name_clusters_fills_label_and_sector():
     }
     out = name_clusters(clusters, llm=_FakeLLM())
     assert out["TH_1"].label == "存储/HBM"
-    assert out["TH_1"].parent_sector == "Semiconductor"
+    # parent_sector is normalized to the canonical taxonomy: Semiconductor -> Technology
+    assert out["TH_1"].parent_sector == "Technology"
     # cluster missing from LLM response is left unchanged (no crash)
     assert out["TH_9"].label is None
     assert out["TH_9"].parent_sector == "SEC_3"

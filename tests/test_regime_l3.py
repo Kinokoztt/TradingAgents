@@ -1,4 +1,4 @@
-"""Tests for L3 regime verdict + circuit breaker (no network)."""
+"""Tests for L3 regime verdict + the non-destructive regime veto (no network)."""
 
 import pytest
 
@@ -10,7 +10,6 @@ from tradingagents.regime import (
     StockSignal,
     Strength,
     analyze_regime,
-    apply_circuit_breaker,
 )
 from tradingagents.regime.l3_regime import _L3Verdict
 
@@ -25,31 +24,37 @@ def _signals():
     ]
 
 
-def _report(state):
+def _report(state, range_min_confidence=0.6):
     return RegimeReport(
-        as_of_date="2026-06-08", market_state=state, macro_summary="x", stock_signals=_signals()
+        as_of_date="2026-06-08", market_state=state, macro_summary="x",
+        range_min_confidence=range_min_confidence, stock_signals=_signals()
     )
 
 
-def test_bearish_blocks_all_longs():
-    out = apply_circuit_breaker(_report(MarketRegime.BEARISH))
-    by = {s.ticker: s.direction for s in out.stock_signals}
-    assert by["HIGH"] is Direction.BLOCK
-    assert by["LOW"] is Direction.BLOCK
-    assert by["SHRT"] is Direction.SHORT  # shorts untouched
+def test_bearish_vetoes_all_longs_without_overwriting():
+    r = _report(MarketRegime.BEARISH)
+    # raw L1 directions are preserved (not recoded to Block)...
+    assert {s.ticker: s.direction for s in r.stock_signals} == {
+        "HIGH": Direction.LONG, "LOW": Direction.LONG, "SHRT": Direction.SHORT
+    }
+    assert r.long_whitelist == ["HIGH", "LOW"]        # raw view unchanged
+    # ...but the consumption rule vetoes every Long, shorts pass through.
+    assert r.tradable_long_whitelist == []
+    assert set(r.regime_blocked_longs) == {"HIGH", "LOW"}
+    assert r.tradable_short_whitelist == ["SHRT"]
 
 
-def test_range_blocks_only_low_confidence_longs():
-    out = apply_circuit_breaker(_report(MarketRegime.RANGE), range_min_confidence=0.6)
-    by = {s.ticker: s.direction for s in out.stock_signals}
-    assert by["HIGH"] is Direction.LONG
-    assert by["LOW"] is Direction.BLOCK
-    assert by["SHRT"] is Direction.SHORT
+def test_range_vetoes_only_low_confidence_longs():
+    r = _report(MarketRegime.RANGE, range_min_confidence=0.6)
+    assert r.tradable_long_whitelist == ["HIGH"]       # 0.9 >= 0.6 survives
+    assert r.regime_blocked_longs == ["LOW"]           # 0.3 < 0.6 vetoed
+    assert {s.direction for s in r.stock_signals if s.ticker == "LOW"} == {Direction.LONG}  # still raw Long
 
 
-def test_bullish_is_passthrough():
-    out = apply_circuit_breaker(_report(MarketRegime.BULLISH))
-    assert [s.direction for s in out.stock_signals] == [Direction.LONG, Direction.LONG, Direction.SHORT]
+def test_bullish_vetoes_nothing():
+    r = _report(MarketRegime.BULLISH)
+    assert r.tradable_long_whitelist == ["HIGH", "LOW"]
+    assert r.regime_blocked_longs == []
 
 
 class _FakeTools:
@@ -59,7 +64,7 @@ class _FakeTools:
     def get_market_news(self, curr_date, look_back_days=10, end_datetime=None):
         return "Risk-on tone."
 
-    def get_economic_calendar(self, start_date, end_date):
+    def get_economic_calendar(self, start_date, end_date, cutoff=None):
         return f"No major prints {start_date}..{end_date}."
 
 
@@ -79,17 +84,21 @@ class _FakeLLM:
         return _FakeStructured(self._verdict)
 
 
-def test_analyze_regime_assembles_and_breaks():
+def test_analyze_regime_preserves_raw_signals_and_records_rule():
     verdict = _L3Verdict(market_state=MarketRegime.BEARISH, macro_summary="Systemic risk.", key_drivers=["VIX spike"])
     report = analyze_regime(
         "2026-06-08",
         concept_signals=[ConceptSignal(concept="Semis", strength=Strength.WEAK, member_tickers=["NVDA"], rationale="r")],
         stock_signals=_signals(),
+        range_min_confidence=0.6,
         llm=_FakeLLM(verdict),
         tools=_FakeTools(),
     )
     assert report.market_state is MarketRegime.BEARISH
     assert report.macro_summary == "Systemic risk."
-    # bearish breaker zeroed out the long whitelist
-    assert report.long_whitelist == []
-    assert "HIGH" in report.block_list and "LOW" in report.block_list
+    assert report.range_min_confidence == 0.6
+    # raw L1 Longs are NOT overwritten; the veto is a consumption-time view.
+    assert report.long_whitelist == ["HIGH", "LOW"]
+    assert report.block_list == []                     # nothing recoded to Block
+    assert report.tradable_long_whitelist == []        # bearish vetoes all longs
+    assert set(report.regime_blocked_longs) == {"HIGH", "LOW"}

@@ -18,6 +18,7 @@ from .news import (
 from .prices import (
     latest_trading_day,
     load_daily_close,
+    load_daily_ohlc,
     load_minute_close,
     previous_trading_day,
 )
@@ -31,6 +32,7 @@ __all__ = [
     "get_economic_calendar",
     "get_fundamentals",
     "load_daily_close",
+    "load_daily_ohlc",
     "load_minute_close",
     "latest_trading_day",
     "previous_trading_day",

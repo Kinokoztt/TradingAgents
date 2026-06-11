@@ -1,0 +1,1271 @@
+{
+  "TH_35": {
+    "cluster_id": "TH_35",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "AMZN",
+      "CPNG",
+      "GOOG",
+      "GOOGL",
+      "META",
+      "MSFT"
+    ],
+    "representatives": [
+      "MSFT",
+      "CPNG",
+      "AMZN",
+      "GOOGL",
+      "GOOG"
+    ],
+    "label": "Big Tech & E-commerce"
+  },
+  "TH_8": {
+    "cluster_id": "TH_8",
+    "level": "theme",
+    "parent_sector": "Consumer Defensive",
+    "members": [
+      "BA",
+      "BF.B",
+      "CAG",
+      "CL",
+      "CPB",
+      "FLO",
+      "GIS",
+      "HRL",
+      "KDP",
+      "KHC",
+      "KMB",
+      "KO",
+      "KVUE",
+      "MDLZ",
+      "MKC",
+      "MNST",
+      "PEP",
+      "PG",
+      "PRMB",
+      "TAP",
+      "TSCO"
+    ],
+    "representatives": [
+      "PG",
+      "CL",
+      "CAG",
+      "KMB",
+      "GIS"
+    ],
+    "label": "Consumer Staples & Packaged Goods"
+  },
+  "TH_7": {
+    "cluster_id": "TH_7",
+    "level": "theme",
+    "parent_sector": "Financials",
+    "members": [
+      "APO",
+      "ARCC",
+      "ARES",
+      "BAM",
+      "BEN",
+      "BN",
+      "BX",
+      "CG",
+      "CRBG",
+      "EQH",
+      "FSK",
+      "GBDC",
+      "HTGC",
+      "IVZ",
+      "JEF",
+      "KKR",
+      "MS",
+      "NVCR",
+      "OBDC",
+      "OWL",
+      "TPG"
+    ],
+    "representatives": [
+      "CG",
+      "KKR",
+      "TPG",
+      "APO",
+      "CRBG"
+    ],
+    "label": "Alternative Asset Managers & Financial Services"
+  },
+  "TH_4": {
+    "cluster_id": "TH_4",
+    "level": "theme",
+    "parent_sector": "Basic Materials",
+    "members": [
+      "AA",
+      "AG",
+      "AGI",
+      "ALM",
+      "B",
+      "CDE",
+      "EGO",
+      "EQX",
+      "EXK",
+      "FCX",
+      "FSM",
+      "HBM",
+      "HL",
+      "HYMC",
+      "IAG",
+      "KGC",
+      "NEM",
+      "NG",
+      "NGD",
+      "PAAS",
+      "SGML",
+      "SSRM",
+      "SVM",
+      "TECK"
+    ],
+    "representatives": [
+      "IAG",
+      "FCX",
+      "KGC",
+      "B",
+      "AG"
+    ],
+    "label": "Mining & Metals"
+  },
+  "TH_3": {
+    "cluster_id": "TH_3",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "AMPX",
+      "ASTS",
+      "CCJ",
+      "CRML",
+      "EOSE",
+      "INFQ",
+      "IONQ",
+      "JOBY",
+      "KTOS",
+      "LPTH",
+      "LUNR",
+      "MP",
+      "NXE",
+      "OKLO",
+      "ONDS",
+      "PL",
+      "QBTS",
+      "RCAT",
+      "RGTI",
+      "RKLB",
+      "SATS",
+      "SMR",
+      "UEC",
+      "USAR",
+      "UUUU"
+    ],
+    "representatives": [
+      "UUUU",
+      "MP",
+      "UEC",
+      "OKLO",
+      "SMR"
+    ],
+    "label": "Quantum, Aerospace & Future Energy Tech"
+  },
+  "TH_16": {
+    "cluster_id": "TH_16",
+    "level": "theme",
+    "parent_sector": "Basic Materials",
+    "members": [
+      "ADM",
+      "AES",
+      "ARMK",
+      "CC",
+      "CTVA",
+      "DD",
+      "DOW",
+      "FMC",
+      "HOG",
+      "HUN",
+      "LYB",
+      "LYV",
+      "MOS",
+      "NTR",
+      "OLN"
+    ],
+    "representatives": [
+      "LYB",
+      "DOW",
+      "DD",
+      "NTR",
+      "CC"
+    ],
+    "label": "Chemicals & Agricultural Inputs"
+  },
+  "TH_14": {
+    "cluster_id": "TH_14",
+    "level": "theme",
+    "parent_sector": "Financials",
+    "members": [
+      "ADP",
+      "AJG",
+      "BRBR",
+      "BRO",
+      "CWAN",
+      "DOCS",
+      "FIS",
+      "G",
+      "ICE",
+      "MA",
+      "MRSH",
+      "NDAQ",
+      "OMC",
+      "PAYX",
+      "PGR",
+      "RYAN",
+      "SCHW",
+      "SPGI",
+      "SSNC",
+      "V"
+    ],
+    "representatives": [
+      "G",
+      "PAYX",
+      "ADP",
+      "SSNC",
+      "FIS"
+    ],
+    "label": "Financial Exchanges & Processing Services"
+  },
+  "TH_1": {
+    "cluster_id": "TH_1",
+    "level": "theme",
+    "parent_sector": "Energy",
+    "members": [
+      "APA",
+      "BKR",
+      "BTU",
+      "CNQ",
+      "COP",
+      "CRGY",
+      "CTRA",
+      "CVE",
+      "CVX",
+      "DINO",
+      "DNOW",
+      "DVN",
+      "EOG",
+      "FTI",
+      "HAL",
+      "LBRT",
+      "MGY",
+      "NOV",
+      "OVV",
+      "OXY",
+      "PBF",
+      "PR",
+      "PUMP",
+      "SLB",
+      "SM",
+      "SU",
+      "VNOM",
+      "XOM",
+      "ZIM"
+    ],
+    "representatives": [
+      "OVV",
+      "APA",
+      "EOG",
+      "MGY",
+      "CVE"
+    ],
+    "label": "Oil, Gas & Energy Infrastructure"
+  },
+  "TH_6": {
+    "cluster_id": "TH_6",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "AKAM",
+      "BSY",
+      "CDNS",
+      "CRM",
+      "CRWD",
+      "DDOG",
+      "DOCN",
+      "DT",
+      "FROG",
+      "FSLY",
+      "FTNT",
+      "IOT",
+      "NET",
+      "NOW",
+      "NTNX",
+      "OKTA",
+      "ORCL",
+      "PANW",
+      "PCOR",
+      "RBRK",
+      "S",
+      "SAIL",
+      "SNOW",
+      "TENB",
+      "VRNS",
+      "ZS"
+    ],
+    "representatives": [
+      "CRM",
+      "NOW",
+      "PCOR",
+      "BSY",
+      "SNOW"
+    ],
+    "label": "Cloud, Cybersecurity & SaaS"
+  },
+  "TH_20": {
+    "cluster_id": "TH_20",
+    "level": "theme",
+    "parent_sector": "Industrials",
+    "members": [
+      "AAL",
+      "AAPL",
+      "ALK",
+      "CCL",
+      "DAL",
+      "DB",
+      "GE",
+      "LUV",
+      "NCLH",
+      "SARO",
+      "UAL",
+      "W"
+    ],
+    "representatives": [
+      "ALK",
+      "LUV",
+      "UAL",
+      "CCL",
+      "DAL"
+    ],
+    "label": "Travel, Logistics & Transportation"
+  },
+  "TH_0": {
+    "cluster_id": "TH_0",
+    "level": "theme",
+    "parent_sector": "Semiconductor",
+    "members": [
+      "AAOI",
+      "ADI",
+      "AMAT",
+      "AMD",
+      "AMKR",
+      "AXTI",
+      "BWA",
+      "CAT",
+      "CIEN",
+      "COHR",
+      "ENTG",
+      "ESI",
+      "ETN",
+      "FLEX",
+      "FLR",
+      "FPS",
+      "GFS",
+      "GLW",
+      "INTC",
+      "JCI",
+      "LITE",
+      "LRCX",
+      "MCHP",
+      "MRVL",
+      "MU",
+      "NXPI",
+      "ON",
+      "QCOM",
+      "RMBS",
+      "SNDK",
+      "SOLS",
+      "STM",
+      "STX",
+      "SWKS",
+      "TER",
+      "TXN",
+      "VIAV",
+      "VISN",
+      "VRT",
+      "WDC"
+    ],
+    "representatives": [
+      "TER",
+      "CAT",
+      "AMAT",
+      "ETN",
+      "COHR"
+    ],
+    "label": "Semiconductors & Industrial Components"
+  },
+  "TH_38": {
+    "cluster_id": "TH_38",
+    "level": "theme",
+    "parent_sector": "Financials",
+    "members": [
+      "FISV",
+      "GPN",
+      "PYPL",
+      "TOST",
+      "TTD"
+    ],
+    "representatives": [
+      "TOST",
+      "FISV",
+      "GPN",
+      "PYPL",
+      "TTD"
+    ],
+    "label": "Fintech & Digital Payments"
+  },
+  "TH_24": {
+    "cluster_id": "TH_24",
+    "level": "theme",
+    "parent_sector": "Communication Services",
+    "members": [
+      "AIG",
+      "BCE",
+      "CMCSA",
+      "LBTYA",
+      "RNA",
+      "T",
+      "TMUS",
+      "TU",
+      "VZ"
+    ],
+    "representatives": [
+      "VZ",
+      "AIG",
+      "CMCSA",
+      "BCE",
+      "T"
+    ],
+    "label": "Telecommunications & Media"
+  },
+  "TH_23": {
+    "cluster_id": "TH_23",
+    "level": "theme",
+    "parent_sector": "Energy",
+    "members": [
+      "AM",
+      "AR",
+      "EPD",
+      "EQT",
+      "ET",
+      "EXE",
+      "KMI",
+      "OKE",
+      "PAA",
+      "RRC",
+      "WMB"
+    ],
+    "representatives": [
+      "OKE",
+      "RRC",
+      "AR",
+      "EPD",
+      "WMB"
+    ],
+    "label": "Midstream Energy & Pipelines"
+  },
+  "TH_15": {
+    "cluster_id": "TH_15",
+    "level": "theme",
+    "parent_sector": "Real Estate",
+    "members": [
+      "AMH",
+      "BRX",
+      "COLD",
+      "CUZ",
+      "DEI",
+      "DOC",
+      "EQR",
+      "HR",
+      "INVH",
+      "IRT",
+      "KIM",
+      "PLD",
+      "UDR",
+      "VICI",
+      "VTRS"
+    ],
+    "representatives": [
+      "PLD",
+      "VICI",
+      "BRX",
+      "INVH",
+      "KIM"
+    ],
+    "label": "REITs & Property Management"
+  },
+  "TH_5": {
+    "cluster_id": "TH_5",
+    "level": "theme",
+    "parent_sector": "Utilities",
+    "members": [
+      "AEP",
+      "CMS",
+      "CNP",
+      "D",
+      "DUK",
+      "EIX",
+      "ENB",
+      "EXC",
+      "FE",
+      "LNT",
+      "MO",
+      "NEE",
+      "NI",
+      "O",
+      "PCG",
+      "PM",
+      "PPL",
+      "SBRA",
+      "SO",
+      "SRE",
+      "WELL",
+      "XEL"
+    ],
+    "representatives": [
+      "DUK",
+      "LNT",
+      "O",
+      "CMS",
+      "NI"
+    ],
+    "label": "Utilities & Essential Services"
+  },
+  "TH_22": {
+    "cluster_id": "TH_22",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "ADBE",
+      "BRZE",
+      "DOCU",
+      "FIVN",
+      "KD",
+      "KVYO",
+      "MNDY",
+      "PEGA",
+      "RNG",
+      "TEAM",
+      "TWLO",
+      "VERX",
+      "WDAY",
+      "ZM"
+    ],
+    "representatives": [
+      "WDAY",
+      "VERX",
+      "DOCU",
+      "TEAM",
+      "KVYO"
+    ],
+    "label": "Workflow & Enterprise Software"
+  },
+  "TH_42": {
+    "cluster_id": "TH_42",
+    "level": "theme",
+    "parent_sector": "Consumer Defensive",
+    "members": [
+      "ACI",
+      "AMT",
+      "CCI",
+      "KR",
+      "SFM"
+    ],
+    "representatives": [
+      "AMT",
+      "CCI",
+      "KR",
+      "ACI",
+      "SFM"
+    ],
+    "label": "Retail, Food & Communications Infrastructure"
+  },
+  "TH_11": {
+    "cluster_id": "TH_11",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "ALAB",
+      "ANET",
+      "APH",
+      "APLD",
+      "AVGO",
+      "BE",
+      "BMNR",
+      "CIFR",
+      "CORZ",
+      "CRDO",
+      "CRWV",
+      "FLNC",
+      "GLXY",
+      "HUT",
+      "IREN",
+      "NBIS",
+      "NVDA",
+      "RIOT",
+      "SMX",
+      "WULF"
+    ],
+    "representatives": [
+      "CORZ",
+      "APLD",
+      "CRWV",
+      "CIFR",
+      "RIOT"
+    ],
+    "label": "Data Centers, AI Hardware & Crypto Mining"
+  },
+  "TH_2": {
+    "cluster_id": "TH_2",
+    "level": "theme",
+    "parent_sector": "Financials",
+    "members": [
+      "ALLY",
+      "AXP",
+      "BAC",
+      "BANC",
+      "BK",
+      "C",
+      "CFG",
+      "CLF",
+      "COF",
+      "COLB",
+      "FHN",
+      "FITB",
+      "FLG",
+      "FNB",
+      "HBAN",
+      "JHG",
+      "JPM",
+      "KEY",
+      "MET",
+      "NEOG",
+      "ONB",
+      "RF",
+      "SLM",
+      "SYF",
+      "TFC",
+      "USB",
+      "VLY",
+      "WBS",
+      "WFC"
+    ],
+    "representatives": [
+      "TFC",
+      "KEY",
+      "RF",
+      "USB",
+      "HBAN"
+    ],
+    "label": "Banking & Consumer Finance"
+  },
+  "TH_27": {
+    "cluster_id": "TH_27",
+    "level": "theme",
+    "parent_sector": "Consumer Cyclical",
+    "members": [
+      "CZR",
+      "DKNG",
+      "FLUT",
+      "FTV",
+      "HST",
+      "MGM",
+      "PENN",
+      "PK",
+      "TTEK"
+    ],
+    "representatives": [
+      "HST",
+      "PK",
+      "TTEK",
+      "FTV",
+      "FLUT"
+    ],
+    "label": "Gaming, Hospitality & Engineering Services"
+  },
+  "TH_32": {
+    "cluster_id": "TH_32",
+    "level": "theme",
+    "parent_sector": "Industrials",
+    "members": [
+      "ACN",
+      "CSGP",
+      "CTSH",
+      "FOXA",
+      "ICLR",
+      "IQV",
+      "RHI"
+    ],
+    "representatives": [
+      "ACN",
+      "CTSH",
+      "RHI",
+      "CSGP",
+      "IQV"
+    ],
+    "label": "Business & Information Services"
+  },
+  "TH_34": {
+    "cluster_id": "TH_34",
+    "level": "theme",
+    "parent_sector": "Industrials",
+    "members": [
+      "CEG",
+      "CGNX",
+      "MIR",
+      "PSTG",
+      "SEI",
+      "VST"
+    ],
+    "representatives": [
+      "SEI",
+      "VST",
+      "CEG",
+      "PSTG",
+      "CGNX"
+    ],
+    "label": "Industrial Technology & Power Generation"
+  },
+  "TH_26": {
+    "cluster_id": "TH_26",
+    "level": "theme",
+    "parent_sector": "Industrials",
+    "members": [
+      "BKD",
+      "CHRW",
+      "DHT",
+      "FIGS",
+      "FRO",
+      "MFC",
+      "QSR",
+      "ROL",
+      "WAY"
+    ],
+    "representatives": [
+      "WAY",
+      "ROL",
+      "CHRW",
+      "MFC",
+      "DHT"
+    ],
+    "label": "Logistics & Consumer Services"
+  },
+  "TH_25": {
+    "cluster_id": "TH_25",
+    "level": "theme",
+    "parent_sector": "Real Estate",
+    "members": [
+      "AGNC",
+      "ARR",
+      "DX",
+      "NLY",
+      "PFGC",
+      "RITM",
+      "STWD",
+      "TWO",
+      "WT"
+    ],
+    "representatives": [
+      "STWD",
+      "RITM",
+      "NLY",
+      "AGNC",
+      "PFGC"
+    ],
+    "label": "Mortgage & Specialty Finance REITs"
+  },
+  "TH_18": {
+    "cluster_id": "TH_18",
+    "level": "theme",
+    "parent_sector": "Industrials",
+    "members": [
+      "AMCR",
+      "CARR",
+      "CNH",
+      "CP",
+      "CSX",
+      "CWH",
+      "EMR",
+      "FAST",
+      "GTES",
+      "HON",
+      "IR",
+      "MMM",
+      "PCAR",
+      "TEX",
+      "UNP"
+    ],
+    "representatives": [
+      "IR",
+      "AMCR",
+      "CNH",
+      "PCAR",
+      "EMR"
+    ],
+    "label": "Industrial Machinery & Transportation"
+  },
+  "TH_12": {
+    "cluster_id": "TH_12",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "AI",
+      "CHYM",
+      "COIN",
+      "CRCL",
+      "DJT",
+      "FIGR",
+      "HIMS",
+      "HOOD",
+      "IBKR",
+      "KLAR",
+      "LMND",
+      "MSTR",
+      "PGY",
+      "PLTR",
+      "SOFI",
+      "TEM",
+      "TSLA",
+      "UPST"
+    ],
+    "representatives": [
+      "PGY",
+      "SOFI",
+      "AI",
+      "CHYM",
+      "HOOD"
+    ],
+    "label": "AI, Fintech & Growth Disruptors"
+  },
+  "TH_36": {
+    "cluster_id": "TH_36",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "CHWY",
+      "DUOL",
+      "FIG",
+      "INTU",
+      "TRI",
+      "ZETA"
+    ],
+    "representatives": [
+      "INTU",
+      "TRI",
+      "ZETA",
+      "FIG",
+      "DUOL"
+    ],
+    "label": "Consumer Platforms & Personal Finance Software"
+  },
+  "TH_37": {
+    "cluster_id": "TH_37",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "CSCO",
+      "DELL",
+      "HPE",
+      "HPQ",
+      "IBM",
+      "SMCI"
+    ],
+    "representatives": [
+      "IBM",
+      "HPE",
+      "HPQ",
+      "DELL",
+      "CSCO"
+    ],
+    "label": "Enterprise Computing & Server Infrastructure"
+  },
+  "TH_30": {
+    "cluster_id": "TH_30",
+    "level": "theme",
+    "parent_sector": "Communication Services",
+    "members": [
+      "CBRE",
+      "COMP",
+      "CWK",
+      "DIS",
+      "HRB",
+      "MLEC",
+      "REAL",
+      "TRU"
+    ],
+    "representatives": [
+      "TRU",
+      "HRB",
+      "CBRE",
+      "DIS",
+      "CWK"
+    ],
+    "label": "Entertainment, Real Estate & Data Services"
+  },
+  "TH_10": {
+    "cluster_id": "TH_10",
+    "level": "theme",
+    "parent_sector": "Consumer Cyclical",
+    "members": [
+      "AMRZ",
+      "AXTA",
+      "BBWI",
+      "CRH",
+      "EL",
+      "ELAN",
+      "FBIN",
+      "GPK",
+      "HD",
+      "IP",
+      "JHX",
+      "KMX",
+      "MAS",
+      "QXO",
+      "RKT",
+      "RYN",
+      "SW",
+      "TPH",
+      "WHR",
+      "WY"
+    ],
+    "representatives": [
+      "HD",
+      "FBIN",
+      "JHX",
+      "MAS",
+      "WY"
+    ],
+    "label": "Home Improvement & Building Materials"
+  },
+  "TH_41": {
+    "cluster_id": "TH_41",
+    "level": "theme",
+    "parent_sector": "Financials",
+    "members": [
+      "JBS",
+      "NU",
+      "PAGS",
+      "STNE",
+      "XP"
+    ],
+    "representatives": [
+      "JBS",
+      "PAGS",
+      "XP",
+      "STNE",
+      "NU"
+    ],
+    "label": "Emerging Markets Fintech"
+  },
+  "TH_39": {
+    "cluster_id": "TH_39",
+    "level": "theme",
+    "parent_sector": "Technology",
+    "members": [
+      "ETSY",
+      "GTLB",
+      "ODD",
+      "OS",
+      "PATH",
+      "UPWK"
+    ],
+    "representatives": [
+      "GTLB",
+      "PATH",
+      "UPWK",
+      "ETSY",
+      "ODD"
+    ],
+    "label": "Digital Productivity & E-commerce Platforms"
+  },
+  "TH_43": {
+    "cluster_id": "TH_43",
+    "level": "theme",
+    "parent_sector": "Energy",
+    "members": [
+      "ARRY",
+      "ENPH",
+      "RUN",
+      "SEDG"
+    ],
+    "representatives": [
+      "SEDG",
+      "ENPH",
+      "RUN",
+      "ARRY"
+    ],
+    "label": "Solar Energy"
+  },
+  "TH_13": {
+    "cluster_id": "TH_13",
+    "level": "theme",
+    "parent_sector": "Healthcare",
+    "members": [
+      "ABBV",
+      "AMGN",
+      "BMY",
+      "EXEL",
+      "GILD",
+      "JNJ",
+      "LLY",
+      "MCD",
+      "MRK",
+      "ORLY",
+      "PFE",
+      "RPRX",
+      "RTX",
+      "SEE",
+      "SYY",
+      "USFD",
+      "WMT"
+    ],
+    "representatives": [
+      "MCD",
+      "JNJ",
+      "WMT",
+      "SYY",
+      "AMGN"
+    ],
+    "label": "Healthcare, Food & Distribution"
+  },
+  "TH_31": {
+    "cluster_id": "TH_31",
+    "level": "theme",
+    "parent_sector": "Communication Services",
+    "members": [
+      "BILL",
+      "CART",
+      "DBX",
+      "GEN",
+      "GME",
+      "MTCH",
+      "OTEX"
+    ],
+    "representatives": [
+      "OTEX",
+      "BILL",
+      "DBX",
+      "GEN",
+      "MTCH"
+    ],
+    "label": "Digital Media, Consumer Tech & Internet"
+  },
+  "TH_28": {
+    "cluster_id": "TH_28",
+    "level": "theme",
+    "parent_sector": "Consumer Cyclical",
+    "members": [
+      "ABNB",
+      "EXPE",
+      "NYT",
+      "PINS",
+      "RELY",
+      "TRIP",
+      "UBER",
+      "WRBY",
+      "Z"
+    ],
+    "representatives": [
+      "ABNB",
+      "EXPE",
+      "PINS",
+      "Z",
+      "TRIP"
+    ],
+    "label": "Consumer Marketplaces & Travel Tech"
+  },
+  "TH_19": {
+    "cluster_id": "TH_19",
+    "level": "theme",
+    "parent_sector": "Communication Services",
+    "members": [
+      "AFRM",
+      "APP",
+      "CVNA",
+      "DASH",
+      "EA",
+      "EBAY",
+      "LYFT",
+      "RBLX",
+      "RDDT",
+      "ROKU",
+      "SHOP",
+      "TTWO",
+      "U"
+    ],
+    "representatives": [
+      "SHOP",
+      "DASH",
+      "TTWO",
+      "U",
+      "APP"
+    ],
+    "label": "E-commerce & Interactive Entertainment"
+  },
+  "TH_40": {
+    "cluster_id": "TH_40",
+    "level": "theme",
+    "parent_sector": "Healthcare",
+    "members": [
+      "ACHC",
+      "CNC",
+      "CVS",
+      "OSCR",
+      "UNH"
+    ],
+    "representatives": [
+      "OSCR",
+      "CNC",
+      "ACHC",
+      "CVS",
+      "UNH"
+    ],
+    "label": "Managed Healthcare & Hospitals"
+  },
+  "TH_9": {
+    "cluster_id": "TH_9",
+    "level": "theme",
+    "parent_sector": "Consumer Cyclical",
+    "members": [
+      "AEO",
+      "AS",
+      "BBY",
+      "CALY",
+      "CPRI",
+      "F",
+      "GAP",
+      "GM",
+      "KNX",
+      "KSS",
+      "LVS",
+      "M",
+      "MAT",
+      "NKE",
+      "ONON",
+      "RXO",
+      "SIRI",
+      "TGT",
+      "UPS",
+      "VFC"
+    ],
+    "representatives": [
+      "VFC",
+      "GAP",
+      "RXO",
+      "GM",
+      "CPRI"
+    ],
+    "label": "Automotive, Retail & Logistics"
+  },
+  "TH_21": {
+    "cluster_id": "TH_21",
+    "level": "theme",
+    "parent_sector": "Healthcare",
+    "members": [
+      "ABT",
+      "BAX",
+      "BDX",
+      "BSX",
+      "DHR",
+      "DXCM",
+      "EW",
+      "GEHC",
+      "MDT",
+      "NVST",
+      "XRAY",
+      "ZTS"
+    ],
+    "representatives": [
+      "XRAY",
+      "BAX",
+      "BDX",
+      "GEHC",
+      "ZTS"
+    ],
+    "label": "Medical Devices & Biotechnology"
+  },
+  "TH_33": {
+    "cluster_id": "TH_33",
+    "level": "theme",
+    "parent_sector": "Communication Services",
+    "members": [
+      "CPRT",
+      "NFLX",
+      "NWSA",
+      "PSKY",
+      "SPOT",
+      "WMG",
+      "XYZ"
+    ],
+    "representatives": [
+      "XYZ",
+      "CPRT",
+      "NWSA",
+      "SPOT",
+      "NFLX"
+    ],
+    "label": "Media, Entertainment & Services"
+  },
+  "TH_29": {
+    "cluster_id": "TH_29",
+    "level": "theme",
+    "parent_sector": "Consumer Cyclical",
+    "members": [
+      "BRK.B",
+      "BROS",
+      "CAVA",
+      "CELH",
+      "CMG",
+      "OTIS",
+      "SBUX",
+      "TJX"
+    ],
+    "representatives": [
+      "TJX",
+      "CMG",
+      "OTIS",
+      "BRK.B",
+      "BROS"
+    ],
+    "label": "Consumer Brands, Restaurants & Retail"
+  },
+  "TH_17": {
+    "cluster_id": "TH_17",
+    "level": "theme",
+    "parent_sector": "Healthcare",
+    "members": [
+      "ACLX",
+      "ARWR",
+      "BBIO",
+      "CFLT",
+      "DBRG",
+      "ERAS",
+      "FOLD",
+      "LCID",
+      "MRNA",
+      "NTLA",
+      "QURE",
+      "RIVN",
+      "ROIV",
+      "VKTX",
+      "WBD"
+    ],
+    "representatives": [
+      "NTLA",
+      "LCID",
+      "VKTX",
+      "ROIV",
+      "BBIO"
+    ],
+    "label": "Biotech, EV & Specialized Therapeutics"
+  }
+}

@@ -1,9 +1,30 @@
+import random
+import time
 from typing import Any, Optional
 
+import httpx
+from google.genai import errors as genai_errors
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from .base_client import BaseLLMClient, normalize_content
 from .validators import validate_model
+
+# Transient errors worth retrying: the Gemini endpoint occasionally drops the
+# connection mid-request ("Server disconnected without sending a response") or
+# returns 5xx under load. google.genai's built-in retry does not cover these.
+_TRANSIENT_LLM_ERRORS = (
+    httpx.RemoteProtocolError,
+    httpx.ConnectError,
+    httpx.ConnectTimeout,
+    httpx.ReadError,
+    httpx.ReadTimeout,
+    httpx.WriteError,
+    httpx.PoolTimeout,
+    genai_errors.ServerError,
+)
+_LLM_MAX_RETRIES = 5
+_LLM_BACKOFF = 1.0
+_LLM_MAX_BACKOFF = 30.0
 
 
 class NormalizedChatGoogleGenerativeAI(ChatGoogleGenerativeAI):
@@ -11,10 +32,22 @@ class NormalizedChatGoogleGenerativeAI(ChatGoogleGenerativeAI):
 
     Gemini 3 models return content as list of typed blocks.
     This normalizes to string for consistent downstream handling.
+
+    Also retries transient connection/5xx failures with exponential backoff;
+    non-transient errors (bad request, schema) propagate immediately.
     """
 
     def invoke(self, input, config=None, **kwargs):
-        return normalize_content(super().invoke(input, config, **kwargs))
+        for attempt in range(_LLM_MAX_RETRIES + 1):
+            try:
+                result = super().invoke(input, config, **kwargs)
+                break
+            except _TRANSIENT_LLM_ERRORS:
+                if attempt >= _LLM_MAX_RETRIES:
+                    raise
+                delay = min(_LLM_BACKOFF * (2 ** attempt), _LLM_MAX_BACKOFF)
+                time.sleep(delay + random.uniform(0, delay * 0.25))
+        return normalize_content(result)
 
 
 class GoogleClient(BaseLLMClient):

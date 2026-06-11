@@ -58,3 +58,20 @@ def test_enum_values_are_stable():
     assert MarketRegime.BULLISH.value == "Bullish"
     assert Direction.BLOCK.value == "Block"
     assert Strength.WEAK.value == "Weak"
+
+
+def test_concept_signal_block_forces_neutral_strength():
+    cs = ConceptSignal(concept="X", direction=Direction.BLOCK, strength=Strength.STRONG, confidence=0.8)
+    assert cs.strength is Strength.NEUTRAL
+
+
+def test_concept_signal_directional_neutral_coerced_by_confidence():
+    strong = ConceptSignal(concept="X", direction=Direction.LONG, strength=Strength.NEUTRAL, confidence=0.7)
+    weak = ConceptSignal(concept="Y", direction=Direction.SHORT, strength=Strength.NEUTRAL, confidence=0.3)
+    assert strong.strength is Strength.STRONG
+    assert weak.strength is Strength.WEAK
+
+
+def test_concept_signal_explicit_strength_preserved():
+    cs = ConceptSignal(concept="X", direction=Direction.LONG, strength=Strength.WEAK, confidence=0.9)
+    assert cs.strength is Strength.WEAK

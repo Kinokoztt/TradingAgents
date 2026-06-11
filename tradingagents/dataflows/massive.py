@@ -20,6 +20,8 @@ from typing import Optional
 
 import requests
 
+from . import _http
+
 API_BASE_URL = "https://api.massive.com"
 NEWS_ENDPOINT = "/v2/reference/news"
 SPLITS_ENDPOINT = "/v3/reference/splits"
@@ -43,8 +45,7 @@ def _to_rfc3339(date_str: str, end_of_day: bool = False) -> str:
 
 def _get(url: str, params: Optional[dict] = None) -> dict:
     headers = {"Authorization": f"Bearer {get_api_key()}"}
-    response = requests.get(url, params=params, headers=headers, timeout=30)
-    response.raise_for_status()
+    response = _http.get_with_retry(requests.get, url, params=params, headers=headers, timeout=30)
     return response.json()
 
 

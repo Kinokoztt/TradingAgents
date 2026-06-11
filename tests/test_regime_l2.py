@@ -96,3 +96,15 @@ def test_propagate_does_not_override_existing():
     by = {s.ticker: s for s in out}
     assert by["AMD"].direction is Direction.SHORT  # existing signal preserved
     assert by["AMD"].catalyst_confidence == 0.5
+
+
+def test_propagate_skips_share_class_sibling_of_existing():
+    # GOOG has a real signal; its graph neighbour GOOGL canonicalizes to GOOG,
+    # so it must NOT be resurrected as a separate propagated signal.
+    signals = [StockSignal(ticker="GOOG", direction=Direction.LONG, catalyst_confidence=0.9, reason="stake")]
+    out = propagate_catalysts(
+        "2026-06-08", signals, neighbors_fn=lambda t: {"GOOG": [("GOOGL", 0.9), ("MSFT", 0.8)]}.get(t, [])
+    )
+    tickers = {s.ticker for s in out}
+    assert "GOOGL" not in tickers          # sibling collapsed
+    assert tickers == {"GOOG", "MSFT"}     # genuine neighbour still propagated

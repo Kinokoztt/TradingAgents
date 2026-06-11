@@ -1,0 +1,167 @@
+{
+  "session": "2026-06-09",
+  "market_state": "Range",
+  "evaluated_at": "2026-06-11",
+  "proxy": "SPY",
+  "band_mode": "atr",
+  "atr_pct": 0.009591091204783351,
+  "atr_k": 1.0,
+  "range_band": 0.01,
+  "trend_metric": "slope",
+  "complete": false,
+  "horizons": [
+    {
+      "horizon": 1,
+      "target_date": "2026-06-09",
+      "evaluable": true,
+      "market_return": -0.00884848647849068,
+      "market_trend": -0.00884848647849265,
+      "market_trend_r2": 1.0,
+      "market_hit": true,
+      "range_band_used": 0.009591091204783351,
+      "long": {
+        "count": 75,
+        "evaluated": 75,
+        "hit_rate": 0.36,
+        "avg_return": -0.0182940662846137,
+        "avg_alpha": -0.009445579806123016,
+        "win_rate": 0.4266666666666667
+      },
+      "short": {
+        "count": 120,
+        "evaluated": 120,
+        "hit_rate": 0.4666666666666667,
+        "avg_return": -0.005157339420903931,
+        "avg_alpha": -0.0036911470575867493,
+        "win_rate": 0.4
+      },
+      "dir_confusion": {
+        "Long": {
+          "up": 27,
+          "down": 48
+        },
+        "Short": {
+          "up": 64,
+          "down": 56
+        },
+        "Block": {
+          "up": 108,
+          "down": 119
+        }
+      },
+      "long_precision": 0.36,
+      "short_precision": 0.4666666666666667,
+      "confidence_brier": 0.32838124712820543,
+      "regime_veto": {
+        "vetoed_long_count": 0,
+        "evaluated": 0,
+        "vetoed_avg_return": null,
+        "vetoed_rose_rate": null
+      },
+      "sector_hit_rate": 0.6666666666666666,
+      "theme_hit_rate": 0.5416666666666666
+    },
+    {
+      "horizon": 3,
+      "target_date": null,
+      "evaluable": false,
+      "market_return": null,
+      "market_trend": null,
+      "market_trend_r2": null,
+      "market_hit": null,
+      "range_band_used": 0.01661225726671176,
+      "long": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "short": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "dir_confusion": {
+        "Long": {
+          "up": 0,
+          "down": 0
+        },
+        "Short": {
+          "up": 0,
+          "down": 0
+        },
+        "Block": {
+          "up": 0,
+          "down": 0
+        }
+      },
+      "long_precision": null,
+      "short_precision": null,
+      "confidence_brier": null,
+      "regime_veto": {
+        "vetoed_long_count": 0,
+        "evaluated": 0,
+        "vetoed_avg_return": null,
+        "vetoed_rose_rate": null
+      },
+      "sector_hit_rate": null,
+      "theme_hit_rate": null
+    },
+    {
+      "horizon": 5,
+      "target_date": null,
+      "evaluable": false,
+      "market_return": null,
+      "market_trend": null,
+      "market_trend_r2": null,
+      "market_hit": null,
+      "range_band_used": 0.02144633191229593,
+      "long": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "short": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "dir_confusion": {
+        "Long": {
+          "up": 0,
+          "down": 0
+        },
+        "Short": {
+          "up": 0,
+          "down": 0
+        },
+        "Block": {
+          "up": 0,
+          "down": 0
+        }
+      },
+      "long_precision": null,
+      "short_precision": null,
+      "confidence_brier": null,
+      "regime_veto": {
+        "vetoed_long_count": 0,
+        "evaluated": 0,
+        "vetoed_avg_return": null,
+        "vetoed_rose_rate": null
+      },
+      "sector_hit_rate": null,
+      "theme_hit_rate": null
+    }
+  ]
+}

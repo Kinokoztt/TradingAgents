@@ -43,13 +43,14 @@ def run_regime_gate(
     tools: MarketDataTools | None = None,
     llm=None,
     provider: str = "google",
-    model: str = "gemini-3.1-pro",
+    model: str = "gemini-3.1-pro-preview",
     universe: list[str] | None = None,
+    news_tickers: list[str] | None = None,
     out_dir: str | None = None,
     news_look_back_days: int = 3,
     max_news_tickers: int | None = None,
     batch_size: int = 20,
-    max_workers: int = 4,
+    max_workers: int = 2,
     with_fundamentals: bool = True,
     propagate: bool = True,
     use_llm_concepts: bool = True,
@@ -70,10 +71,14 @@ def run_regime_gate(
     cutoff_utc, cutoff_fmp = premarket_cutoffs(as_of_date)
 
     # S0 + S1: news-active stocks (news capped at pre-market) -> per-stock signals.
-    tickers = select_news_tickers(
-        as_of_date, look_back_days=news_look_back_days, universe=universe,
-        max_tickers=max_news_tickers, market=market, tools=tools, news_end=cutoff_utc,
-    )
+    # S0 is skipped when the caller pins the active names explicitly (small test runs).
+    if news_tickers is not None:
+        tickers = news_tickers
+    else:
+        tickers = select_news_tickers(
+            as_of_date, look_back_days=news_look_back_days, universe=universe,
+            max_tickers=max_news_tickers, market=market, tools=tools, news_end=cutoff_utc,
+        )
     stock_signals = analyze_stocks(
         tickers, as_of_date, market=market, tools=tools, llm=llm, provider=provider, model=model,
         batch_size=batch_size, max_workers=max_workers, with_fundamentals=with_fundamentals,

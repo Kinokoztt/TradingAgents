@@ -48,6 +48,11 @@ def get_market_news(curr_date: str, look_back_days: int = 3, end_datetime: str |
     return fmp.get_global_news(curr_date, look_back_days=look_back_days, end_datetime=end_datetime)
 
 
-def get_economic_calendar(start_date: str, end_date: str) -> str:
-    """LLM-ready economic calendar (FMP)."""
-    return fmp.get_economic_calendar(start_date, end_date)
+def get_economic_calendar(start_date: str, end_date: str, cutoff: str | None = None) -> str:
+    """LLM-ready economic calendar (FMP).
+
+    ``cutoff`` ("YYYY-MM-DD HH:MM:SS") blanks the realized ``Actual`` of events
+    timed after the session's pre-market cutoff, so a rollback can't read future
+    macro prints (FMP's calendar is a live table; see fmp.get_economic_calendar).
+    """
+    return fmp.get_economic_calendar(start_date, end_date, cutoff=cutoff)

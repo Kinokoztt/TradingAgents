@@ -183,12 +183,13 @@ flowchart TD
   | `us10y_yield` | FLOAT | 美 10 年期国债收益率 |
   | `us_yield_curve_spread` | FLOAT | 10Y-2Y 利差（衰退指标） |
   | `vix_close` | FLOAT | VIX 收盘 |
-  | `nq_futures_close` | FLOAT | 纳指期货收盘 |
-  | `dxy_close` | FLOAT | 美元指数 |
-  | `vix_pct_change` | FLOAT | VIX 日变化率 |
-  | `nq_futures_pct_change` | FLOAT | 纳指期货日变化率 |
+  | `nasdaq100_close` | FLOAT | 纳斯达克100 现货收盘（FRED NASDAQ100） |
+  | `usd_broad_index` | FLOAT | 美联储广义名义美元指数（DTWEXBGS，~120；**非** ICE DXY ~99） |
+  | `vix_pct_change` | FLOAT | VIX 日变化率（真实相邻交易日观测） |
+  | `nasdaq100_pct_change` | FLOAT | 纳指100 日变化率（真实相邻交易日观测） |
+  | `usd_broad_index_stale_days` | INTEGER | 美元指数距上次真实观测的自然日数（0=当日真值，>0=ffill 出的陈旧值，区分发布滞后） |
 
-  > 数据由 FRED 经 `docs/macro_daily_deploy.py`（Cloud Functions）落库；管道内 `shift(1, freq='D')` 已把每行特征对齐为「该交易日盘前可见的上一日收盘值」，因此读当日行**无未来函数风险**。`nq_futures_pct_change` 亦可作为概念图谱 co-movement 的去市场化基准。
+  > 数据由 FRED 经 `docs/macro_daily_deploy.py`（Cloud Functions）落库；管道以 **NYSE 交易日历**对齐（非自然日 ffill），`pct_change` 在真实观测上计算（避免被周末填平的同值抹成 0%），并用 `shift(1)`（一个交易日）对齐为「该交易日盘前可见的上一交易日收盘值」，因此读当日行**无未来函数风险**。`nasdaq100_pct_change` 亦可作为概念图谱 co-movement 的去市场化基准。
 
 - 函数：
   - `get_macro_daily(curr_date, look_back_days) -> str`：查询 `macro_daily`，返回利率/VIX/利差/DXY 近 N 日趋势摘要（格式化为便于 LLM 消费的文本/小表）。

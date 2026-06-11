@@ -44,7 +44,7 @@
 | Co-mention | Massive `/v2/reference/news`、Benzinga `/benzinga/v2/news`、FMP `/stable/news/*` | `results[].tickers` / `stocks` 数组 |
 | Co-movement | **BQ 日线** `day_aggs_di`（Polygon/Massive 风格，非复权，≥2024） | `ticker, open, high, low, close, volume, transactions, trade_date(DATE)` → 日收益率 |
 | 拆股修正 | **Massive `/v3/reference/splits`**（历史，单票一次调用，量小，缓存到 BQ） | `execution_date, split_from, split_to` |
-| 去市场化基准 | `macro_daily.nq_futures_close` / `nq_futures_pct_change`（亦可从日线表自算 QQQ/SPY 代理） | 市场因子收益率 |
+| 去市场化基准 | `macro_daily.nasdaq100_close` / `nasdaq100_pct_change`（亦可从日线表自算 QQQ/SPY 代理） | 市场因子收益率 |
 | 盘中增量 | **BQ 分钟** `minute_aggs_di` | `ticker, open, high, low, close, volume, transactions, trade_minute(STRING), trade_date(DATE)`（盘中触发短窗共振） |
 | ETF 成分 | FMP `etf-holdings`（**仅最新、无历史** → 历史建图阶段不用，见 §4.3） | ETF → 成分 ticker + 权重 |
 | 候选节点全集 | BQ `valid_ticker_v3_pure_cs` | ticker（仅 `ticker_type='CS'` 作为节点） |
@@ -90,7 +90,7 @@ PMI(i, j) = log( P(i, j) / (P(i) · P(j)) )
 
 ```
 r_i,t       = 个股 i 第 t 日收益率
-r_mkt,t     = 市场因子收益率（首选 day_aggs_di 内的 SPY/QQQ，因表内已含 ETF/指数；备选 macro_daily.nq_futures_pct_change）
+r_mkt,t     = 市场因子收益率（首选 day_aggs_di 内的 SPY/QQQ，因表内已含 ETF/指数；备选 macro_daily.nasdaq100_pct_change）
 r_i,t = α_i + β_i · r_mkt,t + ε_i,t        # 对窗口 W_c 回归
 co_move(i, j) = corr(ε_i, ε_j)            # 残差相关（Pearson/Spearman）
 ```

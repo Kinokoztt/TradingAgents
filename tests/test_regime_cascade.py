@@ -61,7 +61,7 @@ class _FakeTools:
     def get_market_news(self, curr_date, look_back_days=10, end_datetime=None):
         return "Risk-on."
 
-    def get_economic_calendar(self, start_date, end_date):
+    def get_economic_calendar(self, start_date, end_date, cutoff=None):
         return "No prints."
 
 

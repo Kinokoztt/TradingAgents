@@ -18,8 +18,9 @@ from pydantic import BaseModel
 from tradingagents.market_tools import MarketDataTools, get_market_tools
 
 from .schemas import StockSignal
+from .tickers import canonical_ticker, canonicalize_tickers
 
-DEFAULT_STOCK_MODEL = "gemini-3.1-pro"
+DEFAULT_STOCK_MODEL = "gemini-3.1-pro-preview"
 
 
 class _StockSignalBatch(BaseModel):
@@ -59,7 +60,8 @@ def select_news_tickers(
     for tickers in articles["tickers"]:
         for t in tickers:
             if t in universe_set:
-                counts[t] += 1
+                # merge dual-class siblings (GOOGL→GOOG) so they rank/whitelist once
+                counts[canonical_ticker(t)] += 1
 
     ranked = [t for t, _ in counts.most_common()]
     return ranked[:max_tickers] if max_tickers else ranked
@@ -137,6 +139,7 @@ def analyze_stocks(
     """
     if not tickers:
         return []
+    tickers = canonicalize_tickers(tickers)  # collapse dual-class siblings, dedupe
     news_end = news_end or as_of_date
 
     tools = tools or get_market_tools(market)

@@ -1,0 +1,6657 @@
+{
+  "GOOG": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "GOOGL": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KMB": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1674,
+      "is_primary": false
+    }
+  ],
+  "KVUE": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1503,
+      "is_primary": false
+    }
+  ],
+  "CRBG": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1892,
+      "is_primary": false
+    }
+  ],
+  "EQH": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.2077,
+      "is_primary": false
+    }
+  ],
+  "AG": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EXK": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "QBTS": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1622,
+      "is_primary": false
+    }
+  ],
+  "RGTI": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DOW": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_23",
+      "weight": 0.2324,
+      "is_primary": false
+    }
+  ],
+  "LYB": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_23",
+      "weight": 0.1998,
+      "is_primary": false
+    }
+  ],
+  "MA": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "V": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DINO": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PBF": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CVX": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.168,
+      "is_primary": false
+    }
+  ],
+  "XOM": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HL": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "IONQ": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.2488,
+      "is_primary": false
+    }
+  ],
+  "AAL": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1749,
+      "is_primary": false
+    }
+  ],
+  "UAL": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.19,
+      "is_primary": false
+    }
+  ],
+  "CRWD": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PANW": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CCL": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1509,
+      "is_primary": false
+    }
+  ],
+  "NCLH": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FCX": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HBM": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OKLO": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SMR": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DAL": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2725,
+      "is_primary": false
+    }
+  ],
+  "COHR": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "LITE": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AMAT": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "LRCX": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ALK": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1981,
+      "is_primary": false
+    }
+  ],
+  "LUV": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1523,
+      "is_primary": false
+    }
+  ],
+  "STX": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "WDC": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MP": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "USAR": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KGC": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NEM": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "T": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2062,
+      "is_primary": false
+    }
+  ],
+  "VZ": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3245,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1783,
+      "is_primary": false
+    }
+  ],
+  "FIS": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FISV": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3435,
+      "is_primary": false
+    }
+  ],
+  "ADI": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1502,
+      "is_primary": false
+    }
+  ],
+  "TXN": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OBDC": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OWL": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BAM": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BN": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PLD": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3017,
+      "is_primary": false
+    }
+  ],
+  "WELL": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1524,
+      "is_primary": false
+    }
+  ],
+  "KMI": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3546,
+      "is_primary": false
+    }
+  ],
+  "WMB": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.2739,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2076,
+      "is_primary": false
+    }
+  ],
+  "HAL": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SLB": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CRM": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2328,
+      "is_primary": false
+    }
+  ],
+  "NOW": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2164,
+      "is_primary": false
+    }
+  ],
+  "COP": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PAAS": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FTNT": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ADBE": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.3219,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1781,
+      "is_primary": false
+    }
+  ],
+  "CAG": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "GIS": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OVV": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.1546,
+      "is_primary": false
+    }
+  ],
+  "PR": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.151,
+      "is_primary": false
+    }
+  ],
+  "ASTS": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "RKLB": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DKNG": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1773,
+      "is_primary": false
+    }
+  ],
+  "FLUT": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2142,
+      "is_primary": false
+    }
+  ],
+  "AMT": [
+    {
+      "cluster_id": "TH_37",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.4281,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.2338,
+      "is_primary": false
+    }
+  ],
+  "CCI": [
+    {
+      "cluster_id": "TH_37",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3587,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.2916,
+      "is_primary": false
+    }
+  ],
+  "AR": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.6528,
+      "is_primary": false
+    }
+  ],
+  "RRC": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.5787,
+      "is_primary": false
+    }
+  ],
+  "CFG": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KEY": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FITB": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HBAN": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CRWV": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NBIS": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EOG": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.1622,
+      "is_primary": false
+    }
+  ],
+  "ADP": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PAYX": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CVE": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.1592,
+      "is_primary": false
+    }
+  ],
+  "SU": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "UEC": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.1953,
+      "is_primary": false
+    }
+  ],
+  "UUUU": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CRGY": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FSM": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AGI": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "IAG": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CTRA": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.1958,
+      "is_primary": false
+    }
+  ],
+  "DVN": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MGY": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.2253,
+      "is_primary": false
+    }
+  ],
+  "MCHP": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "RF": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TFC": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DUK": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1535,
+      "is_primary": false
+    }
+  ],
+  "SO": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "B": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OXY": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BX": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KKR": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1546,
+      "is_primary": false
+    }
+  ],
+  "LUNR": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FNB": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ONB": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BRX": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.305,
+      "is_primary": false
+    }
+  ],
+  "KIM": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.268,
+      "is_primary": false
+    }
+  ],
+  "ZS": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CMS": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CL": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PG": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1603,
+      "is_primary": false
+    }
+  ],
+  "ONDS": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1991,
+      "is_primary": false
+    }
+  ],
+  "RCAT": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SVM": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "USB": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AMH": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "INVH": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.1988,
+      "is_primary": false
+    }
+  ],
+  "APA": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FHN": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "VLY": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ACN": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2871,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1861,
+      "is_primary": false
+    }
+  ],
+  "CTSH": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3235,
+      "is_primary": false
+    }
+  ],
+  "CNQ": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.2079,
+      "is_primary": false
+    }
+  ],
+  "LNT": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1589,
+      "is_primary": false
+    }
+  ],
+  "CDE": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TEAM": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3107,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2824,
+      "is_primary": false
+    }
+  ],
+  "CEG": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.4687,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.1841,
+      "is_primary": false
+    }
+  ],
+  "VST": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.3329,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2594,
+      "is_primary": false
+    }
+  ],
+  "COLB": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "WDAY": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1712,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1641,
+      "is_primary": false
+    }
+  ],
+  "EQX": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ICLR": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2158,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_26",
+      "weight": 0.16,
+      "is_primary": false
+    }
+  ],
+  "IQV": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2146,
+      "is_primary": false
+    }
+  ],
+  "SNDK": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AGNC": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.1502,
+      "is_primary": false
+    }
+  ],
+  "NLY": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.2753,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.1974,
+      "is_primary": false
+    }
+  ],
+  "APO": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.167,
+      "is_primary": false
+    }
+  ],
+  "DHT": [
+    {
+      "cluster_id": "TH_36",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2369,
+      "is_primary": false
+    }
+  ],
+  "FRO": [
+    {
+      "cluster_id": "TH_36",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_21",
+      "weight": 0.2233,
+      "is_primary": false
+    }
+  ],
+  "CZR": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1638,
+      "is_primary": false
+    }
+  ],
+  "MGM": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CNP": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "GPN": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2971,
+      "is_primary": false
+    }
+  ],
+  "ENB": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_22",
+      "weight": 0.3194,
+      "is_primary": false
+    }
+  ],
+  "EPD": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.4647,
+      "is_primary": false
+    }
+  ],
+  "CCJ": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.314,
+      "is_primary": false
+    }
+  ],
+  "NXE": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.2321,
+      "is_primary": false
+    }
+  ],
+  "ARCC": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MU": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CSX": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1904,
+      "is_primary": false
+    }
+  ],
+  "UNP": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1558,
+      "is_primary": false
+    }
+  ],
+  "INFQ": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OKTA": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BKR": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.1933,
+      "is_primary": false
+    }
+  ],
+  "SSRM": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TMUS": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2884,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.271,
+      "is_primary": false
+    }
+  ],
+  "EQR": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "UDR": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "INTU": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2236,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2033,
+      "is_primary": false
+    }
+  ],
+  "ON": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EIX": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PCG": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MO": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2346,
+      "is_primary": false
+    }
+  ],
+  "PM": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.204,
+      "is_primary": false
+    }
+  ],
+  "EXC": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PPL": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "COIN": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.186,
+      "is_primary": false
+    }
+  ],
+  "HOOD": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "COF": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4544,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.1964,
+      "is_primary": false
+    }
+  ],
+  "SYF": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4338,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.2026,
+      "is_primary": false
+    }
+  ],
+  "AEP": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EQT": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.3843,
+      "is_primary": false
+    }
+  ],
+  "ARES": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FE": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "XEL": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BAC": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1829,
+      "is_primary": false
+    }
+  ],
+  "WFC": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1674,
+      "is_primary": false
+    }
+  ],
+  "NI": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CRCL": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3132,
+      "is_primary": false
+    }
+  ],
+  "CARR": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2562,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.1792,
+      "is_primary": false
+    }
+  ],
+  "JCI": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.2159,
+      "is_primary": false
+    }
+  ],
+  "FIVN": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_30",
+      "weight": 0.1509,
+      "is_primary": false
+    }
+  ],
+  "RNG": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2531,
+      "is_primary": false
+    }
+  ],
+  "SOFI": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.158,
+      "is_primary": false
+    }
+  ],
+  "D": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NEE": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DELL": [
+    {
+      "cluster_id": "TH_35",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3379,
+      "is_primary": false
+    }
+  ],
+  "HPE": [
+    {
+      "cluster_id": "TH_35",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.2767,
+      "is_primary": false
+    }
+  ],
+  "AXP": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4595,
+      "is_primary": false
+    }
+  ],
+  "ET": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.4423,
+      "is_primary": false
+    }
+  ],
+  "TPG": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NG": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PL": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DDOG": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SNOW": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NXPI": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "RBRK": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EGO": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SM": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DX": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KHC": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "O": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.2282,
+      "is_primary": false
+    }
+  ],
+  "OKE": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.6017,
+      "is_primary": false
+    }
+  ],
+  "CBRE": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2081,
+      "is_primary": false
+    }
+  ],
+  "CWK": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.1831,
+      "is_primary": false
+    }
+  ],
+  "AJG": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BRO": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MRSH": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NOV": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CIFR": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "WULF": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "IP": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SW": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.2041,
+      "is_primary": false
+    }
+  ],
+  "EXE": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.4643,
+      "is_primary": false
+    }
+  ],
+  "AMD": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1618,
+      "is_primary": false
+    }
+  ],
+  "INTC": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TENB": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "VRNS": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HPQ": [
+    {
+      "cluster_id": "TH_35",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2391,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2333,
+      "is_primary": false
+    }
+  ],
+  "HST": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1825,
+      "is_primary": false
+    }
+  ],
+  "PK": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3228,
+      "is_primary": false
+    }
+  ],
+  "KO": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.1561,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.1555,
+      "is_primary": false
+    }
+  ],
+  "PCOR": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2546,
+      "is_primary": false
+    }
+  ],
+  "MSTR": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3378,
+      "is_primary": false
+    }
+  ],
+  "KVYO": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3062,
+      "is_primary": false
+    }
+  ],
+  "GLW": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "G": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "VNOM": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ETN": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NGD": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DOCU": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3129,
+      "is_primary": false
+    }
+  ],
+  "GTLB": [
+    {
+      "cluster_id": "TH_41",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.388,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2477,
+      "is_primary": false
+    }
+  ],
+  "PAGS": [
+    {
+      "cluster_id": "TH_40",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1804,
+      "is_primary": false
+    }
+  ],
+  "STNE": [
+    {
+      "cluster_id": "TH_40",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "UPST": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DT": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2147,
+      "is_primary": false
+    }
+  ],
+  "C": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.2272,
+      "is_primary": false
+    }
+  ],
+  "BANC": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1527,
+      "is_primary": false
+    }
+  ],
+  "STM": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SSNC": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "IRT": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.18,
+      "is_primary": false
+    }
+  ],
+  "LBRT": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PUMP": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CRML": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.2301,
+      "is_primary": false
+    }
+  ],
+  "HUN": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1826,
+      "is_primary": false
+    }
+  ],
+  "OLN": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.585,
+      "is_primary": false
+    }
+  ],
+  "CP": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2205,
+      "is_primary": false
+    }
+  ],
+  "TWLO": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.385,
+      "is_primary": false
+    }
+  ],
+  "SRE": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ENPH": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.3634,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1682,
+      "is_primary": false
+    }
+  ],
+  "SEDG": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.3623,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1794,
+      "is_primary": false
+    }
+  ],
+  "FBIN": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.2553,
+      "is_primary": false
+    }
+  ],
+  "MAS": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1733,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1685,
+      "is_primary": false
+    }
+  ],
+  "CG": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MNDY": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.3071,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2402,
+      "is_primary": false
+    }
+  ],
+  "FSK": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "JPM": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ALLY": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4123,
+      "is_primary": false
+    }
+  ],
+  "BMNR": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4614,
+      "is_primary": false
+    }
+  ],
+  "GBDC": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AAOI": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FLG": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "IREN": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AMGN": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BMY": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_21",
+      "weight": 0.1553,
+      "is_primary": false
+    }
+  ],
+  "CORZ": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_20",
+      "weight": 0.1562,
+      "is_primary": false
+    }
+  ],
+  "VERX": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1978,
+      "is_primary": false
+    }
+  ],
+  "TOST": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1565,
+      "is_primary": false
+    }
+  ],
+  "S": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.3093,
+      "is_primary": false
+    }
+  ],
+  "FIG": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3579,
+      "is_primary": false
+    }
+  ],
+  "IOT": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1878,
+      "is_primary": false
+    }
+  ],
+  "MSFT": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.4153,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_30",
+      "weight": 0.1657,
+      "is_primary": false
+    }
+  ],
+  "BILL": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2396,
+      "is_primary": false
+    }
+  ],
+  "OTEX": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.188,
+      "is_primary": false
+    }
+  ],
+  "PATH": [
+    {
+      "cluster_id": "TH_41",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3028,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2587,
+      "is_primary": false
+    }
+  ],
+  "NTNX": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1908,
+      "is_primary": false
+    }
+  ],
+  "ORCL": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "GEN": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.3614,
+      "is_primary": false
+    }
+  ],
+  "ARR": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.4033,
+      "is_primary": false
+    }
+  ],
+  "PEP": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.1733,
+      "is_primary": false
+    }
+  ],
+  "ZETA": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.229,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1811,
+      "is_primary": false
+    }
+  ],
+  "CAT": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1844,
+      "is_primary": false
+    }
+  ],
+  "ABNB": [
+    {
+      "cluster_id": "TH_38",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.226,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1996,
+      "is_primary": false
+    }
+  ],
+  "EXPE": [
+    {
+      "cluster_id": "TH_38",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1959,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1878,
+      "is_primary": false
+    }
+  ],
+  "CPB": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BRZE": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3001,
+      "is_primary": false
+    }
+  ],
+  "RYAN": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TRI": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1508,
+      "is_primary": false
+    }
+  ],
+  "ALAB": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.3646,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.326,
+      "is_primary": false
+    }
+  ],
+  "CRDO": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.5406,
+      "is_primary": false
+    }
+  ],
+  "RYN": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.213,
+      "is_primary": false
+    }
+  ],
+  "WY": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "APLD": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BSY": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1808,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.151,
+      "is_primary": false
+    }
+  ],
+  "KTOS": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TECK": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ALM": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2681,
+      "is_primary": false
+    }
+  ],
+  "SPGI": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_33",
+      "weight": 0.1667,
+      "is_primary": false
+    }
+  ],
+  "PEGA": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.221,
+      "is_primary": false
+    }
+  ],
+  "SAIL": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "STWD": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.313,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.2522,
+      "is_primary": false
+    }
+  ],
+  "FTI": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EMR": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2443,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1744,
+      "is_primary": false
+    }
+  ],
+  "IR": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2724,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1646,
+      "is_primary": false
+    }
+  ],
+  "VRT": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CUZ": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2156,
+      "is_primary": false
+    }
+  ],
+  "DEI": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2066,
+      "is_primary": false
+    }
+  ],
+  "CVS": [
+    {
+      "cluster_id": "TH_39",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.2037,
+      "is_primary": false
+    }
+  ],
+  "UNH": [
+    {
+      "cluster_id": "TH_39",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2302,
+      "is_primary": false
+    }
+  ],
+  "HTGC": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SBRA": [
+    {
+      "cluster_id": "TH_4",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.3309,
+      "is_primary": false
+    }
+  ],
+  "HUT": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "RIOT": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HRB": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AFRM": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1878,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_31",
+      "weight": 0.1803,
+      "is_primary": false
+    }
+  ],
+  "GE": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1985,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1581,
+      "is_primary": false
+    }
+  ],
+  "RTX": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1669,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.1628,
+      "is_primary": false
+    }
+  ],
+  "IBM": [
+    {
+      "cluster_id": "TH_35",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2238,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1776,
+      "is_primary": false
+    }
+  ],
+  "RMBS": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TER": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "RHI": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.269,
+      "is_primary": false
+    }
+  ],
+  "AMRZ": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.2111,
+      "is_primary": false
+    }
+  ],
+  "CRH": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1826,
+      "is_primary": false
+    }
+  ],
+  "VIAV": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CIEN": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_20",
+      "weight": 0.2222,
+      "is_primary": false
+    }
+  ],
+  "ACI": [
+    {
+      "cluster_id": "TH_37",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2816,
+      "is_primary": false
+    }
+  ],
+  "KR": [
+    {
+      "cluster_id": "TH_37",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2846,
+      "is_primary": false
+    }
+  ],
+  "XP": [
+    {
+      "cluster_id": "TH_40",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NDAQ": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AM": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3144,
+      "is_primary": false
+    }
+  ],
+  "F": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.2074,
+      "is_primary": false
+    }
+  ],
+  "GM": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4369,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1917,
+      "is_primary": false
+    }
+  ],
+  "HD": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2439,
+      "is_primary": false
+    }
+  ],
+  "DBX": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1584,
+      "is_primary": false
+    }
+  ],
+  "NET": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ENTG": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ESI": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PENN": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DASH": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2327,
+      "is_primary": false
+    }
+  ],
+  "SHOP": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HYMC": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2283,
+      "is_primary": false
+    }
+  ],
+  "AMKR": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DOCN": [
+    {
+      "cluster_id": "TH_42",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.372,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.1527,
+      "is_primary": false
+    }
+  ],
+  "FSLY": [
+    {
+      "cluster_id": "TH_42",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.4228,
+      "is_primary": false
+    }
+  ],
+  "SYY": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3297,
+      "is_primary": false
+    }
+  ],
+  "USFD": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2019,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1611,
+      "is_primary": false
+    }
+  ],
+  "TRU": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ABT": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1696,
+      "is_primary": false
+    }
+  ],
+  "MDT": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.3121,
+      "is_primary": false
+    }
+  ],
+  "MS": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4197,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.2652,
+      "is_primary": false
+    }
+  ],
+  "APP": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BF.B": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TAP": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2635,
+      "is_primary": false
+    }
+  ],
+  "AMCR": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2069,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2014,
+      "is_primary": false
+    }
+  ],
+  "SARO": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1952,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_19",
+      "weight": 0.1614,
+      "is_primary": false
+    }
+  ],
+  "GLXY": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4741,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.1985,
+      "is_primary": false
+    }
+  ],
+  "CNH": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2317,
+      "is_primary": false
+    }
+  ],
+  "GTES": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2459,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.1737,
+      "is_primary": false
+    }
+  ],
+  "PFGC": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2237,
+      "is_primary": false
+    }
+  ],
+  "FROG": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2037,
+      "is_primary": false
+    }
+  ],
+  "MNST": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TGT": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "WMT": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2105,
+      "is_primary": false
+    }
+  ],
+  "ICE": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "VICI": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2637,
+      "is_primary": false
+    }
+  ],
+  "PAA": [
+    {
+      "cluster_id": "TH_22",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.67,
+      "is_primary": false
+    }
+  ],
+  "LLY": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NTR": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_23",
+      "weight": 0.2185,
+      "is_primary": false
+    }
+  ],
+  "IBKR": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.2864,
+      "is_primary": false
+    }
+  ],
+  "PGY": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.2062,
+      "is_primary": false
+    }
+  ],
+  "JOBY": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CHRW": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.425,
+      "is_primary": false
+    }
+  ],
+  "RXO": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ABBV": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HRL": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NVST": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4196,
+      "is_primary": false
+    }
+  ],
+  "XRAY": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2213,
+      "is_primary": false
+    }
+  ],
+  "HR": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3357,
+      "is_primary": false
+    }
+  ],
+  "CC": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.4677,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.269,
+      "is_primary": false
+    }
+  ],
+  "MET": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3755,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.2309,
+      "is_primary": false
+    }
+  ],
+  "PYPL": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.242,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1506,
+      "is_primary": false
+    }
+  ],
+  "WBS": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BDX": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "TTD": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2714,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.184,
+      "is_primary": false
+    }
+  ],
+  "ZM": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2828,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_30",
+      "weight": 0.184,
+      "is_primary": false
+    }
+  ],
+  "CDNS": [
+    {
+      "cluster_id": "TH_10",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2341,
+      "is_primary": false
+    }
+  ],
+  "TJX": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1788,
+      "is_primary": false
+    }
+  ],
+  "ADM": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.662,
+      "is_primary": false
+    }
+  ],
+  "AXTA": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NU": [
+    {
+      "cluster_id": "TH_40",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1547,
+      "is_primary": false
+    }
+  ],
+  "MDLZ": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "DHR": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_33",
+      "weight": 0.1842,
+      "is_primary": false
+    }
+  ],
+  "AKAM": [
+    {
+      "cluster_id": "TH_42",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3954,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.2039,
+      "is_primary": false
+    }
+  ],
+  "PCAR": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2664,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1722,
+      "is_primary": false
+    }
+  ],
+  "TEX": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.2488,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1768,
+      "is_primary": false
+    }
+  ],
+  "MOS": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.4399,
+      "is_primary": false
+    }
+  ],
+  "PFE": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_21",
+      "weight": 0.1917,
+      "is_primary": false
+    }
+  ],
+  "FAST": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2125,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.174,
+      "is_primary": false
+    }
+  ],
+  "JHX": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.2396,
+      "is_primary": false
+    }
+  ],
+  "FLEX": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AEO": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1919,
+      "is_primary": false
+    }
+  ],
+  "GAP": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3413,
+      "is_primary": false
+    }
+  ],
+  "SEI": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.4168,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2213,
+      "is_primary": false
+    }
+  ],
+  "IVZ": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1892,
+      "is_primary": false
+    }
+  ],
+  "AA": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2477,
+      "is_primary": false
+    }
+  ],
+  "QCOM": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SWKS": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.3481,
+      "is_primary": false
+    }
+  ],
+  "RBLX": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1569,
+      "is_primary": false
+    }
+  ],
+  "TTWO": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.279,
+      "is_primary": false
+    }
+  ],
+  "U": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2439,
+      "is_primary": false
+    }
+  ],
+  "FLO": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CPRI": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2138,
+      "is_primary": false
+    }
+  ],
+  "RITM": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.438,
+      "is_primary": false
+    }
+  ],
+  "XYZ": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2092,
+      "is_primary": false
+    }
+  ],
+  "DOC": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.2097,
+      "is_primary": false
+    }
+  ],
+  "CTVA": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.5152,
+      "is_primary": false
+    }
+  ],
+  "DUOL": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1872,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1782,
+      "is_primary": false
+    }
+  ],
+  "JNJ": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.229,
+      "is_primary": false
+    }
+  ],
+  "MTCH": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "UPWK": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1693,
+      "is_primary": false
+    }
+  ],
+  "BAX": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2583,
+      "is_primary": false
+    }
+  ],
+  "KDP": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PLTR": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.3987,
+      "is_primary": false
+    }
+  ],
+  "KSS": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "M": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4339,
+      "is_primary": false
+    }
+  ],
+  "CNC": [
+    {
+      "cluster_id": "TH_39",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2468,
+      "is_primary": false
+    }
+  ],
+  "OSCR": [
+    {
+      "cluster_id": "TH_39",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2103,
+      "is_primary": false
+    }
+  ],
+  "KD": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2424,
+      "is_primary": false
+    }
+  ],
+  "MKC": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CSGP": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2644,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1523,
+      "is_primary": false
+    }
+  ],
+  "CART": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.182,
+      "is_primary": false
+    }
+  ],
+  "LYFT": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1729,
+      "is_primary": false
+    }
+  ],
+  "UBER": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2446,
+      "is_primary": false
+    }
+  ],
+  "AMPX": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "GILD": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "OMC": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.245,
+      "is_primary": false
+    }
+  ],
+  "SMCI": [
+    {
+      "cluster_id": "TH_35",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2974,
+      "is_primary": false
+    }
+  ],
+  "SFM": [
+    {
+      "cluster_id": "TH_37",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1788,
+      "is_primary": false
+    }
+  ],
+  "CAVA": [
+    {
+      "cluster_id": "TH_43",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2691,
+      "is_primary": false
+    }
+  ],
+  "CMG": [
+    {
+      "cluster_id": "TH_43",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2212,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1581,
+      "is_primary": false
+    }
+  ],
+  "AXTI": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CPRT": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3496,
+      "is_primary": false
+    }
+  ],
+  "CHYM": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1977,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1686,
+      "is_primary": false
+    }
+  ],
+  "TRIP": [
+    {
+      "cluster_id": "TH_38",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2489,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.2142,
+      "is_primary": false
+    }
+  ],
+  "AI": [
+    {
+      "cluster_id": "TH_41",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2101,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1748,
+      "is_primary": false
+    }
+  ],
+  "GEHC": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1698,
+      "is_primary": false
+    }
+  ],
+  "BE": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "SCHW": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_8",
+      "weight": 0.1975,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1907,
+      "is_primary": false
+    }
+  ],
+  "TSCO": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.2504,
+      "is_primary": false
+    }
+  ],
+  "MCD": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2872,
+      "is_primary": false
+    }
+  ],
+  "AMZN": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BSX": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "MRK": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.219,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_21",
+      "weight": 0.2185,
+      "is_primary": false
+    }
+  ],
+  "BROS": [
+    {
+      "cluster_id": "TH_43",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "WAY": [
+    {
+      "cluster_id": "TH_36",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3187,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2058,
+      "is_primary": false
+    }
+  ],
+  "EBAY": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2345,
+      "is_primary": false
+    }
+  ],
+  "ETSY": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2539,
+      "is_primary": false
+    }
+  ],
+  "SBUX": [
+    {
+      "cluster_id": "TH_43",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1735,
+      "is_primary": false
+    }
+  ],
+  "VFC": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.28,
+      "is_primary": false
+    }
+  ],
+  "Z": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1804,
+      "is_primary": false
+    }
+  ],
+  "GFS": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "VKTX": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4128,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.235,
+      "is_primary": false
+    }
+  ],
+  "PINS": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1762,
+      "is_primary": false
+    }
+  ],
+  "MMM": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.3106,
+      "is_primary": false
+    }
+  ],
+  "DD": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.2601,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.2021,
+      "is_primary": false
+    }
+  ],
+  "RDDT": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1875,
+      "is_primary": false
+    }
+  ],
+  "TTEK": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CSCO": [
+    {
+      "cluster_id": "TH_35",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.464,
+      "is_primary": false
+    }
+  ],
+  "RPRX": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "QSR": [
+    {
+      "cluster_id": "TH_36",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ROL": [
+    {
+      "cluster_id": "TH_36",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_21",
+      "weight": 0.1534,
+      "is_primary": false
+    }
+  ],
+  "META": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "HON": [
+    {
+      "cluster_id": "TH_16",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.1525,
+      "is_primary": false
+    }
+  ],
+  "DOCS": [
+    {
+      "cluster_id": "TH_30",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2375,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1648,
+      "is_primary": false
+    }
+  ],
+  "BCE": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.3108,
+      "is_primary": false
+    }
+  ],
+  "NWSA": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2712,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.2354,
+      "is_primary": false
+    }
+  ],
+  "BA": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2557,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2175,
+      "is_primary": false
+    }
+  ],
+  "COMP": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ORLY": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.1574,
+      "is_primary": false
+    }
+  ],
+  "DIS": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BKD": [
+    {
+      "cluster_id": "TH_36",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_4",
+      "weight": 0.3526,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_9",
+      "weight": 0.1618,
+      "is_primary": false
+    }
+  ],
+  "SLM": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1882,
+      "is_primary": false
+    }
+  ],
+  "BEN": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2787,
+      "is_primary": false
+    }
+  ],
+  "ZTS": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2136,
+      "is_primary": false
+    }
+  ],
+  "MFC": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1741,
+      "is_primary": false
+    }
+  ],
+  "FOXA": [
+    {
+      "cluster_id": "TH_33",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3543,
+      "is_primary": false
+    }
+  ],
+  "ROKU": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BBIO": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2843,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.1839,
+      "is_primary": false
+    }
+  ],
+  "ROIV": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.1936,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1771,
+      "is_primary": false
+    }
+  ],
+  "WHR": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1618,
+      "is_primary": false
+    }
+  ],
+  "ELAN": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1897,
+      "is_primary": false
+    }
+  ],
+  "OTIS": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1624,
+      "is_primary": false
+    }
+  ],
+  "CELH": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.179,
+      "is_primary": false
+    }
+  ],
+  "JEF": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3543,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_32",
+      "weight": 0.1787,
+      "is_primary": false
+    }
+  ],
+  "MRVL": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AS": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "RELY": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_31",
+      "weight": 0.2235,
+      "is_primary": false
+    }
+  ],
+  "FTV": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.336,
+      "is_primary": false
+    }
+  ],
+  "RUN": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.3478,
+      "is_primary": false
+    }
+  ],
+  "LMND": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NKE": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ONON": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2805,
+      "is_primary": false
+    }
+  ],
+  "BWA": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "GPK": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "AIG": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.3139,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2823,
+      "is_primary": false
+    }
+  ],
+  "DNOW": [
+    {
+      "cluster_id": "TH_2",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ARRY": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.4856,
+      "is_primary": false
+    }
+  ],
+  "FMC": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.1958,
+      "is_primary": false
+    }
+  ],
+  "TU": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1974,
+      "is_primary": false
+    }
+  ],
+  "NEOG": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_21",
+      "weight": 0.185,
+      "is_primary": false
+    }
+  ],
+  "BRK.B": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "LPTH": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CVNA": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1951,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1771,
+      "is_primary": false
+    }
+  ],
+  "KMX": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1928,
+      "is_primary": false
+    }
+  ],
+  "DXCM": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BBY": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BK": [
+    {
+      "cluster_id": "TH_32",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.4937,
+      "is_primary": false
+    }
+  ],
+  "QXO": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.2548,
+      "is_primary": false
+    }
+  ],
+  "TEM": [
+    {
+      "cluster_id": "TH_41",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1796,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1601,
+      "is_primary": false
+    }
+  ],
+  "CWAN": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2272,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1557,
+      "is_primary": false
+    }
+  ],
+  "OS": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2163,
+      "is_primary": false
+    }
+  ],
+  "NFLX": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2668,
+      "is_primary": false
+    }
+  ],
+  "SPOT": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2002,
+      "is_primary": false
+    }
+  ],
+  "KNX": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.275,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1592,
+      "is_primary": false
+    }
+  ],
+  "ANET": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1854,
+      "is_primary": false
+    }
+  ],
+  "APH": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2998,
+      "is_primary": false
+    }
+  ],
+  "ARMK": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1836,
+      "is_primary": false
+    }
+  ],
+  "SOLS": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EOSE": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CMCSA": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2763,
+      "is_primary": false
+    }
+  ],
+  "SGML": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1731,
+      "is_primary": false
+    }
+  ],
+  "PGR": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "KLAR": [
+    {
+      "cluster_id": "TH_31",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2473,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.2441,
+      "is_primary": false
+    }
+  ],
+  "FLNC": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4209,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1956,
+      "is_primary": false
+    }
+  ],
+  "CHWY": [
+    {
+      "cluster_id": "TH_14",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_30",
+      "weight": 0.1747,
+      "is_primary": false
+    }
+  ],
+  "JBS": [
+    {
+      "cluster_id": "TH_40",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2547,
+      "is_primary": false
+    }
+  ],
+  "AVGO": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.4514,
+      "is_primary": false
+    }
+  ],
+  "TPH": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2563,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1583,
+      "is_primary": false
+    }
+  ],
+  "EL": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.2954,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.1788,
+      "is_primary": false
+    }
+  ],
+  "RKT": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1803,
+      "is_primary": false
+    }
+  ],
+  "EXEL": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_19",
+      "weight": 0.3486,
+      "is_primary": false
+    }
+  ],
+  "SATS": [
+    {
+      "cluster_id": "TH_3",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3383,
+      "is_primary": false
+    }
+  ],
+  "LCID": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4192,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1761,
+      "is_primary": false
+    }
+  ],
+  "RIVN": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.1795,
+      "is_primary": false
+    }
+  ],
+  "WMG": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1655,
+      "is_primary": false
+    }
+  ],
+  "NVCR": [
+    {
+      "cluster_id": "TH_8",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "BTU": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.4266,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4052,
+      "is_primary": false
+    }
+  ],
+  "CALY": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "W": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "FPS": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.1634,
+      "is_primary": false
+    }
+  ],
+  "FLR": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.2423,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.1923,
+      "is_primary": false
+    }
+  ],
+  "MIR": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.3202,
+      "is_primary": false
+    }
+  ],
+  "UPS": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1818,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1688,
+      "is_primary": false
+    }
+  ],
+  "GME": [
+    {
+      "cluster_id": "TH_15",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1774,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.1606,
+      "is_primary": false
+    }
+  ],
+  "DJT": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.377,
+      "is_primary": false
+    }
+  ],
+  "DB": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1698,
+      "is_primary": false
+    }
+  ],
+  "BBWI": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.293,
+      "is_primary": false
+    }
+  ],
+  "COLD": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "WRBY": [
+    {
+      "cluster_id": "TH_38",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1526,
+      "is_primary": false
+    }
+  ],
+  "TWO": [
+    {
+      "cluster_id": "TH_24",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PRMB": [
+    {
+      "cluster_id": "TH_7",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "NTLA": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3909,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.1913,
+      "is_primary": false
+    }
+  ],
+  "CWH": [
+    {
+      "cluster_id": "TH_13",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1944,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1837,
+      "is_primary": false
+    }
+  ],
+  "LVS": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "REAL": [
+    {
+      "cluster_id": "TH_26",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.2022,
+      "is_primary": false
+    }
+  ],
+  "CGNX": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.4209,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2573,
+      "is_primary": false
+    }
+  ],
+  "VTRS": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_13",
+      "weight": 0.2347,
+      "is_primary": false
+    }
+  ],
+  "VISN": [
+    {
+      "cluster_id": "TH_0",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_20",
+      "weight": 0.1763,
+      "is_primary": false
+    }
+  ],
+  "MRNA": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "LBTYA": [
+    {
+      "cluster_id": "TH_29",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.1891,
+      "is_primary": false
+    }
+  ],
+  "FIGR": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3366,
+      "is_primary": false
+    }
+  ],
+  "MAT": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.1973,
+      "is_primary": false
+    }
+  ],
+  "MLEC": [
+    {
+      "cluster_id": "TH_28",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.2552,
+      "is_primary": false
+    }
+  ],
+  "PSKY": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.2021,
+      "is_primary": false
+    }
+  ],
+  "LYV": [
+    {
+      "cluster_id": "TH_23",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_16",
+      "weight": 0.1962,
+      "is_primary": false
+    }
+  ],
+  "WT": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.4318,
+      "is_primary": false
+    }
+  ],
+  "NYT": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_6",
+      "weight": 0.1515,
+      "is_primary": false
+    }
+  ],
+  "ODD": [
+    {
+      "cluster_id": "TH_41",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.1912,
+      "is_primary": false
+    }
+  ],
+  "ZIM": [
+    {
+      "cluster_id": "TH_42",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.2903,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.1878,
+      "is_primary": false
+    }
+  ],
+  "FOLD": [
+    {
+      "cluster_id": "TH_18",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.2682,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_12",
+      "weight": 0.1936,
+      "is_primary": false
+    }
+  ],
+  "BRBR": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3256,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_31",
+      "weight": 0.1615,
+      "is_primary": false
+    }
+  ],
+  "ACHC": [
+    {
+      "cluster_id": "TH_39",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_3",
+      "weight": 0.5924,
+      "is_primary": false
+    }
+  ],
+  "CPNG": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_15",
+      "weight": 0.2333,
+      "is_primary": false
+    }
+  ],
+  "NVDA": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3026,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.2102,
+      "is_primary": false
+    }
+  ],
+  "AES": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_2",
+      "weight": 0.3358,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_23",
+      "weight": 0.1637,
+      "is_primary": false
+    }
+  ],
+  "SEE": [
+    {
+      "cluster_id": "TH_17",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_27",
+      "weight": 0.1952,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1526,
+      "is_primary": false
+    }
+  ],
+  "FIGS": [
+    {
+      "cluster_id": "TH_38",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "PSTG": [
+    {
+      "cluster_id": "TH_20",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_10",
+      "weight": 0.2227,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_0",
+      "weight": 0.2201,
+      "is_primary": false
+    }
+  ],
+  "HOG": [
+    {
+      "cluster_id": "TH_9",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2035,
+      "is_primary": false
+    }
+  ],
+  "JHG": [
+    {
+      "cluster_id": "TH_5",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ACLX": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3073,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.1526,
+      "is_primary": false
+    }
+  ],
+  "ARWR": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.2065,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_18",
+      "weight": 0.1872,
+      "is_primary": false
+    }
+  ],
+  "AAPL": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "CLF": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.2394,
+      "is_primary": false
+    }
+  ],
+  "TSLA": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.3578,
+      "is_primary": false
+    }
+  ],
+  "EA": [
+    {
+      "cluster_id": "TH_11",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "EW": [
+    {
+      "cluster_id": "TH_21",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_36",
+      "weight": 0.1736,
+      "is_primary": false
+    }
+  ],
+  "WBD": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.2395,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_5",
+      "weight": 0.213,
+      "is_primary": false
+    }
+  ],
+  "HIMS": [
+    {
+      "cluster_id": "TH_12",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_1",
+      "weight": 0.2932,
+      "is_primary": false
+    }
+  ],
+  "RNA": [
+    {
+      "cluster_id": "TH_25",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_11",
+      "weight": 0.175,
+      "is_primary": false
+    }
+  ],
+  "SIRI": [
+    {
+      "cluster_id": "TH_6",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "ERAS": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_7",
+      "weight": 0.1541,
+      "is_primary": false
+    }
+  ],
+  "CFLT": [
+    {
+      "cluster_id": "TH_27",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.227,
+      "is_primary": false
+    }
+  ],
+  "SMX": [
+    {
+      "cluster_id": "TH_1",
+      "weight": 1.0,
+      "is_primary": true
+    }
+  ],
+  "QURE": [
+    {
+      "cluster_id": "TH_19",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_17",
+      "weight": 0.4975,
+      "is_primary": false
+    }
+  ],
+  "DBRG": [
+    {
+      "cluster_id": "TH_34",
+      "weight": 1.0,
+      "is_primary": true
+    },
+    {
+      "cluster_id": "TH_14",
+      "weight": 0.3527,
+      "is_primary": false
+    },
+    {
+      "cluster_id": "TH_27",
+      "weight": 0.329,
+      "is_primary": false
+    }
+  ]
+}

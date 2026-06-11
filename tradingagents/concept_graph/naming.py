@@ -11,6 +11,7 @@ from __future__ import annotations
 from pydantic import BaseModel, Field
 
 from .schemas import Cluster
+from .sectors import CANONICAL_SECTORS, normalize_sector
 
 DEFAULT_NAMING_MODEL = "gemini-3.1-flash-lite"
 
@@ -26,11 +27,13 @@ class _ClusterNames(BaseModel):
 
 
 def _build_prompt(clusters: dict[str, Cluster]) -> str:
+    sectors = ", ".join(CANONICAL_SECTORS)
     lines = [
         "You label stock-market concept clusters. For each cluster below, give a",
         "concise English theme `label` (the specific sub-theme its members share)",
-        "and a broad English `parent_sector`. Use English only. Return every",
-        "cluster_id exactly once.",
+        f"and a `parent_sector` chosen STRICTLY from this fixed list: {sectors}.",
+        "(Semiconductors belong to Technology; do not invent new sectors.)",
+        "Use English only. Return every cluster_id exactly once.",
         "",
         "Clusters (cluster_id: representative tickers | all members):",
     ]
@@ -71,7 +74,7 @@ def name_clusters(
     for cid, c in clusters.items():
         n = names.get(cid)
         out[cid] = (
-            c.model_copy(update={"label": n.label, "parent_sector": n.parent_sector})
+            c.model_copy(update={"label": n.label, "parent_sector": normalize_sector(n.parent_sector)})
             if n
             else c
         )

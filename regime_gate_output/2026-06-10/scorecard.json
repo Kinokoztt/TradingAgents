@@ -1,0 +1,167 @@
+{
+  "session": "2026-06-10",
+  "market_state": "Range",
+  "evaluated_at": "2026-06-11",
+  "proxy": "SPY",
+  "band_mode": "atr",
+  "atr_pct": 0.012227609136036127,
+  "atr_k": 1.0,
+  "range_band": 0.01,
+  "trend_metric": "slope",
+  "complete": false,
+  "horizons": [
+    {
+      "horizon": 1,
+      "target_date": "2026-06-10",
+      "evaluable": true,
+      "market_return": -0.010853706759023196,
+      "market_trend": -0.010853706759024787,
+      "market_trend_r2": 1.0,
+      "market_hit": true,
+      "range_band_used": 0.012227609136036127,
+      "long": {
+        "count": 269,
+        "evaluated": 269,
+        "hit_rate": 0.34572490706319703,
+        "avg_return": -0.009266789283762872,
+        "avg_alpha": 0.0015869174752603204,
+        "win_rate": 0.5650557620817844
+      },
+      "short": {
+        "count": 111,
+        "evaluated": 111,
+        "hit_rate": 0.6936936936936937,
+        "avg_return": -0.01596259050635725,
+        "avg_alpha": 0.005108883747334053,
+        "win_rate": 0.5855855855855856
+      },
+      "dir_confusion": {
+        "Long": {
+          "up": 93,
+          "down": 176
+        },
+        "Short": {
+          "up": 34,
+          "down": 77
+        },
+        "Block": {
+          "up": 25,
+          "down": 33
+        }
+      },
+      "long_precision": 0.34572490706319703,
+      "short_precision": 0.6936936936936937,
+      "confidence_brier": 0.3392461709473685,
+      "regime_veto": {
+        "vetoed_long_count": 189,
+        "evaluated": 187,
+        "vetoed_avg_return": -0.010443156843915747,
+        "vetoed_rose_rate": 0.3315508021390374
+      },
+      "sector_hit_rate": 0.4444444444444444,
+      "theme_hit_rate": 0.4
+    },
+    {
+      "horizon": 3,
+      "target_date": null,
+      "evaluable": false,
+      "market_return": null,
+      "market_trend": null,
+      "market_trend_r2": null,
+      "market_hit": null,
+      "range_band_used": 0.021178840278707953,
+      "long": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "short": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "dir_confusion": {
+        "Long": {
+          "up": 0,
+          "down": 0
+        },
+        "Short": {
+          "up": 0,
+          "down": 0
+        },
+        "Block": {
+          "up": 0,
+          "down": 0
+        }
+      },
+      "long_precision": null,
+      "short_precision": null,
+      "confidence_brier": null,
+      "regime_veto": {
+        "vetoed_long_count": 189,
+        "evaluated": 0,
+        "vetoed_avg_return": null,
+        "vetoed_rose_rate": null
+      },
+      "sector_hit_rate": null,
+      "theme_hit_rate": null
+    },
+    {
+      "horizon": 5,
+      "target_date": null,
+      "evaluable": false,
+      "market_return": null,
+      "market_trend": null,
+      "market_trend_r2": null,
+      "market_hit": null,
+      "range_band_used": 0.027341765230474255,
+      "long": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "short": {
+        "count": 0,
+        "evaluated": 0,
+        "hit_rate": null,
+        "avg_return": null,
+        "avg_alpha": null,
+        "win_rate": null
+      },
+      "dir_confusion": {
+        "Long": {
+          "up": 0,
+          "down": 0
+        },
+        "Short": {
+          "up": 0,
+          "down": 0
+        },
+        "Block": {
+          "up": 0,
+          "down": 0
+        }
+      },
+      "long_precision": null,
+      "short_precision": null,
+      "confidence_brier": null,
+      "regime_veto": {
+        "vetoed_long_count": 189,
+        "evaluated": 0,
+        "vetoed_avg_return": null,
+        "vetoed_rose_rate": null
+      },
+      "sector_hit_rate": null,
+      "theme_hit_rate": null
+    }
+  ]
+}

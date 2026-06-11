@@ -18,10 +18,11 @@ _FIELDS = [
     "us10y_yield",
     "us_yield_curve_spread",
     "vix_close",
-    "nq_futures_close",
-    "dxy_close",
+    "nasdaq100_close",
+    "usd_broad_index",
     "vix_pct_change",
-    "nq_futures_pct_change",
+    "nasdaq100_pct_change",
+    "usd_broad_index_stale_days",
 ]
 
 
@@ -53,6 +54,8 @@ def get_macro_summary(curr_date: str, look_back_days: int = 10) -> str:
         return f"No macro_daily rows between {start} and {curr_date}."
 
     latest = df.iloc[-1]
+    usd_stale = int(latest["usd_broad_index_stale_days"])
+    usd_note = f" (stale {usd_stale}d — no fresh obs)" if usd_stale > 0 else ""
     lines = [
         f"## Macro snapshot as of {curr_date} (pre-market visible)",
         "",
@@ -61,19 +64,19 @@ def get_macro_summary(curr_date: str, look_back_days: int = 10) -> str:
         f"- VIX close: {latest['vix_close']} ({latest['vix_pct_change']:+.2%} d/d)"
         if pd.notna(latest["vix_pct_change"])
         else f"- VIX close: {latest['vix_close']}",
-        f"- Nasdaq futures: {latest['nq_futures_close']} ({latest['nq_futures_pct_change']:+.2%} d/d)"
-        if pd.notna(latest["nq_futures_pct_change"])
-        else f"- Nasdaq futures: {latest['nq_futures_close']}",
-        f"- DXY: {latest['dxy_close']}",
+        f"- Nasdaq-100 (spot): {latest['nasdaq100_close']} ({latest['nasdaq100_pct_change']:+.2%} d/d)"
+        if pd.notna(latest["nasdaq100_pct_change"])
+        else f"- Nasdaq-100 (spot): {latest['nasdaq100_close']}",
+        f"- USD broad index (Fed DTWEXBGS, ~120; not ICE DXY): {latest['usd_broad_index']}{usd_note}",
         "",
         f"### {look_back_days}-day trend (oldest → newest)",
-        "| Date | 10Y | Spread | VIX | NQ fut | DXY |",
-        "|---|---|---|---|---|---|",
+        "| Date | 10Y | Spread | VIX | NQ100 | USD idx | USD stale(d) |",
+        "|---|---|---|---|---|---|---|",
     ]
     for _, row in df.iterrows():
         lines.append(
             f"| {row['trade_date'].date()} | {row['us10y_yield']} | "
             f"{row['us_yield_curve_spread']} | {row['vix_close']} | "
-            f"{row['nq_futures_close']} | {row['dxy_close']} |"
+            f"{row['nasdaq100_close']} | {row['usd_broad_index']} | {int(row['usd_broad_index_stale_days'])} |"
         )
     return "\n".join(lines)

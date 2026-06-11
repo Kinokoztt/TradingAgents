@@ -7,6 +7,7 @@ orchestration agents land next.
 """
 
 from .commander import run_regime_gate
+from .evaluate import HorizonScore, Scorecard, WhitelistScore, evaluate_report
 from .l1_stock import analyze_stocks, select_news_tickers
 from .l2_concept import (
     aggregate_concepts,
@@ -14,7 +15,7 @@ from .l2_concept import (
     judge_sectors,
     propagate_catalysts,
 )
-from .l3_regime import analyze_regime, apply_circuit_breaker
+from .l3_regime import analyze_regime
 from .schemas import (
     ConceptSignal,
     Direction,
@@ -32,7 +33,6 @@ __all__ = [
     "ConceptSignal",
     "RegimeReport",
     "analyze_regime",
-    "apply_circuit_breaker",
     "aggregate_concepts",
     "judge_clusters",
     "judge_sectors",
@@ -40,4 +40,8 @@ __all__ = [
     "select_news_tickers",
     "analyze_stocks",
     "run_regime_gate",
+    "evaluate_report",
+    "Scorecard",
+    "HorizonScore",
+    "WhitelistScore",
 ]

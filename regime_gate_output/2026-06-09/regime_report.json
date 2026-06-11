@@ -1,0 +1,4308 @@
+{
+  "as_of_date": "2026-06-09",
+  "market_state": "Range",
+  "macro_summary": "Equities recently experienced a sharp pullback alongside a spike in the 10-year Treasury yield to 4.56% and a jump in the VIX. While volatility has slightly cooled and the Nasdaq-100 bounced today, markets remain defensive and range-bound. Investors are largely sidelining capital ahead of critical US CPI and PPI data, which will dictate the next directional move in inflation expectations, interest rates, and risk assets.",
+  "key_drivers": [
+    "Impending high-impact US CPI and PPI prints",
+    "10-year Treasury yield rising to 4.56% local highs",
+    "Elevated VIX (~19) reflecting defensive positioning and caution"
+  ],
+  "macro_snapshot": "## Macro snapshot as of 2026-06-09 (pre-market visible)\n\n- US 10Y yield: 4.56\n- 10Y-2Y spread: 0.41\n- VIX close: 18.92 (-12.04% d/d)\n- Nasdaq-100 (spot): 29414.26 (+1.58% d/d)\n- USD broad index (Fed DTWEXBGS, ~120; not ICE DXY): 120.0831 (stale 3d — no fresh obs)\n\n### 10-day trend (oldest → newest)\n| Date | 10Y | Spread | VIX | NQ100 | USD idx | USD stale(d) |\n|---|---|---|---|---|---|---|\n| 2026-06-01 | 4.45 | 0.47 | 15.32 | 30333.18 | 118.8783 | 0 |\n| 2026-06-02 | 4.47 | 0.42 | 16.05 | 30513.86 | 119.1653 | 0 |\n| 2026-06-03 | 4.46 | 0.41 | 15.77 | 30660.6 | 119.0359 | 0 |\n| 2026-06-04 | 4.49 | 0.41 | 16.06 | 30571.24 | 119.3848 | 0 |\n| 2026-06-05 | 4.47 | 0.42 | 15.4 | 30407.81 | 119.3615 | 0 |\n| 2026-06-08 | 4.55 | 0.38 | 21.51 | 28957.6 | 120.0831 | 0 |\n| 2026-06-09 | 4.56 | 0.41 | 18.92 | 29414.26 | 120.0831 | 3 |",
+  "economic_calendar": "## Economic calendar (2026-06-09 to 2026-06-16, US)\n\n| Date | Event | Actual | Estimate | Previous | Impact |\n|---|---|---|---|---|---|\n| 2026-06-16 20:30:00 | API Crude Oil Stock Change (Jun/12) | None | None | -9.119 | Medium |\n| 2026-06-16 17:00:00 | 20-Year Bond Auction | None | None | 5.122 | Low |\n| 2026-06-16 12:55:00 | Redbook YoY (Jun/13) | None | None | 9.1 | Low |\n| 2026-06-16 12:30:00 | Building Permits (May) | None | 1.41 | 1.423 | High |\n| 2026-06-16 12:30:00 | Building Permits MoM (May) | None | -0.9 | 4.4 | Medium |\n| 2026-06-16 12:30:00 | Housing Starts (May) | None | 1.46 | 1.465 | High |\n| 2026-06-16 12:30:00 | Export Prices MoM (May) | None | 2.1 | 3.3 | Medium |\n| 2026-06-16 12:30:00 | Export Prices YoY (May) | None | 11.9 | 8.8 | Low |\n| 2026-06-16 12:30:00 | Import Prices YoY (May) | None | 6 | 4.2 | Low |\n| 2026-06-16 12:30:00 | Import Prices MoM (May) | None | 1.3 | 1.9 | Medium |\n| 2026-06-16 12:30:00 | Housing Starts MoM (May) | None | -0.3 | -2.8 | Medium |\n| 2026-06-15 15:30:00 | 6-Month Bill Auction | None | None | 3.69 | Low |\n| 2026-06-15 15:30:00 | 3-Month Bill Auction | None | None | 3.64 | Low |\n| 2026-06-15 14:00:00 | NAHB Housing Market Index (Jun) | None | 36 | 37 | Medium |\n| 2026-06-15 13:15:00 | Manufacturing Production YoY (May) | None | 1.7 | 1.3 | Low |\n| 2026-06-15 13:15:00 | Manufacturing Production MoM (May) | None | 0.3 | 0.6 | Low |\n| 2026-06-15 13:15:00 | Industrial Production MoM (May) | None | 0.5 | 0.7 | Medium |\n| 2026-06-15 13:15:00 | Capacity Utilization (May) | None | 76 | 76.1 | Low |\n| 2026-06-15 13:15:00 | Industrial Production YoY (May) | None | 1.9 | 1.4 | Low |\n| 2026-06-15 12:30:00 | NY Empire State Manufacturing Index (Jun) | None | 9 | 19.6 | Medium |\n| 2026-06-12 19:30:00 | CFTC Natural Gas speculative net positions | None | None | -186.1 | Low |\n| 2026-06-12 19:30:00 | CFTC S&P 500 speculative net positions | None | None | -220.8 | Medium |\n| 2026-06-12 19:30:00 | CFTC Wheat speculative net positions | None | None | -40.8 | Low |\n| 2026-06-12 19:30:00 | CFTC Soybeans speculative net positions | None | None | 187.8 | Low |\n| 2026-06-12 19:30:00 | CFTC Copper Speculative net positions | None | None | 78.8 | Low |\n| 2026-06-12 19:30:00 | CFTC Silver Speculative net positions | None | None | 23.9 | Low |\n| 2026-06-12 19:30:00 | CFTC Crude Oil speculative net positions | None | None | 155.9 | Medium |\n| 2026-06-12 19:30:00 | CFTC Aluminium Speculative net positions | None | None | 0.8 | Low |\n| 2026-06-12 19:30:00 | CFTC Nasdaq 100 speculative net positions | None | None | -14.9 | Medium |\n| 2026-06-12 19:30:00 | CFTC Corn speculative net positions | None | None | 199.9 | Low |\n| 2026-06-12 19:30:00 | CFTC Gold Speculative net positions | None | None | 176 | Medium |\n| 2026-06-12 17:00:00 | Baker Hughes Oil Rig Count (Jun/12) | None | None | 431 | Low |\n| 2026-06-12 14:00:00 | Michigan Current Conditions (Jun) | None | 46.2 | 45.8 | Low |\n| 2026-06-12 14:00:00 | Michigan 5 Year Inflation Expectations (Jun) | None | 3.8 | 3.9 | Low |\n| 2026-06-12 14:00:00 | Michigan 1 Year Inflation Expectations (Jun) | None | None | 4.8 | Medium |\n| 2026-06-12 14:00:00 | Michigan Consumer Sentiment (Jun) | None | 46 | 44.8 | High |\n| 2026-06-12 14:00:00 | Michigan Consumer Expectations (Jun) | None | 44.3 | 44.1 | Low |\n| 2026-06-12 14:00:00 | Michigan Inflation Expectations (Jun) | None | 4.8 | 4.8 | Low |\n| 2026-06-11 20:30:00 | Fed Balance Sheet (Jun/10) | None | None | 6.711 | Low |\n| 2026-06-11 17:00:00 | 30-Year Bond Auction | None | None | 5.046 | Low |\n| 2026-06-11 16:00:00 | WASDE Report | None | None | None | Medium |\n| 2026-06-11 16:00:00 | 30-Year Mortgage Rate (Jun/11) | None | None | 6.48 | Low |\n| 2026-06-11 16:00:00 | 15-Year Mortgage Rate (Jun/11) | None | None | 5.79 | Low |\n| 2026-06-11 15:30:00 | 8-Week Bill Auction | None | None | 3.61 | Low |\n| 2026-06-11 15:30:00 | 4-Week Bill Auction | None | None | 3.615 | Low |\n| 2026-06-11 14:30:00 | EIA Natural Gas Stocks Change (Jun/05) | None | 101 | 95 | Low |\n| 2026-06-11 12:30:00 | Core PPI MoM (May) | None | 0.5 | 1 | Medium |\n| 2026-06-11 12:30:00 | Producer Price Index YoY (May) | None | 6.4 | 6 | Low |\n| 2026-06-11 12:30:00 | PPI Ex Food, Energy and Trade YoY (May) | None | 4.4 | 4.4 | Low |\n| 2026-06-11 12:30:00 | Initial Jobless Claims (Jun/06) | None | 219 | 225 | Medium |\n| 2026-06-11 12:30:00 | Producer Price Index MoM (May) | None | 0.7 | 1.4 | High |\n| 2026-06-11 12:30:00 | Core PPI YoY (May) | None | 5.4 | 5.2 | Low |\n| 2026-06-11 12:30:00 | PPI Ex Food, Energy and Trade MoM (May) | None | 0.3 | 0.6 | Low |\n| 2026-06-11 12:30:00 | Producer Price Index (May) | None | 157.5 | 156.496 | Low |\n| 2026-06-11 12:30:00 | Continuing Jobless Claims (May/30) | None | 1780 | 1777 | Low |\n| 2026-06-11 12:30:00 | Jobless Claims 4-Week Average (Jun/06) | None | 216.5 | 214.75 | Low |\n| 2026-06-11 10:00:00 | OPEC Monthly Report | None | None | None | Medium |\n| 2026-06-10 18:00:00 | Monthly Budget Statement (May) | None | -275 | 215 | Medium |\n| 2026-06-10 18:00:00 | Budget Balance (May) | None | -282.9 | 215 | Medium |\n| 2026-06-10 17:00:00 | 10-Year Note Auction | None | None | 4.468 | Low |\n| 2026-06-10 15:30:00 | 17-Week Bill Auction | None | None | 3.635 | Low |\n| 2026-06-10 15:00:00 | Thomson Reuters IPSOS PCSI (Jun) | None | None | 49.65 | Low |\n| 2026-06-10 14:30:00 | EIA Weekly Refinery Utilization Rates WoW | None | None | 0.2 | Low |\n| 2026-06-10 14:30:00 | EIA Distillate Fuel Production Change (Jun/05) | None | None | 0.098 | Low |\n| 2026-06-10 14:30:00 | EIA Gasoline Production Change (Jun/05) | None | None | -0.515 | Low |\n| 2026-06-10 14:30:00 | EIA Heating Oil Stocks Change (Jun/05) | None | None | 0.255 | Low |\n| 2026-06-10 14:30:00 | EIA Refinery Crude Runs Change (Jun/05) | None | None | -0.09 | Low |\n| 2026-06-10 14:30:00 | EIA Crude Oil Stocks Change (Jun/05) | None | -4 | -7.974 | Medium |\n| 2026-06-10 14:30:00 | Crude Oil Imports | None | None | -0.249 | Low |\n| 2026-06-10 14:30:00 | EIA Distillate Stocks Change (Jun/05) | None | -0.5 | 1.502 | Low |\n| 2026-06-10 14:30:00 | EIA Crude Oil Imports Change (Jun/05) | None | None | -0.249 | Low |\n| 2026-06-10 14:30:00 | EIA Cushing Crude Oil Stocks Change (Jun/05) | None | None | -0.583 | Low |\n| 2026-06-10 14:30:00 | EIA Gasoline Stocks Change (Jun/05) | None | -0.5 | 3.364 | Medium |\n| 2026-06-10 12:30:00 | Inflation Rate MoM (May) | None | 0.5 | 0.6 | High |\n| 2026-06-10 12:30:00 | CPI YoY (May) | None | 4.2 | 3.8 | High |\n| 2026-06-10 12:30:00 | CPI (May) | None | 335.11 | 333.02 | Medium |\n| 2026-06-10 12:30:00 | Core CPI (May) | None | None | 335.42 | Low |\n| 2026-06-10 12:30:00 | CPI MoM (May) | None | 0.5 | 0.6 | High |\n| 2026-06-10 12:30:00 | Real Earnings MoM (May) | None | None | -0.2 | Low |\n| 2026-06-10 12:30:00 | Core Inflation Rate MoM (May) | None | 0.3 | 0.4 | High |\n| 2026-06-10 12:30:00 | Core Inflation Rate YoY (May) | None | 2.9 | 2.8 | High |\n| 2026-06-10 12:30:00 | CPI s.a (May) | None | 333.7 | 332.407 | Medium |\n| 2026-06-10 12:30:00 | Inflation Rate YoY (May) | None | 4.2 | 3.8 | High |\n| 2026-06-10 11:00:00 | MBA Mortgage Refinance Index (Jun/05) | None | None | 736.2 | Low |\n| 2026-06-10 11:00:00 | MBA 30-Year Mortgage Rate (Jun/05) | None | None | 6.57 | Medium |\n| 2026-06-10 11:00:00 | MBA Mortgage Market Index (Jun/05) | None | None | 252.8 | Low |\n| 2026-06-10 11:00:00 | MBA Mortgage Applications (Jun/05) | None | None | -2.5 | Low |\n| 2026-06-10 11:00:00 | MBA Purchase Index (Jun/05) | None | None | 164.8 | Low |\n| 2026-06-09 20:30:00 | API Crude Oil Stock Change (Jun/05) | -9.119 | -3.4 | -6.75 | Medium |\n| 2026-06-09 17:00:00 | 3-Year Note Auction | 4.192 | None | 3.965 | Low |\n| 2026-06-09 15:30:00 | 52-Week Bill Auction | 3.75 | None | 3.65 | Low |\n| 2026-06-09 15:30:00 | Atlanta Fed GDPNow (Q2) | 3.3 | 3 | 3 | Medium |\n| 2026-06-09 14:00:00 | Wholesale Sales MoM (Apr) | 2 | None | 3 | Low |\n| 2026-06-09 14:00:00 | Existing Home Sales MoM (May) | 3.2 | 0.5 | 0.7 | Medium |\n| 2026-06-09 14:00:00 | Existing Home Sales (May) | 4.17 | 4.07 | 4.04 | High |\n| 2026-06-09 14:00:00 | Wholesale Inventories MoM (Apr) | 0.6 | 0.5 | 1.5 | Low |\n| 2026-06-09 12:55:00 | Redbook YoY (Jun/06) | 9.1 | None | 9 | Low |\n| 2026-06-09 12:30:00 | Imports | None | None | 381.2 | Medium |\n| 2026-06-09 12:30:00 | Balance of Trade (Apr) | -55.9 | -56.1 | -56.6 | Medium |\n| 2026-06-09 12:30:00 | Exports (Apr) | 327.1 | 329.1 | 318.8 | Medium |\n| 2026-06-09 12:30:00 | Imports (Apr) | 383 | 387 | 375.4 | Medium |\n| 2026-06-09 10:00:00 | NFIB Business Optimism Index (May) | 95.3 | 96 | 95.9 | Low |",
+  "concept_signals": [
+    {
+      "concept": "Technology",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AAOI",
+        "ADBE",
+        "ADI",
+        "AI",
+        "AKAM",
+        "ALAB",
+        "AMAT",
+        "AMD",
+        "AMKR",
+        "AMPX",
+        "AMZN",
+        "ANET",
+        "APH",
+        "APLD",
+        "ASTS",
+        "AVGO",
+        "AXTI",
+        "BE",
+        "BMNR",
+        "BRZE",
+        "BSY",
+        "BWA",
+        "CAT",
+        "CCJ",
+        "CDNS",
+        "CHWY",
+        "CHYM",
+        "CIEN",
+        "CIFR",
+        "COHR",
+        "COIN",
+        "CORZ",
+        "CPNG",
+        "CRCL",
+        "CRDO",
+        "CRM",
+        "CRML",
+        "CRWD",
+        "CRWV",
+        "CSCO",
+        "DDOG",
+        "DELL",
+        "DJT",
+        "DOCN",
+        "DOCU",
+        "DT",
+        "DUOL",
+        "ENTG",
+        "EOSE",
+        "ESI",
+        "ETN",
+        "ETSY",
+        "FIG",
+        "FIGR",
+        "FIVN",
+        "FLEX",
+        "FLNC",
+        "FLR",
+        "FPS",
+        "FROG",
+        "FSLY",
+        "FTNT",
+        "GFS",
+        "GLW",
+        "GLXY",
+        "GOOG",
+        "GOOGL",
+        "GTLB",
+        "HIMS",
+        "HOOD",
+        "HPE",
+        "HPQ",
+        "HUT",
+        "IBKR",
+        "IBM",
+        "INFQ",
+        "INTC",
+        "INTU",
+        "IONQ",
+        "IOT",
+        "IREN",
+        "JCI",
+        "JOBY",
+        "KD",
+        "KLAR",
+        "KTOS",
+        "KVYO",
+        "LITE",
+        "LMND",
+        "LPTH",
+        "LRCX",
+        "LUNR",
+        "MCHP",
+        "META",
+        "MNDY",
+        "MP",
+        "MRVL",
+        "MSFT",
+        "MSTR",
+        "MU",
+        "NBIS",
+        "NET",
+        "NOW",
+        "NTNX",
+        "NVDA",
+        "NXE",
+        "NXPI",
+        "ODD",
+        "OKLO",
+        "OKTA",
+        "ON",
+        "ONDS",
+        "ORCL",
+        "OS",
+        "PANW",
+        "PATH",
+        "PCOR",
+        "PEGA",
+        "PGY",
+        "PL",
+        "PLTR",
+        "QBTS",
+        "QCOM",
+        "RBRK",
+        "RCAT",
+        "RGTI",
+        "RIOT",
+        "RKLB",
+        "RMBS",
+        "RNG",
+        "S",
+        "SAIL",
+        "SATS",
+        "SMCI",
+        "SMR",
+        "SMX",
+        "SNDK",
+        "SNOW",
+        "SOFI",
+        "SOLS",
+        "STM",
+        "STX",
+        "SWKS",
+        "TEAM",
+        "TEM",
+        "TENB",
+        "TER",
+        "TRI",
+        "TSLA",
+        "TWLO",
+        "TXN",
+        "UEC",
+        "UPST",
+        "UPWK",
+        "USAR",
+        "UUUU",
+        "VERX",
+        "VIAV",
+        "VISN",
+        "VRNS",
+        "VRT",
+        "WDAY",
+        "WDC",
+        "WULF",
+        "ZETA",
+        "ZM",
+        "ZS"
+      ],
+      "rationale": "The Technology sector exhibits overwhelming bullish momentum driven by the massive, ongoing AI infrastructure supercycle. Core heavyweight sub-sectors, including Big Tech, Semiconductors, Cloud & Cybersecurity, and Enterprise Computing, are uniformly Long with strong confidence due to accelerating cloud revenue, surging AI server sales, and successful monetization of generative AI tools. Although there are pockets of weakness and bifurcation in niche areas like aerospace, crypto-exposed fintech, and AI-disrupted freelance/workflow platforms, the extraordinary fundamental strength and institutional backing of the broader mega-cap and enterprise tech cohort firmly dictate a bullish sector outlook."
+    },
+    {
+      "concept": "Basic Materials",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.75,
+      "member_tickers": [
+        "AA",
+        "ADM",
+        "AES",
+        "AG",
+        "AGI",
+        "ALM",
+        "ARMK",
+        "B",
+        "CC",
+        "CDE",
+        "CTVA",
+        "DD",
+        "DOW",
+        "EGO",
+        "EQX",
+        "EXK",
+        "FCX",
+        "FMC",
+        "FSM",
+        "HBM",
+        "HL",
+        "HOG",
+        "HUN",
+        "HYMC",
+        "IAG",
+        "KGC",
+        "LYB",
+        "LYV",
+        "MOS",
+        "NEM",
+        "NG",
+        "NGD",
+        "NTR",
+        "OLN",
+        "PAAS",
+        "SGML",
+        "SSRM",
+        "SVM",
+        "TECK"
+      ],
+      "rationale": "The Basic Materials sector exhibits a bullish overall stance, predominantly driven by the Mining & Metals cluster. Powerful secular tailwinds, including structural copper demand for AI infrastructure and the energy transition, alongside surging precious metals prices from central bank demand, fuel strong financial results for key constituents. While the Chemicals & Agricultural Inputs cluster remains neutral lacking significant catalysts, the exceptional strength in mining warrants a Long verdict for the sector."
+    },
+    {
+      "concept": "Healthcare",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "ABBV",
+        "ABT",
+        "ACLX",
+        "AMGN",
+        "ARWR",
+        "BAX",
+        "BBIO",
+        "BDX",
+        "BMY",
+        "BSX",
+        "CFLT",
+        "DBRG",
+        "DHR",
+        "DXCM",
+        "ERAS",
+        "EW",
+        "EXEL",
+        "FOLD",
+        "GEHC",
+        "GILD",
+        "JNJ",
+        "LCID",
+        "LLY",
+        "MCD",
+        "MDT",
+        "MRK",
+        "MRNA",
+        "NTLA",
+        "NVST",
+        "ORLY",
+        "PFE",
+        "QURE",
+        "RIVN",
+        "ROIV",
+        "RPRX",
+        "RTX",
+        "SEE",
+        "SYY",
+        "USFD",
+        "VKTX",
+        "WBD",
+        "WMT",
+        "XRAY",
+        "ZTS"
+      ],
+      "rationale": "The Healthcare sector demonstrates robust bullish momentum driven by breakthrough clinical successes in the lucrative obesity and weight-loss market (LLY, PFE) and exceptional earnings and FDA approvals in medical devices (MDT). While one associated theme cluster is blocked due to extreme divergence in unrelated EV stocks, the underlying biotech components (MRNA, VKTX) within that cluster are experiencing strong inflows and promising pipeline developments. Overall, the sector benefits significantly from a powerful combination of high-growth pharmaceutical catalysts, robust medical device sales, and defensive capital rotation into earnings-driven names."
+    },
+    {
+      "concept": "Consumer Cyclical",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.75,
+      "member_tickers": [
+        "ABNB",
+        "AEO",
+        "AMRZ",
+        "AS",
+        "AXTA",
+        "BBWI",
+        "BBY",
+        "BRK.B",
+        "BROS",
+        "CALY",
+        "CAVA",
+        "CELH",
+        "CMG",
+        "CPRI",
+        "CRH",
+        "CZR",
+        "DKNG",
+        "EL",
+        "ELAN",
+        "EXPE",
+        "F",
+        "FBIN",
+        "FLUT",
+        "FTV",
+        "GAP",
+        "GM",
+        "GPK",
+        "HD",
+        "HST",
+        "IP",
+        "JHX",
+        "KMX",
+        "KNX",
+        "KSS",
+        "LVS",
+        "M",
+        "MAS",
+        "MAT",
+        "MGM",
+        "NKE",
+        "NYT",
+        "ONON",
+        "OTIS",
+        "PENN",
+        "PINS",
+        "PK",
+        "QXO",
+        "RELY",
+        "RKT",
+        "RXO",
+        "RYN",
+        "SBUX",
+        "SIRI",
+        "SW",
+        "TGT",
+        "TJX",
+        "TPH",
+        "TRIP",
+        "TTEK",
+        "UBER",
+        "UPS",
+        "VFC",
+        "WHR",
+        "WRBY",
+        "WY",
+        "Z"
+      ],
+      "rationale": "The sector exhibits deeply conflicting thematic drivers. Significant macro headwinds from high mortgage rates and persistent inflation are suppressing demand in Home Improvement and causing weakness in the Restaurant and Automotive segments. However, these bearish pressures are offset by strong stock-specific bullish narratives, particularly UBER's strategic investments in Consumer Marketplaces and Macy's Q1 earnings beat in Retail. This stark divergence across sub-sectors creates a neutral, offsetting outlook for the broader Consumer Cyclical sector."
+    },
+    {
+      "concept": "Consumer Defensive",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "BA",
+        "BF.B",
+        "CAG",
+        "CL",
+        "CPB",
+        "FLO",
+        "GIS",
+        "HRL",
+        "KDP",
+        "KHC",
+        "KMB",
+        "KO",
+        "KVUE",
+        "MDLZ",
+        "MKC",
+        "MNST",
+        "PEP",
+        "PG",
+        "PRMB",
+        "TAP",
+        "TSCO"
+      ],
+      "rationale": "The Consumer Defensive sector exhibits robust bullish momentum, driven entirely by strong fundamentals and upcoming catalysts within the Consumer Staples and Packaged Goods cluster. Key upside drivers include Coca-Cola's planned 10 billion dollar IPO of its Indian bottling unit, Mondelez's expected margin recovery as cocoa prices stabilize, and McCormick's transformative merger catalyst. Furthermore, amid macroeconomic uncertainties, the sector's defensive characteristics, attractive dividend yields, and successful strategic pricing adjustments are attracting a market rotation toward safer assets."
+    },
+    {
+      "concept": "Utilities",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AEP",
+        "CMS",
+        "CNP",
+        "D",
+        "DUK",
+        "EIX",
+        "ENB",
+        "EXC",
+        "FE",
+        "LNT",
+        "MO",
+        "NEE",
+        "NI",
+        "O",
+        "PCG",
+        "PM",
+        "PPL",
+        "SBRA",
+        "SO",
+        "SRE",
+        "WELL",
+        "XEL"
+      ],
+      "rationale": "The Utilities sector is undergoing a fundamental paradigm shift from a traditional defensive yield play to a growth-oriented sector. This is primarily driven by robust structural tailwinds, including a projected 60% surge in long-term electricity demand stemming from AI data centers and widespread EV adoption. Power infrastructure has emerged as the primary bottleneck for AI expansion, highly benefiting electric and nuclear utility members. Furthermore, industry consolidation catalysts, highlighted by NextEra Energy's pending acquisition of Dominion Energy, provide strong upside potential that vastly outweighs isolated bearish risks in legacy telecom from satellite broadband disruption."
+    },
+    {
+      "concept": "Financials",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.65,
+      "member_tickers": [
+        "ADP",
+        "AJG",
+        "ALLY",
+        "APO",
+        "ARCC",
+        "ARES",
+        "AXP",
+        "BAC",
+        "BAM",
+        "BANC",
+        "BEN",
+        "BK",
+        "BN",
+        "BRBR",
+        "BRO",
+        "BX",
+        "C",
+        "CFG",
+        "CG",
+        "CLF",
+        "COF",
+        "COLB",
+        "CRBG",
+        "CWAN",
+        "DOCS",
+        "EQH",
+        "FHN",
+        "FIS",
+        "FISV",
+        "FITB",
+        "FLG",
+        "FNB",
+        "FSK",
+        "G",
+        "GBDC",
+        "GPN",
+        "HBAN",
+        "HTGC",
+        "ICE",
+        "IVZ",
+        "JEF",
+        "JHG",
+        "JPM",
+        "KEY",
+        "KKR",
+        "MA",
+        "MET",
+        "MRSH",
+        "MS",
+        "NDAQ",
+        "NEOG",
+        "NVCR",
+        "OBDC",
+        "OMC",
+        "ONB",
+        "OWL",
+        "PAYX",
+        "PGR",
+        "PYPL",
+        "RF",
+        "RYAN",
+        "SCHW",
+        "SLM",
+        "SPGI",
+        "SSNC",
+        "SYF",
+        "TFC",
+        "TOST",
+        "TPG",
+        "TTD",
+        "USB",
+        "V",
+        "VLY",
+        "WBS",
+        "WFC"
+      ],
+      "rationale": "The Financials sector faces a stark divergence. On the bullish side, traditional Banking & Consumer Finance and Financial Exchanges are poised for growth, driven by higher-for-longer rates, aggressive capital returns following favorable stress test rules, and regulatory tailwinds like the SEC's elimination of the PDT rule boosting retail trading volume. Conversely, the Alternative Asset Managers space presents severe bearish risks due to private credit contagion, substantial fair value losses, and redemption caps at major funds. Coupled with broad weakness in Fintech, these conflicting dynamics result in no clear directional lean for the broader sector."
+    },
+    {
+      "concept": "Industrials",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.8,
+      "member_tickers": [
+        "AAL",
+        "AAPL",
+        "ACN",
+        "ALK",
+        "AMCR",
+        "BKD",
+        "CARR",
+        "CCL",
+        "CEG",
+        "CGNX",
+        "CHRW",
+        "CNH",
+        "CP",
+        "CSGP",
+        "CSX",
+        "CTSH",
+        "CWH",
+        "DAL",
+        "DB",
+        "DHT",
+        "EMR",
+        "FAST",
+        "FIGS",
+        "FOXA",
+        "FRO",
+        "GE",
+        "GTES",
+        "HON",
+        "ICLR",
+        "IQV",
+        "IR",
+        "LUV",
+        "MFC",
+        "MIR",
+        "MMM",
+        "NCLH",
+        "PCAR",
+        "PSTG",
+        "QSR",
+        "RHI",
+        "ROL",
+        "SARO",
+        "SEI",
+        "TEX",
+        "UAL",
+        "UNP",
+        "VST",
+        "W",
+        "WAY"
+      ],
+      "rationale": "The Industrials sector exhibits robust bullish momentum, driven by strong fundamentals in travel and logistics, massive aerospace and defense backlogs, and surging power generation demand tied to AI data centers. The strategic positioning and pricing power of industry leaders in core clusters significantly outweigh minor mixed or neutral signals in peripheral segments."
+    },
+    {
+      "concept": "Energy",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.65,
+      "member_tickers": [
+        "AM",
+        "APA",
+        "AR",
+        "BKR",
+        "BTU",
+        "CNQ",
+        "COP",
+        "CRGY",
+        "CTRA",
+        "CVE",
+        "CVX",
+        "DINO",
+        "DNOW",
+        "DVN",
+        "EOG",
+        "EPD",
+        "EQT",
+        "ET",
+        "EXE",
+        "FTI",
+        "HAL",
+        "KMI",
+        "LBRT",
+        "MGY",
+        "NOV",
+        "OKE",
+        "OVV",
+        "OXY",
+        "PAA",
+        "PBF",
+        "PR",
+        "PUMP",
+        "RRC",
+        "SLB",
+        "SM",
+        "SU",
+        "VNOM",
+        "WMB",
+        "XOM",
+        "ZIM"
+      ],
+      "rationale": "The energy sector is heavily pressured by macroeconomic and geopolitical headwinds affecting major E&P and integrated oil companies, including significant vulnerability to declining crude prices and insider selling. While midstream and pipeline operators provide some defensive, fee-based stability, they are insufficient to offset the strong bearish sentiment and downside risks blanketing the core oil and gas producers."
+    },
+    {
+      "concept": "Communication Services",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.7,
+      "member_tickers": [
+        "AFRM",
+        "AIG",
+        "APP",
+        "BCE",
+        "BILL",
+        "CART",
+        "CMCSA",
+        "CPRT",
+        "CVNA",
+        "DASH",
+        "DBX",
+        "EA",
+        "EBAY",
+        "GEN",
+        "GME",
+        "LBTYA",
+        "LYFT",
+        "MTCH",
+        "NFLX",
+        "NWSA",
+        "OTEX",
+        "PSKY",
+        "RBLX",
+        "RDDT",
+        "RNA",
+        "ROKU",
+        "SHOP",
+        "SPOT",
+        "T",
+        "TMUS",
+        "TTWO",
+        "TU",
+        "U",
+        "VZ",
+        "WMG",
+        "XYZ"
+      ],
+      "rationale": "The Communication Services sector exhibits a strong bearish outlook driven by significant headwinds in two of its core clusters. E-commerce & Interactive Entertainment is weighed down by class action lawsuits, guidance cuts, and macroeconomic challenges affecting gaming companies. Simultaneously, the Telecommunications & Media cluster faces severe disruption risks from low-earth orbit satellite networks, threatening the subscriber base and margins of legacy terrestrial infrastructure providers. The remaining clusters show mixed, low-confidence signals, leaving the sector vulnerable to these overarching negative catalysts."
+    },
+    {
+      "concept": "Real Estate",
+      "cluster_id": null,
+      "level": "sector",
+      "parent_sector": null,
+      "direction": "Short",
+      "strength": "Weak",
+      "confidence": 0.06,
+      "member_tickers": [
+        "AMH",
+        "BRX",
+        "COLD",
+        "CUZ",
+        "DEI",
+        "DOC",
+        "EQR",
+        "HR",
+        "INVH",
+        "IRT",
+        "KIM",
+        "PLD",
+        "UDR",
+        "VICI",
+        "VTRS"
+      ],
+      "rationale": "The Real Estate sector's directional lean is based solely on the REITs & Property Management theme, which indicates a bearish trend. However, this is driven entirely by low-conviction propagated signals from graph neighbors, lacking any direct fundamental news or high-conviction catalysts. Therefore, while the sector technically leans short, the signal is exceptionally weak and conviction is minimal."
+    },
+    {
+      "concept": "Consumer Platforms & Personal Finance Software",
+      "cluster_id": "TH_36",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.7,
+      "member_tickers": [
+        "CHWY",
+        "DUOL",
+        "FIG",
+        "INTU",
+        "TRI",
+        "ZETA"
+      ],
+      "rationale": "The theme cluster leans bullish, primarily driven by strong fundamental performance, resilient growth, and attractive valuations from key members like FIG, DUOL, and CHWY. FIG recently posted a massive 46% Q1 revenue beat and raised guidance, fueled by the successful monetization of new AI tools. Similarly, DUOL and CHWY are demonstrating robust user adoption, expanding margins, and recurring revenue strength, creating compelling buying opportunities after recent valuation resets. However, the cluster's overall strength is tempered by severe headwinds affecting INTU and RBLX, both of which have suffered significant stock declines, lowered guidance, and ongoing securities class action lawsuits. Despite these idiosyncratic negative catalysts, the core consumer platforms exhibiting successful AI integration and sustained revenue growth support a favorable, albeit cautious, Long posture."
+    },
+    {
+      "concept": "Big Tech & E-commerce",
+      "cluster_id": "TH_35",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AMZN",
+        "CPNG",
+        "GOOG",
+        "GOOGL",
+        "META",
+        "MSFT"
+      ],
+      "rationale": "The cluster exhibits strong bullish momentum driven by hyperscaler AI infrastructure investments and accelerating cloud revenue growth. Alphabet secured a massive $10 billion investment from Berkshire Hathaway validating its AI strategy and custom silicon progress, while Microsoft unveiled highly competitive in-house AI models and quantum chips to reduce external vendor dependencies. Amazon continues to show robust AWS growth and is securing critical fiber-optic supply chains. Although Meta faces near-term pressure from a potential dilutive stock sale to fund its ballooning capex, the overarching fundamental strength, massive institutional backing, and tangible AI-driven cloud acceleration across the rest of the mega-cap tech cohort present a highly favorable outlook for the theme."
+    },
+    {
+      "concept": "Chemicals & Agricultural Inputs",
+      "cluster_id": "TH_16",
+      "level": "theme",
+      "parent_sector": "Basic Materials",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.5,
+      "member_tickers": [
+        "ADM",
+        "AES",
+        "ARMK",
+        "CC",
+        "CTVA",
+        "DD",
+        "DOW",
+        "FMC",
+        "HOG",
+        "HUN",
+        "LYB",
+        "LYV",
+        "MOS",
+        "NTR",
+        "OLN"
+      ],
+      "rationale": "The only significant news and signal within this cluster pertains to an idiosyncratic institutional share purchase in Harley-Davidson (HOG), which does not reflect the core fundamentals of the chemicals and agricultural inputs sector. Core members such as Corteva (CTVA), Dow (DOW), and Nutrien (NTR) lack meaningful catalysts or news during this period, leaving the broader theme without a clear directional lean."
+    },
+    {
+      "concept": "Cloud, Cybersecurity & SaaS",
+      "cluster_id": "TH_6",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AKAM",
+        "BSY",
+        "CDNS",
+        "CRM",
+        "CRWD",
+        "DDOG",
+        "DOCN",
+        "DT",
+        "FROG",
+        "FSLY",
+        "FTNT",
+        "IOT",
+        "NET",
+        "NOW",
+        "NTNX",
+        "OKTA",
+        "ORCL",
+        "PANW",
+        "PCOR",
+        "RBRK",
+        "S",
+        "SAIL",
+        "SNOW",
+        "TENB",
+        "VRNS",
+        "ZS"
+      ],
+      "rationale": "The Cloud, Cybersecurity, and SaaS theme is exhibiting robust bullish momentum driven by the successful integration and aggressive monetization of AI across enterprise software platforms. Early market fears of generative AI disrupting traditional SaaS models have been decisively refuted by accelerating revenue growth and raised full-year guidance from bellwethers like Salesforce (CRM), ServiceNow (NOW), and Snowflake (SNOW). Meanwhile, cybersecurity leaders (CRWD, PANW, FTNT, RBRK) are capitalizing on expanding total addressable markets fueled by AI-driven cyber threats and successful platform consolidation strategies. With massive AI infrastructure spending now flowing downstream to the software and security layers, structural tailwinds support a sustained acceleration in enterprise demand."
+    },
+    {
+      "concept": "Semiconductors & Industrial Components",
+      "cluster_id": "TH_0",
+      "level": "theme",
+      "parent_sector": "Semiconductor",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AAOI",
+        "ADI",
+        "AMAT",
+        "AMD",
+        "AMKR",
+        "AXTI",
+        "BWA",
+        "CAT",
+        "CIEN",
+        "COHR",
+        "ENTG",
+        "ESI",
+        "ETN",
+        "FLEX",
+        "FLR",
+        "FPS",
+        "GFS",
+        "GLW",
+        "INTC",
+        "JCI",
+        "LITE",
+        "LRCX",
+        "MCHP",
+        "MRVL",
+        "MU",
+        "NXPI",
+        "ON",
+        "QCOM",
+        "RMBS",
+        "SNDK",
+        "SOLS",
+        "STM",
+        "STX",
+        "SWKS",
+        "TER",
+        "TXN",
+        "VIAV",
+        "VISN",
+        "VRT",
+        "WDC"
+      ],
+      "rationale": "The Semiconductors & Industrial Components cluster is experiencing overwhelming bullish momentum, driven by massive secular tailwinds from the AI infrastructure buildout. Key beneficiaries across custom silicon (MRVL), AI-driven memory (SNDK), optical networking (COHR), and semiconductor equipment (AMAT) are reporting exceptional demand, locking in multi-year supply agreements, and receiving significant analyst upgrades. Major catalysts include MRVL's inclusion in the S&P 500, widespread supply constraints granting pricing power to memory makers, and substantial capital return programs. While there are pockets of weakness due to idiosyncratic issues (SMCI's accounting probes, AVGO's soft guidance) and intra-sector competition (Nvidia's entry into the CPU space threatening AMD and QCOM), the broader thematic evidence points to sustained, robust growth and strong institutional conviction."
+    },
+    {
+      "concept": "Healthcare, Food & Distribution",
+      "cluster_id": "TH_13",
+      "level": "theme",
+      "parent_sector": "Healthcare",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.88,
+      "member_tickers": [
+        "ABBV",
+        "AMGN",
+        "BMY",
+        "EXEL",
+        "GILD",
+        "JNJ",
+        "LLY",
+        "MCD",
+        "MRK",
+        "ORLY",
+        "PFE",
+        "RPRX",
+        "RTX",
+        "SEE",
+        "SYY",
+        "USFD",
+        "WMT"
+      ],
+      "rationale": "The theme is heavily supported by strong bullish catalysts across both the healthcare and food/beverage sectors. In healthcare, pharmaceutical giants like LLY and PFE are seeing tremendous upside driven by highly successful clinical trial results in the lucrative obesity and weight-loss market, with LLY reaching all-time highs. MDT further bolsters the sector with robust earnings beats and segment growth. On the food and distribution side, defensive staples like KO and PEP are demonstrating pricing power, solid volume growth, and strategic value-unlocking initiatives, such as KO's planned $10 billion IPO of its Indian bottling unit. This combination of high-growth pharmaceutical breakthroughs and resilient consumer staple performance creates a highly favorable outlook for the cluster."
+    },
+    {
+      "concept": "Consumer Marketplaces & Travel Tech",
+      "cluster_id": "TH_28",
+      "level": "theme",
+      "parent_sector": "Consumer Cyclical",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.65,
+      "member_tickers": [
+        "ABNB",
+        "EXPE",
+        "NYT",
+        "PINS",
+        "RELY",
+        "TRIP",
+        "UBER",
+        "WRBY",
+        "Z"
+      ],
+      "rationale": "The concept cluster's bullish lean is primarily driven by UBER, which exhibits strong positive catalysts including a $500M strategic investment in Nuro to secure autonomous distribution, a $1.25B investment in Rivian, and margin-expanding acquisitions like Foodpanda. Furthermore, AI integration has bolstered UBER's platform efficiency. However, other consumer marketplace members like Zillow face headwinds from sluggish housing market activity and affordability challenges. Thus, the overarching theme is Long but conviction is Neutralized by mixed sub-sector performance and reliance on a single heavy-weight stock."
+    },
+    {
+      "concept": "Consumer Staples & Packaged Goods",
+      "cluster_id": "TH_8",
+      "level": "theme",
+      "parent_sector": "Consumer Defensive",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "BA",
+        "BF.B",
+        "CAG",
+        "CL",
+        "CPB",
+        "FLO",
+        "GIS",
+        "HRL",
+        "KDP",
+        "KHC",
+        "KMB",
+        "KO",
+        "KVUE",
+        "MDLZ",
+        "MKC",
+        "MNST",
+        "PEP",
+        "PG",
+        "PRMB",
+        "TAP",
+        "TSCO"
+      ],
+      "rationale": "The Consumer Staples & Packaged Goods cluster exhibits robust bullish momentum driven by significant fundamental catalysts across its major constituents. Key drivers include Coca-Cola's planned $10 billion IPO of its Indian bottling unit, which is expected to unlock hidden value and transition the company to a higher-margin model. Mondelēz is poised for a strong margin recovery as temporary cocoa price spikes reverse, and McCormick has a transformative mid-term catalyst with the upcoming merger of Unilever's foods division. Additionally, the sector's defensive nature, combined with attractive dividend yields (such as Campbell Soup's sustainable 7% yield) and successful strategic pricing adjustments (like PepsiCo's volume-driving price reductions), makes these stocks highly attractive amid broader macroeconomic uncertainties and a market rotation toward safer assets."
+    },
+    {
+      "concept": "Utilities & Essential Services",
+      "cluster_id": "TH_5",
+      "level": "theme",
+      "parent_sector": "Utilities",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AEP",
+        "CMS",
+        "CNP",
+        "D",
+        "DUK",
+        "EIX",
+        "ENB",
+        "EXC",
+        "FE",
+        "LNT",
+        "MO",
+        "NEE",
+        "NI",
+        "O",
+        "PCG",
+        "PM",
+        "PPL",
+        "SBRA",
+        "SO",
+        "SRE",
+        "WELL",
+        "XEL"
+      ],
+      "rationale": "The Utilities & Essential Services cluster is experiencing robust structural tailwinds driven by a projected 60% surge in long-term electricity demand from AI data centers and EV adoption. This fundamentally shifts the sector from a traditional yield play to a growth-oriented space, as power infrastructure becomes the primary bottleneck for AI expansion. Additionally, NextEra Energy's pending acquisition of Dominion Energy introduces a major M&A catalyst that could spark further industry consolidation. Despite isolated bearish signals in legacy telecom due to satellite broadband disruption, the core electric and nuclear utility members exhibit strong bullish momentum and high conviction catalysts."
+    },
+    {
+      "concept": "Mining & Metals",
+      "cluster_id": "TH_4",
+      "level": "theme",
+      "parent_sector": "Basic Materials",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AA",
+        "AG",
+        "AGI",
+        "ALM",
+        "B",
+        "CDE",
+        "EGO",
+        "EQX",
+        "EXK",
+        "FCX",
+        "FSM",
+        "HBM",
+        "HL",
+        "HYMC",
+        "IAG",
+        "KGC",
+        "NEM",
+        "NG",
+        "NGD",
+        "PAAS",
+        "SGML",
+        "SSRM",
+        "SVM",
+        "TECK"
+      ],
+      "rationale": "The Mining & Metals cluster is buoyed by powerful secular tailwinds, including structural copper demand stemming from AI infrastructure and the energy transition, as well as surging precious metals prices driven by strong central bank demand. Key constituents like FCX and CDE are delivering record financial results and trading at attractive valuations, reinforcing a highly bullish outlook for the sector."
+    },
+    {
+      "concept": "Enterprise Computing & Server Infrastructure",
+      "cluster_id": "TH_37",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "CSCO",
+        "DELL",
+        "HPE",
+        "HPQ",
+        "IBM",
+        "SMCI"
+      ],
+      "rationale": "The Enterprise Computing & Server Infrastructure cluster is experiencing a massive bullish tailwind driven by the AI infrastructure supercycle. Legacy OEMs like Dell and HPE are reporting exceptional earnings, highlighted by massive surges in AI server sales (up to 700% YoY) and multi-billion dollar backlogs. This confirms that AI hardware adoption is accelerating rapidly beyond hyperscalers to enterprise deployments. While SMCI faces severe idiosyncratic headwinds such as accounting probes and scandals, and HPQ deals with margin compression, the explosive top-line growth, margin expansion, and significantly raised guidance from heavyweights DELL, HPE, and IBM dictate a strong bullish structural trend for the sector overall."
+    },
+    {
+      "concept": "Home Improvement & Building Materials",
+      "cluster_id": "TH_10",
+      "level": "theme",
+      "parent_sector": "Consumer Cyclical",
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AMRZ",
+        "AXTA",
+        "BBWI",
+        "CRH",
+        "EL",
+        "ELAN",
+        "FBIN",
+        "GPK",
+        "HD",
+        "IP",
+        "JHX",
+        "KMX",
+        "MAS",
+        "QXO",
+        "RKT",
+        "RYN",
+        "SW",
+        "TPH",
+        "WHR",
+        "WY"
+      ],
+      "rationale": "The theme faces substantial macroeconomic and operational headwinds. High mortgage rates and persistent inflation are severely suppressing housing turnover and consumer spending on large home improvement projects, as evidenced by Home Depot's weak same-store sales and sluggish demand. Additionally, building materials player Graphic Packaging (GPK) is dealing with a severe securities class action related to concealed inventory issues and negative guidance revisions. The widespread propagation of these bearish signals to peers like FBIN, MAS, JHX, and WY confirms a strong negative outlook for the entire cluster."
+    },
+    {
+      "concept": "Alternative Asset Managers & Financial Services",
+      "cluster_id": "TH_7",
+      "level": "theme",
+      "parent_sector": "Financials",
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "APO",
+        "ARCC",
+        "ARES",
+        "BAM",
+        "BEN",
+        "BN",
+        "BX",
+        "CG",
+        "CRBG",
+        "EQH",
+        "FSK",
+        "GBDC",
+        "HTGC",
+        "IVZ",
+        "JEF",
+        "KKR",
+        "MS",
+        "NVCR",
+        "OBDC",
+        "OWL",
+        "TPG"
+      ],
+      "rationale": "The concept cluster is overwhelmingly bearish, driven by severe deterioration and systemic risks in the private credit and alternative asset management space. FSK has suffered a massive $880 million fair value loss, a 31% dividend cut, and faces class-action lawsuits over concealed non-accruals. Crucially, Blackstone (BX) is implementing redemption caps on its flagship private credit fund due to escalating investor withdrawals, signaling broad liquidity and valuation concerns. Additionally, JEF faces a $715 million loss from a recent bankruptcy. While Morgan Stanley (MS) presents a bullish counter-catalyst via its strong IPO underwriting pipeline, the vast majority of the cluster's members (including KKR, APO, ARES, and various BDCs) are exposed to the growing contagion and liquidity headwinds in private markets."
+    },
+    {
+      "concept": "Banking & Consumer Finance",
+      "cluster_id": "TH_2",
+      "level": "theme",
+      "parent_sector": "Financials",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "ALLY",
+        "AXP",
+        "BAC",
+        "BANC",
+        "BK",
+        "C",
+        "CFG",
+        "CLF",
+        "COF",
+        "COLB",
+        "FHN",
+        "FITB",
+        "FLG",
+        "FNB",
+        "HBAN",
+        "JHG",
+        "JPM",
+        "KEY",
+        "MET",
+        "NEOG",
+        "ONB",
+        "RF",
+        "SLM",
+        "SYF",
+        "TFC",
+        "USB",
+        "VLY",
+        "WBS",
+        "WFC"
+      ],
+      "rationale": "The Banking & Consumer Finance cluster is heavily skewed toward a bullish outlook, anchored by strong positive signals from major industry leaders like JPMorgan Chase and Bank of America. A favorable reflationary macro environment and higher-for-longer interest rates are bolstering net interest income projections. Furthermore, the Federal Reserve's freeze on stress capital buffers clears the path for aggressive capital return programs, including robust dividend payouts and share buybacks. Massive capital market activities, such as leading the historic $75 billion SpaceX IPO, provide an additional catalyst for fee revenue. The overwhelming majority of the cluster's constituents exhibit positive sentiment, indicating broad-based sector strength."
+    },
+    {
+      "concept": "AI, Fintech & Growth Disruptors",
+      "cluster_id": "TH_12",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.75,
+      "member_tickers": [
+        "AI",
+        "CHYM",
+        "COIN",
+        "CRCL",
+        "DJT",
+        "FIGR",
+        "HIMS",
+        "HOOD",
+        "IBKR",
+        "KLAR",
+        "LMND",
+        "MSTR",
+        "PGY",
+        "PLTR",
+        "SOFI",
+        "TEM",
+        "TSLA",
+        "UPST"
+      ],
+      "rationale": "The cluster exhibits sharply conflicting internal dynamics across its sub-themes. Retail fintech platforms (HOOD, IBKR, SOFI) are heavily bullish, driven by the SEC's elimination of the Pattern Day Trader (PDT) rule, which is expected to massively unlock retail trading volume, alongside solid fundamental growth. Certain AI and growth stocks (AI, TEM, LMND) also display strong momentum from earnings beats and improving margins. Conversely, the crypto-exposed segment (COIN, CRCL) is distinctly bearish amid plummeting transaction revenues, Bitcoin weakness, and intensifying stablecoin competition from legacy payment giants. Additionally, Palantir (PLTR) faces steep headwinds from overvaluation, high insider selling, and potential contract cancellations. This stark divergence between surging retail brokerages and struggling crypto/overvalued AI components prevents a clear directional lean."
+    },
+    {
+      "concept": "Travel, Logistics & Transportation",
+      "cluster_id": "TH_20",
+      "level": "theme",
+      "parent_sector": "Industrials",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AAL",
+        "AAPL",
+        "ALK",
+        "CCL",
+        "DAL",
+        "DB",
+        "GE",
+        "LUV",
+        "NCLH",
+        "SARO",
+        "UAL",
+        "W"
+      ],
+      "rationale": "The theme is heavily driven by robust fundamentals and institutional backing in core market leaders. Berkshire Hathaway's massive $3.28 billion stake in Delta Air Lines signals immense confidence in the sector's premium positioning and post-pandemic recovery. Furthermore, GE Aerospace presents a colossal $210 billion backlog and 29% revenue growth, confirming sustained aerospace demand. While spiking jet fuel costs are squeezing out weaker competitors like AAL and budget airlines, dominant carriers (DAL, UAL) are leveraging strong pricing power to maintain margins and are actively positioned to absorb assets from struggling rivals. The structural advantage of these industry leaders outweighs the fundamental pressures on lower-tier operators."
+    },
+    {
+      "concept": "Industrial Technology & Power Generation",
+      "cluster_id": "TH_34",
+      "level": "theme",
+      "parent_sector": "Industrials",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.6,
+      "member_tickers": [
+        "CEG",
+        "CGNX",
+        "MIR",
+        "PSTG",
+        "SEI",
+        "VST"
+      ],
+      "rationale": "The theme is heavily supported by massive thematic tailwinds in power generation, particularly the surging electricity demand from AI data centers and potential EV expansion. Members like CEG, as major nuclear baseload operators, are perfectly positioned to capitalize on this bottleneck, outweighing isolated valuation concerns in other cluster components."
+    },
+    {
+      "concept": "Industrial Machinery & Transportation",
+      "cluster_id": "TH_18",
+      "level": "theme",
+      "parent_sector": "Industrials",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.75,
+      "member_tickers": [
+        "AMCR",
+        "CARR",
+        "CNH",
+        "CP",
+        "CSX",
+        "CWH",
+        "EMR",
+        "FAST",
+        "GTES",
+        "HON",
+        "IR",
+        "MMM",
+        "PCAR",
+        "TEX",
+        "UNP"
+      ],
+      "rationale": "Key players in the industrial machinery and transportation space demonstrate robust fundamental tailwinds. Confidence is supported by massive backlogs and expanding defense applications (GE), favorable currency dynamics and international expansion (IR), and a strategic shift toward higher-margin customers alongside an anticipated earnings inflection (UPS). Although minor bearish signals exist from housing-related and packaging neighbors, they are vastly overshadowed by the strong bullish momentum and solid earnings visibility in the core industrial and transportation names."
+    },
+    {
+      "concept": "Medical Devices & Biotechnology",
+      "cluster_id": "TH_21",
+      "level": "theme",
+      "parent_sector": "Healthcare",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.8,
+      "member_tickers": [
+        "ABT",
+        "BAX",
+        "BDX",
+        "BSX",
+        "DHR",
+        "DXCM",
+        "EW",
+        "GEHC",
+        "MDT",
+        "NVST",
+        "XRAY",
+        "ZTS"
+      ],
+      "rationale": "The theme is demonstrating strong bullish momentum, primarily driven by Medtronic (MDT), which reported its highest sales growth in a decade, a significant earnings beat, and FDA approval for its Hugo robotic surgical system. The sector is also benefiting from a defensive rotation of capital away from high-multiple tech stocks into stable, earnings-driven healthcare names. Although Abbott (ABT) faces near-term legal headwinds regarding its nutrition segment marketing, the broader medical device industry outlook remains robust, supported by strong performance in cardiovascular, diabetes care, and peripheral vascular device markets. Positive propagated signals across the cluster, including BDX, BSX, and DXCM, further validate the strong Long conviction."
+    },
+    {
+      "concept": "Logistics & Consumer Services",
+      "cluster_id": "TH_26",
+      "level": "theme",
+      "parent_sector": "Industrials",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.15,
+      "member_tickers": [
+        "BKD",
+        "CHRW",
+        "DHT",
+        "FIGS",
+        "FRO",
+        "MFC",
+        "QSR",
+        "ROL",
+        "WAY"
+      ],
+      "rationale": "The cluster exhibits sparse and very low-confidence signals, with only weak neighbor-based catalysts for ROL and unrelated or loosely connected sentiment regarding BSX. Without stronger fundamental or thematic drivers across the constituent members, there is no clear directional lean."
+    },
+    {
+      "concept": "Midstream Energy & Pipelines",
+      "cluster_id": "TH_23",
+      "level": "theme",
+      "parent_sector": "Energy",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.45,
+      "member_tickers": [
+        "AM",
+        "AR",
+        "EPD",
+        "EQT",
+        "ET",
+        "EXE",
+        "KMI",
+        "OKE",
+        "PAA",
+        "RRC",
+        "WMB"
+      ],
+      "rationale": "Midstream and pipeline operators provide a relatively insulated, fee-based alternative within a highly volatile energy sector. While major exploration and production companies face severe downside risks from potential crude price declines tied to Middle East ceasefire developments, midstream companies offer defensive characteristics and stable dividend yields. However, mixed and weak constituent signals alongside broader energy sector headwinds prevent a strong directional conviction."
+    },
+    {
+      "concept": "E-commerce & Interactive Entertainment",
+      "cluster_id": "TH_19",
+      "level": "theme",
+      "parent_sector": "Communication Services",
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.75,
+      "member_tickers": [
+        "AFRM",
+        "APP",
+        "CVNA",
+        "DASH",
+        "EA",
+        "EBAY",
+        "LYFT",
+        "RBLX",
+        "RDDT",
+        "ROKU",
+        "SHOP",
+        "TTWO",
+        "U"
+      ],
+      "rationale": "The theme exhibits a strong bearish lean, driven heavily by RBLX, which is facing multiple securities class action lawsuits following an 18% stock decline, significantly reduced guidance, and declines in bookings growth and engagement. Other key cluster members like TTWO face headwinds from global memory shortages squeezing the gaming industry, potentially dampening future launch prospects and consumer purchasing power. The majority of other components (APP, SHOP, DASH, RDDT, U) also carry propagated short signals, heavily outweighing the mild bullish momentum in names like LYFT and EA."
+    },
+    {
+      "concept": "Automotive, Retail & Logistics",
+      "cluster_id": "TH_9",
+      "level": "theme",
+      "parent_sector": "Consumer Cyclical",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.85,
+      "member_tickers": [
+        "AEO",
+        "AS",
+        "BBY",
+        "CALY",
+        "CPRI",
+        "F",
+        "GAP",
+        "GM",
+        "KNX",
+        "KSS",
+        "LVS",
+        "M",
+        "MAT",
+        "NKE",
+        "ONON",
+        "RXO",
+        "SIRI",
+        "TGT",
+        "UPS",
+        "VFC"
+      ],
+      "rationale": "The concept cluster exhibits a stark divergence between its constituent sub-sectors. The Automotive segment faces significant bearish pressure, highlighted by Ford's (F) massive recall of 420,000 SUVs and disappointing May vehicle sales. Conversely, the Retail and Logistics segments present a strong bullish narrative; Macy's (M) posted a significant Q1 earnings beat with raised guidance and a new Berkshire Hathaway investment, while UPS is showing positive turnaround signals with improved revenue per piece ahead of an anticipated second-half earnings inflection. This fundamental disconnect between struggling automotive operations and recovering retail/logistics names creates a neutral, offsetting outlook for the broader cluster."
+    },
+    {
+      "concept": "Fintech & Digital Payments",
+      "cluster_id": "TH_38",
+      "level": "theme",
+      "parent_sector": "Financials",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.5,
+      "member_tickers": [
+        "FISV",
+        "GPN",
+        "PYPL",
+        "TOST",
+        "TTD"
+      ],
+      "rationale": "Signals for TOST and GPN show very low-confidence long indications from concept-graph neighbors. However, recent news for GPN highlights a significant 12.6% stock decline driven by deal concerns and 'broad fintech weakness'. Given the conflicting quantitative signals and negative industry sentiment, the cluster lacks a clear directional lean."
+    },
+    {
+      "concept": "Digital Productivity & E-commerce Platforms",
+      "cluster_id": "TH_39",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.8,
+      "member_tickers": [
+        "ETSY",
+        "GTLB",
+        "ODD",
+        "OS",
+        "PATH",
+        "UPWK"
+      ],
+      "rationale": "The cluster exhibits starkly divergent fundamentals driven by the impact of artificial intelligence. While GitLab (GTLB) is successfully monetizing its AI-powered developer tools and reporting strong earnings with raised guidance, Upwork (UPWK) is facing declining client volumes due to AI replacing low-end freelance work and is under a securities fraud investigation. Additionally, UiPath (PATH) faces significant investor skepticism regarding its long-term viability in the agentic AI era despite decent recent growth. This sharp bifurcation between AI beneficiaries and those disrupted by AI creates a highly mixed outlook with no clear directional lean for the broader cluster."
+    },
+    {
+      "concept": "Financial Exchanges & Processing Services",
+      "cluster_id": "TH_14",
+      "level": "theme",
+      "parent_sector": "Financials",
+      "direction": "Long",
+      "strength": "Strong",
+      "confidence": 0.7,
+      "member_tickers": [
+        "ADP",
+        "AJG",
+        "BRBR",
+        "BRO",
+        "CWAN",
+        "DOCS",
+        "FIS",
+        "G",
+        "ICE",
+        "MA",
+        "MRSH",
+        "NDAQ",
+        "OMC",
+        "PAYX",
+        "PGR",
+        "RYAN",
+        "SCHW",
+        "SPGI",
+        "SSNC",
+        "V"
+      ],
+      "rationale": "The theme is strongly anchored by a clear bullish catalyst for Charles Schwab (SCHW) following the SEC's elimination of the 25-year-old Pattern Day Trader (PDT) rule. Lowering the minimum account requirement from $25,000 to $2,000 significantly reduces entry barriers for retail investors, directly driving increased trading volume, expanded user bases, and potential growth in margin lending. While other constituents within the processing and exchanges cluster show mixed but generally weak propagated signals, the regulatory tailwind for retail brokerages presents a compelling growth driver for the broader sector's transaction revenues."
+    },
+    {
+      "concept": "Gaming, Hospitality & Engineering Services",
+      "cluster_id": "TH_27",
+      "level": "theme",
+      "parent_sector": "Consumer Cyclical",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.1,
+      "member_tickers": [
+        "CZR",
+        "DKNG",
+        "FLUT",
+        "FTV",
+        "HST",
+        "MGM",
+        "PENN",
+        "PK",
+        "TTEK"
+      ],
+      "rationale": "The cluster has only very weak, propagated signals for HST and PK with confidence levels below 0.10. There is no substantial news or direct catalysts for any of the constituent stocks to support a clear directional lean."
+    },
+    {
+      "concept": "Biotech, EV & Specialized Therapeutics",
+      "cluster_id": "TH_17",
+      "level": "theme",
+      "parent_sector": "Healthcare",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.85,
+      "member_tickers": [
+        "ACLX",
+        "ARWR",
+        "BBIO",
+        "CFLT",
+        "DBRG",
+        "ERAS",
+        "FOLD",
+        "LCID",
+        "MRNA",
+        "NTLA",
+        "QURE",
+        "RIVN",
+        "ROIV",
+        "VKTX",
+        "WBD"
+      ],
+      "rationale": "The theme cluster exhibits severe internal divergence, preventing a unified directional bias. Within the EV segment, LCID is a high-conviction short due to massive cash burn, imminent insolvency risks, and severe class-action lawsuits regarding supplier issues. In stark contrast, RIVN presents strong bullish momentum driven by matching Tesla's efficiency, a major Uber partnership, and expanding production. Furthermore, biotech members like MRNA and VKTX are attracting defensive and growth inflows due to promising pipelines and credible paths to profitability. This extreme polarization between distressed assets and high-momentum growth names necessitates a Block verdict."
+    },
+    {
+      "concept": "Oil, Gas & Energy Infrastructure",
+      "cluster_id": "TH_1",
+      "level": "theme",
+      "parent_sector": "Energy",
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.65,
+      "member_tickers": [
+        "APA",
+        "BKR",
+        "BTU",
+        "CNQ",
+        "COP",
+        "CRGY",
+        "CTRA",
+        "CVE",
+        "CVX",
+        "DINO",
+        "DNOW",
+        "DVN",
+        "EOG",
+        "FTI",
+        "HAL",
+        "LBRT",
+        "MGY",
+        "NOV",
+        "OVV",
+        "OXY",
+        "PBF",
+        "PR",
+        "PUMP",
+        "SLB",
+        "SM",
+        "SU",
+        "VNOM",
+        "XOM",
+        "ZIM"
+      ],
+      "rationale": "The theme is predominantly pressured by macroeconomic and geopolitical headwinds affecting major integrated and E&P companies. Chevron and its peers face vulnerability to declining crude oil prices amid Middle East ceasefire optimism, exacerbated by significant insider selling and Berkshire Hathaway reducing its stake. Furthermore, DNOW provides a strong negative catalyst due to a severe earnings miss and ensuing securities fraud investigations. Although the offshore equipment and services sub-sector, led by FTI, shows resilience with record order pipelines and strong free cash flow, it is insufficient to overcome the broader bearish sentiment blanketing the core oil and gas producers."
+    },
+    {
+      "concept": "Business & Information Services",
+      "cluster_id": "TH_32",
+      "level": "theme",
+      "parent_sector": "Industrials",
+      "direction": "Long",
+      "strength": "Weak",
+      "confidence": 0.21,
+      "member_tickers": [
+        "ACN",
+        "CSGP",
+        "CTSH",
+        "FOXA",
+        "ICLR",
+        "IQV",
+        "RHI"
+      ],
+      "rationale": "The cluster presents mixed but slightly bullish signals, driven primarily by weak positive propagation from IBM affecting core IT and business services members like CTSH, ACN, and RHI. However, conflicting bearish signals in clinical and life sciences members (IQV, DHR) and a lack of direct material news for the majority of the constituents limit overall conviction."
+    },
+    {
+      "concept": "Data Centers, AI Hardware & Crypto Mining",
+      "cluster_id": "TH_11",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.85,
+      "member_tickers": [
+        "ALAB",
+        "ANET",
+        "APH",
+        "APLD",
+        "AVGO",
+        "BE",
+        "BMNR",
+        "CIFR",
+        "CORZ",
+        "CRDO",
+        "CRWV",
+        "FLNC",
+        "GLXY",
+        "HUT",
+        "IREN",
+        "NBIS",
+        "NVDA",
+        "RIOT",
+        "SMX",
+        "WULF"
+      ],
+      "rationale": "The concept cluster is experiencing sharp internal divergence, preventing a unified directional lean. Heavyweight AI hardware and networking stocks (AVGO, ANET) are facing severe bearish pressure from disappointing forward guidance, stretched valuations, and sector-wide contagion. In contrast, data center infrastructure providers, specialized neoclouds, and pivoting crypto miners (NBIS, NVDA, CIFR, CRDO, IREN, CORZ) are exhibiting robust bullish momentum, driven by explosive revenue growth, massive capacity expansions, and substantial HPC infrastructure deals. This bifurcation between struggling hardware guidance and booming data center build-outs results in a blocked signal."
+    },
+    {
+      "concept": "Quantum, Aerospace & Future Energy Tech",
+      "cluster_id": "TH_3",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.75,
+      "member_tickers": [
+        "AMPX",
+        "ASTS",
+        "CCJ",
+        "CRML",
+        "EOSE",
+        "INFQ",
+        "IONQ",
+        "JOBY",
+        "KTOS",
+        "LPTH",
+        "LUNR",
+        "MP",
+        "NXE",
+        "OKLO",
+        "ONDS",
+        "PL",
+        "QBTS",
+        "RCAT",
+        "RGTI",
+        "RKLB",
+        "SATS",
+        "SMR",
+        "UEC",
+        "USAR",
+        "UUUU"
+      ],
+      "rationale": "The aerospace and future mobility segments of this cluster are facing severe headwinds, characterized by massive dilutive equity offerings (such as LUNR's $500 million and PL's $1.5 billion raises) and a broader space sector selloff driven by macro risk-off sentiment and SpaceX IPO fatigue. While some mining and quantum components like MP and INFQ show positive catalysts through government funding and strategic positioning, the overwhelming downward momentum, multiple compression, and highly dilutive capital raises in the space and transport names heavily tilt the cluster's overall outlook to bearish."
+    },
+    {
+      "concept": "Workflow & Enterprise Software",
+      "cluster_id": "TH_22",
+      "level": "theme",
+      "parent_sector": "Technology",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.65,
+      "member_tickers": [
+        "ADBE",
+        "BRZE",
+        "DOCU",
+        "FIVN",
+        "KD",
+        "KVYO",
+        "MNDY",
+        "PEGA",
+        "RNG",
+        "TEAM",
+        "TWLO",
+        "VERX",
+        "WDAY",
+        "ZM"
+      ],
+      "rationale": "Despite a broader rally in the SaaS and enterprise software sector driven by strong AI monetization and robust earnings from closely related peers (like Salesforce and ServiceNow), key constituents of this specific cluster face significant headwinds. Notably, Adobe (ADBE) is pressured by AI-driven commoditization fears and rising competition, while DocuSign (DOCU) is suffering from disappointing forward guidance. The divergence between strong macro software tailwinds and poor idiosyncratic performance among major cluster members results in a mixed outlook and no clear directional lean."
+    },
+    {
+      "concept": "REITs & Property Management",
+      "cluster_id": "TH_15",
+      "level": "theme",
+      "parent_sector": "Real Estate",
+      "direction": "Short",
+      "strength": "Weak",
+      "confidence": 0.06,
+      "member_tickers": [
+        "AMH",
+        "BRX",
+        "COLD",
+        "CUZ",
+        "DEI",
+        "DOC",
+        "EQR",
+        "HR",
+        "INVH",
+        "IRT",
+        "KIM",
+        "PLD",
+        "UDR",
+        "VICI",
+        "VTRS"
+      ],
+      "rationale": "All available signals for the cluster members (AMH, DEI, EQR, UDR) point to a bearish direction. However, these signals are exclusively propagated from concept-graph neighbors with extremely low confidence scores (0.05 to 0.08), and there is a lack of direct fundamental news or high-conviction catalysts for the sector."
+    },
+    {
+      "concept": "Consumer Brands, Restaurants & Retail",
+      "cluster_id": "TH_29",
+      "level": "theme",
+      "parent_sector": "Consumer Cyclical",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.6,
+      "member_tickers": [
+        "BRK.B",
+        "BROS",
+        "CAVA",
+        "CELH",
+        "CMG",
+        "OTIS",
+        "SBUX",
+        "TJX"
+      ],
+      "rationale": "The cluster exhibits conflicting signals and lacks a unified thematic driver. Berkshire Hathaway (BRK.B) presents a strong Long signal driven by aggressive capital deployment in AI infrastructure and homebuilding, which are largely unrelated to core consumer or retail trends. Conversely, pure-play restaurant and retail equities like CMG, SBUX, and CAVA face significant headwinds from inflation, rising commodity costs, and increasingly price-sensitive lower-income consumers, leading to a bearish lean for the consumer-facing group. TJX shows operational resilience but carries a weak short signal, further muddying the thematic outlook."
+    },
+    {
+      "concept": "Digital Media, Consumer Tech & Internet",
+      "cluster_id": "TH_31",
+      "level": "theme",
+      "parent_sector": "Communication Services",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.15,
+      "member_tickers": [
+        "BILL",
+        "CART",
+        "DBX",
+        "GEN",
+        "GME",
+        "MTCH",
+        "OTEX"
+      ],
+      "rationale": "The cluster exhibits extremely weak and highly mixed signals, with low-confidence propagated signals pointing in both bullish and bearish directions. The only notable recent news is mildly positive for Gen Digital (GEN) regarding an industry award for its identity protection services, which is insufficient to drive a clear thematic directional lean for the entire sector."
+    },
+    {
+      "concept": "Telecommunications & Media",
+      "cluster_id": "TH_24",
+      "level": "theme",
+      "parent_sector": "Communication Services",
+      "direction": "Short",
+      "strength": "Strong",
+      "confidence": 0.75,
+      "member_tickers": [
+        "AIG",
+        "BCE",
+        "CMCSA",
+        "LBTYA",
+        "RNA",
+        "T",
+        "TMUS",
+        "TU",
+        "VZ"
+      ],
+      "rationale": "Legacy telecommunications providers within the cluster, such as AT&T and Verizon, are facing severe systemic disruption risks from the rapid expansion of low-earth orbit satellite networks, particularly SpaceX's Starlink. This emerging technology threatens to bypass traditional terrestrial infrastructure, risking significant subscriber base erosion and margin compression across the $1.6 trillion communications industry. While media components like Comcast are actively diversifying revenues through massive capital investments in theme park expansions, the core broadband and mobile network segments that anchor this cluster remain highly vulnerable to orbital alternatives, driving a decidedly bearish outlook."
+    },
+    {
+      "concept": "Media, Entertainment & Services",
+      "cluster_id": "TH_33",
+      "level": "theme",
+      "parent_sector": "Communication Services",
+      "direction": "Block",
+      "strength": "Neutral",
+      "confidence": 0.05,
+      "member_tickers": [
+        "CPRT",
+        "NFLX",
+        "NWSA",
+        "PSKY",
+        "SPOT",
+        "WMG",
+        "XYZ"
+      ],
+      "rationale": "Mixed and extremely low-confidence propagated signals, along with an absence of direct news or clear catalysts across member stocks, result in a lack of a definitive directional trend for the cluster."
+    }
+  ],
+  "stock_signals": [
+    {
+      "ticker": "NVDA",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Massive indirect demand from the $30B Google/SpaceX cloud deal which includes 110,000 Nvidia GPUs, offsetting broader sector volatility."
+    },
+    {
+      "ticker": "GOOG",
+      "direction": "Long",
+      "catalyst_confidence": 0.9,
+      "reason": "Berkshire Hathaway took a massive $10B stake via private placement alongside an $80B capital raise for AI infrastructure."
+    },
+    {
+      "ticker": "MSFT",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Unveiled highly competitive in-house AI models (MAI-Thinking-1) and a topological quantum chip to reduce OpenAI dependency."
+    },
+    {
+      "ticker": "AMZN",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Strong AWS momentum with 28% growth and a multibillion-dollar optical fiber supply agreement with Corning."
+    },
+    {
+      "ticker": "META",
+      "direction": "Short",
+      "catalyst_confidence": 0.8,
+      "reason": "Reportedly weighing a multibillion-dollar stock sale to fund ballooning AI capex, threatening shareholders with dilution."
+    },
+    {
+      "ticker": "AAPL",
+      "direction": "Short",
+      "catalyst_confidence": 0.65,
+      "reason": "WWDC announcements triggered a 'sell the news' reaction with shares dropping 1.94% amid skepticism over AI monetization."
+    },
+    {
+      "ticker": "AVGO",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Disappointing forward guidance for Q3 AI chip sales triggered a massive 15% sell-off and broader sector contagion."
+    },
+    {
+      "ticker": "MU",
+      "direction": "Block",
+      "catalyst_confidence": 0.5,
+      "reason": "High volatility from sympathy sell-offs with Broadcom, mixed with insider selling and the launch of a 2x short ETF."
+    },
+    {
+      "ticker": "TSLA",
+      "direction": "Block",
+      "catalyst_confidence": 0.65,
+      "reason": "Untradable uncertainty surrounding potential dilution from a rumored megamerger with SpaceX and shrinking robotaxi fleet metrics."
+    },
+    {
+      "ticker": "MRVL",
+      "direction": "Long",
+      "catalyst_confidence": 0.95,
+      "reason": "Announced inclusion in the S&P 500 index and received a 'next trillion-dollar company' endorsement from Nvidia's CEO."
+    },
+    {
+      "ticker": "AMD",
+      "direction": "Short",
+      "catalyst_confidence": 0.7,
+      "reason": "Facing an aggressive new competitive threat from Nvidia's entry into the CPU market via the RTX Spark and Vera platforms."
+    },
+    {
+      "ticker": "INTC",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Shares surged 11% on reports of a massive Google AI chip foundry order for over 3 million TPU units by 2028."
+    },
+    {
+      "ticker": "BRK.B",
+      "direction": "Long",
+      "catalyst_confidence": 0.9,
+      "reason": "Aggressive capital deployment under new CEO Greg Abel, executing a $10B Alphabet investment and an $8.5B Taylor Morrison acquisition."
+    },
+    {
+      "ticker": "PLTR",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Threat of the UK parliament recommending the cancellation of a £330 million NHS contract, compounded by high insider selling."
+    },
+    {
+      "ticker": "LLY",
+      "direction": "Long",
+      "catalyst_confidence": 0.95,
+      "reason": "Reached all-time highs following exceptional Phase 3 data for retatrutide and key failures from rival Zealand Pharma."
+    },
+    {
+      "ticker": "HOOD",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "A major regulatory tailwind as the SEC scrapped the Pattern Day Trader (PDT) rule, unlocking significant trading volume from retail accounts."
+    },
+    {
+      "ticker": "MS",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Positioned to reap hundreds of millions in underwriting fees and options from leading the massive $75 billion SpaceX IPO."
+    },
+    {
+      "ticker": "SNDK",
+      "direction": "Long",
+      "catalyst_confidence": 0.9,
+      "reason": "Upgrades from BofA and Morgan Stanley plus a major new $179M stake from billionaire David Tepper validate its AI memory pricing power."
+    },
+    {
+      "ticker": "UBER",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "Strategic $500M investment in Nuro for robotaxis and acquiring Foodpanda to drive margin expansion and secure autonomous distribution."
+    },
+    {
+      "ticker": "COIN",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Crypto trading revenues plummeted 47% YoY amid Bitcoin weakness, leading analysts to project a 70% drop in 2026 EPS."
+    },
+    {
+      "ticker": "LCID",
+      "direction": "Short",
+      "catalyst_confidence": 0.9,
+      "reason": "Facing massive cash burn, imminent insolvency risks, and severe class-action lawsuits over concealed supplier issues and delivery halts."
+    },
+    {
+      "ticker": "CRWV",
+      "direction": "Short",
+      "catalyst_confidence": 0.65,
+      "reason": "Shares fell sharply following news of SpaceX entering the infrastructure leasing market with a $920M Google deal, directly threatening CoreWeave's neocloud business."
+    },
+    {
+      "ticker": "DELL",
+      "direction": "Long",
+      "catalyst_confidence": 0.9,
+      "reason": "Delivered an exceptional earnings beat with 88% YoY revenue growth, a 700% surge in AI server sales, and a massive guidance increase."
+    },
+    {
+      "ticker": "SCHW",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "The SEC's elimination of the 25-year-old PDT rule lowers entry barriers for retail day traders, serving as a direct catalyst for increased trading volume and revenue."
+    },
+    {
+      "ticker": "CRWD",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "Reported strong Q1 earnings, raised guidance, accelerating ARR growth in AI security, and an upcoming 4-for-1 stock split."
+    },
+    {
+      "ticker": "JPM",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Leading the historic $75 billion SpaceX IPO distribution and providing strong net interest income guidance of $103 billion for 2026."
+    },
+    {
+      "ticker": "ORCL",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Heading into earnings with a massive $553 billion contracted revenue backlog, strong AI infrastructure demand, and a new strategic partnership with Arm."
+    },
+    {
+      "ticker": "IBM",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Announced a massive $10 billion quantum computing investment and a strategic partnership with Google Cloud to scale enterprise AI adoption."
+    },
+    {
+      "ticker": "GLW",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Secured a multibillion-dollar fiber-optics supply agreement with Amazon, validating its critical role and revenue potential in AI infrastructure buildouts."
+    },
+    {
+      "ticker": "RKLB",
+      "direction": "Short",
+      "catalyst_confidence": 0.65,
+      "reason": "Stock plummeted over 25% due to broader space tech sector weakness, macro rate concerns, and fading momentum ahead of the SpaceX IPO."
+    },
+    {
+      "ticker": "FSK",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Rocked by a 31% dividend cut, an $880M fair value loss, and multiple class-action lawsuits over concealed deteriorating non-accrual rates."
+    },
+    {
+      "ticker": "PFE",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Reported highly positive Phase 2b data for its obesity drug showing nearly 16% weight loss, alongside an FDA approval expansion for HYMPAVZI."
+    },
+    {
+      "ticker": "GM",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "No direct near-term catalysts; news primarily discusses general valuation comparisons and long-term macro threats from Chinese EV exports."
+    },
+    {
+      "ticker": "NFLX",
+      "direction": "Block",
+      "catalyst_confidence": 0.4,
+      "reason": "Mixed narrative of dodging Canadian streaming levies offset by Paramount's 'scorched-earth' accusations and analyst concerns over decelerating growth and valuation."
+    },
+    {
+      "ticker": "DIS",
+      "direction": "Block",
+      "catalyst_confidence": 0.55,
+      "reason": "[circuit-breaker:range<0.6] Benefiting from operational missteps at rival Epic Universe, maintaining strong theme park margins, and avoiding massive Canadian streaming levies."
+    },
+    {
+      "ticker": "PEP",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Demonstrated successful selective price reductions driving sales and volume growth, making it an attractive defensive stock with a reliable dividend."
+    },
+    {
+      "ticker": "V",
+      "direction": "Block",
+      "catalyst_confidence": 0.4,
+      "reason": "Conflicting signals with Berkshire Hathaway fully exiting its position, offset slightly by long-term initiatives in stablecoin settlement testing."
+    },
+    {
+      "ticker": "PANW",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Delivered record quarterly results with 60% YoY growth in Next Generation Security ARR and raised guidance, validating its platformization strategy."
+    },
+    {
+      "ticker": "PL",
+      "direction": "Short",
+      "catalyst_confidence": 0.7,
+      "reason": "Stock plunged on a $1.5 billion equity offering announcement causing dilution concerns, alongside multiple compression as SpaceX IPO momentum fades."
+    },
+    {
+      "ticker": "SNOW",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Surged on a massive Q1 earnings beat, raised guidance, multiple strategic product announcements at its Summit, and strong validation of its AI Data Cloud."
+    },
+    {
+      "ticker": "D",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "The pending acquisition by NextEra Energy presents a major M&A catalyst, outweighing routine and expected shareholder class-action investigations."
+    },
+    {
+      "ticker": "NEE",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Strategic expansion via the Dominion Energy acquisition and exposure to a projected 60% surge in long-term electricity demand driven by AI and EVs provide strong upside."
+    },
+    {
+      "ticker": "CVX",
+      "direction": "Short",
+      "catalyst_confidence": 0.7,
+      "reason": "High vulnerability to crude oil price declines amid potential Middle East ceasefire developments, compounded by heavy insider and Berkshire Hathaway stake reductions."
+    },
+    {
+      "ticker": "CRDO",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Exceptional fundamental performance with 157% YoY revenue growth and strategic AI connectivity positioning override short-term retail profit-taking headwinds."
+    },
+    {
+      "ticker": "NBIS",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "Explosive 350% YoY revenue growth, major investments from high-profile AI figures, and explicit endorsements from industry leaders establish strong momentum."
+    },
+    {
+      "ticker": "UAL",
+      "direction": "Block",
+      "catalyst_confidence": 0.4,
+      "reason": "Conflicting catalysts between severe jet fuel margin compression and the company's demonstrated pricing power and intent to acquire distressed rival assets."
+    },
+    {
+      "ticker": "AAL",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Suspending domestic routes due to uneconomical operations amid spiking jet fuel costs highlights severe fundamental pressures and lack of robust pricing power."
+    },
+    {
+      "ticker": "BA",
+      "direction": "Block",
+      "catalyst_confidence": 0.4,
+      "reason": "Massive order backlogs and defense spending tailwinds are fundamentally offset by ongoing delivery delays, supply chain constraints, and steep valuations."
+    },
+    {
+      "ticker": "HON",
+      "direction": "Block",
+      "catalyst_confidence": 0.35,
+      "reason": "A reaffirmed guidance and impending aerospace spin-off provide a murky near-term catalyst picture given expectations of uneven earnings progression through 2028."
+    },
+    {
+      "ticker": "GE",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "A massive $210 billion backlog, 29% revenue growth, and expanding defense applications present a fundamentally confirmed growth trajectory despite brief technical weakness."
+    },
+    {
+      "ticker": "SMCI",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Severe fundamental trust issues, including an alleged $2.5 billion chip-smuggling scandal, accounting probes, and a major revenue guidance miss."
+    },
+    {
+      "ticker": "KO",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "The planned $10 billion IPO of its Indian bottling unit is a major catalyst to unlock hidden value and transition to a higher-margin, asset-light model."
+    },
+    {
+      "ticker": "T",
+      "direction": "Short",
+      "catalyst_confidence": 0.65,
+      "reason": "Emerging systemic disruption risks to legacy terrestrial broadband and mobile networks posed by SpaceX's Starlink and associated loss of subscriber base."
+    },
+    {
+      "ticker": "JOBY",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "An extreme 84x sales valuation with no meaningful revenue leaves the stock highly vulnerable to macro risk-off sentiment and prospective Federal Reserve interest rate hikes."
+    },
+    {
+      "ticker": "CRM",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "A highly lucrative $5 billion stake in Anthropic ahead of its upcoming IPO and aggressive monetization of AI-integrated enterprise software present clear bullish catalysts."
+    },
+    {
+      "ticker": "WDAY",
+      "direction": "Block",
+      "catalyst_confidence": 0.25,
+      "reason": "Routine partnership announcements lack material catalyst impact, and the broader software sector is facing headwinds post-index inclusion."
+    },
+    {
+      "ticker": "AMAT",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "A 15% dividend hike and $13.2 billion share repurchase authorization denote massive capital return strength amid a recovering semiconductor equipment capex cycle."
+    },
+    {
+      "ticker": "MDLZ",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Reversing cocoa commodity price spikes are poised to alleviate temporary margin pressures, offering a strong fundamental rebound opportunity after a 30% drawdown."
+    },
+    {
+      "ticker": "BAC",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Favorable stress test capital buffer freezes and a supportive reflationary macro environment pave the way for increased dividend payouts and aggressive share buybacks."
+    },
+    {
+      "ticker": "LRCX",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Benefiting from a broad semiconductor sector relief rally and increased capacity signaling from major memory chip manufacturers like SK Hynix."
+    },
+    {
+      "ticker": "SWKS",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Company unveiled a next-generation EV gate driver platform with significant efficiency improvements."
+    },
+    {
+      "ticker": "DNOW",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Disappointing earnings miss and 19.1% stock plunge triggered multiple securities fraud investigations."
+    },
+    {
+      "ticker": "RBLX",
+      "direction": "Short",
+      "catalyst_confidence": 0.8,
+      "reason": "Significant guidance reduction and an 18% stock decline sparked multiple securities class actions."
+    },
+    {
+      "ticker": "CIEN",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Announced a $2 billion convertible notes offering, raising immediate share dilution concerns."
+    },
+    {
+      "ticker": "CHWY",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Attractive valuation, a planned Modern Animal acquisition, and consistent earnings beats provide a bullish setup."
+    },
+    {
+      "ticker": "ASTS",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Recent sector-wide sympathy selloff driven by SpaceX IPO fatigue without a company-specific catalyst."
+    },
+    {
+      "ticker": "VRT",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Routine quarterly dividend declaration does not constitute a clear tradable catalyst."
+    },
+    {
+      "ticker": "LBRT",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "CFO's prearranged stock sale and weak Q1 revenue growth provide no definitive trading catalyst."
+    },
+    {
+      "ticker": "GPK",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Facing a securities class action over concealed inventory issues and multiple negative guidance revisions."
+    },
+    {
+      "ticker": "COHR",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Received an analyst price target upgrade on strong AI-driven optical transceiver demand."
+    },
+    {
+      "ticker": "ABBV",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Mentioned only in ETF and partnership contexts without any material corporate catalyst."
+    },
+    {
+      "ticker": "BE",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Flagged as significantly overvalued by Morningstar amid broader clean energy sector volatility."
+    },
+    {
+      "ticker": "ABT",
+      "direction": "Short",
+      "catalyst_confidence": 0.6,
+      "reason": "A federal judge ruled against the company's motion to dismiss a misleading marketing class-action lawsuit."
+    },
+    {
+      "ticker": "VZ",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Routine dividend declaration and theoretical satellite competition concerns offer no immediate catalyst."
+    },
+    {
+      "ticker": "CMCSA",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Announced a historic $8 billion investment to build a new Universal theme park in the UK."
+    },
+    {
+      "ticker": "MDT",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Delivered a strong earnings beat and received an analyst upgrade driven by robust segment growth."
+    },
+    {
+      "ticker": "WMT",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Recent stock drop from expense concerns has no fresh follow-up catalyst."
+    },
+    {
+      "ticker": "IOT",
+      "direction": "Short",
+      "catalyst_confidence": 0.8,
+      "reason": "Stock fell over 5% after Q2 revenue guidance missed Wall Street expectations."
+    },
+    {
+      "ticker": "DAL",
+      "direction": "Long",
+      "catalyst_confidence": 0.9,
+      "reason": "Berkshire Hathaway disclosed a massive $3.28 billion new stake, signaling deep institutional conviction."
+    },
+    {
+      "ticker": "C",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Pending bank stress tests are an industry-wide macro event rather than an idiosyncratic catalyst."
+    },
+    {
+      "ticker": "BX",
+      "direction": "Short",
+      "catalyst_confidence": 0.8,
+      "reason": "Implementing redemption caps on its flagship private credit fund due to escalating investor withdrawals signals significant liquidity and valuation risks."
+    },
+    {
+      "ticker": "UPS",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Steady increases in revenue per piece and a strategic shift toward higher-margin customers ahead of an anticipated second-half earnings inflection."
+    },
+    {
+      "ticker": "IBKR",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "The SEC's elimination of the Pattern Day Trader rule is expected to significantly increase retail trading volumes and commission revenues."
+    },
+    {
+      "ticker": "RTX",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Favorable defense spending trends and securing a Western rare earth supply chain bolster long-term production stability despite commercial engine backlogs."
+    },
+    {
+      "ticker": "RIVN",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Matching Tesla's EV efficiency, securing a major Uber partnership, and expanding production capacity provide strong bullish momentum."
+    },
+    {
+      "ticker": "SOFI",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Strong fundamental growth with 41% YoY revenue increase, solid member additions, and potential retail participation in mega-IPOs."
+    },
+    {
+      "ticker": "HD",
+      "direction": "Short",
+      "catalyst_confidence": 0.7,
+      "reason": "Weak same-store sales and sluggish near-term housing turnover due to high mortgage rates signal continued headwinds for home improvement spending."
+    },
+    {
+      "ticker": "MP",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Strong positioning as the sole U.S. large-scale rare-earth mine stands to benefit from SpaceX's satellite expansion and continued DoD funding."
+    },
+    {
+      "ticker": "PSKY",
+      "direction": "Block",
+      "catalyst_confidence": 0.6,
+      "reason": "Ongoing regulatory scrutiny and anti-trust opposition create significant uncertainty regarding the completion of its Warner Bros. Discovery acquisition."
+    },
+    {
+      "ticker": "WBD",
+      "direction": "Block",
+      "catalyst_confidence": 0.5,
+      "reason": "Unclear acquisition timeline and major regulatory headwinds regarding the Paramount deal limit tradable upside or downside."
+    },
+    {
+      "ticker": "CWK",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Cited merely as a case study for a software provider's DevOps platform, lacking a material standalone catalyst for the stock."
+    },
+    {
+      "ticker": "LMND",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Improving loss ratios, geographic expansion, and management's guidance for positive adjusted EBITDA by year-end provide a credible bullish setup."
+    },
+    {
+      "ticker": "IR",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Favorable currency tailwinds, recent earnings beats, and international expansion through the Fox s.r.l. acquisition support growth."
+    },
+    {
+      "ticker": "CPB",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Attractive valuation, a sustainable 7% dividend yield, and aggressive institutional accumulation point to a solid turnaround opportunity."
+    },
+    {
+      "ticker": "CMG",
+      "direction": "Short",
+      "catalyst_confidence": 0.6,
+      "reason": "Price-sensitive consumers and rising beef costs are pressuring margins, prompting recent Wall Street downgrades despite long-term international growth."
+    },
+    {
+      "ticker": "MRNA",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Rotation into defensive healthcare names and a credible path to cash flow positivity by 2028 offset near-term revenue declines."
+    },
+    {
+      "ticker": "NET",
+      "direction": "Block",
+      "catalyst_confidence": 0.5,
+      "reason": "[circuit-breaker:range<0.6] Broader enterprise software and networking infrastructure tailwinds from the AI boom present a moderately bullish backdrop."
+    },
+    {
+      "ticker": "FTNT",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "Accelerating revenue growth, custom security chips, and an expanding TAM from AI-driven cyber threats represent a strong confirmed catalyst."
+    },
+    {
+      "ticker": "ADBE",
+      "direction": "Short",
+      "catalyst_confidence": 0.6,
+      "reason": "Growing fears of AI-driven software commoditization and rising competition from nimbler rivals threaten its pricing power and market share."
+    },
+    {
+      "ticker": "CIFR",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Successful pricing of a massive $810 million debt offering secures funding for its Stingray data center, validating its growth strategy in the HPC market."
+    },
+    {
+      "ticker": "FIG",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Delivered a massive 46% Q1 revenue beat, raised full-year guidance, and is seeing rapid adoption of its new AI tools."
+    },
+    {
+      "ticker": "MRK",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Incidental mentions regarding an awards panel and being used as a revenue benchmark, offering no clear trading catalyst."
+    },
+    {
+      "ticker": "HPQ",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Goldman Sachs reiterated a Sell rating with a 35% downside target, citing severe margin compression, rising input costs, and supply chain constraints."
+    },
+    {
+      "ticker": "ANET",
+      "direction": "Short",
+      "catalyst_confidence": 0.6,
+      "reason": "Stock dropped post-earnings due to an elevated P/E valuation and modest sequential growth relative to better-positioned AI peers."
+    },
+    {
+      "ticker": "HRL",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Only mentioned in passing as a well-capitalized competitor to Beyond Meat with no specific company performance data."
+    },
+    {
+      "ticker": "NOW",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Accelerating revenue growth confirms strong enterprise demand, effectively dismissing previous market fears of AI disruption to its SaaS model."
+    },
+    {
+      "ticker": "AAOI",
+      "direction": "Long",
+      "catalyst_confidence": 0.8,
+      "reason": "Reported 51% Q1 revenue growth, doubled datacenter sales, and initiated volume shipments of 800-gigabit products amid soaring AI infrastructure demand."
+    },
+    {
+      "ticker": "HOG",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "A significant $22.2 million share purchase by Pine Valley Investments signals strong institutional confidence in the new CEO's turnaround strategy."
+    },
+    {
+      "ticker": "FTI",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Highlighted as a top offshore energy buy due to a record subsea order pipeline, consistent guidance raises, and robust free cash flow."
+    },
+    {
+      "ticker": "GFS",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Successfully completed a strategic acquisition of Synopsys' ARC Processor IP Solutions, significantly expanding its Physical AI platform capabilities."
+    },
+    {
+      "ticker": "TEM",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Positioned as a healthcare AI winner showing upward momentum through FDA progress and growing pharmaceutical partnerships."
+    },
+    {
+      "ticker": "CRCL",
+      "direction": "Short",
+      "catalyst_confidence": 0.8,
+      "reason": "Stock plunged over 10% following reports that massive competitors like Visa, Mastercard, and Stripe are developing a rival stablecoin platform."
+    },
+    {
+      "ticker": "BRBR",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Noted as dropping 10.1% alongside a broader market move without a clear, specific fundamental catalyst provided."
+    },
+    {
+      "ticker": "FCX",
+      "direction": "Long",
+      "catalyst_confidence": 0.75,
+      "reason": "Delivered strong Q1 results and is favorably positioned at an attractive valuation to benefit from structural copper demand driven by AI infrastructure."
+    },
+    {
+      "ticker": "UPWK",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Facing an active securities fraud investigation after Q1 results revealed declining client metrics and flat volumes due to aggressive AI adoption."
+    },
+    {
+      "ticker": "WDC",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Crossed a significant profitability milestone and raised its dividend by 20% on the back of surging AI-driven digital storage demand."
+    },
+    {
+      "ticker": "MCHP",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Received a Buy rating from Bank of America highlighting approximately 38% upside as a key beneficiary of the AI semiconductor scarcity."
+    },
+    {
+      "ticker": "TXN",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Included in BofA's semiconductor secular upside thesis with a Buy rating and approximately 30% upside potential."
+    },
+    {
+      "ticker": "ADI",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Upgraded with a Buy rating by Bank of America, positioned to capitalize on sustained semiconductor demand for AI data center infrastructure."
+    },
+    {
+      "ticker": "CDNS",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Rated Buy by Bank of America as a key structural beneficiary of accelerating AI chip design and broader semiconductor sector growth."
+    },
+    {
+      "ticker": "TMUS",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Mentioned only as a telecom partner in articles regarding AST SpaceMobile and SpaceX, lacking a direct company-specific catalyst."
+    },
+    {
+      "ticker": "ENPH",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Stock moves were driven by broad clean energy sector tailwinds rather than an idiosyncratic company catalyst."
+    },
+    {
+      "ticker": "IONQ",
+      "direction": "Block",
+      "catalyst_confidence": 0.4,
+      "reason": "Mixed sentiment involving a previous Q1 earnings surge offset by recent sector rotation from the Quantinuum IPO and ongoing cash burn concerns."
+    },
+    {
+      "ticker": "DD",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Announced a 1-for-3 reverse stock split, which is a cosmetic change with no real fundamental impact."
+    },
+    {
+      "ticker": "M",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Reported a significant Q1 earnings beat, raised full-year guidance, and gained credibility alongside a new Berkshire Hathaway investment."
+    },
+    {
+      "ticker": "DUOL",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Demonstrated robust fundamentals with 27% YoY revenue growth and rising user adoption, presenting an attractive valuation entry point."
+    },
+    {
+      "ticker": "PAA",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Only mentioned in the context of portfolio holdings for MLP ETFs without any company-specific developments."
+    },
+    {
+      "ticker": "TTD",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Referenced purely as a historical S&P 500 inclusion precedent and within generic stock recommendation lists."
+    },
+    {
+      "ticker": "STX",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Sector-driven recovery tied to easing macroeconomic and geopolitical tensions rather than a direct fundamental catalyst."
+    },
+    {
+      "ticker": "LUNR",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Announced a highly dilutive $500 million stock offering causing a sharp price drop amidst broader space sector fatigue."
+    },
+    {
+      "ticker": "MMM",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Only cited as a major player in a generic market research report on the global surgical masks industry."
+    },
+    {
+      "ticker": "KMB",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Mentioned solely as a participant in the surgical masks market within a broader industry overview."
+    },
+    {
+      "ticker": "HPE",
+      "direction": "Long",
+      "catalyst_confidence": 0.95,
+      "reason": "Delivered an exceptional Q2 beat with 40% revenue growth, a massive $5.9B AI server backlog, and significantly raised full-year guidance."
+    },
+    {
+      "ticker": "PG",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Highlighted generically as a safe-haven dividend stock and prominent ETF holding, lacking an actionable near-term catalyst."
+    },
+    {
+      "ticker": "OXY",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Referenced briefly regarding Berkshire Hathaway's acquisition strategy without fresh, standalone fundamental news."
+    },
+    {
+      "ticker": "CDE",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Posted record Q1 results and is well-positioned with multiple operating mines to capture upside from surging precious metals."
+    },
+    {
+      "ticker": "NDAQ",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "Facing negative PR for altering index inclusion rules to accommodate the SpaceX IPO, but direct financial impact remains ambiguous."
+    },
+    {
+      "ticker": "SPGI",
+      "direction": "Block",
+      "catalyst_confidence": 0.2,
+      "reason": "Maintained existing S&P 500 inclusion rules despite the SpaceX IPO, representing a neutral operational stance."
+    },
+    {
+      "ticker": "DOCU",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Suffered analyst downgrades and a pre-market drop due to disappointing in-line Q2 guidance, overshadowing its Q1 earnings beat."
+    },
+    {
+      "ticker": "ON",
+      "direction": "Long",
+      "catalyst_confidence": 0.6,
+      "reason": "Introduced an innovative cloud-based design tool to streamline power electronics engineering, bolstering its position in AI and EV markets."
+    },
+    {
+      "ticker": "USAR",
+      "direction": "Block",
+      "catalyst_confidence": 0.35,
+      "reason": "[circuit-breaker:range<0.6] Speculative analyst prediction of upcoming government mineral deposit approval, providing a weak but positive potential catalyst."
+    },
+    {
+      "ticker": "BMNR",
+      "direction": "Short",
+      "catalyst_confidence": 0.65,
+      "reason": "Ethereum price plunge is exposing the company's treasury to billions in unrealized losses, creating a clear bearish risk."
+    },
+    {
+      "ticker": "QCOM",
+      "direction": "Short",
+      "catalyst_confidence": 0.65,
+      "reason": "Nvidia's introduction of the RTX Spark superchip presents a direct and credible competitive threat to Qualcomm's Windows PC processor ambitions."
+    },
+    {
+      "ticker": "CAT",
+      "direction": "Block",
+      "catalyst_confidence": 0.15,
+      "reason": "Mentioned as a thematic beneficiary of AI data center construction without any company-specific tradable catalyst."
+    },
+    {
+      "ticker": "RBRK",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Strong Q1 earnings and revenue beat combined with raised full-year guidance provides a confirmed bullish catalyst."
+    },
+    {
+      "ticker": "ABNB",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "News revolves around the CEO launching a personal AI venture with no immediate financial impact on the company."
+    },
+    {
+      "ticker": "AI",
+      "direction": "Long",
+      "catalyst_confidence": 0.85,
+      "reason": "Company delivered a robust Q4 earnings and revenue beat, driving double-digit after-hours stock gains."
+    },
+    {
+      "ticker": "F",
+      "direction": "Short",
+      "catalyst_confidence": 0.85,
+      "reason": "Disappointing May vehicle sales and a massive recall of 420,000 SUVs constitute a strong bearish catalyst."
+    },
+    {
+      "ticker": "ALAB",
+      "direction": "Block",
+      "catalyst_confidence": 0.5,
+      "reason": "[circuit-breaker:range<0.6] Shipping advanced fabric switches to leading cloud customers aligns with the AI infrastructure build-out narrative."
+    },
+    {
+      "ticker": "CPNG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1,
+      "reason": "Only mentioned in passing regarding historical IPO underperformance; no company-specific news or catalyst."
+    },
+    {
+      "ticker": "O",
+      "direction": "Block",
+      "catalyst_confidence": 0.15,
+      "reason": "News consists entirely of generalized dividend investing recommendations without any new fundamental catalyst."
+    },
+    {
+      "ticker": "CEG",
+      "direction": "Block",
+      "catalyst_confidence": 0.45,
+      "reason": "[circuit-breaker:range<0.6] Thematic tailwinds from data center electricity demand coupled with a recent acquisition of natural gas capacity."
+    },
+    {
+      "ticker": "GTLB",
+      "direction": "Long",
+      "catalyst_confidence": 0.9,
+      "reason": "Significant Q1 earnings beat, strong revenue growth, and raised full-year guidance serve as a highly credible bullish catalyst."
+    },
+    {
+      "ticker": "ROKU",
+      "direction": "Block",
+      "catalyst_confidence": 0.15,
+      "reason": "Featured in a bullish opinion article with no new hard catalysts or fundamental updates."
+    },
+    {
+      "ticker": "MKC",
+      "direction": "Long",
+      "catalyst_confidence": 0.7,
+      "reason": "Transformative upcoming merger with Unilever's foods division provides a clear mid-to-long-term fundamental catalyst."
+    },
+    {
+      "ticker": "GIS",
+      "direction": "Block",
+      "catalyst_confidence": 0.15,
+      "reason": "Mentioned as a value play in a consumer stock listicle; no direct fundamental catalyst."
+    },
+    {
+      "ticker": "INFQ",
+      "direction": "Long",
+      "catalyst_confidence": 0.65,
+      "reason": "Recent $100M government funding award and ETF launch generate credible positive momentum despite minor insider selling."
+    },
+    {
+      "ticker": "JEF",
+      "direction": "Short",
+      "catalyst_confidence": 0.75,
+      "reason": "Law firm investigation regarding potential securities violations and $715 million in losses from First Brands bankruptcy represents a credible bearish risk."
+    },
+    {
+      "ticker": "EA",
+      "direction": "Block",
+      "catalyst_confidence": 0.0481,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NVDA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FLNC",
+      "direction": "Block",
+      "catalyst_confidence": 0.0481,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NVDA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BTU",
+      "direction": "Short",
+      "catalyst_confidence": 0.0755,
+      "reason": "[propagated from LCID] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CORZ",
+      "direction": "Block",
+      "catalyst_confidence": 0.1236,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NBIS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GOOGL",
+      "direction": "Block",
+      "catalyst_confidence": 0.3,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GOOG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NVCR",
+      "direction": "Block",
+      "catalyst_confidence": 0.0492,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GOOG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MTCH",
+      "direction": "Block",
+      "catalyst_confidence": 0.0472,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GOOG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NWSA",
+      "direction": "Block",
+      "catalyst_confidence": 0.0466,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GOOG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TEAM",
+      "direction": "Block",
+      "catalyst_confidence": 0.1814,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CRM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ZS",
+      "direction": "Block",
+      "catalyst_confidence": 0.1743,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CRWD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "INTU",
+      "direction": "Block",
+      "catalyst_confidence": 0.1638,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CRM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NU",
+      "direction": "Block",
+      "catalyst_confidence": 0.0368,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AMZN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "XYZ",
+      "direction": "Block",
+      "catalyst_confidence": 0.0362,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AMZN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MA",
+      "direction": "Block",
+      "catalyst_confidence": 0.0906,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BRK.B] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SHOP",
+      "direction": "Short",
+      "catalyst_confidence": 0.0962,
+      "reason": "[propagated from PLTR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DOCS",
+      "direction": "Block",
+      "catalyst_confidence": 0.0345,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AMZN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RDDT",
+      "direction": "Short",
+      "catalyst_confidence": 0.0775,
+      "reason": "[propagated from CRCL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ACHC",
+      "direction": "Short",
+      "catalyst_confidence": 0.0451,
+      "reason": "[propagated from META] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DX",
+      "direction": "Short",
+      "catalyst_confidence": 0.0402,
+      "reason": "[propagated from META] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ALK",
+      "direction": "Block",
+      "catalyst_confidence": 0.1694,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TFC",
+      "direction": "Block",
+      "catalyst_confidence": 0.1284,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "LUV",
+      "direction": "Block",
+      "catalyst_confidence": 0.1997,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RNA",
+      "direction": "Short",
+      "catalyst_confidence": 0.0382,
+      "reason": "[propagated from AAPL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AIG",
+      "direction": "Short",
+      "catalyst_confidence": 0.0376,
+      "reason": "[propagated from AAPL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FNB",
+      "direction": "Block",
+      "catalyst_confidence": 0.113,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CLF",
+      "direction": "Short",
+      "catalyst_confidence": 0.0352,
+      "reason": "[propagated from AAPL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CCL",
+      "direction": "Block",
+      "catalyst_confidence": 0.1378,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RMBS",
+      "direction": "Block",
+      "catalyst_confidence": 0.1061,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MRVL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "STM",
+      "direction": "Block",
+      "catalyst_confidence": 0.1226,
+      "reason": "[circuit-breaker:range<0.6] [propagated from ADI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ETN",
+      "direction": "Block",
+      "catalyst_confidence": 0.1115,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GLW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BWA",
+      "direction": "Block",
+      "catalyst_confidence": 0.0753,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MRVL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FLEX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1206,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GLW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TER",
+      "direction": "Block",
+      "catalyst_confidence": 0.1388,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AMAT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "IREN",
+      "direction": "Block",
+      "catalyst_confidence": 0.1268,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CIFR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AMKR",
+      "direction": "Block",
+      "catalyst_confidence": 0.1179,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AMAT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BRO",
+      "direction": "Block",
+      "catalyst_confidence": 0.092,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BRK.B] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TJX",
+      "direction": "Short",
+      "catalyst_confidence": 0.0972,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FAST",
+      "direction": "Block",
+      "catalyst_confidence": 0.0853,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BRK.B] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AJG",
+      "direction": "Block",
+      "catalyst_confidence": 0.0849,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BRK.B] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ROL",
+      "direction": "Block",
+      "catalyst_confidence": 0.0847,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BRK.B] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OTIS",
+      "direction": "Block",
+      "catalyst_confidence": 0.0813,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BRK.B] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "APP",
+      "direction": "Short",
+      "catalyst_confidence": 0.0975,
+      "reason": "[propagated from PLTR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AMGN",
+      "direction": "Block",
+      "catalyst_confidence": 0.1456,
+      "reason": "[circuit-breaker:range<0.6] [propagated from LLY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VKTX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1224,
+      "reason": "[circuit-breaker:range<0.6] [propagated from LLY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "JNJ",
+      "direction": "Block",
+      "catalyst_confidence": 0.1031,
+      "reason": "[circuit-breaker:range<0.6] [propagated from LLY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BMY",
+      "direction": "Block",
+      "catalyst_confidence": 0.1079,
+      "reason": "[circuit-breaker:range<0.6] [propagated from PFE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GILD",
+      "direction": "Block",
+      "catalyst_confidence": 0.0986,
+      "reason": "[circuit-breaker:range<0.6] [propagated from LLY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ORLY",
+      "direction": "Block",
+      "catalyst_confidence": 0.0868,
+      "reason": "[circuit-breaker:range<0.6] [propagated from LLY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MCD",
+      "direction": "Block",
+      "catalyst_confidence": 0.0975,
+      "reason": "[circuit-breaker:range<0.6] [propagated from KO] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MSTR",
+      "direction": "Short",
+      "catalyst_confidence": 0.1428,
+      "reason": "[propagated from COIN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "UPST",
+      "direction": "Block",
+      "catalyst_confidence": 0.1126,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SOFI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PGY",
+      "direction": "Block",
+      "catalyst_confidence": 0.1083,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KEY",
+      "direction": "Block",
+      "catalyst_confidence": 0.125,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "COF",
+      "direction": "Block",
+      "catalyst_confidence": 0.0925,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SYF",
+      "direction": "Block",
+      "catalyst_confidence": 0.1096,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CFG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1252,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RF",
+      "direction": "Block",
+      "catalyst_confidence": 0.1153,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "USB",
+      "direction": "Block",
+      "catalyst_confidence": 0.1394,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "LITE",
+      "direction": "Block",
+      "catalyst_confidence": 0.2157,
+      "reason": "[circuit-breaker:range<0.6] [propagated from COHR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FPS",
+      "direction": "Block",
+      "catalyst_confidence": 0.0865,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SNDK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "LYFT",
+      "direction": "Block",
+      "catalyst_confidence": 0.1078,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UBER] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DASH",
+      "direction": "Short",
+      "catalyst_confidence": 0.0916,
+      "reason": "[propagated from UPWK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "Z",
+      "direction": "Block",
+      "catalyst_confidence": 0.0839,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UBER] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PINS",
+      "direction": "Block",
+      "catalyst_confidence": 0.0769,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UBER] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SSNC",
+      "direction": "Short",
+      "catalyst_confidence": 0.1157,
+      "reason": "[propagated from UPWK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EBAY",
+      "direction": "Block",
+      "catalyst_confidence": 0.0698,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UBER] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ARWR",
+      "direction": "Block",
+      "catalyst_confidence": 0.0695,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UBER] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PATH",
+      "direction": "Block",
+      "catalyst_confidence": 0.1573,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GTLB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NYT",
+      "direction": "Block",
+      "catalyst_confidence": 0.0668,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UBER] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GLXY",
+      "direction": "Short",
+      "catalyst_confidence": 0.1031,
+      "reason": "[propagated from BMNR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RGTI",
+      "direction": "Block",
+      "catalyst_confidence": 0.1343,
+      "reason": "[circuit-breaker:range<0.6] [propagated from INFQ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NTLA",
+      "direction": "Short",
+      "catalyst_confidence": 0.081,
+      "reason": "[propagated from LCID] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RCAT",
+      "direction": "Short",
+      "catalyst_confidence": 0.111,
+      "reason": "[propagated from LUNR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "APA",
+      "direction": "Short",
+      "catalyst_confidence": 0.1276,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "APLD",
+      "direction": "Block",
+      "catalyst_confidence": 0.1162,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CIFR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RIOT",
+      "direction": "Block",
+      "catalyst_confidence": 0.11,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CIFR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "WULF",
+      "direction": "Block",
+      "catalyst_confidence": 0.1361,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CIFR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HUT",
+      "direction": "Block",
+      "catalyst_confidence": 0.1099,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CIFR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OKTA",
+      "direction": "Block",
+      "catalyst_confidence": 0.1588,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GTLB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CSCO",
+      "direction": "Block",
+      "catalyst_confidence": 0.1166,
+      "reason": "[circuit-breaker:range<0.6] [propagated from HPE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CG",
+      "direction": "Short",
+      "catalyst_confidence": 0.1305,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FIS",
+      "direction": "Short",
+      "catalyst_confidence": 0.1001,
+      "reason": "[propagated from UPWK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TPG",
+      "direction": "Short",
+      "catalyst_confidence": 0.135,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RHI",
+      "direction": "Block",
+      "catalyst_confidence": 0.0827,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IBM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DDOG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1674,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SNOW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TENB",
+      "direction": "Block",
+      "catalyst_confidence": 0.1459,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SNOW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DT",
+      "direction": "Block",
+      "catalyst_confidence": 0.1536,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GTLB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "WFC",
+      "direction": "Block",
+      "catalyst_confidence": 0.1515,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ONB",
+      "direction": "Block",
+      "catalyst_confidence": 0.1138,
+      "reason": "[circuit-breaker:range<0.6] [propagated from JPM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HBAN",
+      "direction": "Block",
+      "catalyst_confidence": 0.1186,
+      "reason": "[circuit-breaker:range<0.6] [propagated from BAC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VRNS",
+      "direction": "Block",
+      "catalyst_confidence": 0.1482,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SNOW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CTSH",
+      "direction": "Block",
+      "catalyst_confidence": 0.1078,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IBM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ACN",
+      "direction": "Block",
+      "catalyst_confidence": 0.1002,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IBM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PAYX",
+      "direction": "Block",
+      "catalyst_confidence": 0.089,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IBM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "G",
+      "direction": "Short",
+      "catalyst_confidence": 0.1175,
+      "reason": "[propagated from UPWK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ADP",
+      "direction": "Short",
+      "catalyst_confidence": 0.0921,
+      "reason": "[propagated from UPWK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TOST",
+      "direction": "Block",
+      "catalyst_confidence": 0.0821,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IBM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VIAV",
+      "direction": "Block",
+      "catalyst_confidence": 0.1357,
+      "reason": "[circuit-breaker:range<0.6] [propagated from COHR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KTOS",
+      "direction": "Short",
+      "catalyst_confidence": 0.1003,
+      "reason": "[propagated from LUNR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ONDS",
+      "direction": "Short",
+      "catalyst_confidence": 0.1089,
+      "reason": "[propagated from LUNR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NXE",
+      "direction": "Short",
+      "catalyst_confidence": 0.0981,
+      "reason": "[propagated from LUNR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OKLO",
+      "direction": "Block",
+      "catalyst_confidence": 0.1096,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SATS",
+      "direction": "Short",
+      "catalyst_confidence": 0.0705,
+      "reason": "[propagated from RKLB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ARCC",
+      "direction": "Short",
+      "catalyst_confidence": 0.1551,
+      "reason": "[propagated from FSK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OBDC",
+      "direction": "Short",
+      "catalyst_confidence": 0.1531,
+      "reason": "[propagated from FSK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GBDC",
+      "direction": "Short",
+      "catalyst_confidence": 0.136,
+      "reason": "[propagated from FSK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HTGC",
+      "direction": "Short",
+      "catalyst_confidence": 0.124,
+      "reason": "[propagated from FSK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OWL",
+      "direction": "Short",
+      "catalyst_confidence": 0.1602,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ARES",
+      "direction": "Short",
+      "catalyst_confidence": 0.1589,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BAM",
+      "direction": "Short",
+      "catalyst_confidence": 0.1322,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KKR",
+      "direction": "Short",
+      "catalyst_confidence": 0.1731,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BN",
+      "direction": "Short",
+      "catalyst_confidence": 0.1235,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DHR",
+      "direction": "Short",
+      "catalyst_confidence": 0.0882,
+      "reason": "[propagated from ABT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "XRAY",
+      "direction": "Block",
+      "catalyst_confidence": 0.0788,
+      "reason": "[circuit-breaker:range<0.6] [propagated from PFE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NVST",
+      "direction": "Block",
+      "catalyst_confidence": 0.0676,
+      "reason": "[circuit-breaker:range<0.6] [propagated from PFE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ZTS",
+      "direction": "Block",
+      "catalyst_confidence": 0.088,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BCE",
+      "direction": "Block",
+      "catalyst_confidence": 0.0646,
+      "reason": "[circuit-breaker:range<0.6] [propagated from PFE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CAG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1018,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDLZ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MO",
+      "direction": "Block",
+      "catalyst_confidence": 0.1047,
+      "reason": "[circuit-breaker:range<0.6] [propagated from KO] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KHC",
+      "direction": "Block",
+      "catalyst_confidence": 0.1027,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDLZ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CL",
+      "direction": "Block",
+      "catalyst_confidence": 0.1277,
+      "reason": "[circuit-breaker:range<0.6] [propagated from KO] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "S",
+      "direction": "Block",
+      "catalyst_confidence": 0.1194,
+      "reason": "[circuit-breaker:range<0.6] [propagated from PANW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "UEC",
+      "direction": "Block",
+      "catalyst_confidence": 0.1099,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DUK",
+      "direction": "Block",
+      "catalyst_confidence": 0.1519,
+      "reason": "[circuit-breaker:range<0.6] [propagated from D] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SO",
+      "direction": "Block",
+      "catalyst_confidence": 0.143,
+      "reason": "[circuit-breaker:range<0.6] [propagated from D] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "LNT",
+      "direction": "Block",
+      "catalyst_confidence": 0.1428,
+      "reason": "[circuit-breaker:range<0.6] [propagated from D] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CNP",
+      "direction": "Block",
+      "catalyst_confidence": 0.1375,
+      "reason": "[circuit-breaker:range<0.6] [propagated from D] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AEP",
+      "direction": "Block",
+      "catalyst_confidence": 0.133,
+      "reason": "[circuit-breaker:range<0.6] [propagated from D] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CMS",
+      "direction": "Block",
+      "catalyst_confidence": 0.132,
+      "reason": "[circuit-breaker:range<0.6] [propagated from D] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "XEL",
+      "direction": "Block",
+      "catalyst_confidence": 0.1416,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NEE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NI",
+      "direction": "Block",
+      "catalyst_confidence": 0.1295,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NEE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ENB",
+      "direction": "Block",
+      "catalyst_confidence": 0.123,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NEE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SRE",
+      "direction": "Block",
+      "catalyst_confidence": 0.1324,
+      "reason": "[circuit-breaker:range<0.6] [propagated from NEE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "XOM",
+      "direction": "Short",
+      "catalyst_confidence": 0.1989,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "COP",
+      "direction": "Short",
+      "catalyst_confidence": 0.1596,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DVN",
+      "direction": "Short",
+      "catalyst_confidence": 0.1358,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EOG",
+      "direction": "Short",
+      "catalyst_confidence": 0.1351,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MGY",
+      "direction": "Short",
+      "catalyst_confidence": 0.1256,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OVV",
+      "direction": "Short",
+      "catalyst_confidence": 0.1256,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HAL",
+      "direction": "Short",
+      "catalyst_confidence": 0.1227,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CNQ",
+      "direction": "Short",
+      "catalyst_confidence": 0.1171,
+      "reason": "[propagated from CVX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "QBTS",
+      "direction": "Block",
+      "catalyst_confidence": 0.123,
+      "reason": "[circuit-breaker:range<0.6] [propagated from INFQ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "APH",
+      "direction": "Short",
+      "catalyst_confidence": 0.0697,
+      "reason": "[propagated from ANET] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NCLH",
+      "direction": "Block",
+      "catalyst_confidence": 0.1122,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BANC",
+      "direction": "Short",
+      "catalyst_confidence": 0.0757,
+      "reason": "[propagated from AAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "COLB",
+      "direction": "Block",
+      "catalyst_confidence": 0.0991,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DAL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HST",
+      "direction": "Block",
+      "catalyst_confidence": 0.0854,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SARO",
+      "direction": "Block",
+      "catalyst_confidence": 0.1223,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DEI",
+      "direction": "Short",
+      "catalyst_confidence": 0.0593,
+      "reason": "[propagated from SMCI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MNST",
+      "direction": "Block",
+      "catalyst_confidence": 0.1214,
+      "reason": "[circuit-breaker:range<0.6] [propagated from KO] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KDP",
+      "direction": "Block",
+      "catalyst_confidence": 0.1079,
+      "reason": "[circuit-breaker:range<0.6] [propagated from KO] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KMI",
+      "direction": "Short",
+      "catalyst_confidence": 0.0541,
+      "reason": "[propagated from T] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SMR",
+      "direction": "Short",
+      "catalyst_confidence": 0.1133,
+      "reason": "[propagated from JOBY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PCOR",
+      "direction": "Block",
+      "catalyst_confidence": 0.1611,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CRM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KVYO",
+      "direction": "Block",
+      "catalyst_confidence": 0.1605,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CRM] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ENTG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1278,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AMAT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KVUE",
+      "direction": "Block",
+      "catalyst_confidence": 0.0883,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDLZ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NXPI",
+      "direction": "Block",
+      "catalyst_confidence": 0.1376,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MCHP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SM",
+      "direction": "Block",
+      "catalyst_confidence": 0.0606,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SWKS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VISN",
+      "direction": "Block",
+      "catalyst_confidence": 0.0551,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SWKS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NOV",
+      "direction": "Block",
+      "catalyst_confidence": 0.1185,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CTRA",
+      "direction": "Short",
+      "catalyst_confidence": 0.0892,
+      "reason": "[propagated from DNOW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SLB",
+      "direction": "Block",
+      "catalyst_confidence": 0.0948,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BKR",
+      "direction": "Block",
+      "catalyst_confidence": 0.1107,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CVE",
+      "direction": "Block",
+      "catalyst_confidence": 0.0967,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CRGY",
+      "direction": "Short",
+      "catalyst_confidence": 0.0832,
+      "reason": "[propagated from DNOW] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TTWO",
+      "direction": "Short",
+      "catalyst_confidence": 0.1161,
+      "reason": "[propagated from RBLX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "U",
+      "direction": "Short",
+      "catalyst_confidence": 0.0739,
+      "reason": "[propagated from RBLX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ROIV",
+      "direction": "Short",
+      "catalyst_confidence": 0.0617,
+      "reason": "[propagated from RBLX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SPOT",
+      "direction": "Short",
+      "catalyst_confidence": 0.0612,
+      "reason": "[propagated from RBLX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BRZE",
+      "direction": "Block",
+      "catalyst_confidence": 0.0703,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CHWY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OTEX",
+      "direction": "Block",
+      "catalyst_confidence": 0.0563,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CHWY] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CHYM",
+      "direction": "Block",
+      "catalyst_confidence": 0.0783,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SOFI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TRI",
+      "direction": "Block",
+      "catalyst_confidence": 0.1383,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FIG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SW",
+      "direction": "Short",
+      "catalyst_confidence": 0.0954,
+      "reason": "[propagated from GPK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "IQV",
+      "direction": "Short",
+      "catalyst_confidence": 0.0881,
+      "reason": "[propagated from GPK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NKE",
+      "direction": "Short",
+      "catalyst_confidence": 0.0875,
+      "reason": "[propagated from GPK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AXTA",
+      "direction": "Short",
+      "catalyst_confidence": 0.0849,
+      "reason": "[propagated from GPK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AMRZ",
+      "direction": "Short",
+      "catalyst_confidence": 0.0837,
+      "reason": "[propagated from GPK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AMH",
+      "direction": "Short",
+      "catalyst_confidence": 0.0804,
+      "reason": "[propagated from GPK] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BDX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1251,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BSX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1097,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EQR",
+      "direction": "Short",
+      "catalyst_confidence": 0.0519,
+      "reason": "[propagated from ABT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "UDR",
+      "direction": "Short",
+      "catalyst_confidence": 0.0513,
+      "reason": "[propagated from ABT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "OMC",
+      "direction": "Block",
+      "catalyst_confidence": 0.0655,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CMCSA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GPN",
+      "direction": "Block",
+      "catalyst_confidence": 0.0566,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CMCSA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GEHC",
+      "direction": "Block",
+      "catalyst_confidence": 0.0851,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DXCM",
+      "direction": "Block",
+      "catalyst_confidence": 0.0762,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MDT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "APO",
+      "direction": "Short",
+      "catalyst_confidence": 0.1607,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CRBG",
+      "direction": "Short",
+      "catalyst_confidence": 0.104,
+      "reason": "[propagated from BX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FBIN",
+      "direction": "Short",
+      "catalyst_confidence": 0.1099,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VFC",
+      "direction": "Block",
+      "catalyst_confidence": 0.0589,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UPS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RXO",
+      "direction": "Block",
+      "catalyst_confidence": 0.0857,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AEO",
+      "direction": "Block",
+      "catalyst_confidence": 0.097,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CNH",
+      "direction": "Block",
+      "catalyst_confidence": 0.0736,
+      "reason": "[circuit-breaker:range<0.6] [propagated from ADI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TAP",
+      "direction": "Block",
+      "catalyst_confidence": 0.0884,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MKC] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TEX",
+      "direction": "Block",
+      "catalyst_confidence": 0.0538,
+      "reason": "[circuit-breaker:range<0.6] [propagated from UPS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AMT",
+      "direction": "Block",
+      "catalyst_confidence": 0.053,
+      "reason": "[circuit-breaker:range<0.6] [propagated from RTX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FOLD",
+      "direction": "Block",
+      "catalyst_confidence": 0.0606,
+      "reason": "[circuit-breaker:range<0.6] [propagated from RIVN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DJT",
+      "direction": "Block",
+      "catalyst_confidence": 0.0459,
+      "reason": "[circuit-breaker:range<0.6] [propagated from RIVN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ICLR",
+      "direction": "Block",
+      "catalyst_confidence": 0.043,
+      "reason": "[circuit-breaker:range<0.6] [propagated from RIVN] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AFRM",
+      "direction": "Block",
+      "catalyst_confidence": 0.0772,
+      "reason": "[circuit-breaker:range<0.6] [propagated from SOFI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MAS",
+      "direction": "Short",
+      "catalyst_confidence": 0.1093,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AMCR",
+      "direction": "Short",
+      "catalyst_confidence": 0.1037,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "IP",
+      "direction": "Short",
+      "catalyst_confidence": 0.0961,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "JHX",
+      "direction": "Short",
+      "catalyst_confidence": 0.096,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "WY",
+      "direction": "Short",
+      "catalyst_confidence": 0.0954,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TSCO",
+      "direction": "Short",
+      "catalyst_confidence": 0.0949,
+      "reason": "[propagated from HD] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "UUUU",
+      "direction": "Block",
+      "catalyst_confidence": 0.1401,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CRML",
+      "direction": "Block",
+      "catalyst_confidence": 0.1113,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CCJ",
+      "direction": "Block",
+      "catalyst_confidence": 0.0931,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EQH",
+      "direction": "Block",
+      "catalyst_confidence": 0.0611,
+      "reason": "[circuit-breaker:range<0.6] [propagated from LMND] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ZETA",
+      "direction": "Block",
+      "catalyst_confidence": 0.1038,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EMR",
+      "direction": "Block",
+      "catalyst_confidence": 0.1001,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GTES",
+      "direction": "Block",
+      "catalyst_confidence": 0.0877,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VLY",
+      "direction": "Block",
+      "catalyst_confidence": 0.0831,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PCAR",
+      "direction": "Block",
+      "catalyst_confidence": 0.0818,
+      "reason": "[circuit-breaker:range<0.6] [propagated from IR] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FITB",
+      "direction": "Block",
+      "catalyst_confidence": 0.0941,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FLO",
+      "direction": "Block",
+      "catalyst_confidence": 0.0763,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CPB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BF.B",
+      "direction": "Block",
+      "catalyst_confidence": 0.071,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CPB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CAVA",
+      "direction": "Short",
+      "catalyst_confidence": 0.0782,
+      "reason": "[propagated from CMG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SBUX",
+      "direction": "Short",
+      "catalyst_confidence": 0.0681,
+      "reason": "[propagated from CMG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MRSH",
+      "direction": "Short",
+      "catalyst_confidence": 0.0616,
+      "reason": "[propagated from CMG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CPRT",
+      "direction": "Short",
+      "catalyst_confidence": 0.061,
+      "reason": "[propagated from CMG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EXEL",
+      "direction": "Block",
+      "catalyst_confidence": 0.0402,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MRNA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "WBS",
+      "direction": "Block",
+      "catalyst_confidence": 0.0399,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MRNA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SSRM",
+      "direction": "Block",
+      "catalyst_confidence": 0.0369,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MRNA] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NTNX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1194,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTNT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FROG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1176,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTNT] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "MNDY",
+      "direction": "Short",
+      "catalyst_confidence": 0.1022,
+      "reason": "[propagated from ADBE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "VERX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1522,
+      "reason": "[circuit-breaker:range<0.6] [propagated from GTLB] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GEN",
+      "direction": "Short",
+      "catalyst_confidence": 0.0812,
+      "reason": "[propagated from HPQ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "DBX",
+      "direction": "Short",
+      "catalyst_confidence": 0.0752,
+      "reason": "[propagated from HPQ] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "RNG",
+      "direction": "Block",
+      "catalyst_confidence": 0.0845,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDNS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PSTG",
+      "direction": "Short",
+      "catalyst_confidence": 0.0502,
+      "reason": "[propagated from ANET] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SEI",
+      "direction": "Short",
+      "catalyst_confidence": 0.0449,
+      "reason": "[propagated from ANET] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AXTI",
+      "direction": "Block",
+      "catalyst_confidence": 0.086,
+      "reason": "[circuit-breaker:range<0.6] [propagated from AAOI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BBY",
+      "direction": "Short",
+      "catalyst_confidence": 0.0568,
+      "reason": "[propagated from F] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PK",
+      "direction": "Block",
+      "catalyst_confidence": 0.0444,
+      "reason": "[circuit-breaker:range<0.6] [propagated from HOG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CTVA",
+      "direction": "Block",
+      "catalyst_confidence": 0.0425,
+      "reason": "[circuit-breaker:range<0.6] [propagated from HOG] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SU",
+      "direction": "Block",
+      "catalyst_confidence": 0.0946,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PR",
+      "direction": "Block",
+      "catalyst_confidence": 0.0909,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FTI] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HBM",
+      "direction": "Block",
+      "catalyst_confidence": 0.2071,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FCX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TECK",
+      "direction": "Block",
+      "catalyst_confidence": 0.1292,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FCX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "B",
+      "direction": "Block",
+      "catalyst_confidence": 0.1262,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FCX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "IAG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1274,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KGC",
+      "direction": "Block",
+      "catalyst_confidence": 0.122,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "SVM",
+      "direction": "Block",
+      "catalyst_confidence": 0.1122,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FCX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AG",
+      "direction": "Block",
+      "catalyst_confidence": 0.1387,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FSM",
+      "direction": "Block",
+      "catalyst_confidence": 0.1213,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HYMC",
+      "direction": "Block",
+      "catalyst_confidence": 0.1088,
+      "reason": "[circuit-breaker:range<0.6] [propagated from FCX] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PAAS",
+      "direction": "Block",
+      "catalyst_confidence": 0.1341,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ESI",
+      "direction": "Block",
+      "catalyst_confidence": 0.0688,
+      "reason": "[circuit-breaker:range<0.6] [propagated from MCHP] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "BSY",
+      "direction": "Block",
+      "catalyst_confidence": 0.0948,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDNS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "TWLO",
+      "direction": "Block",
+      "catalyst_confidence": 0.0854,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDNS] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "KSS",
+      "direction": "Block",
+      "catalyst_confidence": 0.1167,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "GAP",
+      "direction": "Block",
+      "catalyst_confidence": 0.1144,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "CPRI",
+      "direction": "Block",
+      "catalyst_confidence": 0.1043,
+      "reason": "[circuit-breaker:range<0.6] [propagated from M] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "PEGA",
+      "direction": "Block",
+      "catalyst_confidence": 0.085,
+      "reason": "[circuit-breaker:range<0.6] [propagated from DUOL] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "HL",
+      "direction": "Block",
+      "catalyst_confidence": 0.1566,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EQX",
+      "direction": "Block",
+      "catalyst_confidence": 0.1391,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "EXK",
+      "direction": "Block",
+      "catalyst_confidence": 0.1288,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "AGI",
+      "direction": "Block",
+      "catalyst_confidence": 0.1233,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "NGD",
+      "direction": "Block",
+      "catalyst_confidence": 0.1227,
+      "reason": "[circuit-breaker:range<0.6] [propagated from CDE] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FIVN",
+      "direction": "Short",
+      "catalyst_confidence": 0.1255,
+      "reason": "[propagated from DOCU] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ONON",
+      "direction": "Short",
+      "catalyst_confidence": 0.0655,
+      "reason": "[propagated from F] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "FLG",
+      "direction": "Short",
+      "catalyst_confidence": 0.049,
+      "reason": "[propagated from F] concept-graph neighbour catalyst"
+    },
+    {
+      "ticker": "ALLY",
+      "direction": "Short",
+      "catalyst_confidence": 0.08,
+      "reason": "[propagated from JEF] concept-graph neighbour catalyst"
+    }
+  ]
+}

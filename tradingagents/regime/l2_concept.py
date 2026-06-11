@@ -22,11 +22,13 @@ from pydantic import BaseModel, Field
 
 from tradingagents.concept_graph import store
 from tradingagents.concept_graph.schemas import Cluster, Membership
+from tradingagents.concept_graph.sectors import normalize_sector
 from tradingagents.market_tools import MarketDataTools, get_market_tools
 
 from .schemas import ConceptSignal, Direction, StockSignal, Strength
+from .tickers import canonical_ticker
 
-DEFAULT_CONCEPT_MODEL = "gemini-3.1-pro"
+DEFAULT_CONCEPT_MODEL = "gemini-3.1-pro-preview"
 
 
 def _days_before(date_str: str, days: int) -> str:
@@ -68,22 +70,26 @@ def propagate_catalysts(
         def neighbors_fn(t: str):  # type: ignore[misc]
             return get_neighbors(as_of_date, t, top_k=top_k, out_dir=out_dir)
 
-    existing = {s.ticker for s in stock_signals}
-    # ticker -> (best_confidence, direction, source_ticker)
+    # Key everything by canonical ticker so a graph neighbour that is just a
+    # share-class sibling of an already-signalled name (e.g. GOOGL vs GOOG) is
+    # not resurrected as a separate propagated signal.
+    existing = {canonical_ticker(s.ticker) for s in stock_signals}
+    # canonical ticker -> (best_confidence, direction, source_ticker)
     seeded: dict[str, tuple[float, Direction, str]] = {}
 
     for s in stock_signals:
         if s.direction is Direction.BLOCK or s.catalyst_confidence < min_source_confidence:
             continue
         for other, weight in neighbors_fn(s.ticker):
-            if other in existing:
+            co = canonical_ticker(other)
+            if co in existing:
                 continue
             boost = min(s.catalyst_confidence * weight * decay, max_boost)
             if boost <= 0:
                 continue
-            prev = seeded.get(other)
+            prev = seeded.get(co)
             if prev is None or boost > prev[0]:
-                seeded[other] = (boost, s.direction, s.ticker)
+                seeded[co] = (boost, s.direction, s.ticker)
 
     propagated = list(stock_signals)
     for ticker, (conf, direction, src) in seeded.items():
@@ -317,8 +323,9 @@ def judge_sectors(
     """
     by_sector: dict[str, list[ConceptSignal]] = defaultdict(list)
     for cv in cluster_verdicts:
-        if cv.parent_sector:
-            by_sector[cv.parent_sector].append(cv)
+        sector = normalize_sector(cv.parent_sector)
+        if sector:
+            by_sector[sector].append(cv)
     if not by_sector:
         return []
 

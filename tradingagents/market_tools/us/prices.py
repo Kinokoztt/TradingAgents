@@ -84,6 +84,37 @@ def load_daily_close(
     return df
 
 
+def load_daily_ohlc(
+    tickers: list[str],
+    start_date: str,
+    end_date: str,
+) -> pd.DataFrame:
+    """Long table ``[ticker, trade_date, open, high, low, close]`` from day_aggs_di.
+
+    Used by the post-hoc evaluator (Module A), which anchors forward returns at
+    the session **open** (the first fill after a pre-market judgment) and exits
+    at later closes. high/low feed the ATR-based volatility band. ``tickers``
+    should include the market proxy (SPY/QQQ).
+    """
+    from google.cloud import bigquery
+
+    sql = f"""
+        SELECT DISTINCT ticker, trade_date, open, high, low, close
+        FROM {fq(DAY_TABLE)}
+        WHERE ticker IN UNNEST(@tickers)
+          AND trade_date BETWEEN @start_date AND @end_date
+        ORDER BY trade_date
+    """
+    params = [
+        bigquery.ArrayQueryParameter("tickers", "STRING", tickers),
+        bigquery.ScalarQueryParameter("start_date", "DATE", start_date),
+        bigquery.ScalarQueryParameter("end_date", "DATE", end_date),
+    ]
+    df = run_query(sql, params)
+    df["trade_date"] = pd.to_datetime(df["trade_date"])
+    return df
+
+
 def load_minute_close(
     tickers: list[str],
     trade_date: str,
