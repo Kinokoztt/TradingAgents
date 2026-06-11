@@ -99,6 +99,21 @@ def build_comovement_edges(
     close = close.tail(config.comovement_window + 1)
 
     returns = compute_returns(close, splits)
+
+    # Fail fast on insufficient price history: with fewer return rows than
+    # comovement_min_periods, every pairwise correlation falls below min_periods,
+    # co-movement collapses to an empty edge table, and the graph silently
+    # degenerates into a co-mention-only graph (fuse_beta weight becomes dead).
+    # This typically means day_aggs_di lacks deep enough history for as_of
+    # (e.g. early-2024 dates against a table that starts 2023-12-26) — surface it
+    # instead of emitting a half-built graph.
+    if len(returns) < config.comovement_min_periods:
+        raise ValueError(
+            f"insufficient price history for co-movement: only {len(returns)} return "
+            f"rows in the window but comovement_min_periods={config.comovement_min_periods}. "
+            f"Backfill day_aggs_di earlier or move the rollback start date forward."
+        )
+
     if config.market_ticker not in returns.columns:
         raise ValueError(
             f"market_ticker '{config.market_ticker}' not found in price data"

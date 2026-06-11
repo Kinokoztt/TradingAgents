@@ -1,0 +1,11 @@
+# Build the regime-gate batch image with the custom deploy/Dockerfile and push
+# to Artifact Registry. Usage:
+#   gcloud builds submit --config deploy/cloudbuild.yaml \
+#     --substitutions _IMAGE=us-central1-docker.pkg.dev/PROJECT/regime/regime-job:latest
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-f", "deploy/Dockerfile", "-t", "${_IMAGE}", "."]
+images:
+  - "${_IMAGE}"
+options:
+  logging: CLOUD_LOGGING_ONLY
