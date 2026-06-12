@@ -27,6 +27,13 @@ NEWS_ENDPOINT = "/v2/reference/news"
 SPLITS_ENDPOINT = "/v3/reference/splits"
 _PAGE_LIMIT = 1000
 
+# Long backfills paginate market-wide news for hundreds of dates, so a single
+# multi-minute TLS/connection blip would otherwise abort the whole run. Give
+# Massive GETs a bigger retry budget than the shared default: 8 retries with
+# backoff capped at 60s ~ a few minutes of outage tolerance before failing loudly.
+_RETRIES = 8
+_MAX_BACKOFF = 60.0
+
 
 def get_api_key() -> str:
     api_key = os.getenv("MASSIVE_API_KEY")
@@ -45,7 +52,10 @@ def _to_rfc3339(date_str: str, end_of_day: bool = False) -> str:
 
 def _get(url: str, params: Optional[dict] = None) -> dict:
     headers = {"Authorization": f"Bearer {get_api_key()}"}
-    response = _http.get_with_retry(requests.get, url, params=params, headers=headers, timeout=30)
+    response = _http.get_with_retry(
+        requests.get, url, params=params, headers=headers, timeout=30,
+        retries=_RETRIES, max_backoff=_MAX_BACKOFF,
+    )
     return response.json()
 
 
