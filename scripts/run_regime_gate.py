@@ -50,13 +50,18 @@ def main() -> int:
                    help="Comma-separated tickers to analyze directly, SKIPPING the S0 market-wide news scan (small test runs)")
     p.add_argument("--out-dir", default=DEFAULT_OUT_DIR, help="Where to write the regime report")
     p.add_argument("--cg-out-dir", default=CG_OUT_DIR, help="Concept graph snapshot dir to read")
-    p.add_argument("--model", default="gemini-3.1-pro-preview")
+    # Per-layer models: deep Pro only for the high-leverage L3 market verdict;
+    # high-volume L1/L2 use a faster flash tier. --model pins all three.
+    p.add_argument("--model", default=None, help="If set, use this model for ALL layers (overrides the per-layer flags)")
+    p.add_argument("--l1-model", default="gemini-3-flash-preview", help="L1 per-stock analysis model")
+    p.add_argument("--concept-model", default="gemini-3.1-pro-preview", help="L2 cluster/sector judge model")
+    p.add_argument("--regime-model", default="gemini-3.1-pro-preview", help="L3 market-regime model (deep thinking)")
 
     # cascade knobs
     p.add_argument("--news-look-back", type=int, default=3)
     p.add_argument("--max-news-tickers", type=int, default=None)
     p.add_argument("--batch-size", type=int, default=20)
-    p.add_argument("--max-workers", type=int, default=2)
+    p.add_argument("--max-workers", type=int, default=6)
     p.add_argument("--no-fundamentals", action="store_true")
     p.add_argument("--no-propagate", action="store_true")
     p.add_argument("--no-llm-concepts", action="store_true", help="Use numeric gate instead of LLM cluster/sector judges")
@@ -94,6 +99,9 @@ def main() -> int:
         news_tickers=news_tickers,
         out_dir=args.cg_out_dir,
         model=args.model,
+        l1_model=args.l1_model,
+        concept_model=args.concept_model,
+        regime_model=args.regime_model,
         news_look_back_days=args.news_look_back,
         max_news_tickers=args.max_news_tickers,
         batch_size=args.batch_size,

@@ -49,3 +49,19 @@ def test_no_cutoff_keeps_all_actuals():
     block = fmp.get_economic_calendar("2026-06-09", "2026-06-16")
     assert "hawkish" in block
     assert "0.5" in _row(block, "PPI")
+
+
+def test_share_class_ticker_normalized_to_hyphen(monkeypatch):
+    # FMP wants BRK-B, not BRK.B (the dotted form 402s). Capture the symbol
+    # actually sent to the API.
+    seen = {}
+
+    def fake_get(endpoint, params):
+        seen[endpoint] = params["symbol"]
+        return []
+
+    monkeypatch.setattr(fmp, "_get", fake_get)
+    fmp.get_financial_statements("BRK.B")
+    assert seen["income-statement"] == "BRK-B"
+    assert seen["balance-sheet-statement"] == "BRK-B"
+    assert seen["cash-flow-statement"] == "BRK-B"

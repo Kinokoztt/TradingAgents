@@ -38,6 +38,18 @@ dependencies = [
 # its tests do not pull in GCP/graph deps unless this layer is used.
 regime = [
     "google-cloud-bigquery>=3.25.0",
+    # Storage Read API: fast bulk .to_dataframe() (the concept graph pulls a full
+    # year of daily bars for the whole universe) and silences the "BigQuery
+    # Storage module not found" REST-fallback warning. Falls back to REST if the
+    # SA lacks bigquery.readsessions.create, so it never breaks the run.
+    "google-cloud-bigquery-storage>=2.25.0",
+    # BigQuery .to_dataframe() needs these for typed (DATE/etc.) columns; the
+    # local conda env had them implicitly, the slim image does not.
+    "db-dtypes>=1.2.0",
+    "pyarrow>=14.0.0",
+    # google_client.py imports `google.genai` directly; usually pulled by
+    # langchain-google-genai, declared explicitly so the slim image is safe.
+    "google-genai>=0.3.0",
     "google-cloud-secret-manager>=2.20.0",
     "google-cloud-storage>=2.18.0",
     "networkx>=3.3",

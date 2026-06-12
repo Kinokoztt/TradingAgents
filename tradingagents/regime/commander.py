@@ -43,14 +43,17 @@ def run_regime_gate(
     tools: MarketDataTools | None = None,
     llm=None,
     provider: str = "google",
-    model: str = "gemini-3.1-pro-preview",
+    model: str | None = None,
+    l1_model: str = "gemini-3-flash-preview",
+    concept_model: str = "gemini-3.1-pro-preview",
+    regime_model: str = "gemini-3.1-pro-preview",
     universe: list[str] | None = None,
     news_tickers: list[str] | None = None,
     out_dir: str | None = None,
     news_look_back_days: int = 3,
     max_news_tickers: int | None = None,
     batch_size: int = 20,
-    max_workers: int = 2,
+    max_workers: int = 6,
     with_fundamentals: bool = True,
     propagate: bool = True,
     use_llm_concepts: bool = True,
@@ -64,6 +67,12 @@ def run_regime_gate(
     toggles the LLM cluster/sector judges (S2/S3); when False the numeric
     ``aggregate_concepts`` gate feeds L3 directly. ``tools``/``llm`` injectable.
     """
+    # Per-layer models: deep Pro reserved for the high-leverage L3 market verdict;
+    # the high-volume L1 (per-stock) and L2 (cluster/sector) use a faster flash
+    # tier. Legacy ``model`` (if set) pins all three to one model.
+    if model:
+        l1_model = concept_model = regime_model = model
+
     tools = tools or get_market_tools(market)
     from tradingagents.concept_graph import store
 
@@ -80,7 +89,7 @@ def run_regime_gate(
             max_tickers=max_news_tickers, market=market, tools=tools, news_end=cutoff_utc,
         )
     stock_signals = analyze_stocks(
-        tickers, as_of_date, market=market, tools=tools, llm=llm, provider=provider, model=model,
+        tickers, as_of_date, market=market, tools=tools, llm=llm, provider=provider, model=l1_model,
         batch_size=batch_size, max_workers=max_workers, with_fundamentals=with_fundamentals,
         news_end=cutoff_utc,
     )
@@ -94,7 +103,7 @@ def run_regime_gate(
     # S2 + S3: theme-cluster then sector verdicts (LLM cascade) or numeric gate.
     if use_llm_concepts:
         cluster_verdicts = judge_clusters(
-            as_of_date, stock_signals, market=market, tools=tools, llm=llm, provider=provider, model=model,
+            as_of_date, stock_signals, market=market, tools=tools, llm=llm, provider=provider, model=concept_model,
             out_dir=snapshot_dir, cluster_map=cluster_map, clusters=clusters, max_workers=max_workers,
             news_end=cutoff_utc,
         )
@@ -103,13 +112,13 @@ def run_regime_gate(
             as_of_date, stock_signals, out_dir=snapshot_dir, cluster_map=cluster_map, clusters=clusters,
         )
     sector_verdicts = judge_sectors(
-        cluster_verdicts, as_of_date, llm=llm, provider=provider, model=model, max_workers=max_workers,
+        cluster_verdicts, as_of_date, llm=llm, provider=provider, model=concept_model, max_workers=max_workers,
     ) if use_llm_concepts else []
 
     # S4: market regime fed by the most-aggregated layer, + circuit breaker.
     top_concepts = sector_verdicts or cluster_verdicts
     report = analyze_regime(
         as_of_date, market=market, concept_signals=top_concepts, stock_signals=stock_signals,
-        llm=llm, provider=provider, model=model, tools=tools, news_end=cutoff_fmp,
+        llm=llm, provider=provider, model=regime_model, tools=tools, news_end=cutoff_fmp,
     )
     return report.model_copy(update={"concept_signals": sector_verdicts + cluster_verdicts})

@@ -136,8 +136,13 @@ def get_financial_statements(symbol: str, period: str = "quarter", limit: int = 
     fetch a deep window (``limit`` quarters ~= 10y) so a rolled-back session still
     finds the quarters that were actually public back then, not just the latest.
     """
+    # FMP uses a hyphen for share-class tickers (BRK-B), while our universe/BQ/
+    # Massive use a dot (BRK.B). Passing the dotted form returns a misleading
+    # 402 "Special Endpoint ... not available under your subscription". Normalize
+    # only here; the dotted ticker stays canonical everywhere else (e.g. BQ).
+    sym = symbol.replace(".", "-")
     return {
-        "income": _get("income-statement", {"symbol": symbol, "period": period, "limit": limit}) or [],
-        "balance": _get("balance-sheet-statement", {"symbol": symbol, "period": period, "limit": limit}) or [],
-        "cashflow": _get("cash-flow-statement", {"symbol": symbol, "period": period, "limit": limit}) or [],
+        "income": _get("income-statement", {"symbol": sym, "period": period, "limit": limit}) or [],
+        "balance": _get("balance-sheet-statement", {"symbol": sym, "period": period, "limit": limit}) or [],
+        "cashflow": _get("cash-flow-statement", {"symbol": sym, "period": period, "limit": limit}) or [],
     }
