@@ -7,6 +7,7 @@ the Secret Manager setup (see dataflows/secrets.py).
 
 from __future__ import annotations
 
+import os
 from typing import Any
 
 import pandas as pd
@@ -30,9 +31,17 @@ def run_query(
     params: list[Any] | None = None,
     project: str = PROJECT,
 ) -> pd.DataFrame:
-    """Run a parameterized query and return a DataFrame."""
+    """Run a parameterized query and return a DataFrame.
+
+    The BigQuery Storage Read API (gRPC) speeds up downloads on Cloud Run, but it
+    does not honor a system HTTP proxy, so behind a local TUN/proxy that maps
+    domains to fake IPs (e.g. 198.18.x.x) it hangs until timeout. Set
+    ``BQ_USE_STORAGE_API=0`` to force the plain REST path in such environments.
+    """
     from google.cloud import bigquery
 
+    use_storage = os.environ.get("BQ_USE_STORAGE_API", "1").lower() not in ("0", "false", "no")
     client = bigquery.Client(project=project)
     job_config = bigquery.QueryJobConfig(query_parameters=params or [])
-    return client.query(sql, job_config=job_config).to_dataframe()
+    result = client.query(sql, job_config=job_config)
+    return result.to_dataframe(create_bqstorage_client=use_storage)
