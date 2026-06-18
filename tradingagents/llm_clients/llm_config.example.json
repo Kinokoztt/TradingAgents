@@ -1,0 +1,7 @@
+{
+  "_README": "Per-machine local-LLM config. Copy to llm_config.json (gitignored) and edit. Any value here is overridden by the matching env var. Leave a key out (or empty) to use its default.",
+  "models_dir": "/mnt/data/models",
+  "runtime_dir": "~/.cache/tradingagents/vllm",
+  "log_dir": "~/.cache/tradingagents/vllm/logs",
+  "default_port": 8000
+}

@@ -24,7 +24,9 @@ model-agnostic), registered into the capability table at import.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
+from . import config
 from .capabilities import ModelCapabilities, register
 
 
@@ -192,6 +194,22 @@ def get_local_model(served_name: str) -> LocalModelSpec:
         known = ", ".join(LOCAL_MODELS)
         raise KeyError(f"unknown local model '{served_name}'. Known: {known}")
     return LOCAL_MODELS[served_name]
+
+
+def models_dir() -> Path:
+    """Local weight store (config ``models_dir`` / ``$TRADINGAGENTS_MODELS_DIR``)."""
+    return config.models_dir()
+
+
+def local_path(spec: LocalModelSpec) -> Path:
+    """Where this model's weights live (served name doubles as the dir name)."""
+    return models_dir() / spec.served_name
+
+
+def is_downloaded(spec: LocalModelSpec) -> bool:
+    """True if the weight directory exists and is non-empty."""
+    p = local_path(spec)
+    return p.is_dir() and any(p.iterdir())
 
 
 # Self-hosted models use vLLM guided decoding -> json_schema structured output.

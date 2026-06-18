@@ -6,15 +6,19 @@ PCIe (no NVLink), Linux.
 
 ## TL;DR — the one thing that matters
 
-The pip `vllm` / `torch` wheels **bundle their own CUDA runtime**. You do NOT
-need a matching system CUDA toolkit (`nvcc`). You only need an NVIDIA **driver**
-new enough for the CUDA version the wheel was built against.
+The pip `vllm` / `torch` wheels **bundle their own CUDA runtime**, so you mostly
+just need an NVIDIA **driver** new enough for the CUDA version the wheel was built
+against. BUT vLLM also JIT-compiles some kernels at startup, which needs two extra
+build tools on PATH: a **C compiler** (`gcc`) and the **CUDA compiler** (`nvcc`,
+from the CUDA toolkit). Without them startup dies with `Failed to find C compiler`
+or `Could not find nvcc`.
 
 - vLLM `0.23.0` ships `torch==2.11.0` built against **CUDA 13** → needs driver
-  **>= 580** (Linux).
+  **>= 580** (Linux), and an `nvcc` whose version matches `torch.version.cuda`.
 - If your driver is older and you can't update it, install a vLLM/torch build
   matching your existing CUDA (see "Driver too old" below) — don't install a
-  system toolkit to "fix" it; that won't change which runtime the wheel uses.
+  system toolkit to "fix" the *runtime*; that won't change which runtime the wheel
+  uses. (The toolkit is still needed separately for `nvcc` JIT, see Step 2.)
 
 ## Prerequisites
 
@@ -54,7 +58,58 @@ If `nvidia-smi` itself fails: the driver isn't installed/loaded — fix that fir
 pip install -e ".[serve]"      # vllm>=0.23.0 + huggingface_hub
 ```
 
-Then confirm PyTorch sees CUDA and **both** GPUs:
+vLLM JIT-compiles GPU kernels at startup, so it needs two build tools on PATH:
+
+1. **C compiler** (`gcc`) for Triton — else `Failed to find C compiler`.
+2. **CUDA compiler** (`nvcc`, from the CUDA toolkit) for quant/MoE kernels — else
+   `Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist`.
+
+```bash
+# 1. C compiler
+sudo apt-get update && sudo apt-get install -y build-essential   # or conda: gcc_linux-64 gxx_linux-64
+which gcc && export CC=$(which gcc)
+
+# 2. nvcc — version MUST match torch.version.cuda
+python -c "import torch; print(torch.version.cuda)"              # e.g. 13.0
+```
+
+You need `nvcc` **and** the CUDA dev headers/libs — flashinfer JIT-compiles
+sampling/attention kernels that `#include <curand.h>`, `<cublas.h>`, etc., so the
+bare compiler is not enough. Install the full toolkit. Avoid conda for this — its
+`cuda-toolkit` / `cuda-nvcc` packages fail to solve when the env already has a
+stale `cudatoolkit` from `defaults`.
+
+**(a) NVIDIA apt repo — recommended, needs sudo:**
+
+```bash
+. /etc/os-release && echo "$ID$VERSION_ID"                      # -> ubuntu2204 / ubuntu2404
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb
+sudo dpkg -i cuda-keyring_1.1-1_all.deb && sudo apt-get update
+sudo apt-get install -y cuda-toolkit-13-0                       # nvcc + all dev headers; match torch.version.cuda
+export CUDA_HOME=/usr/local/cuda-13.0
+export PATH=$CUDA_HOME/bin:$PATH
+ls $CUDA_HOME/include/curand.h                                  # sanity: dev headers present
+```
+
+Do **not** `apt install nvidia-cuda-toolkit` — that's Ubuntu's old bundled nvcc
+(e.g. CUDA 11.x) and will mismatch `torch.version.cuda`.
+
+**(b) pip wheels — no sudo (more fiddly: needs each lib wheel):**
+
+```bash
+pip install nvidia-cuda-nvcc-cu13 nvidia-curand-cu13 nvidia-cublas-cu13 nvidia-cuda-runtime-cu13
+export CUDA_HOME=$(python -c "import nvidia.cuda_nvcc,os; print(os.path.dirname(nvidia.cuda_nvcc.__file__))")
+export PATH=$CUDA_HOME/bin:$PATH
+```
+
+Whichever you pick, verify and persist it:
+
+```bash
+nvcc --version                                                  # version == torch.version.cuda
+```
+
+Persist `CC`, `CUDA_HOME`, and the `PATH` edit in `~/.bashrc` so every serve picks
+them up. Then confirm PyTorch sees CUDA and **both** GPUs:
 
 ```bash
 python -c "import torch; print('torch', torch.__version__); \
@@ -125,12 +180,27 @@ Notes:
 
 ## Step 5 — launch and smoke-test
 
+Two ways to launch. Foreground holds the terminal and streams logs:
+
 ```bash
-# serves on :8000 (already downloaded in Step 4, so this just launches)
 python scripts/model_manager.py serve qwen3-32b --exec
 ```
 
-In another shell, confirm the OpenAI-compatible API is up:
+Background runs it as a detached service, writes logs to a file, and returns once
+the model is ready (recommended for normal use):
+
+```bash
+python scripts/model_manager.py serve qwen3-32b -d     # blocks until healthy, then returns
+python scripts/model_manager.py status                  # model, pid, url, health, log path
+python scripts/model_manager.py stop                    # shut it down
+```
+
+The background service is tracked in `$TRADINGAGENTS_VLLM_RUNTIME_DIR`
+(default `~/.cache/tradingagents/vllm`); logs default to
+`<runtime>/logs/<model>-<port>.log`. Only one model runs at a time — starting a
+different one stops the previous service first.
+
+Confirm the OpenAI-compatible API is up:
 
 ```bash
 curl -s http://localhost:8000/v1/models | python -m json.tool
@@ -140,12 +210,20 @@ curl -s http://localhost:8000/v1/chat/completions \
   -d '{"model":"qwen3-32b","messages":[{"role":"user","content":"reply with OK"}],"max_tokens":8}'
 ```
 
-Then point the app at it and run a real extraction:
+Then run a real extraction. With provider `vllm` the task **auto-starts** the
+right model's service (reusing it if already running), so you can skip the manual
+serve step entirely:
 
 ```bash
-export TRADINGAGENTS_LLM_PROVIDER=vllm
-export VLLM_BASE_URL=http://localhost:8000/v1   # only if calling from another host
+# auto-serves qwen3-32b if not already up, then extracts
 python scripts/extract_events.py --as-of 2026-05-11 --news-tickers AAPL --model qwen3-32b
+
+# auto-serve, then shut the service down when the task finishes
+python scripts/extract_events.py --as-of 2026-05-11 --news-tickers AAPL --model qwen3-32b --stop-after-task
+
+# disable auto-serve and point at an already-running / remote server instead
+python scripts/extract_events.py --as-of 2026-05-11 --news-tickers AAPL --model qwen3-32b \
+  --no-auto-serve --backend-url http://localhost:8000/v1
 ```
 
 ## Troubleshooting
@@ -154,6 +232,10 @@ python scripts/extract_events.py --as-of 2026-05-11 --news-tickers AAPL --model 
 | --- | --- | --- |
 | `torch.cuda.is_available()` is False; `nvidia-smi` works | Driver older than the wheel's CUDA (e.g. driver supports CUDA 12, wheel is CUDA 13) | Update the driver to >= 580, OR install a matching build (below). |
 | `CUDA error: forward compatibility was attempted on non supported HW` / version mismatch | Driver/runtime mismatch | Same as above — align driver with wheel CUDA. |
+| `RuntimeError: Failed to find C compiler` (in EngineCore at `determine_available_memory`) | No `gcc` on PATH; Triton can't JIT GPU kernels | `sudo apt-get install -y build-essential` (or conda `gcc_linux-64 gxx_linux-64`), then `export CC=$(which gcc)`. |
+| `Could not find nvcc and default cuda_home='/usr/local/cuda' doesn't exist` | No `nvcc`; a quant/MoE kernel needs it to JIT | Install the CUDA toolkit matching `torch.version.cuda` via Step 2 (apt `cuda-toolkit-13-0`), then set `CUDA_HOME` + PATH. |
+| flashinfer JIT: `fatal error: curand.h: No such file or directory` (also `cublas.h`, `cuda_runtime.h`) | Only `nvcc` installed, missing CUDA dev headers/libs | Install the FULL toolkit, not just the compiler: `sudo apt-get install -y cuda-toolkit-13-0` (Step 2a). |
+| `LibMambaUnsatisfiableError: ... cuda-nvcc ... cudatoolkit ... conflicts` | Conda can't install CUDA-13 packages over a stale `cudatoolkit` | Skip conda for nvcc — use the apt repo or `pip install nvidia-cuda-nvcc-cu13` (Step 2a/2b). |
 | Startup hangs at "initializing NCCL" / all-reduce | NVLink-only kernels on a PCIe box | Ensure `--disable-custom-all-reduce` (default in serve_vllm.sh). Optionally `export NCCL_P2P_DISABLE=1`. |
 | `CUDA out of memory` at load | Model too big for 48 GB at this quant/context | Use an INT4/AWQ build; lower `MAX_MODEL_LEN`; keep `KV_CACHE_DTYPE=fp8`; reduce `GPU_MEM_UTIL`. |
 | `no kernel image is available for execution` (sm mismatch) | Wheel built without sm_86, or a quant kernel needs Blackwell | Use a standard CUDA wheel; avoid NVFP4 builds (Blackwell-only) on 3090s. |

@@ -14,7 +14,10 @@ Examples:
     python scripts/model_manager.py --models-dir /mnt/data/models download --all --latest
     python scripts/model_manager.py downloaded
     python scripts/model_manager.py serve qwen3-32b            # prints the command
-    python scripts/model_manager.py serve qwen3-32b --exec      # downloads if needed + runs vLLM
+    python scripts/model_manager.py serve qwen3-32b --exec      # foreground (downloads if needed)
+    python scripts/model_manager.py serve qwen3-32b -d          # background service, logs to a file
+    python scripts/model_manager.py status                      # show the running service
+    python scripts/model_manager.py stop                        # stop the running service
 """
 
 from __future__ import annotations
@@ -27,8 +30,15 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from tradingagents.llm_clients import hf_resolver
-from tradingagents.llm_clients.local_models import LocalModelSpec, get_local_model, list_local_models
+from tradingagents.llm_clients import config, hf_resolver, vllm_service
+from tradingagents.llm_clients.local_models import (
+    LocalModelSpec,
+    get_local_model,
+    is_downloaded,
+    list_local_models,
+    local_path,
+    models_dir,
+)
 
 _SERVE_SCRIPT = Path(__file__).resolve().parent / "serve_vllm.sh"
 
@@ -44,19 +54,6 @@ def _repo_for(spec: LocalModelSpec, latest: bool) -> str:
     print(f"resolved latest for '{spec.served_name}': {found.repo_id} "
           f"(downloads={found.downloads}, likes={found.likes}, modified={found.last_modified})")
     return found.repo_id
-
-
-def models_dir() -> Path:
-    return Path(os.environ.get("TRADINGAGENTS_MODELS_DIR", str(Path.home() / "models"))).expanduser()
-
-
-def local_path(spec: LocalModelSpec) -> Path:
-    return models_dir() / spec.served_name
-
-
-def is_downloaded(spec: LocalModelSpec) -> bool:
-    p = local_path(spec)
-    return p.is_dir() and any(p.iterdir())
 
 
 def cmd_list(_args) -> int:
@@ -160,17 +157,50 @@ def cmd_serve(args) -> int:
     pretty = (f"MODEL={model_ref} SERVED_MODEL_NAME={spec.served_name} "
               f"TP_SIZE={spec.tp_size} MAX_MODEL_LEN={env['MAX_MODEL_LEN']} PORT={args.port} "
               f"{_SERVE_SCRIPT}")
-    if not args.exec:
-        print("serve command (run with --exec to launch):\n  " + pretty)
+    if not args.exec and not args.background:
+        print("serve command (run with --exec to launch, or -d for a background service):\n  " + pretty)
         if not is_downloaded(spec):
-            print(f"\nnote: '{spec.served_name}' is not downloaded; --exec will fetch it first.")
+            print(f"\nnote: '{spec.served_name}' is not downloaded; --exec/-d will fetch it first.")
         return 0
 
     if not is_downloaded(spec):
         _download(spec, _repo_for(spec, args.latest))
         env["MODEL"] = str(local_path(spec))
-    print("launching: " + pretty)
+
+    if args.background:
+        state = vllm_service.ensure(
+            spec.served_name, port=args.port, max_model_len=args.max_model_len,
+            log_file=args.log_file, wait_timeout=args.wait_timeout,
+        )
+        print(f"serving '{state.served_name}' (pid {state.pid}) at {state.base_url}")
+        print(f"logs: {state.log_file}")
+        print(f"stop with: python scripts/model_manager.py stop")
+        return 0
+
+    print("launching (foreground): " + pretty)
     return subprocess.call(["bash", str(_SERVE_SCRIPT)], env=env)
+
+
+def cmd_stop(_args) -> int:
+    if vllm_service.stop():
+        print("stopped the running vLLM service")
+    else:
+        print("no vLLM service is running")
+    return 0
+
+
+def cmd_status(_args) -> int:
+    st = vllm_service.status()
+    if st is None:
+        print("no vLLM service is running")
+        return 0
+    healthy = vllm_service.is_healthy(st.base_url, st.served_name)
+    print(f"model:   {st.served_name}")
+    print(f"pid:     {st.pid}")
+    print(f"url:     {st.base_url}")
+    print(f"healthy: {'yes' if healthy else 'not yet (still loading?)'}")
+    print(f"log:     {st.log_file}")
+    return 0
 
 
 def main() -> int:
@@ -208,11 +238,18 @@ def main() -> int:
 
     ps = sub.add_parser("serve", help="print/launch the vLLM serve command for a model")
     ps.add_argument("name")
-    ps.add_argument("--port", type=int, default=8000)
+    ps.add_argument("--port", type=int, default=config.default_port())
     ps.add_argument("--max-model-len", type=int, default=None, help="override the catalog default")
     ps.add_argument("--latest", action="store_true", help="live-resolve the newest matching HF repo if not downloaded")
-    ps.add_argument("--exec", action="store_true", help="actually download (if needed) and launch vLLM")
+    ps.add_argument("--exec", action="store_true", help="actually download (if needed) and launch vLLM in the foreground")
+    ps.add_argument("-d", "--background", action="store_true",
+                    help="launch detached as a background service (logs to a file); reuses/replaces any running model")
+    ps.add_argument("--log-file", default=None, help="background log path (default <runtime>/logs/<name>-<port>.log)")
+    ps.add_argument("--wait-timeout", type=float, default=600.0, help="seconds to wait for readiness in background mode")
     ps.set_defaults(func=cmd_serve)
+
+    sub.add_parser("stop", help="stop the running background vLLM service").set_defaults(func=cmd_stop)
+    sub.add_parser("status", help="show the running background vLLM service").set_defaults(func=cmd_status)
 
     args = p.parse_args()
     if args.models_dir:
