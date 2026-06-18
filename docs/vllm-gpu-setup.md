@@ -91,10 +91,42 @@ without NVLink — that's expected and fine; NCCL falls back to PCIe/host stagin
 Because of this, `serve_vllm.sh` already passes `--disable-custom-all-reduce`
 (the custom all-reduce kernels require NVLink). Leave it on for 3090s.
 
-## Step 4 — launch and smoke-test
+## Step 4 — pick a directory and batch-download the model files
+
+Choose where weights live (a big, fast disk) and pre-fetch the whole catalog
+there in one go, so the later serve step has nothing to download.
 
 ```bash
-# downloads if needed, then serves on :8000
+# 1. point the store at your chosen directory (persists for this shell)
+export TRADINGAGENTS_MODELS_DIR=/mnt/data/models
+
+# 2. see the catalog + rough sizes (and what's already present)
+python scripts/model_manager.py list
+
+# 3. batch-download EVERY catalog model into that directory.
+#    --latest live-resolves the newest matching HF build per model;
+#    --skip-existing avoids re-downloading ones already present.
+python scripts/model_manager.py download --all --latest --skip-existing
+```
+
+Each model lands in `$TRADINGAGENTS_MODELS_DIR/<served-name>/` (the served name
+is reused as the dir name and the vLLM `--served-model-name`). You can also set
+the directory inline without exporting:
+
+```bash
+python scripts/model_manager.py --models-dir /mnt/data/models download --all --latest
+```
+
+Notes:
+- Downloading the full catalog is large (the 70B AWQ builds are ~40 GB each).
+  To grab just a few, download them by name instead:
+  `python scripts/model_manager.py download qwen3-32b --latest`.
+- Verify what landed: `python scripts/model_manager.py downloaded`.
+
+## Step 5 — launch and smoke-test
+
+```bash
+# serves on :8000 (already downloaded in Step 4, so this just launches)
 python scripts/model_manager.py serve qwen3-32b --exec
 ```
 

@@ -11,6 +11,7 @@ Download store: ``$TRADINGAGENTS_MODELS_DIR`` (default ``~/models``).
 Examples:
     python scripts/model_manager.py list
     python scripts/model_manager.py download qwen3-32b
+    python scripts/model_manager.py --models-dir /mnt/data/models download --all --latest
     python scripts/model_manager.py downloaded
     python scripts/model_manager.py serve qwen3-32b            # prints the command
     python scripts/model_manager.py serve qwen3-32b --exec      # downloads if needed + runs vLLM
@@ -99,6 +100,20 @@ def _download(spec: LocalModelSpec, repo_id: str | None = None) -> Path:
 
 
 def cmd_download(args) -> int:
+    if args.all:
+        specs = list_local_models()
+        print(f"batch download of {len(specs)} model(s) into {models_dir()}\n")
+        for i, spec in enumerate(specs, 1):
+            if args.skip_existing and is_downloaded(spec):
+                print(f"[{i}/{len(specs)}] {spec.served_name}: already present, skipping")
+                continue
+            print(f"[{i}/{len(specs)}] {spec.served_name}")
+            _download(spec, _repo_for(spec, args.latest))
+        print("\nbatch download complete")
+        return 0
+    if not args.name:
+        print("error: provide a model name, or --all to download the whole catalog")
+        return 2
     spec = get_local_model(args.name)
     dest = _download(spec, _repo_for(spec, args.latest))
     print(f"done: {dest}")
@@ -160,6 +175,8 @@ def cmd_serve(args) -> int:
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--models-dir", default=None,
+                   help="download store (overrides $TRADINGAGENTS_MODELS_DIR; default ~/models)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("list", help="show the catalog + which are downloaded").set_defaults(func=cmd_list)
@@ -169,8 +186,10 @@ def main() -> int:
     pp.add_argument("name")
     pp.set_defaults(func=cmd_path)
 
-    pd = sub.add_parser("download", help="download a model's weights to the store")
-    pd.add_argument("name")
+    pd = sub.add_parser("download", help="download model weights to the store (one, or --all)")
+    pd.add_argument("name", nargs="?", default=None, help="served name; omit when using --all")
+    pd.add_argument("--all", action="store_true", help="download every model in the catalog")
+    pd.add_argument("--skip-existing", action="store_true", help="with --all, skip already-downloaded models")
     pd.add_argument("--latest", action="store_true", help="live-resolve the newest matching HF repo first")
     pd.set_defaults(func=cmd_download)
 
@@ -196,6 +215,8 @@ def main() -> int:
     ps.set_defaults(func=cmd_serve)
 
     args = p.parse_args()
+    if args.models_dir:
+        os.environ["TRADINGAGENTS_MODELS_DIR"] = args.models_dir
     return args.func(args)
 
 
