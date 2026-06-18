@@ -98,8 +98,7 @@ def resolve_candidates(spec: LocalModelSpec, *, limit: int = 50) -> list[Candida
 
     infos = HfApi().list_models(
         search=effective_query(spec),
-        sort="downloads",
-        direction=-1,
+        sort="downloads",  # descending by default in current huggingface_hub
         limit=limit,
         full=True,  # populate last_modified so the recency signal is visible
     )
@@ -126,8 +125,7 @@ def discover(*, sort: str = "downloads", task: str = "text-generation", limit: i
     infos = HfApi().list_models(
         search=query or None,
         filter=task,
-        sort=_SORT_KEYS.get(sort, sort),
-        direction=-1,
+        sort=_SORT_KEYS.get(sort, sort),  # descending by default in current huggingface_hub
         limit=limit,
         full=True,
     )
