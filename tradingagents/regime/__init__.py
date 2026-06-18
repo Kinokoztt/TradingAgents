@@ -11,13 +11,14 @@ from .evaluate import HorizonScore, Scorecard, WhitelistScore, evaluate_report
 from .events import (
     Certainty,
     EventType,
-    Horizon,
-    Materiality,
     NewsEvent,
     Polarity,
     PriceInStatus,
     SourceReliability,
+    build_event_llms,
     extract_events,
+    extract_ticker_events,
+    fetch_ticker_articles,
 )
 from .l1_stock import analyze_stocks, select_news_tickers
 from .l2_concept import (
@@ -63,12 +64,13 @@ __all__ = [
     "EventType",
     "Certainty",
     "Polarity",
-    "Materiality",
-    "Horizon",
     "SourceReliability",
     "PriceInStatus",
     "NewsEvent",
     "extract_events",
+    "extract_ticker_events",
+    "fetch_ticker_articles",
+    "build_event_llms",
     "classify_source",
     "tag_source_reliability",
     "label_price_in",

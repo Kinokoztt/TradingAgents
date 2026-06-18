@@ -11,8 +11,6 @@ from tradingagents.regime import events as events_mod
 from tradingagents.regime.events import (
     Certainty,
     EventType,
-    Horizon,
-    Materiality,
     NewsEvent,
     Polarity,
     PriceInStatus,
@@ -21,7 +19,13 @@ from tradingagents.regime.events import (
 )
 from tradingagents.regime.price_in import label_price_in, tag_price_in
 from tradingagents.regime.source_reliability import classify_source, tag_source_reliability
-from tradingagents.regime.store import load_events, save_events
+from tradingagents.regime.store import (
+    append_events,
+    load_event_progress,
+    load_events,
+    mark_event_progress,
+    save_events,
+)
 
 pytestmark = pytest.mark.unit
 
@@ -32,11 +36,10 @@ def _make_event(**overrides) -> NewsEvent:
     base = dict(
         ticker="AAPL",
         as_of_date="2026-05-11",
-        event_type=EventType.EARNINGS_BEAT,
-        certainty=Certainty.OFFICIAL,
+        event_type=EventType.EARNINGS,
+        certainty=Certainty.CONFIRMED,
         polarity=Polarity.POSITIVE,
-        materiality=Materiality.HIGH,
-        horizon=Horizon.SHORT_TERM,
+        is_primary=True,
         summary="Q2 EPS above consensus",
     )
     base.update(overrides)
@@ -51,12 +54,12 @@ def test_news_event_defaults_to_unknown_enrichment():
 
 
 def test_news_event_json_roundtrip():
-    ev = _make_event(source="Reuters", published_utc="2026-05-10T13:00:00Z")
+    ev = _make_event(source="Reuters", published_utc="2026-05-10T13:00:00Z", is_primary=False)
     restored = NewsEvent.model_validate_json(ev.model_dump_json())
     assert restored == ev
 
 
-# --- extraction -----------------------------------------------------------
+# --- extraction (two-stage) -----------------------------------------------
 
 _ARTICLES = {
     "AAPL": [
@@ -70,30 +73,34 @@ _ARTICLES = {
 }
 
 
-class _FakeStructured:
-    """Emit one event per article index parsed from the prompt."""
+def _indices(prompt: str) -> list[int]:
+    return [int(i) for i in re.findall(r"^\[(\d+)\]", prompt, flags=re.MULTILINE)]
+
+
+class _FakeStage1:
+    """One event per article index parsed from the stage-1 prompt."""
 
     def invoke(self, prompt):
-        indices = [int(i) for i in re.findall(r"^\[(\d+)\]", prompt, flags=re.MULTILINE)]
-        return events_mod.StockEventExtraction(
-            events=[
-                events_mod.ExtractedEvent(
-                    article_index=i,
-                    event_type=EventType.OTHER,
-                    certainty=Certainty.REPORTED,
-                    polarity=Polarity.NEUTRAL,
-                    materiality=Materiality.MEDIUM,
-                    horizon=Horizon.SHORT_TERM,
-                    summary=f"event {i}",
-                )
-                for i in indices
-            ]
-        )
+        return events_mod.Stage1Extraction(events=[
+            events_mod.Stage1Event(article_index=i, is_primary=True,
+                                   certainty=Certainty.UNCONFIRMED, summary=f"event {i}")
+            for i in _indices(prompt)
+        ])
+
+
+class _FakeStage2:
+    """One label per summary index parsed from the stage-2 prompt."""
+
+    def invoke(self, prompt):
+        return events_mod.Stage2Labels(labels=[
+            events_mod.Stage2Label(index=i, event_type=EventType.OTHER, polarity=Polarity.NEUTRAL)
+            for i in _indices(prompt)
+        ])
 
 
 class _FakeLLM:
-    def with_structured_output(self, _schema):
-        return _FakeStructured()
+    def with_structured_output(self, schema):
+        return _FakeStage1() if schema is events_mod.Stage1Extraction else _FakeStage2()
 
 
 def test_extract_events_attaches_provenance(monkeypatch):
@@ -108,6 +115,9 @@ def test_extract_events_attaches_provenance(monkeypatch):
     assert first.source == "Reuters"
     assert first.published_utc == "2026-05-10T13:00:00Z"
     assert first.article_url == "http://x/1"
+    assert first.event_type is EventType.OTHER
+    assert first.certainty is Certainty.UNCONFIRMED
+    assert first.is_primary is True
 
 
 def test_extract_events_drops_out_of_range_index(monkeypatch):
@@ -116,19 +126,15 @@ def test_extract_events_drops_out_of_range_index(monkeypatch):
         lambda start, end, ticker=None, max_articles=50: _ARTICLES.get(ticker, []),
     )
 
-    class _BadStructured:
+    class _BadStage1:
         def invoke(self, prompt):
-            return events_mod.StockEventExtraction(
-                events=[events_mod.ExtractedEvent(
-                    article_index=99, event_type=EventType.OTHER, certainty=Certainty.REPORTED,
-                    polarity=Polarity.NEUTRAL, materiality=Materiality.LOW, horizon=Horizon.SHORT_TERM,
-                    summary="ghost",
-                )]
-            )
+            return events_mod.Stage1Extraction(events=[events_mod.Stage1Event(
+                article_index=99, is_primary=True, certainty=Certainty.UNCONFIRMED, summary="ghost",
+            )])
 
     class _BadLLM:
-        def with_structured_output(self, _schema):
-            return _BadStructured()
+        def with_structured_output(self, schema):
+            return _BadStage1() if schema is events_mod.Stage1Extraction else _FakeStage2()
 
     out = extract_events(["AAPL"], "2026-05-11", llm=_BadLLM())
     assert out == []  # ghost index dropped, not guessed
@@ -242,9 +248,21 @@ def test_save_load_events_roundtrip(tmp_path):
     evs = [
         _make_event(source="Reuters", source_reliability=SourceReliability.HIGH,
                     price_in=PriceInStatus.NOT_PRICED_IN, post_return=0.2),
-        _make_event(ticker="NVDA", event_type=EventType.GUIDANCE_RAISE),
+        _make_event(ticker="NVDA", event_type=EventType.GUIDANCE),
     ]
     path = save_events("2026-05-11", evs, out_dir=str(tmp_path))
     assert path.endswith("2026-05-11/events.jsonl")
     loaded = load_events("2026-05-11", out_dir=str(tmp_path))
     assert loaded == evs
+
+
+def test_append_events_and_progress_resume(tmp_path):
+    out = str(tmp_path)
+    append_events("2026-05-11", [_make_event(ticker="AAPL")], out_dir=out)
+    mark_event_progress("2026-05-11", "AAPL", out_dir=out)
+    append_events("2026-05-11", [_make_event(ticker="NVDA")], out_dir=out)
+    mark_event_progress("2026-05-11", "NVDA", out_dir=out)
+
+    assert load_event_progress("2026-05-11", out_dir=out) == {"AAPL", "NVDA"}
+    loaded = load_events("2026-05-11", out_dir=out)
+    assert [e.ticker for e in loaded] == ["AAPL", "NVDA"]  # appended in order

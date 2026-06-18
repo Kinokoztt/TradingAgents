@@ -3,18 +3,22 @@
 Instead of asking the LLM to predict a trading *direction* (which no model has
 been shown to do reliably), this layer asks it to do what LLMs are good at:
 turn unstructured news into a *standardized, typed event record* — what kind of
-event, how certain, how material — with NO price prediction. The structured
-output is the standardized corpus that downstream encoding + NN training will
-consume (see docs/nn-pipeline-roadmap.md).
+event, is it about this company, is it confirmed — with NO price prediction. The
+structured output is the corpus that downstream encoding + NN training consumes
+(see docs/nn-pipeline-roadmap.md).
 
-Each ``NewsEvent`` keeps its provenance (source publisher, url, timestamp) so
-two non-LLM enrichers can run on top:
-  - source_reliability.py: tag each event with the publisher's reliability tier.
-  - price_in.py: use the timestamp + real prices to label whether the
-    information was already priced in (or is just a post-hoc recap).
+Two-stage extraction (decomposed for reliability — one big "judge everything at
+once" call degenerates into default labels):
+  - Stage 1 (reading): per-ticker, read the raw articles and emit discrete
+    events with ``is_primary`` (is the ticker the subject), ``certainty`` and a
+    clean one-line ``summary``. Non-events are skipped here.
+  - Stage 2 (classification): classify each clean summary into ``event_type``
+    (reduced taxonomy) + ``polarity``. Classifying a one-liner is far more
+    consistent than classifying a noisy article.
 
-The extractor mirrors l1_stock.analyze_stocks: per-ticker batched LLM calls run
-on a thread pool, structured output via with_structured_output.
+Each ``NewsEvent`` keeps its provenance (publisher, url, timestamp) so two
+non-LLM enrichers run on top: source_reliability.py (publisher tier) and
+price_in.py (was it already priced in, via real prices).
 """
 
 from __future__ import annotations
@@ -31,40 +35,31 @@ DEFAULT_EVENT_MODEL = "qwen3-32b"
 
 
 class EventType(str, Enum):
-    """Closed taxonomy of corporate/market events. Extend deliberately —
-    the encoder one-hots this, so new members change the feature space."""
+    """Reduced, high-signal taxonomy. The encoder one-hots this, so keep it
+    small and well-populated; direction (beat/miss, up/down, approve/probe) is
+    carried by ``polarity`` rather than separate members."""
 
-    EARNINGS_BEAT = "EarningsBeat"
-    EARNINGS_MISS = "EarningsMiss"
-    EARNINGS_INLINE = "EarningsInline"
-    GUIDANCE_RAISE = "GuidanceRaise"
-    GUIDANCE_CUT = "GuidanceCut"
-    ANALYST_UPGRADE = "AnalystUpgrade"
-    ANALYST_DOWNGRADE = "AnalystDowngrade"
-    PRICE_TARGET_CHANGE = "PriceTargetChange"
-    MNA = "MnA"
-    PARTNERSHIP = "Partnership"
-    PRODUCT_LAUNCH = "ProductLaunch"
-    REGULATORY_APPROVAL = "RegulatoryApproval"
-    REGULATORY_PROBE = "RegulatoryProbe"
-    LITIGATION = "Litigation"
-    SETTLEMENT = "Settlement"
-    MANAGEMENT_CHANGE = "ManagementChange"
-    INSIDER_TRANSACTION = "InsiderTransaction"
-    DIVIDEND = "Dividend"
-    BUYBACK = "Buyback"
-    OFFERING = "Offering"
-    MACRO = "Macro"
-    OTHER = "Other"
+    EARNINGS = "Earnings"            # results: beat/miss/inline (polarity = sign)
+    GUIDANCE = "Guidance"            # outlook raise/cut (polarity = sign)
+    ANALYST_ACTION = "AnalystAction"  # upgrade/downgrade/price-target change
+    MNA = "MnA"                      # mergers & acquisitions, takeovers
+    PARTNERSHIP = "Partnership"      # deals, JVs, strategic investments, supply
+    PRODUCT = "Product"             # product / technology / platform launches
+    REGULATORY = "Regulatory"        # approvals / probes / policy actions
+    LEGAL = "Legal"                 # litigation / settlements
+    CAPITAL = "Capital"             # dividend / buyback / offering / raise
+    GOVERNANCE = "Governance"        # management change / insider transactions
+    MACRO = "Macro"                 # sector / market backdrop
+    OTHER = "Other"                 # no discrete company event (opinion/recap)
 
 
 class Certainty(str, Enum):
-    """How firm the information is — distinct from how material it is."""
+    """How firm the information is. Binary on purpose: a finer scale is not
+    reliably separable by the model and adds noise rather than NN signal."""
 
-    RUMORED = "Rumored"      # speculation / unconfirmed report
-    REPORTED = "Reported"    # media reporting, not company-confirmed
-    CONFIRMED = "Confirmed"  # company/counterparty confirmed
-    OFFICIAL = "Official"    # official filing / press release / regulator
+    CONFIRMED = "Confirmed"      # company/counterparty/regulator confirmed, official
+                                 # filing/release, OR a concretely announced deal
+    UNCONFIRMED = "Unconfirmed"  # media report w/o confirmation, opinion, forecast, rumor
 
 
 class Polarity(str, Enum):
@@ -74,18 +69,6 @@ class Polarity(str, Enum):
     NEGATIVE = "Negative"
     NEUTRAL = "Neutral"
     MIXED = "Mixed"
-
-
-class Materiality(str, Enum):
-    HIGH = "High"
-    MEDIUM = "Medium"
-    LOW = "Low"
-
-
-class Horizon(str, Enum):
-    IMMEDIATE = "Immediate"    # impact plays out intraday / next session
-    SHORT_TERM = "ShortTerm"   # days to weeks
-    LONG_TERM = "LongTerm"     # quarters+
 
 
 class SourceReliability(str, Enum):
@@ -107,28 +90,29 @@ class PriceInStatus(str, Enum):
     UNKNOWN = "Unknown"            # no/insufficient price data to judge
 
 
-class ExtractedEvent(BaseModel):
-    """One event as classified by the LLM from a single article.
+class Stage1Event(BaseModel):
+    """Stage-1 (reading) output: one discrete event found in one article."""
 
-    ``article_index`` ties the event back to the source article so the
-    non-LLM enrichers can recover its timestamp/publisher/url. The LLM only
-    fills the classification fields; provenance is attached by code.
-    """
-
-    article_index: int = Field(description="Index of the source article in the provided list")
-    event_type: EventType
+    article_index: int = Field(description="Index [N] of the source article")
+    is_primary: bool = Field(description="True if the ticker is the MAIN subject/driver of this event (not merely mentioned, compared, or held)")
     certainty: Certainty
+    summary: str = Field(description="One neutral line describing what happened (no forecast, no price call)")
+
+
+class Stage1Extraction(BaseModel):
+    events: list[Stage1Event] = Field(default_factory=list)
+
+
+class Stage2Label(BaseModel):
+    """Stage-2 (classification) output: type + polarity for one summary."""
+
+    index: int = Field(description="Index of the summary in the provided list")
+    event_type: EventType
     polarity: Polarity
-    materiality: Materiality
-    horizon: Horizon
-    summary: str = Field(description="One-line standardized summary of the event (no price prediction)")
-    evidence: str = Field(default="", description="Short verbatim snippet from the article supporting the classification")
 
 
-class StockEventExtraction(BaseModel):
-    """LLM structured-output container: all events found across the batch."""
-
-    events: list[ExtractedEvent] = Field(default_factory=list)
+class Stage2Labels(BaseModel):
+    labels: list[Stage2Label] = Field(default_factory=list)
 
 
 class NewsEvent(BaseModel):
@@ -144,10 +128,8 @@ class NewsEvent(BaseModel):
     event_type: EventType
     certainty: Certainty
     polarity: Polarity
-    materiality: Materiality
-    horizon: Horizon
-    summary: str
-    evidence: str = ""
+    is_primary: bool = True
+    summary: str = ""
 
     # provenance (from the source article)
     source: str = ""
@@ -168,9 +150,16 @@ def _days_before(date_str: str, days: int) -> str:
     return (datetime.fromisoformat(date_str[:10]) - timedelta(days=days)).strftime("%Y-%m-%d")
 
 
+def _vendor_sentiment(insights: list[dict], ticker: str) -> str:
+    for insight in insights:
+        if insight.get("ticker", "").upper() == ticker.upper():
+            return f"{insight.get('sentiment', '')} — {insight.get('sentiment_reasoning', '')}".strip(" —")
+    return ""
+
+
 def _format_article(index: int, article: dict, ticker: str) -> str:
-    """Render one article for the prompt. Uses only vendor-provided summary
-    fields (title + description + insights) — we do NOT fetch full bodies."""
+    """Render one article for the stage-1 prompt. Vendor summary fields only
+    (title + description + insights) — we do NOT fetch full bodies."""
     lines = [f"[{index}] {article.get('date', '')} — {article.get('title', '')}"]
     publisher = article.get("publisher")
     if publisher:
@@ -184,66 +173,146 @@ def _format_article(index: int, article: dict, ticker: str) -> str:
     return "\n".join(lines)
 
 
-def _vendor_sentiment(insights: list[dict], ticker: str) -> str:
-    for insight in insights:
-        if insight.get("ticker", "").upper() == ticker.upper():
-            return f"{insight.get('sentiment', '')} — {insight.get('sentiment_reasoning', '')}".strip(" —")
-    return ""
-
-
-def _build_prompt(ticker: str, articles: list[dict]) -> str:
+def _build_stage1_prompt(ticker: str, articles: list[dict]) -> str:
     article_block = "\n\n".join(_format_article(i, a, ticker) for i, a in enumerate(articles))
-    return f"""You are a financial news classifier. Extract the discrete, material EVENTS for {ticker}
-from the articles below. This is a CLASSIFICATION task — do NOT predict price moves, do NOT
-recommend buy/sell, do NOT guess direction of trading.
+    return f"""You are a financial news reader. From the articles below, extract the discrete,
+material EVENTS that concern {ticker}. This is reading + extraction — do NOT predict prices,
+do NOT recommend buy/sell, do NOT guess trading direction.
 
-For each distinct event you find, return one record with:
+For each distinct event emit one record:
 - article_index: the [N] index of the source article
-- event_type: one of the closed taxonomy values
-- certainty: Rumored / Reported / Confirmed / Official
-- polarity: sentiment toward the company (Positive/Negative/Neutral/Mixed) — this is sentiment, NOT a price call
-- materiality: High / Medium / Low (expected importance to the company)
-- horizon: Immediate / ShortTerm / LongTerm
-- summary: one neutral line describing what happened (no forecasting)
-- evidence: a short verbatim snippet supporting the classification
+- is_primary: true ONLY if {ticker} is the MAIN subject/driver of the event. Set false if
+  {ticker} is merely mentioned, compared to a peer, listed as an ETF/fund holding, or is a
+  secondary beneficiary. (Still emit it, just mark is_primary=false.)
+- certainty: "Confirmed" if the company/counterparty/regulator confirmed it, it's an official
+  filing/press release, OR it's a concretely announced transaction (named parties + terms/amount).
+  Otherwise "Unconfirmed" (media report without confirmation, analyst opinion/estimate, forecast,
+  prediction, rumor, speculation).
+- summary: ONE neutral sentence stating what happened — factual, no forecasting, no price call.
 
 Rules:
-- Multiple articles about the SAME event -> still emit per-article records (dedup happens later), but keep them faithful.
-- Pure market-recap articles ("stock rose 5% today on heavy volume") with no underlying catalyst: classify as Macro/Other with Low materiality.
-- If an article has no material event, skip it.
+- SKIP articles with no discrete event: pure opinion/valuation pieces ("is X a buy?", "X looks
+  cheap"), generic stock-price recaps ("X rose 5% on volume"), and ETF/fund composition notes.
+  Do not invent events for them.
+- Multiple articles about the SAME event -> emit one record per article (dedup happens later).
 
 Articles for {ticker}:
 {article_block}
 """
 
 
-def _extract_for_ticker(ticker: str, articles: list[dict], as_of_date: str, structured_llm) -> list[NewsEvent]:
+_EVENT_TYPE_GUIDE = """- Earnings: quarterly/annual results (beat/miss/inline)
+- Guidance: forward outlook raised or cut
+- AnalystAction: analyst upgrade/downgrade or price-target change
+- MnA: merger, acquisition, takeover, divestiture
+- Partnership: commercial deal, JV, strategic investment, supply/customer agreement
+- Product: product / technology / platform launch or major capability announcement
+- Regulatory: regulatory approval, probe/investigation, policy/government action
+- Legal: lawsuit, litigation, settlement
+- Capital: dividend, buyback, share offering, capital raise
+- Governance: executive/board change, insider buying/selling
+- Macro: sector- or market-level backdrop affecting the name
+- Other: anything without a clear discrete company event"""
+
+
+def _build_stage2_prompt(ticker: str, summaries: list[str]) -> str:
+    listing = "\n".join(f"[{i}] {s}" for i, s in enumerate(summaries))
+    return f"""Classify each one-line event about {ticker}. For each, return its index plus:
+- event_type: exactly one of the taxonomy below
+- polarity: sentiment toward {ticker} (Positive/Negative/Neutral/Mixed) — sentiment, NOT a price call
+
+event_type taxonomy:
+{_EVENT_TYPE_GUIDE}
+
+Notes:
+- The taxonomy is direction-agnostic; an earnings miss is still "Earnings" (polarity Negative),
+  an analyst downgrade is "AnalystAction" (polarity Negative).
+- If no taxonomy member fits, use "Other".
+
+Events:
+{listing}
+"""
+
+
+def build_event_llms(
+    *,
+    llm=None,
+    provider: str = "vllm",
+    model: str = DEFAULT_EVENT_MODEL,
+    base_url: str | None = None,
+):
+    """Build the two structured LLMs (stage-1 reader, stage-2 classifier).
+
+    ``llm`` is injectable for tests; otherwise a client is built for
+    ``provider``/``model``/``base_url`` (defaults to the self-hosted vLLM Qwen).
+    Both stages share the same underlying model.
+    """
+    if llm is None:
+        from tradingagents.llm_clients import create_llm_client
+
+        llm = create_llm_client(provider, model, base_url=base_url).get_llm()
+    return llm.with_structured_output(Stage1Extraction), llm.with_structured_output(Stage2Labels)
+
+
+def extract_ticker_events(
+    ticker: str,
+    as_of_date: str,
+    articles: list[dict],
+    stage1_llm,
+    stage2_llm,
+) -> list[NewsEvent]:
+    """Two-stage extraction for ONE ticker's articles. Pure given the LLMs."""
     if not articles:
         return []
-    extraction: StockEventExtraction = structured_llm.invoke(_build_prompt(ticker, articles))
+
+    stage1: Stage1Extraction = stage1_llm.invoke(_build_stage1_prompt(ticker, articles))
+    rows: list[tuple[Stage1Event, dict]] = []
+    for ev in stage1.events:
+        if 0 <= ev.article_index < len(articles):
+            rows.append((ev, articles[ev.article_index]))
+    if not rows:
+        return []
+
+    summaries = [ev.summary for ev, _ in rows]
+    stage2: Stage2Labels = stage2_llm.invoke(_build_stage2_prompt(ticker, summaries))
+    labels = {lab.index: lab for lab in stage2.labels}
+
     events: list[NewsEvent] = []
-    for ev in extraction.events:
-        if ev.article_index < 0 or ev.article_index >= len(articles):
-            continue  # LLM referenced a non-existent article; drop rather than guess
-        src = articles[ev.article_index]
+    for i, (s1, art) in enumerate(rows):
+        lab = labels.get(i)
+        if lab is None:
+            continue  # stage-2 dropped this summary; skip rather than guess a type
         events.append(
             NewsEvent(
                 ticker=ticker,
                 as_of_date=as_of_date,
-                event_type=ev.event_type,
-                certainty=ev.certainty,
-                polarity=ev.polarity,
-                materiality=ev.materiality,
-                horizon=ev.horizon,
-                summary=ev.summary,
-                evidence=ev.evidence,
-                source=src.get("publisher", ""),
-                article_url=src.get("article_url", ""),
-                published_utc=src.get("published_utc", ""),
-                event_date=src.get("date", "") or "",
+                event_type=lab.event_type,
+                certainty=s1.certainty,
+                polarity=lab.polarity,
+                is_primary=s1.is_primary,
+                summary=s1.summary,
+                source=art.get("publisher", ""),
+                article_url=art.get("article_url", ""),
+                published_utc=art.get("published_utc", ""),
+                event_date=art.get("date", "") or "",
             )
         )
     return events
+
+
+def fetch_ticker_articles(
+    ticker: str,
+    as_of_date: str,
+    *,
+    look_back_days: int = 7,
+    news_end: str | None = None,
+    max_articles_per_ticker: int = 50,
+) -> list[dict]:
+    """Fetch one ticker's articles for the extraction window (structured)."""
+    news_start = _days_before(as_of_date, look_back_days)
+    return massive.fetch_news_articles(
+        news_start, news_end or as_of_date, ticker=ticker, max_articles=max_articles_per_ticker
+    )
 
 
 def extract_events(
@@ -259,30 +328,22 @@ def extract_events(
     max_articles_per_ticker: int = 50,
     max_workers: int = 4,
 ) -> list[NewsEvent]:
-    """Extract standardized ``NewsEvent``s for ``tickers`` as of ``as_of_date``.
+    """Extract standardized ``NewsEvent``s for ``tickers`` (batch convenience).
 
-    Per-ticker articles are fetched from Massive (structured: timestamp +
-    publisher + url preserved), classified by the LLM, and enriched later by
-    source_reliability/price_in. ``llm`` is injectable for tests; otherwise a
-    client is built for ``provider``/``model``/``base_url`` (defaults to the
-    self-hosted vLLM Qwen).
+    Per-ticker two-stage extraction runs on a thread pool. For incremental
+    progress / resume, callers should instead drive ``extract_ticker_events``
+    per ticker (see scripts/extract_events.py).
     """
     if not tickers:
         return []
-    news_start = _days_before(as_of_date, look_back_days)
-    news_end = news_end or as_of_date
-
-    if llm is None:
-        from tradingagents.llm_clients import create_llm_client
-
-        llm = create_llm_client(provider, model, base_url=base_url).get_llm()
-    structured_llm = llm.with_structured_output(StockEventExtraction)
+    stage1_llm, stage2_llm = build_event_llms(llm=llm, provider=provider, model=model, base_url=base_url)
 
     def run(ticker: str) -> list[NewsEvent]:
-        articles = massive.fetch_news_articles(
-            news_start, news_end, ticker=ticker, max_articles=max_articles_per_ticker
+        articles = fetch_ticker_articles(
+            ticker, as_of_date, look_back_days=look_back_days, news_end=news_end,
+            max_articles_per_ticker=max_articles_per_ticker,
         )
-        return _extract_for_ticker(ticker, articles, as_of_date, structured_llm)
+        return extract_ticker_events(ticker, as_of_date, articles, stage1_llm, stage2_llm)
 
     results: list[NewsEvent] = []
     with ThreadPoolExecutor(max_workers=max_workers) as pool:

@@ -17,6 +17,7 @@ DEFAULT_OUT_DIR = "regime_gate_output"
 REPORT_FILE = "regime_report.json"
 SCORECARD_FILE = "scorecard.json"
 EVENTS_FILE = "events.jsonl"
+EVENTS_PROGRESS_FILE = "events.progress.json"
 
 
 def save_report(as_of_date: str, report: RegimeReport, out_dir: str = DEFAULT_OUT_DIR) -> str:
@@ -70,3 +71,35 @@ def load_events(as_of_date: str, out_dir: str = DEFAULT_OUT_DIR) -> list[NewsEve
     path = Path(out_dir) / as_of_date / EVENTS_FILE
     with path.open(encoding="utf-8") as f:
         return [NewsEvent.model_validate_json(line) for line in f if line.strip()]
+
+
+def append_events(as_of_date: str, events: list[NewsEvent], out_dir: str = DEFAULT_OUT_DIR) -> str:
+    """Append events to ``events.jsonl`` (create if absent). For incremental,
+    resumable extraction — one ticker's events are flushed as it completes."""
+    day_dir = Path(out_dir) / as_of_date
+    day_dir.mkdir(parents=True, exist_ok=True)
+    path = day_dir / EVENTS_FILE
+    with path.open("a", encoding="utf-8") as f:
+        for ev in events:
+            f.write(json.dumps(ev.model_dump(mode="json"), ensure_ascii=False))
+            f.write("\n")
+    return str(path)
+
+
+def load_event_progress(as_of_date: str, out_dir: str = DEFAULT_OUT_DIR) -> set[str]:
+    """Tickers already processed for this session (for resume). Empty if none."""
+    path = Path(out_dir) / as_of_date / EVENTS_PROGRESS_FILE
+    if not path.exists():
+        return set()
+    return set(json.loads(path.read_text(encoding="utf-8")).get("done", []))
+
+
+def mark_event_progress(as_of_date: str, ticker: str, out_dir: str = DEFAULT_OUT_DIR) -> None:
+    """Record that ``ticker`` finished (read-modify-write; guard with a lock if
+    called from multiple threads)."""
+    day_dir = Path(out_dir) / as_of_date
+    day_dir.mkdir(parents=True, exist_ok=True)
+    path = day_dir / EVENTS_PROGRESS_FILE
+    done = load_event_progress(as_of_date, out_dir)
+    done.add(ticker)
+    path.write_text(json.dumps({"done": sorted(done)}, ensure_ascii=False, indent=2), encoding="utf-8")
