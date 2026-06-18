@@ -3,5 +3,8 @@
   "models_dir": "/mnt/data/models",
   "runtime_dir": "~/.cache/tradingagents/vllm",
   "log_dir": "~/.cache/tradingagents/vllm/logs",
-  "default_port": 8000
+  "default_port": 8000,
+  "gpu_arch": "ampere",
+  "_gpu_arch_help": "ampere (3090/A100) | ada (4090/L40) | hopper (H100) | blackwell. Drives which checkpoint formats are downloadable. ampere blocks fp8 + nvfp4.",
+  "_blocked_quant_terms_help": "Optional override: list of repo-id substrings to exclude when resolving a checkpoint, e.g. [\"fp8\", \"nvfp4\", \"gguf\"]. Leave out to use the gpu_arch defaults."
 }

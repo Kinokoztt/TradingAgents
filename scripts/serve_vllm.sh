@@ -34,10 +34,11 @@ HOST="${HOST:-0.0.0.0}"
 TP_SIZE="${TP_SIZE:-2}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.92}"
-# fp8 KV cache is what makes long context fit on 48 GB; set to "auto" to disable.
-# 3090s (Ampere, sm_86) only support fp8_e5m2 — the plain "fp8" alias means
-# e4m3 (fp8e4nv) which is Hopper/Ada-only and crashes Triton on Ampere.
-KV_CACHE_DTYPE="${KV_CACHE_DTYPE:-fp8_e5m2}"
+# KV cache dtype. "auto" is the safe default: it works for fp8 checkpoints (which
+# reject fp8_e5m2) AND for AWQ/fp16 models. To save VRAM / extend context on an
+# AWQ or fp16 model, set fp8_e5m2 — but NOT for fp8 checkpoints, and NOT plain
+# "fp8" (=e4m3/fp8e4nv) on 3090s (Ampere only supports e5m2; e4m3 is Hopper/Ada).
+KV_CACHE_DTYPE="${KV_CACHE_DTYPE:-auto}"
 # PCIe-connected 3090s have no NVLink, so the custom all-reduce kernels must be
 # disabled (forces NCCL). Set to 0 if your cards are NVLink-bridged.
 DISABLE_CUSTOM_ALL_REDUCE="${DISABLE_CUSTOM_ALL_REDUCE:-1}"

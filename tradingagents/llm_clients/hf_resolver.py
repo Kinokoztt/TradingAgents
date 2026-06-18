@@ -14,6 +14,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
+from . import config
 from .local_models import LocalModelSpec
 
 # Quant tokens we recognize in repo ids, used to derive prefer_terms when a
@@ -66,14 +67,26 @@ def effective_prefer_terms(spec: LocalModelSpec) -> tuple[str, ...]:
     return tuple(t for t in _QUANT_TOKENS if t in spec.quant.lower())
 
 
+def is_repo_compatible(repo_id: str, blocked_terms: tuple[str, ...]) -> bool:
+    """False if the repo id contains any hardware-incompatible quant token."""
+    rid = repo_id.lower()
+    return not any(t in rid for t in blocked_terms)
+
+
 def rank_candidates(
     candidates: list[Candidate],
     match_terms: tuple[str, ...],
     prefer_terms: tuple[str, ...],
+    blocked_terms: tuple[str, ...] = (),
 ) -> list[Candidate]:
-    """Filter to repos matching ALL ``match_terms``, rank by (#prefer hits,
-    downloads, likes). Pure — no network."""
-    matched = [c for c in candidates if all(t in c.repo_id.lower() for t in match_terms)]
+    """Filter to repos matching ALL ``match_terms`` and NONE of ``blocked_terms``
+    (incompatible quant formats), then rank by (#prefer hits, downloads, likes).
+    Pure — no network."""
+    matched = [
+        c for c in candidates
+        if all(t in c.repo_id.lower() for t in match_terms)
+        and is_repo_compatible(c.repo_id, blocked_terms)
+    ]
 
     def score(c: Candidate) -> tuple[int, int, int]:
         rid = c.repo_id.lower()
@@ -92,9 +105,19 @@ def _to_candidate(info) -> Candidate:
     )
 
 
-def resolve_candidates(spec: LocalModelSpec, *, limit: int = 50) -> list[Candidate]:
-    """Live HF search for ``spec``, ranked best-first. Empty if nothing matches."""
+def resolve_candidates(
+    spec: LocalModelSpec, *, limit: int = 50, blocked_terms: tuple[str, ...] | None = None,
+) -> list[Candidate]:
+    """Live HF search for ``spec``, ranked best-first and filtered to checkpoints
+    compatible with this box's GPU. Empty if nothing compatible matches.
+
+    ``blocked_terms`` defaults to ``config.blocked_quant_terms()`` (derived from
+    ``gpu_arch``); pass an explicit tuple to override.
+    """
     from huggingface_hub import HfApi
+
+    if blocked_terms is None:
+        blocked_terms = config.blocked_quant_terms()
 
     infos = HfApi().list_models(
         search=effective_query(spec),
@@ -103,12 +126,16 @@ def resolve_candidates(spec: LocalModelSpec, *, limit: int = 50) -> list[Candida
         full=True,  # populate last_modified so the recency signal is visible
     )
     candidates = [_to_candidate(i) for i in infos]
-    return rank_candidates(candidates, effective_match_terms(spec), effective_prefer_terms(spec))
+    return rank_candidates(
+        candidates, effective_match_terms(spec), effective_prefer_terms(spec), blocked_terms,
+    )
 
 
-def resolve_latest(spec: LocalModelSpec, *, limit: int = 50) -> Candidate | None:
-    """Best current HF repo for ``spec``, or None if the search found nothing."""
-    ranked = resolve_candidates(spec, limit=limit)
+def resolve_latest(
+    spec: LocalModelSpec, *, limit: int = 50, blocked_terms: tuple[str, ...] | None = None,
+) -> Candidate | None:
+    """Best GPU-compatible HF repo for ``spec``, or None if none match."""
+    ranked = resolve_candidates(spec, limit=limit, blocked_terms=blocked_terms)
     return ranked[0] if ranked else None
 
 

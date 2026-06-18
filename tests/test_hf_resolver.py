@@ -9,6 +9,7 @@ from tradingagents.llm_clients.hf_resolver import (
     effective_match_terms,
     effective_prefer_terms,
     effective_query,
+    is_repo_compatible,
     rank_candidates,
 )
 from tradingagents.llm_clients.local_models import LocalModelSpec
@@ -60,3 +61,25 @@ def test_rank_prefers_quant_then_downloads():
 
 def test_rank_empty_when_nothing_matches():
     assert rank_candidates([Candidate("x/y-7b")], ("qwen3",), ()) == []
+
+
+def test_is_repo_compatible():
+    blocked = ("fp8", "nvfp4", "gguf")
+    assert is_repo_compatible("cyankiwi/gemma-4-31B-it-AWQ-4bit", blocked)
+    assert not is_repo_compatible("someone/gemma-4-31B-FP8", blocked)
+    assert not is_repo_compatible("someone/model-NVFP4", blocked)
+    assert not is_repo_compatible("TheBloke/foo-GGUF", blocked)
+
+
+def test_rank_excludes_blocked_quant_formats():
+    cands = [
+        Candidate("a/gemma-4-31b-FP8", downloads=9000),     # incompatible, must be dropped
+        Candidate("b/gemma-4-31b-AWQ-4bit", downloads=50),  # compatible, lower dl but chosen
+    ]
+    ranked = rank_candidates(cands, ("gemma-4", "31b"), ("awq", "4bit"), ("fp8", "nvfp4"))
+    assert [c.repo_id for c in ranked] == ["b/gemma-4-31b-AWQ-4bit"]
+
+
+def test_rank_empty_when_only_blocked_match():
+    cands = [Candidate("a/gemma-4-31b-FP8", downloads=9000)]
+    assert rank_candidates(cands, ("gemma-4", "31b"), (), ("fp8",)) == []

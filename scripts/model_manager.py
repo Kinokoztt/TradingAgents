@@ -44,16 +44,31 @@ _SERVE_SCRIPT = Path(__file__).resolve().parent / "serve_vllm.sh"
 
 
 def _repo_for(spec: LocalModelSpec, latest: bool) -> str:
-    """Repo id to fetch: live-resolved newest match when ``latest``, else pinned."""
-    if not latest:
-        return spec.hf_repo
-    found = hf_resolver.resolve_latest(spec)
-    if found is None:
-        print(f"warning: live search found no match for '{spec.served_name}'; using pinned {spec.hf_repo}")
-        return spec.hf_repo
-    print(f"resolved latest for '{spec.served_name}': {found.repo_id} "
-          f"(downloads={found.downloads}, likes={found.likes}, modified={found.last_modified})")
-    return found.repo_id
+    """Repo id to fetch, restricted to a checkpoint compatible with this GPU.
+
+    With ``latest`` we live-resolve the newest GPU-compatible build; otherwise we
+    use the pinned repo. Either way, if the chosen repo isn't compatible with the
+    configured ``gpu_arch`` we refuse rather than serve an unrunnable checkpoint.
+    """
+    blocked = config.blocked_quant_terms()
+    if latest:
+        found = hf_resolver.resolve_latest(spec)
+        if found is not None:
+            print(f"resolved latest for '{spec.served_name}': {found.repo_id} "
+                  f"(downloads={found.downloads}, likes={found.likes}, modified={found.last_modified})")
+            return found.repo_id
+        print(f"warning: no GPU-compatible repo found live for '{spec.served_name}' "
+              f"(arch={config.gpu_arch()}, blocked={','.join(blocked) or 'none'}); "
+              f"trying the pinned repo")
+
+    if not hf_resolver.is_repo_compatible(spec.hf_repo, blocked):
+        raise SystemExit(
+            f"no GPU-compatible checkpoint for '{spec.served_name}' on arch "
+            f"'{config.gpu_arch()}': pinned {spec.hf_repo} uses a blocked format "
+            f"({','.join(blocked)}). Pick a different model, or adjust gpu_arch / "
+            f"blocked_quant_terms in your llm_config.json."
+        )
+    return spec.hf_repo
 
 
 def cmd_list(_args) -> int:
@@ -122,8 +137,9 @@ def cmd_resolve(args) -> int:
     ranked = hf_resolver.resolve_candidates(spec, limit=args.limit)
     print(f"query='{hf_resolver.effective_query(spec)}'  "
           f"match={hf_resolver.effective_match_terms(spec)}  prefer={hf_resolver.effective_prefer_terms(spec)}")
+    print(f"gpu_arch={config.gpu_arch()}  blocked={','.join(config.blocked_quant_terms()) or 'none'}")
     if not ranked:
-        print("no matching repos found on Hugging Face")
+        print("no GPU-compatible matching repos found on Hugging Face")
         return 0
     print(f"\ntop {min(args.top, len(ranked))} candidates (best first):")
     for c in ranked[: args.top]:

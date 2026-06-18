@@ -78,3 +78,41 @@ def log_dir() -> Path:
 def default_port() -> int:
     """Default vLLM port for serve / auto-serve (default 8000)."""
     return int(_resolve("TRADINGAGENTS_VLLM_PORT", "default_port", 8000))
+
+
+# Quant/checkpoint formats that won't run (well) per GPU generation, matched as
+# case-insensitive substrings of a HF repo id. Used to pick a hardware-adapted
+# checkpoint at download time instead of failing at serve time.
+_BASE_BLOCKED_QUANT = ("gguf",)  # llama.cpp format, not what we serve via vLLM
+_ARCH_BLOCKED_QUANT = {
+    # 3090/A100 etc. (sm_80/86): no hardware fp8; NVFP4 is Blackwell-only.
+    "ampere": ("fp8", "nvfp4"),
+    # 4090/L40 (sm_89): fp8 ok; NVFP4 still Blackwell-only.
+    "ada": ("nvfp4",),
+    "hopper": ("nvfp4",),
+    "blackwell": (),
+}
+
+
+def gpu_arch() -> str:
+    """Target GPU generation for checkpoint selection (default ``ampere`` = 3090)."""
+    return str(_resolve("TRADINGAGENTS_GPU_ARCH", "gpu_arch", "ampere")).lower()
+
+
+def blocked_quant_terms() -> tuple[str, ...]:
+    """Repo-id substrings to exclude when resolving a checkpoint for this box.
+
+    Override directly with the ``blocked_quant_terms`` config key (or the
+    ``TRADINGAGENTS_BLOCKED_QUANT_TERMS`` env, comma-separated); otherwise derived
+    from ``gpu_arch``. Empty/absent override falls back to the arch defaults.
+    """
+    override = _file_config().get("blocked_quant_terms")
+    env = os.environ.get("TRADINGAGENTS_BLOCKED_QUANT_TERMS")
+    if env:
+        terms: tuple[str, ...] = tuple(t.strip() for t in env.split(",") if t.strip())
+    elif override:
+        terms = tuple(override)
+    else:
+        terms = _BASE_BLOCKED_QUANT + _ARCH_BLOCKED_QUANT.get(gpu_arch(), ())
+    # de-dup, lowercase, preserve order
+    return tuple(dict.fromkeys(t.lower() for t in terms))
