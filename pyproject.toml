@@ -56,9 +56,17 @@ regime = [
     "leidenalg>=0.10.2",
     "python-igraph>=0.11.3",
 ]
-# Self-hosted model tooling (scripts/model_manager.py downloader). vLLM itself
-# is installed on the GPU box separately; only the HF downloader is needed here.
+# Self-hosted model tooling for the dev box: just the HF downloader/resolver
+# (scripts/model_manager.py). No CUDA needed, so this installs on macOS too.
 local = [
+    "huggingface_hub>=0.34.0",
+]
+# GPU serving box (2x3090): the vLLM OpenAI-compatible server is our default
+# self-hosted backend. Pinned to a recent floor so a fresh `pip install
+# -e ".[serve]"` pulls a version new enough for the 2026 catalog models
+# (e.g. Gemma 4, Qwen3). vLLM ships CUDA wheels — install this on the GPU host.
+serve = [
+    "vllm>=0.23.0",
     "huggingface_hub>=0.34.0",
 ]
 

@@ -7,6 +7,9 @@
 # (~20GB weights) sharded across both GPUs with tensor parallelism. For a
 # non-quantized option use the MoE Qwen3-30B-A3B-Instruct instead.
 #
+# Install vLLM on the GPU box first (pinned recent floor in the 'serve' extra):
+#   pip install -e ".[serve]"
+#
 # Once running, point TradingAgents at it:
 #   export TRADINGAGENTS_LLM_PROVIDER=vllm
 #   export TRADINGAGENTS_DEEP_THINK_LLM=qwen3-32b
