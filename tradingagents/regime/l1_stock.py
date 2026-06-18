@@ -124,6 +124,7 @@ def analyze_stocks(
     llm=None,
     provider: str = "google",
     model: str = DEFAULT_STOCK_MODEL,
+    base_url: str | None = None,
     batch_size: int = 20,
     max_workers: int = 4,
     look_back_days: int = 7,
@@ -149,7 +150,7 @@ def analyze_stocks(
 
         from tradingagents.llm_clients import create_llm_client
 
-        client = create_llm_client(provider, model, google_api_key=os.getenv("GOOGLE_API_KEY"))
+        client = create_llm_client(provider, model, base_url=base_url, google_api_key=os.getenv("GOOGLE_API_KEY"))
         llm = client.get_llm()
     structured_llm = llm.with_structured_output(_StockSignalBatch)
 

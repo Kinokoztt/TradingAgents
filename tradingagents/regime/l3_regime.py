@@ -89,6 +89,7 @@ def analyze_regime(
     llm=None,
     provider: str = "google",
     model: str = DEFAULT_REGIME_MODEL,
+    base_url: str | None = None,
     tools: MarketDataTools | None = None,
     news_end: str | None = None,
 ) -> RegimeReport:
@@ -115,7 +116,7 @@ def analyze_regime(
 
         from tradingagents.llm_clients import create_llm_client
 
-        client = create_llm_client(provider, model, google_api_key=os.getenv("GOOGLE_API_KEY"))
+        client = create_llm_client(provider, model, base_url=base_url, google_api_key=os.getenv("GOOGLE_API_KEY"))
         llm = client.get_llm()
 
     structured = llm.with_structured_output(_L3Verdict)

@@ -90,6 +90,19 @@ _DEFAULT = ModelCapabilities(
     preferred_structured_method="function_calling",
 )
 
+# Qwen served via a self-hosted vLLM OpenAI-compatible server. vLLM's
+# guided-decoding backend (xgrammar/outlines) implements
+# response_format={"type":"json_schema",...} robustly and without the
+# tool-call-parser launch flags that function_calling would require, so we
+# prefer json_schema for structured output. Matches both the HF id
+# (``Qwen/Qwen3-32B``) and a custom --served-model-name (``qwen3-32b``).
+_QWEN_VLLM = ModelCapabilities(
+    supports_tool_choice=True,
+    supports_json_mode=True,
+    supports_json_schema=True,
+    preferred_structured_method="json_schema",
+)
+
 
 # Exact-ID matches take precedence over pattern matches.
 _BY_ID: dict[str, ModelCapabilities] = {
@@ -114,7 +127,18 @@ _BY_PATTERN: list[tuple[re.Pattern[str], ModelCapabilities]] = [
     (re.compile(r"^deepseek-v\d"), _DEEPSEEK_THINKING),
     (re.compile(r"^deepseek-reasoner"), _DEEPSEEK_THINKING),
     (re.compile(r"^MiniMax-M\d"), _MINIMAX_THINKING),
+    (re.compile(r"^[Qq]wen"), _QWEN_VLLM),
 ]
+
+
+def register(model_id: str, caps: ModelCapabilities) -> None:
+    """Register (or override) capabilities for an exact model id.
+
+    Used by the self-hosted model catalog (local_models.py) so each served
+    model name resolves to json_schema structured output without baking model
+    ids into this module. Exact-id registration wins over pattern matching.
+    """
+    _BY_ID[model_id] = caps
 
 
 def get_capabilities(model_name: str) -> ModelCapabilities:

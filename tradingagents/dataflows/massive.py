@@ -154,9 +154,15 @@ def fetch_splits(
         payload = _get(next_url)
 
 
-def get_news(ticker: str, start_date: str, end_date: str) -> str:
-    """Formatted ticker news block for analyst prompts (vendor interface)."""
-    articles = fetch_news_articles(start_date, end_date, ticker=ticker, max_articles=50)
+def get_news(ticker: str, start_date: str, end_date: str, max_articles: int = 200) -> str:
+    """Formatted ticker news block for analyst prompts (vendor interface).
+
+    ``max_articles`` caps how many of the window's articles are rendered.
+    Massive returns newest-first, so a low cap silently drops older articles
+    in the window — earnings season can blow past 50 for a single name, so the
+    default is generous; lower it explicitly when prompt size matters.
+    """
+    articles = fetch_news_articles(start_date, end_date, ticker=ticker, max_articles=max_articles)
     if not articles:
         return f"No Massive news found for {ticker} between {start_date} and {end_date}."
 

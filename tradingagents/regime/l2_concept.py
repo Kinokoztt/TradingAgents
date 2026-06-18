@@ -193,14 +193,14 @@ def aggregate_concepts(
     return [cs for _, cs in out]
 
 
-def _resolve_structured_llm(llm, provider: str, model: str):
-    """Bind structured output, creating a Gemini client from env if ``llm`` is None."""
+def _resolve_structured_llm(llm, provider: str, model: str, base_url: str | None = None):
+    """Bind structured output, creating a client from env if ``llm`` is None."""
     if llm is None:
         import os
 
         from tradingagents.llm_clients import create_llm_client
 
-        client = create_llm_client(provider, model, google_api_key=os.getenv("GOOGLE_API_KEY"))
+        client = create_llm_client(provider, model, base_url=base_url, google_api_key=os.getenv("GOOGLE_API_KEY"))
         llm = client.get_llm()
     return llm.with_structured_output(_ConceptVerdict)
 
@@ -233,6 +233,7 @@ def judge_clusters(
     llm=None,
     provider: str = "google",
     model: str = DEFAULT_CONCEPT_MODEL,
+    base_url: str | None = None,
     out_dir: str = store.DEFAULT_OUT_DIR,
     cluster_map: dict[str, list[Membership]] | None = None,
     clusters: dict[str, Cluster] | None = None,
@@ -265,7 +266,7 @@ def judge_clusters(
         return []
 
     tools = tools or get_market_tools(market)
-    structured = _resolve_structured_llm(llm, provider, model)
+    structured = _resolve_structured_llm(llm, provider, model, base_url)
     member_signals = _cluster_member_signals(stock_signals, cluster_map, include_secondary)
     news_start = _days_before(as_of_date, look_back_days)
     news_end = news_end or as_of_date
@@ -314,6 +315,7 @@ def judge_sectors(
     llm=None,
     provider: str = "google",
     model: str = DEFAULT_CONCEPT_MODEL,
+    base_url: str | None = None,
     max_workers: int = 4,
 ) -> list[ConceptSignal]:
     """S3: LLM verdict per sector, aggregating its theme verdicts (concurrent).
@@ -329,7 +331,7 @@ def judge_sectors(
     if not by_sector:
         return []
 
-    structured = _resolve_structured_llm(llm, provider, model)
+    structured = _resolve_structured_llm(llm, provider, model, base_url)
 
     def judge(item: tuple[str, list[ConceptSignal]]) -> ConceptSignal:
         sector, themes = item

@@ -56,6 +56,11 @@ regime = [
     "leidenalg>=0.10.2",
     "python-igraph>=0.11.3",
 ]
+# Self-hosted model tooling (scripts/model_manager.py downloader). vLLM itself
+# is installed on the GPU box separately; only the HF downloader is needed here.
+local = [
+    "huggingface_hub>=0.34.0",
+]
 
 [project.scripts]
 tradingagents = "cli.main:app"

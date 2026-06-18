@@ -8,6 +8,17 @@ orchestration agents land next.
 
 from .commander import run_regime_gate
 from .evaluate import HorizonScore, Scorecard, WhitelistScore, evaluate_report
+from .events import (
+    Certainty,
+    EventType,
+    Horizon,
+    Materiality,
+    NewsEvent,
+    Polarity,
+    PriceInStatus,
+    SourceReliability,
+    extract_events,
+)
 from .l1_stock import analyze_stocks, select_news_tickers
 from .l2_concept import (
     aggregate_concepts,
@@ -16,6 +27,7 @@ from .l2_concept import (
     propagate_catalysts,
 )
 from .l3_regime import analyze_regime
+from .price_in import label_price_in, tag_price_in
 from .schemas import (
     ConceptSignal,
     Direction,
@@ -25,6 +37,7 @@ from .schemas import (
     StockSignal,
     Strength,
 )
+from .source_reliability import classify_source, tag_source_reliability
 
 __all__ = [
     "MarketRegime",
@@ -46,4 +59,18 @@ __all__ = [
     "Scorecard",
     "HorizonScore",
     "WhitelistScore",
+    # event extraction + enrichment
+    "EventType",
+    "Certainty",
+    "Polarity",
+    "Materiality",
+    "Horizon",
+    "SourceReliability",
+    "PriceInStatus",
+    "NewsEvent",
+    "extract_events",
+    "classify_source",
+    "tag_source_reliability",
+    "label_price_in",
+    "tag_price_in",
 ]

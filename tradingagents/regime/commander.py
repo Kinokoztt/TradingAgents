@@ -43,6 +43,7 @@ def run_regime_gate(
     tools: MarketDataTools | None = None,
     llm=None,
     provider: str = "google",
+    base_url: str | None = None,
     model: str | None = None,
     l1_model: str = "gemini-3-flash-preview",
     concept_model: str = "gemini-3.1-pro-preview",
@@ -90,7 +91,7 @@ def run_regime_gate(
         )
     stock_signals = analyze_stocks(
         tickers, as_of_date, market=market, tools=tools, llm=llm, provider=provider, model=l1_model,
-        batch_size=batch_size, max_workers=max_workers, with_fundamentals=with_fundamentals,
+        base_url=base_url, batch_size=batch_size, max_workers=max_workers, with_fundamentals=with_fundamentals,
         news_end=cutoff_utc,
     )
 
@@ -104,21 +105,22 @@ def run_regime_gate(
     if use_llm_concepts:
         cluster_verdicts = judge_clusters(
             as_of_date, stock_signals, market=market, tools=tools, llm=llm, provider=provider, model=concept_model,
-            out_dir=snapshot_dir, cluster_map=cluster_map, clusters=clusters, max_workers=max_workers,
-            news_end=cutoff_utc,
+            base_url=base_url, out_dir=snapshot_dir, cluster_map=cluster_map, clusters=clusters,
+            max_workers=max_workers, news_end=cutoff_utc,
         )
     else:
         cluster_verdicts = aggregate_concepts(
             as_of_date, stock_signals, out_dir=snapshot_dir, cluster_map=cluster_map, clusters=clusters,
         )
     sector_verdicts = judge_sectors(
-        cluster_verdicts, as_of_date, llm=llm, provider=provider, model=concept_model, max_workers=max_workers,
+        cluster_verdicts, as_of_date, llm=llm, provider=provider, model=concept_model,
+        base_url=base_url, max_workers=max_workers,
     ) if use_llm_concepts else []
 
     # S4: market regime fed by the most-aggregated layer, + circuit breaker.
     top_concepts = sector_verdicts or cluster_verdicts
     report = analyze_regime(
         as_of_date, market=market, concept_signals=top_concepts, stock_signals=stock_signals,
-        llm=llm, provider=provider, model=regime_model, tools=tools, news_end=cutoff_fmp,
+        llm=llm, provider=provider, model=regime_model, base_url=base_url, tools=tools, news_end=cutoff_fmp,
     )
     return report.model_copy(update={"concept_signals": sector_verdicts + cluster_verdicts})

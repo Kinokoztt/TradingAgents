@@ -50,6 +50,11 @@ def main() -> int:
                    help="Comma-separated tickers to analyze directly, SKIPPING the S0 market-wide news scan (small test runs)")
     p.add_argument("--out-dir", default=DEFAULT_OUT_DIR, help="Where to write the regime report")
     p.add_argument("--cg-out-dir", default=CG_OUT_DIR, help="Concept graph snapshot dir to read")
+    # LLM provider/endpoint. Defaults to Google Gemini; pass --provider vllm
+    # (+ optional --backend-url) to run the whole cascade on a self-hosted model.
+    p.add_argument("--provider", default="google", help="LLM provider (google, vllm, openai, ...)")
+    p.add_argument("--backend-url", default=None,
+                   help="Override the provider base URL (e.g. http://localhost:8000/v1 for self-hosted vLLM)")
     # Per-layer models: deep Pro only for the high-leverage L3 market verdict;
     # high-volume L1/L2 use a faster flash tier. --model pins all three.
     p.add_argument("--model", default=None, help="If set, use this model for ALL layers (overrides the per-layer flags)")
@@ -98,6 +103,8 @@ def main() -> int:
         universe=universe,
         news_tickers=news_tickers,
         out_dir=args.cg_out_dir,
+        provider=args.provider,
+        base_url=args.backend_url,
         model=args.model,
         l1_model=args.l1_model,
         concept_model=args.concept_model,

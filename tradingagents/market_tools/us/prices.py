@@ -115,6 +115,35 @@ def load_daily_ohlc(
     return df
 
 
+def load_daily_ohlcv(
+    tickers: list[str],
+    start_date: str,
+    end_date: str,
+) -> pd.DataFrame:
+    """Long table ``[ticker, trade_date, open, high, low, close, volume]``.
+
+    Same as ``load_daily_ohlc`` but carries ``volume``, which the price-in
+    event study needs to compare pre/post-publication trading activity.
+    """
+    from google.cloud import bigquery
+
+    sql = f"""
+        SELECT DISTINCT ticker, trade_date, open, high, low, close, volume
+        FROM {fq(DAY_TABLE)}
+        WHERE ticker IN UNNEST(@tickers)
+          AND trade_date BETWEEN @start_date AND @end_date
+        ORDER BY trade_date
+    """
+    params = [
+        bigquery.ArrayQueryParameter("tickers", "STRING", tickers),
+        bigquery.ScalarQueryParameter("start_date", "DATE", start_date),
+        bigquery.ScalarQueryParameter("end_date", "DATE", end_date),
+    ]
+    df = run_query(sql, params)
+    df["trade_date"] = pd.to_datetime(df["trade_date"])
+    return df
+
+
 def load_minute_close(
     tickers: list[str],
     trade_date: str,

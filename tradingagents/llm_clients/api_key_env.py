@@ -30,8 +30,11 @@ PROVIDER_API_KEY_ENV: dict[str, Optional[str]] = {
     "minimax":    "MINIMAX_API_KEY",
     "minimax-cn": "MINIMAX_CN_API_KEY",
     "openrouter": "OPENROUTER_API_KEY",
-    # Local runtimes do not authenticate.
+    # Local runtimes do not authenticate by default. A self-hosted vLLM
+    # server only needs a key when launched with --api-key; that optional
+    # key is read from VLLM_API_KEY in the client, not enforced here.
     "ollama":     None,
+    "vllm":       None,
 }
 
 

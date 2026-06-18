@@ -158,32 +158,47 @@ _PROVIDER_BASE_URL = {
     "minimax-cn": "https://api.minimaxi.com/v1",
     "openrouter": "https://openrouter.ai/api/v1",
     "ollama":     "http://localhost:11434/v1",
+    # Self-hosted vLLM OpenAI-compatible server (e.g. 2x3090 box). The
+    # default points at a local server; set VLLM_BASE_URL to reach a
+    # remote host without editing code.
+    "vllm":       "http://localhost:8000/v1",
+}
+
+# Local runtimes that authenticate with an optional, user-supplied key
+# rather than a provider-issued one. vLLM only requires a key when started
+# with --api-key; the openai SDK still wants a non-empty string, so we fall
+# back to a dummy sentinel when the env var is unset.
+_LOCAL_API_KEY_ENV = {
+    "vllm": "VLLM_API_KEY",
 }
 
 
 def _resolve_provider_base_url(provider: str) -> Optional[str]:
     """Default base URL for ``provider``, with env-var overrides where defined.
 
-    Currently only Ollama supports an env-var override (``OLLAMA_BASE_URL``),
-    matching the convention in the broader Ollama tooling ecosystem so users
-    can point at a remote ollama-serve without editing code. The check is
-    call-time, not import-time, so tests that monkeypatch the env after
-    import behave correctly.
+    Ollama (``OLLAMA_BASE_URL``) and vLLM (``VLLM_BASE_URL``) support an
+    env-var override so users can point at a remote server without editing
+    code. The check is call-time, not import-time, so tests that monkeypatch
+    the env after import behave correctly.
     """
     if provider == "ollama":
         env_url = os.environ.get("OLLAMA_BASE_URL")
+        if env_url:
+            return env_url
+    if provider == "vllm":
+        env_url = os.environ.get("VLLM_BASE_URL")
         if env_url:
             return env_url
     return _PROVIDER_BASE_URL.get(provider)
 
 
 class OpenAIClient(BaseLLMClient):
-    """Client for OpenAI, Ollama, OpenRouter, and xAI providers.
+    """Client for OpenAI, Ollama, vLLM, OpenRouter, and xAI providers.
 
     For native OpenAI models, uses the Responses API (/v1/responses) which
     supports reasoning_effort with function tools across all model families
-    (GPT-4.1, GPT-5). Third-party compatible providers (xAI, OpenRouter,
-    Ollama) use standard Chat Completions.
+    (GPT-4.1, GPT-5). Third-party / self-hosted compatible providers (xAI,
+    OpenRouter, Ollama, vLLM) use standard Chat Completions.
     """
 
     def __init__(
@@ -218,7 +233,13 @@ class OpenAIClient(BaseLLMClient):
                         f"(e.g. add {api_key_env}=your_key to your .env file)."
                     )
             else:
-                llm_kwargs["api_key"] = "ollama"
+                # Local runtimes: use the optional user-supplied key if set
+                # (vLLM started with --api-key), else a dummy sentinel since
+                # the openai SDK rejects an empty api_key.
+                local_key_env = _LOCAL_API_KEY_ENV.get(self.provider)
+                llm_kwargs["api_key"] = (
+                    os.environ.get(local_key_env) if local_key_env else None
+                ) or "EMPTY"
         elif self.base_url:
             llm_kwargs["base_url"] = self.base_url
 

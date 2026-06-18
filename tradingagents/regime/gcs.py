@@ -41,3 +41,27 @@ def upload_scorecard(
 ) -> str:
     """Upload the local scorecard for ``session`` to GCS. Returns the gs:// URI."""
     return _upload(session, SCORECARD_FILE, bucket, prefix, out_dir, project)
+
+
+def download_report(
+    session: str,
+    bucket: str,
+    prefix: str = "regime_gate",
+    out_dir: str = DEFAULT_OUT_DIR,
+    project: str | None = None,
+) -> Path:
+    """Download a report from GCS into the local layout. Returns the local path.
+
+    Reports live on GCS; this materializes one locally so the evaluator can score
+    it. Fails loudly if the report is absent on GCS.
+    """
+    from google.cloud import storage
+
+    local = Path(out_dir) / session / REPORT_FILE
+    local.parent.mkdir(parents=True, exist_ok=True)
+    blob_path = f"{prefix}/{session}/{REPORT_FILE}" if prefix else f"{session}/{REPORT_FILE}"
+    blob = storage.Client(project=project).bucket(bucket).blob(blob_path)
+    if not blob.exists():
+        raise FileNotFoundError(f"regime report missing on GCS: gs://{bucket}/{blob_path}")
+    blob.download_to_filename(str(local))
+    return local
