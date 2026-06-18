@@ -52,6 +52,18 @@ from tradingagents.regime.store import (
 )
 
 
+def _previous_session(as_of: str, tools, proxy: str) -> str:
+    """Last trading session strictly before ``as_of`` (from the proxy's bars)."""
+    from datetime import datetime, timedelta
+
+    lo = (datetime.fromisoformat(as_of[:10]) - timedelta(days=12)).strftime("%Y-%m-%d")
+    df = tools.load_daily_ohlc([proxy], lo, as_of)
+    days = [d.strftime("%Y-%m-%d") for d in sorted(df["trade_date"].unique()) if d.strftime("%Y-%m-%d") < as_of]
+    if not days:
+        raise SystemExit(f"no {proxy} trading session found before {as_of} (needed for the incremental window)")
+    return days[-1]
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--as-of", required=True, help="Trading session YYYY-MM-DD (names the output dir)")
@@ -70,10 +82,21 @@ def main() -> int:
     p.add_argument("--stop-after-task", action="store_true",
                    help="Shut the auto-started vLLM service down when the task finishes")
 
-    p.add_argument("--news-look-back", type=int, default=7)
+    p.add_argument("--window", choices=["incremental", "lookback"], default="incremental",
+                   help="incremental (default): news in (prev session cutoff, this session cutoff] — gapless, "
+                        "no cross-day duplication. lookback: a fixed --news-look-back day window (overlaps daily).")
+    p.add_argument("--proxy", default="SPY", help="Ticker whose bars define the trading calendar (for the prev session)")
+    p.add_argument("--news-start", default=None,
+                   help="Explicit window start (RFC3339 instant or YYYY-MM-DD); overrides --window")
+    p.add_argument("--news-look-back", type=int, default=7, help="Window length in days when --window lookback")
     p.add_argument("--max-news-tickers", type=int, default=None)
-    p.add_argument("--max-articles-per-ticker", type=int, default=50)
+    p.add_argument("--max-articles-per-ticker", type=int, default=50,
+                   help="Cap articles per ticker (bounds prompt size / generation time)")
     p.add_argument("--max-workers", type=int, default=4)
+    p.add_argument("--timeout", type=float, default=300.0,
+                   help="Per-request LLM timeout in seconds (a stuck request fails instead of hanging)")
+    p.add_argument("--max-tokens", type=int, default=8192,
+                   help="Max generated tokens per LLM call (bounds the unbounded event list)")
     p.add_argument("--no-resume", action="store_true", help="Ignore prior progress and re-extract all tickers")
     p.add_argument("--no-price-in", action="store_true", help="Skip price-in labeling (no BigQuery price reads)")
     args = p.parse_args()
@@ -83,9 +106,21 @@ def main() -> int:
     tools = get_market_tools(args.market)
     cutoff_utc, _ = premarket_cutoffs(as_of)
 
+    # News window. Default "incremental": (prev session cutoff, this session
+    # cutoff] — each article is processed exactly once across a daily backfill,
+    # no cross-day duplication. "lookback" keeps a fixed N-day window (overlaps).
+    if args.news_start:
+        news_start = args.news_start
+    elif args.window == "incremental":
+        news_start = premarket_cutoffs(_previous_session(as_of, tools, args.proxy))[0]
+    else:
+        news_start = None  # select/fetch fall back to as_of - look_back_days
+    window_desc = f"{news_start or f'{as_of}-{args.news_look_back}d'} .. {cutoff_utc}"
+    print(f"news window [{args.window}]: {window_desc}")
+
     # Ticker universe: same candidate pool the concept graph uses
     # (tools.load_candidate_universe via select_news_tickers), restricted to
-    # names with news in the look-back window.
+    # names with news in the window.
     if args.news_tickers:
         tickers = [t.strip().upper() for t in args.news_tickers.split(",") if t.strip()]
     else:
@@ -94,7 +129,8 @@ def main() -> int:
             universe = [t.strip().upper() for t in args.tickers.split(",") if t.strip()]
         tickers = select_news_tickers(
             as_of, look_back_days=args.news_look_back, universe=universe,
-            max_tickers=args.max_news_tickers, market=args.market, tools=tools, news_end=cutoff_utc,
+            max_tickers=args.max_news_tickers, market=args.market, tools=tools,
+            news_start=news_start, news_end=cutoff_utc,
         )
 
     done = set() if args.no_resume else load_event_progress(as_of, out_dir=args.out_dir)
@@ -117,11 +153,15 @@ def main() -> int:
         auto_served = True
         print(f"vLLM ready at {base_url} (pid {state.pid}, log {state.log_file})")
 
-    stage1_llm, stage2_llm = build_event_llms(provider=args.provider, model=args.model, base_url=base_url)
+    stage1_llm, stage2_llm = build_event_llms(
+        provider=args.provider, model=args.model, base_url=base_url,
+        timeout=args.timeout, max_tokens=args.max_tokens,
+    )
 
     def work(ticker: str):
         articles = fetch_ticker_articles(
-            ticker, as_of, look_back_days=args.news_look_back, news_end=cutoff_utc,
+            ticker, as_of, look_back_days=args.news_look_back,
+            news_start=news_start, news_end=cutoff_utc,
             max_articles_per_ticker=args.max_articles_per_ticker,
         )
         evs = extract_ticker_events(ticker, as_of, articles, stage1_llm, stage2_llm)

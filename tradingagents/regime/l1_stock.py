@@ -40,20 +40,24 @@ def select_news_tickers(
     market: str = "US",
     tools: MarketDataTools | None = None,
     max_articles: int = 20000,
+    news_start: str | None = None,
     news_end: str | None = None,
 ) -> list[str]:
     """Tickers with recent news, restricted to the candidate universe.
 
     Ranked by mention frequency (most-covered first). ``max_tickers`` caps the
-    list. ``news_end`` (RFC3339 instant) caps news at a pre-market cutoff; defaults
-    to ``as_of_date`` (whole day). ``universe``/``tools`` are injectable for tests.
+    list. ``news_start`` (RFC3339 instant or date) overrides the look-back window
+    start — pass the previous session's cutoff for gapless incremental scans;
+    defaults to ``as_of - look_back_days``. ``news_end`` (RFC3339 instant) caps
+    news at a pre-market cutoff; defaults to ``as_of_date`` (whole day).
+    ``universe``/``tools`` are injectable for tests.
     """
     tools = tools or get_market_tools(market)
     if universe is None:
         universe = tools.load_candidate_universe()
     universe_set = set(universe)
 
-    start = _days_before(as_of_date, look_back_days)
+    start = news_start or _days_before(as_of_date, look_back_days)
     articles = tools.load_news_articles(start, news_end or as_of_date, max_articles=max_articles)
 
     counts: Counter[str] = Counter()

@@ -240,17 +240,28 @@ def build_event_llms(
     provider: str = "vllm",
     model: str = DEFAULT_EVENT_MODEL,
     base_url: str | None = None,
+    timeout: float = 180.0,
+    max_tokens: int = 4096,
+    max_retries: int = 1,
 ):
     """Build the two structured LLMs (stage-1 reader, stage-2 classifier).
 
     ``llm`` is injectable for tests; otherwise a client is built for
     ``provider``/``model``/``base_url`` (defaults to the self-hosted vLLM Qwen).
     Both stages share the same underlying model.
+
+    ``timeout``/``max_tokens`` are set on purpose: without them a single request
+    can hang forever (no timeout) or generate up to the context limit (the event
+    list is unbounded), which stalls the whole pool. Qwen thinking is disabled so
+    no reasoning tokens are spent before the structured JSON.
     """
     if llm is None:
         from tradingagents.llm_clients import create_llm_client
 
-        llm = create_llm_client(provider, model, base_url=base_url).get_llm()
+        client_kwargs: dict = {"timeout": timeout, "max_tokens": max_tokens, "max_retries": max_retries}
+        if "qwen" in model.lower():
+            client_kwargs["extra_body"] = {"chat_template_kwargs": {"enable_thinking": False}}
+        llm = create_llm_client(provider, model, base_url=base_url, **client_kwargs).get_llm()
     return llm.with_structured_output(Stage1Extraction), llm.with_structured_output(Stage2Labels)
 
 
@@ -305,13 +316,19 @@ def fetch_ticker_articles(
     as_of_date: str,
     *,
     look_back_days: int = 7,
+    news_start: str | None = None,
     news_end: str | None = None,
     max_articles_per_ticker: int = 50,
 ) -> list[dict]:
-    """Fetch one ticker's articles for the extraction window (structured)."""
-    news_start = _days_before(as_of_date, look_back_days)
+    """Fetch one ticker's articles for the extraction window (structured).
+
+    ``news_start`` (RFC3339 instant/date) overrides the window start; pass the
+    previous session's cutoff for a gapless, non-overlapping incremental window.
+    Defaults to ``as_of - look_back_days``.
+    """
+    start = news_start or _days_before(as_of_date, look_back_days)
     return massive.fetch_news_articles(
-        news_start, news_end or as_of_date, ticker=ticker, max_articles=max_articles_per_ticker
+        start, news_end or as_of_date, ticker=ticker, max_articles=max_articles_per_ticker
     )
 
 

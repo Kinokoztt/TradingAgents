@@ -53,9 +53,12 @@ def _extract_cmd(session: str, args) -> list[str]:
         sys.executable, _SCRIPT, "--as-of", session,
         "--market", args.market, "--out-dir", args.out_dir,
         "--provider", args.provider, "--model", args.model, "--port", str(args.port),
+        "--window", args.window, "--proxy", args.proxy,
         "--news-look-back", str(args.news_look_back),
         "--max-articles-per-ticker", str(args.max_articles_per_ticker),
         "--max-workers", str(args.max_workers),
+        "--timeout", str(args.timeout),
+        "--max-tokens", str(args.max_tokens),
     ]
     if args.backend_url:
         cmd += ["--backend-url", args.backend_url]
@@ -85,10 +88,14 @@ def main() -> int:
     p.add_argument("--stop-after-task", action="store_true",
                    help="Stop the auto-started vLLM service after the whole range finishes")
 
-    p.add_argument("--news-look-back", type=int, default=7)
+    p.add_argument("--window", choices=["incremental", "lookback"], default="incremental",
+                   help="incremental (default): gapless (prev cutoff, this cutoff] per session, no duplication")
+    p.add_argument("--news-look-back", type=int, default=7, help="Window length when --window lookback")
     p.add_argument("--max-news-tickers", type=int, default=None)
     p.add_argument("--max-articles-per-ticker", type=int, default=50)
     p.add_argument("--max-workers", type=int, default=4)
+    p.add_argument("--timeout", type=float, default=300.0)
+    p.add_argument("--max-tokens", type=int, default=8192)
     p.add_argument("--no-price-in", action="store_true")
     p.add_argument("--no-resume", action="store_true", help="Re-extract every ticker (ignore per-session progress)")
 
