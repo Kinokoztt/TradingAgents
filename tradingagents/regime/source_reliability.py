@@ -14,6 +14,8 @@ Tiers reflect the FMP ``news/stock`` publisher mix; opinion mills (Motley Fool,
 
 from __future__ import annotations
 
+import re
+
 from .events import Certainty, NewsEvent, SourceReliability
 
 # Tier assignments (keys matched lowercased). HIGH = primary wires + top-tier
@@ -103,6 +105,56 @@ def certainty_for_source(publisher: str) -> Certainty:
     if any(wire in key for wire in _PRIMARY_WIRES):
         return Certainty.CONFIRMED
     return Certainty.UNCONFIRMED
+
+
+# Securities class-action *solicitation* press releases flood the wires
+# (GlobeNewswire/PRNewswire): law firms blast near-duplicate "lead plaintiff
+# deadline / investors urged to contact" notices for every name that dropped.
+# They are promotional, not company disclosures, get marked Confirmed (wire),
+# and duplicate heavily — pure noise for the event corpus. Drop them pre-LLM.
+# The signatures below essentially never appear in genuine legal *reporting*
+# (e.g. a DOJ/SEC action or a trial covered by Reuters), so real legal events
+# are kept.
+_LAW_FIRMS: tuple[str, ...] = (
+    "rosen law", "hagens berman", "pomerantz", "bragar eagel", "levi & korsinsky",
+    "levi and korsinsky", "berger montague", "glancy prongay", "robbins geller",
+    "kessler topaz", "faruqi", "bernstein liebhard", "kirby mcinerney", "schall law",
+    "johnson fistel", "kahn swick", "scott+scott", "block & leviton", "gross law",
+    "howard g. smith", "holzer", "kaskela", "bronstein, gewirtz", "wolf haldenstein",
+    "labaton", "pawar law", "thornton law", "the law offices of", "rigrodsky",
+)
+
+_SOLICITATION_RE = re.compile(
+    r"lead plaintiff"
+    r"|class period"
+    r"|securities class action"
+    r"|investors?\s+who\s+(?:purchased|bought|acquired)"
+    r"|investors?\s+(?:are\s+)?(?:encouraged|urged|reminded|notified|alerted)"
+    r"|(?:encourages|urges|reminds|notifies|alerts)\s+(?:[\w.,&'\- ]+?\s+)?investors",
+    re.IGNORECASE,
+)
+
+
+def is_litigation_solicitation(text: str) -> bool:
+    """True if ``text`` (article title + snippet) is a securities class-action
+    solicitation / shareholder-alert press release (noise to drop pre-LLM).
+
+    Three nets: (1) a named plaintiff law firm, (2) explicit solicitation phrasing
+    (lead plaintiff / investors urged to contact / class period), (3) the
+    securities-class-action genre itself ("class action" + "securit*"/"10b-5").
+    Genuine legal *reporting* — a DOJ/SEC charge, a product-liability or injury
+    suit, an antitrust trial — matches none of these and is kept.
+    """
+    if not text:
+        return False
+    low = text.lower()
+    if any(firm in low for firm in _LAW_FIRMS):
+        return True
+    if _SOLICITATION_RE.search(text):
+        return True
+    if "class action" in low and ("securit" in low or "10b-5" in low):
+        return True
+    return False
 
 
 def tag_source_reliability(events: list[NewsEvent]) -> list[NewsEvent]:

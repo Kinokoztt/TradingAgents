@@ -345,7 +345,7 @@ def fetch_ticker_articles(
     else:
         articles = massive.fetch_news_articles(start, end, ticker=ticker, max_articles=raw_cap)
 
-    from .source_reliability import meets_min_tier
+    from .source_reliability import is_litigation_solicitation, meets_min_tier
 
     kept: list[dict] = []
     for a in articles:
@@ -355,6 +355,9 @@ def fetch_ticker_articles(
         if news_end and pub and pub > news_end:
             continue
         if min_source_tier is not None and not meets_min_tier(a.get("publisher", ""), min_source_tier):
+            continue
+        # Drop law-firm class-action solicitation / shareholder-alert wire spam.
+        if is_litigation_solicitation(f"{a.get('title', '')} {a.get('description', '')}"):
             continue
         kept.append(a)
         if len(kept) >= max_articles_per_ticker:

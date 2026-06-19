@@ -199,6 +199,46 @@ def test_certainty_for_source_rule():
     assert meets_min_tier("Some Random Blog", SourceReliability.MEDIUM) is False
 
 
+def test_is_litigation_solicitation():
+    from tradingagents.regime.source_reliability import is_litigation_solicitation
+
+    # law-firm shareholder-alert / class-action solicitation -> drop
+    assert is_litigation_solicitation(
+        "ROSEN, A LEADING LAW FIRM, Encourages Camping World Investors to Secure Counsel "
+        "Before Important Lead Plaintiff Deadline")
+    assert is_litigation_solicitation(
+        "Berger Montague: ODDITY Tech investors who purchased shares are encouraged to contact")
+    assert is_litigation_solicitation("Investors are reminded of the class period and lead plaintiff deadline")
+    # securities class-action genre (even when paraphrased without an explicit cue)
+    assert is_litigation_solicitation(
+        "A class action lawsuit has been filed against Oddity Tech for violations of the "
+        "Securities Exchange Act of 1934")
+    # genuine legal reporting -> keep
+    assert not is_litigation_solicitation(
+        "Meta returns to court in New Mexico for an ongoing child safety trial")
+    assert not is_litigation_solicitation("SEC charges company executives with accounting fraud")
+    assert not is_litigation_solicitation(
+        "A worker injured in a Kinder Morgan pipeline explosion filed a lawsuit against the company")
+    assert not is_litigation_solicitation("")
+
+
+def test_fetch_ticker_articles_drops_solicitation(monkeypatch):
+    arts = [
+        {"date": "2026-05-04", "title": "Pomerantz Law Firm reminds investors of CWH class action deadline",
+         "publisher": "GlobeNewswire", "description": "lead plaintiff deadline", "insights": [],
+         "published_utc": "2026-05-04T12:00:00Z", "article_url": "u1"},
+        {"date": "2026-05-04", "title": "Apple beats earnings estimates", "publisher": "Reuters",
+         "description": "results topped consensus", "insights": [],
+         "published_utc": "2026-05-04T12:00:00Z", "article_url": "u2"},
+    ]
+    monkeypatch.setattr(
+        events_mod.massive, "fetch_news_articles",
+        lambda start, end, ticker=None, max_articles=50: arts,
+    )
+    kept = events_mod.fetch_ticker_articles("AAPL", "2026-05-04", source="massive", min_source_tier=None)
+    assert [a["article_url"] for a in kept] == ["u2"]  # solicitation dropped, real news kept
+
+
 def test_tag_source_reliability_in_place():
     evs = [_make_event(source="Reuters"), _make_event(source="Insider Monkey")]
     tag_source_reliability(evs)
