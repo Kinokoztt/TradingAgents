@@ -154,6 +154,10 @@ def is_litigation_solicitation(text: str) -> bool:
         return True
     if "class action" in low and ("securit" in low or "10b-5" in low):
         return True
+    # private law firm announcing an "investigation" = solicitation prelude.
+    # ("SEC/DOJ is investigating" has no llp/law-firm token, so it is kept.)
+    if "investigat" in low and ("llp" in low or "law firm" in low or "law offices" in low):
+        return True
     return False
 
 

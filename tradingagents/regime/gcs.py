@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .store import DEFAULT_OUT_DIR, REPORT_FILE, SCORECARD_FILE
+from .store import CATALYSTS_FILE, DEFAULT_OUT_DIR, EVENTS_FILE, REPORT_FILE, SCORECARD_FILE
 
 
 def _upload(session: str, filename: str, bucket: str, prefix: str, out_dir: str, project: str | None) -> str:
@@ -41,6 +41,28 @@ def upload_scorecard(
 ) -> str:
     """Upload the local scorecard for ``session`` to GCS. Returns the gs:// URI."""
     return _upload(session, SCORECARD_FILE, bucket, prefix, out_dir, project)
+
+
+def upload_events(
+    session: str,
+    bucket: str,
+    prefix: str = "event_corpus",
+    out_dir: str = DEFAULT_OUT_DIR,
+    project: str | None = None,
+) -> str:
+    """Upload the news ``events.jsonl`` for ``session`` to GCS."""
+    return _upload(session, EVENTS_FILE, bucket, prefix, out_dir, project)
+
+
+def upload_catalysts(
+    session: str,
+    bucket: str,
+    prefix: str = "event_corpus",
+    out_dir: str = DEFAULT_OUT_DIR,
+    project: str | None = None,
+) -> str:
+    """Upload the structured ``catalysts.jsonl`` for ``session`` (a date) to GCS."""
+    return _upload(session, CATALYSTS_FILE, bucket, prefix, out_dir, project)
 
 
 def download_report(

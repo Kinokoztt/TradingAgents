@@ -213,10 +213,14 @@ def test_is_litigation_solicitation():
     assert is_litigation_solicitation(
         "A class action lawsuit has been filed against Oddity Tech for violations of the "
         "Securities Exchange Act of 1934")
+    # private law firm "investigation" announcement -> drop
+    assert is_litigation_solicitation(
+        "Ademi LLP is investigating possible securities fraud claims against Roblox Corporation")
     # genuine legal reporting -> keep
     assert not is_litigation_solicitation(
         "Meta returns to court in New Mexico for an ongoing child safety trial")
     assert not is_litigation_solicitation("SEC charges company executives with accounting fraud")
+    assert not is_litigation_solicitation("The SEC is investigating the company's accounting practices")
     assert not is_litigation_solicitation(
         "A worker injured in a Kinder Morgan pipeline explosion filed a lawsuit against the company")
     assert not is_litigation_solicitation("")

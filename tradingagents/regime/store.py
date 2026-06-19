@@ -18,6 +18,7 @@ REPORT_FILE = "regime_report.json"
 SCORECARD_FILE = "scorecard.json"
 EVENTS_FILE = "events.jsonl"
 EVENTS_PROGRESS_FILE = "events.progress.json"
+CATALYSTS_FILE = "catalysts.jsonl"
 
 
 def save_report(as_of_date: str, report: RegimeReport, out_dir: str = DEFAULT_OUT_DIR) -> str:

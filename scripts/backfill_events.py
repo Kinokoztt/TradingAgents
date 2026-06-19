@@ -61,6 +61,8 @@ def _extract_cmd(session: str, args) -> list[str]:
         "--timeout", str(args.timeout),
         "--max-tokens", str(args.max_tokens),
     ]
+    if args.gcs_bucket:
+        cmd += ["--gcs-bucket", args.gcs_bucket, "--gcs-prefix", args.gcs_prefix]
     if args.backend_url:
         cmd += ["--backend-url", args.backend_url]
     if args.max_news_tickers is not None:
@@ -89,6 +91,8 @@ def main() -> int:
     p.add_argument("--stop-after-task", action="store_true",
                    help="Stop the auto-started vLLM service after the whole range finishes")
 
+    p.add_argument("--gcs-bucket", default=None, help="If set, upload each session's events.jsonl to this bucket")
+    p.add_argument("--gcs-prefix", default="event_corpus")
     p.add_argument("--news-source", choices=["fmp", "massive"], default="fmp",
                    help="Per-ticker news vendor (default fmp)")
     p.add_argument("--min-source-tier", choices=["high", "medium", "low", "all"], default="medium",

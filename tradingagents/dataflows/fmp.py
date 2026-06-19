@@ -114,6 +114,61 @@ def fetch_stock_news(
     return articles
 
 
+# --- structured catalyst feeds (line-1: no LLM, deterministic) ---------------
+# earnings/grades/dividends return deep history in one call (caller filters by
+# date); price-target-news and mergers are "latest" feeds -> paginate, stopping
+# once results predate ``stop_before`` (results are newest-first).
+
+def fetch_earnings(symbol: str, limit: int = 120) -> list[dict]:
+    """Earnings calendar rows (epsActual/epsEstimated/revenue..., date)."""
+    return _get("earnings", {"symbol": symbol.replace(".", "-"), "limit": limit}) or []
+
+
+def fetch_grades(symbol: str, limit: int = 1000) -> list[dict]:
+    """Individual analyst grade actions (gradingCompany, prev->new, action)."""
+    return _get("grades", {"symbol": symbol.replace(".", "-"), "limit": limit}) or []
+
+
+def fetch_dividends(symbol: str, limit: int = 60) -> list[dict]:
+    """Dividend history (declarationDate, dividend, yield, frequency, ...)."""
+    return _get("dividends", {"symbol": symbol.replace(".", "-"), "limit": limit}) or []
+
+
+def fetch_price_target_news(symbol: str, stop_before: str | None = None, max_items: int = 500) -> list[dict]:
+    """Analyst price-target change items (priceTarget, priceWhenPosted, title)."""
+    sym = symbol.replace(".", "-")
+    items: list[dict] = []
+    page = 0
+    while len(items) < max_items:
+        data = _get("price-target-news", {"symbol": sym, "page": page, "limit": 100})
+        if not isinstance(data, list) or not data:
+            break
+        items.extend(data)
+        if stop_before and data[-1].get("publishedDate", "")[:10] < stop_before:
+            break
+        if len(data) < 100:
+            break
+        page += 1
+    return items
+
+
+def fetch_mergers(stop_before: str | None = None, max_items: int = 3000) -> list[dict]:
+    """Market-wide M&A deals (acquirer symbol, targetedSymbol, transactionDate)."""
+    items: list[dict] = []
+    page = 0
+    while len(items) < max_items:
+        data = _get("mergers-acquisitions-latest", {"page": page, "limit": 100})
+        if not isinstance(data, list) or not data:
+            break
+        items.extend(data)
+        if stop_before and data[-1].get("transactionDate", "")[:10] < stop_before:
+            break
+        if len(data) < 100:
+            break
+        page += 1
+    return items
+
+
 def get_global_news(
     curr_date: str, look_back_days: int = 7, limit: int = 20, end_datetime: str | None = None
 ) -> str:

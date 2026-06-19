@@ -14,12 +14,15 @@ consumes — `events.jsonl` — is produced today by `scripts/extract_events.py`
 
 ```mermaid
 flowchart LR
-  News["News (vendor summaries)"] --> Extract["extract_events (LLM, classification only)"]
+  News["News (FMP, source-filtered)"] --> Extract["extract_events (LLM, classification only)"]
   Extract --> Enrich["source_reliability + price_in"]
-  Enrich --> JSONL["events.jsonl (standardized corpus)"]
+  Enrich --> JSONL["events.jsonl (news corpus)"]
+  FMP["FMP structured feeds"] --> Catalysts["extract_catalysts (rule-based, no LLM)"]
+  Catalysts --> CJSONL["catalysts.jsonl (numeric corpus)"]
   JSONL --> Encode["encoding (this roadmap)"]
-  Prices["prices / fundamentals"] --> Features["feature join"]
+  Prices["prices / fundamentals"] --> Features["feature join (ticker, session)"]
   Encode --> Features
+  CJSONL --> Features
   Features --> Train["NN training"]
   Train --> Backtest["walk-forward backtest"]
 ```
@@ -33,6 +36,27 @@ flowchart LR
   (`NotPricedIn/Partial/PricedIn/PostHoc`), `pre/post_return`, `pre/post_volume_ratio`.
 
 Persisted as JSONL at `regime_gate_output/{as_of}/events.jsonl`.
+
+## Stage 0b — structured catalysts (DONE)
+
+A second, parallel corpus comes straight from FMP's *structured* endpoints — no
+LLM, no opinion: earnings (eps/revenue surprise), analyst grade actions
+(upgrade/downgrade only), price-target changes, dividends (raise/cut), and M&A.
+`scripts/extract_catalysts.py --start --end` writes one `Catalyst` per
+(ticker, event), partitioned by effective date to `{out_dir}/<date>/catalysts.jsonl`
+(mirroring `events.jsonl`), with `event_type`/`polarity` derived by rule,
+`certainty` always Confirmed, and **full numeric payloads preserved** (surprise %,
+PT change, dividend amount, implied upside, …).
+
+Both corpora share one GCS prefix, `event_corpus`, so each date holds both files:
+`gs://{bucket}/event_corpus/<date>/{events,catalysts}.jsonl`. Upload is automatic
+when `--gcs-bucket` is set (events per session, catalysts per date).
+
+These are a different modality from news text and are NOT merged into the
+`NewsEvent` schema (that would discard magnitude). Instead the two corpora are
+joined at feature-assembly time on (ticker, session): news events are pooled +
+embedded, catalysts contribute their numerics directly. Point-in-time visibility
+uses each catalyst's `effective_date`/`published_utc`.
 
 ## Stage 1 — encoding (planned)
 

@@ -88,6 +88,8 @@ def main() -> int:
     p.add_argument("--proxy", default="SPY", help="Ticker whose bars define the trading calendar (for the prev session)")
     p.add_argument("--news-start", default=None,
                    help="Explicit window start (RFC3339 instant or YYYY-MM-DD); overrides --window")
+    p.add_argument("--gcs-bucket", default=None, help="If set, upload events.jsonl to this bucket after writing")
+    p.add_argument("--gcs-prefix", default="event_corpus")
     p.add_argument("--news-source", choices=["fmp", "massive"], default="fmp",
                    help="Per-ticker news vendor (default fmp: far more publishers than massive)")
     p.add_argument("--min-source-tier", choices=["high", "medium", "low", "all"], default="medium",
@@ -214,6 +216,12 @@ def main() -> int:
     print(f"polarity:   {dict(by_polarity)}")
     print(f"certainty:  {dict(by_certainty)}")
     print(f"price_in:   {dict(by_pricein)}")
+
+    if args.gcs_bucket:
+        from tradingagents.regime.gcs import upload_events
+
+        uri = upload_events(as_of, args.gcs_bucket, args.gcs_prefix, out_dir=args.out_dir)
+        print(f"uploaded -> {uri}")
     return 0
 
 
