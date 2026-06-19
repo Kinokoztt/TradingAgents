@@ -54,6 +54,7 @@ def _extract_cmd(session: str, args) -> list[str]:
         "--market", args.market, "--out-dir", args.out_dir,
         "--provider", args.provider, "--model", args.model, "--port", str(args.port),
         "--window", args.window, "--proxy", args.proxy,
+        "--news-source", args.news_source, "--min-source-tier", args.min_source_tier,
         "--news-look-back", str(args.news_look_back),
         "--max-articles-per-ticker", str(args.max_articles_per_ticker),
         "--max-workers", str(args.max_workers),
@@ -88,6 +89,10 @@ def main() -> int:
     p.add_argument("--stop-after-task", action="store_true",
                    help="Stop the auto-started vLLM service after the whole range finishes")
 
+    p.add_argument("--news-source", choices=["fmp", "massive"], default="fmp",
+                   help="Per-ticker news vendor (default fmp)")
+    p.add_argument("--min-source-tier", choices=["high", "medium", "low", "all"], default="medium",
+                   help="Drop publishers below this tier before the LLM (default medium)")
     p.add_argument("--window", choices=["incremental", "lookback"], default="incremental",
                    help="incremental (default): gapless (prev cutoff, this cutoff] per session, no duplication")
     p.add_argument("--news-look-back", type=int, default=7, help="Window length when --window lookback")

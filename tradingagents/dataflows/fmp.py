@@ -10,12 +10,17 @@ from __future__ import annotations
 
 import os
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 import requests
 
 from . import _http
 
 API_BASE_URL = "https://financialmodelingprep.com/stable"
+
+_ET = ZoneInfo("America/New_York")
+_UTC = ZoneInfo("UTC")
+_NEWS_PAGE_LIMIT = 250
 
 
 def get_api_key() -> str:
@@ -45,6 +50,68 @@ def _visible_premarket(published: str, end_datetime: str) -> bool:
     if len(pub) <= 10:  # date only
         return pub[:10] < end_datetime[:10]
     return pub[:19] <= end_datetime
+
+
+def _news_dt_to_utc(published: str) -> str:
+    """Normalise an FMP ``news/stock`` ``publishedDate`` to an RFC3339 UTC instant.
+
+    FMP returns ``YYYY-MM-DD HH:MM:SS`` *without* a timezone for the stock-news
+    endpoint; these timestamps are US Eastern. The rest of the pipeline (price-in
+    after-hours boundary, pre-market cutoff) assumes UTC, so convert ET->UTC here.
+    Values that already carry a 'T'/'Z' (other FMP endpoints) pass through.
+    """
+    if not published:
+        return ""
+    if "T" in published:
+        return published
+    dt = datetime.strptime(published, "%Y-%m-%d %H:%M:%S").replace(tzinfo=_ET)
+    return dt.astimezone(_UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def fetch_stock_news(
+    symbol: str,
+    start_date: str,
+    end_date: str,
+    max_articles: int = 200,
+) -> list[dict]:
+    """Per-ticker news as normalized article dicts (shape matches massive's).
+
+    Returns dicts with ``date, title, publisher, description, insights,
+    published_utc, article_url, tickers`` so the event extractor can consume FMP
+    and Massive interchangeably. ``start_date``/``end_date`` may be dates or
+    RFC3339 instants — FMP filters by date, so the caller should additionally
+    clip to a precise pre-market cutoff. Paginates via ``page`` until exhausted
+    or ``max_articles`` is reached. FMP uses hyphen share-class tickers (BRK-B).
+    """
+    sym = symbol.replace(".", "-")
+    articles: list[dict] = []
+    page = 0
+    while len(articles) < max_articles:
+        data = _get(
+            "news/stock",
+            {"symbols": sym, "from": start_date[:10], "to": end_date[:10],
+             "page": page, "limit": _NEWS_PAGE_LIMIT},
+        )
+        if not isinstance(data, list) or not data:
+            break
+        for it in data:
+            pub = _news_dt_to_utc(it.get("publishedDate", ""))
+            articles.append({
+                "date": (pub or it.get("publishedDate", ""))[:10],
+                "title": it.get("title", ""),
+                "publisher": it.get("publisher", ""),
+                "description": it.get("text", ""),
+                "insights": [],
+                "published_utc": pub,
+                "article_url": it.get("url", ""),
+                "tickers": [symbol],
+            })
+            if len(articles) >= max_articles:
+                return articles
+        if len(data) < _NEWS_PAGE_LIMIT:
+            break
+        page += 1
+    return articles
 
 
 def get_global_news(

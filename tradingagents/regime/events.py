@@ -91,11 +91,14 @@ class PriceInStatus(str, Enum):
 
 
 class Stage1Event(BaseModel):
-    """Stage-1 (reading) output: one discrete event found in one article."""
+    """Stage-1 (reading) output: one discrete event found in one article.
+
+    ``certainty`` is intentionally NOT asked of the LLM — it is derived from the
+    publisher (primary wire = Confirmed, else Unconfirmed) in extract_ticker_events.
+    """
 
     article_index: int = Field(description="Index [N] of the source article")
     is_primary: bool = Field(description="True if the ticker is the MAIN subject/driver of this event (not merely mentioned, compared, or held)")
-    certainty: Certainty
     summary: str = Field(description="One neutral line describing what happened (no forecast, no price call)")
 
 
@@ -184,10 +187,6 @@ For each distinct event emit one record:
 - is_primary: true ONLY if {ticker} is the MAIN subject/driver of the event. Set false if
   {ticker} is merely mentioned, compared to a peer, listed as an ETF/fund holding, or is a
   secondary beneficiary. (Still emit it, just mark is_primary=false.)
-- certainty: "Confirmed" if the company/counterparty/regulator confirmed it, it's an official
-  filing/press release, OR it's a concretely announced transaction (named parties + terms/amount).
-  Otherwise "Unconfirmed" (media report without confirmation, analyst opinion/estimate, forecast,
-  prediction, rumor, speculation).
 - summary: ONE neutral sentence stating what happened — factual, no forecasting, no price call.
 
 Rules:
@@ -288,6 +287,8 @@ def extract_ticker_events(
     stage2: Stage2Labels = stage2_llm.invoke(_build_stage2_prompt(ticker, summaries))
     labels = {lab.index: lab for lab in stage2.labels}
 
+    from .source_reliability import certainty_for_source
+
     events: list[NewsEvent] = []
     for i, (s1, art) in enumerate(rows):
         lab = labels.get(i)
@@ -298,7 +299,7 @@ def extract_ticker_events(
                 ticker=ticker,
                 as_of_date=as_of_date,
                 event_type=lab.event_type,
-                certainty=s1.certainty,
+                certainty=certainty_for_source(art.get("publisher", "")),
                 polarity=lab.polarity,
                 is_primary=s1.is_primary,
                 summary=s1.summary,
@@ -319,17 +320,46 @@ def fetch_ticker_articles(
     news_start: str | None = None,
     news_end: str | None = None,
     max_articles_per_ticker: int = 50,
+    source: str = "fmp",
+    min_source_tier: SourceReliability | None = SourceReliability.MEDIUM,
 ) -> list[dict]:
     """Fetch one ticker's articles for the extraction window (structured).
 
-    ``news_start`` (RFC3339 instant/date) overrides the window start; pass the
-    previous session's cutoff for a gapless, non-overlapping incremental window.
-    Defaults to ``as_of - look_back_days``.
+    ``source`` selects the vendor: "fmp" (default, diverse publishers) or
+    "massive". ``news_start`` (RFC3339 instant/date) overrides the window start;
+    pass the previous session's cutoff for a gapless incremental window.
+
+    FMP filters by date only, so we additionally clip to the precise
+    ``news_start``/``news_end`` instants. ``min_source_tier`` drops opinion-mill /
+    low-signal publishers (default: keep MEDIUM and above) before the LLM ever
+    reads them.
     """
     start = news_start or _days_before(as_of_date, look_back_days)
-    return massive.fetch_news_articles(
-        start, news_end or as_of_date, ticker=ticker, max_articles=max_articles_per_ticker
-    )
+    end = news_end or as_of_date
+    # Fetch with headroom: source-tier filtering removes a chunk, so over-fetch.
+    raw_cap = max_articles_per_ticker * 3
+    if source == "fmp":
+        from tradingagents.dataflows import fmp
+
+        articles = fmp.fetch_stock_news(ticker, start, end, max_articles=raw_cap)
+    else:
+        articles = massive.fetch_news_articles(start, end, ticker=ticker, max_articles=raw_cap)
+
+    from .source_reliability import meets_min_tier
+
+    kept: list[dict] = []
+    for a in articles:
+        pub = a.get("published_utc", "")
+        if news_start and pub and pub < news_start:
+            continue
+        if news_end and pub and pub > news_end:
+            continue
+        if min_source_tier is not None and not meets_min_tier(a.get("publisher", ""), min_source_tier):
+            continue
+        kept.append(a)
+        if len(kept) >= max_articles_per_ticker:
+            break
+    return kept
 
 
 def extract_events(
@@ -344,6 +374,8 @@ def extract_events(
     news_end: str | None = None,
     max_articles_per_ticker: int = 50,
     max_workers: int = 4,
+    source: str = "fmp",
+    min_source_tier: SourceReliability | None = SourceReliability.MEDIUM,
 ) -> list[NewsEvent]:
     """Extract standardized ``NewsEvent``s for ``tickers`` (batch convenience).
 
@@ -359,6 +391,7 @@ def extract_events(
         articles = fetch_ticker_articles(
             ticker, as_of_date, look_back_days=look_back_days, news_end=news_end,
             max_articles_per_ticker=max_articles_per_ticker,
+            source=source, min_source_tier=min_source_tier,
         )
         return extract_ticker_events(ticker, as_of_date, articles, stage1_llm, stage2_llm)
 

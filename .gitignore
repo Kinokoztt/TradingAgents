@@ -222,3 +222,4 @@ __marimo__/
 
 # Per-machine local-LLM config (keep the .example.json template tracked)
 tradingagents/llm_clients/llm_config.json
+local/

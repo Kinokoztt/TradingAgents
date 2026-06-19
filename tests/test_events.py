@@ -82,8 +82,7 @@ class _FakeStage1:
 
     def invoke(self, prompt):
         return events_mod.Stage1Extraction(events=[
-            events_mod.Stage1Event(article_index=i, is_primary=True,
-                                   certainty=Certainty.UNCONFIRMED, summary=f"event {i}")
+            events_mod.Stage1Event(article_index=i, is_primary=True, summary=f"event {i}")
             for i in _indices(prompt)
         ])
 
@@ -108,7 +107,7 @@ def test_extract_events_attaches_provenance(monkeypatch):
         events_mod.massive, "fetch_news_articles",
         lambda start, end, ticker=None, max_articles=50: _ARTICLES.get(ticker, []),
     )
-    out = extract_events(["AAPL"], "2026-05-11", llm=_FakeLLM())
+    out = extract_events(["AAPL"], "2026-05-11", llm=_FakeLLM(), source="massive", min_source_tier=None)
     assert len(out) == 2
     first = next(e for e in out if e.summary == "event 0")
     assert first.ticker == "AAPL"
@@ -116,8 +115,21 @@ def test_extract_events_attaches_provenance(monkeypatch):
     assert first.published_utc == "2026-05-10T13:00:00Z"
     assert first.article_url == "http://x/1"
     assert first.event_type is EventType.OTHER
+    # certainty is derived from the source: Reuters is not a primary wire -> Unconfirmed
     assert first.certainty is Certainty.UNCONFIRMED
     assert first.is_primary is True
+
+
+def test_extract_events_certainty_from_wire(monkeypatch):
+    wire = {"WIRE": [{"date": "2026-05-10", "title": "8-K filed", "publisher": "GlobeNewswire",
+                      "description": "Board declared a dividend", "insights": [],
+                      "published_utc": "2026-05-10T13:00:00Z", "article_url": "http://x/9"}]}
+    monkeypatch.setattr(
+        events_mod.massive, "fetch_news_articles",
+        lambda start, end, ticker=None, max_articles=50: wire.get(ticker, []),
+    )
+    out = extract_events(["WIRE"], "2026-05-11", llm=_FakeLLM(), source="massive", min_source_tier=None)
+    assert out and out[0].certainty is Certainty.CONFIRMED  # primary wire -> Confirmed
 
 
 def test_extract_events_drops_out_of_range_index(monkeypatch):
@@ -129,14 +141,14 @@ def test_extract_events_drops_out_of_range_index(monkeypatch):
     class _BadStage1:
         def invoke(self, prompt):
             return events_mod.Stage1Extraction(events=[events_mod.Stage1Event(
-                article_index=99, is_primary=True, certainty=Certainty.UNCONFIRMED, summary="ghost",
+                article_index=99, is_primary=True, summary="ghost",
             )])
 
     class _BadLLM:
         def with_structured_output(self, schema):
             return _BadStage1() if schema is events_mod.Stage1Extraction else _FakeStage2()
 
-    out = extract_events(["AAPL"], "2026-05-11", llm=_BadLLM())
+    out = extract_events(["AAPL"], "2026-05-11", llm=_BadLLM(), source="massive", min_source_tier=None)
     assert out == []  # ghost index dropped, not guessed
 
 
@@ -144,15 +156,47 @@ def test_extract_events_empty_is_noop():
     assert extract_events([], "2026-05-11", llm=_FakeLLM()) == []
 
 
+def test_fetch_ticker_articles_drops_low_tier(monkeypatch):
+    arts = [
+        {"date": "2026-05-10", "title": "a", "publisher": "Reuters", "description": "x",
+         "insights": [], "published_utc": "2026-05-10T13:00:00Z", "article_url": "u1"},
+        {"date": "2026-05-10", "title": "b", "publisher": "The Motley Fool", "description": "y",
+         "insights": [], "published_utc": "2026-05-10T13:00:00Z", "article_url": "u2"},
+    ]
+    monkeypatch.setattr(
+        events_mod.massive, "fetch_news_articles",
+        lambda start, end, ticker=None, max_articles=50: arts,
+    )
+    kept = events_mod.fetch_ticker_articles("AAPL", "2026-05-11", source="massive",
+                                            min_source_tier=SourceReliability.MEDIUM)
+    assert [a["publisher"] for a in kept] == ["Reuters"]  # Motley Fool (LOW) dropped
+
+
 # --- source reliability ---------------------------------------------------
 
 def test_classify_source_tiers():
     assert classify_source("Reuters") is SourceReliability.HIGH
     assert classify_source("Thomson Reuters") is SourceReliability.HIGH  # substring
-    assert classify_source("Zacks") is SourceReliability.MEDIUM
+    assert classify_source("Zacks Investment Research") is SourceReliability.MEDIUM  # substring
     assert classify_source("Simply Wall St") is SourceReliability.LOW
+    assert classify_source("The Motley Fool") is SourceReliability.LOW  # opinion mill
+    assert classify_source("24/7 Wall Street") is SourceReliability.LOW
     assert classify_source("Some Random Blog") is SourceReliability.UNKNOWN
     assert classify_source("") is SourceReliability.UNKNOWN
+
+
+def test_certainty_for_source_rule():
+    from tradingagents.regime.source_reliability import certainty_for_source, meets_min_tier
+
+    assert certainty_for_source("GlobeNewswire") is Certainty.CONFIRMED  # primary wire
+    assert certainty_for_source("Business Wire") is Certainty.CONFIRMED
+    assert certainty_for_source("Reuters") is Certainty.UNCONFIRMED  # report, not disclosure
+    assert certainty_for_source("The Motley Fool") is Certainty.UNCONFIRMED
+    assert certainty_for_source("") is Certainty.UNCONFIRMED
+
+    assert meets_min_tier("Reuters", SourceReliability.MEDIUM) is True
+    assert meets_min_tier("The Motley Fool", SourceReliability.MEDIUM) is False
+    assert meets_min_tier("Some Random Blog", SourceReliability.MEDIUM) is False
 
 
 def test_tag_source_reliability_in_place():

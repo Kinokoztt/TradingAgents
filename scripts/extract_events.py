@@ -88,6 +88,11 @@ def main() -> int:
     p.add_argument("--proxy", default="SPY", help="Ticker whose bars define the trading calendar (for the prev session)")
     p.add_argument("--news-start", default=None,
                    help="Explicit window start (RFC3339 instant or YYYY-MM-DD); overrides --window")
+    p.add_argument("--news-source", choices=["fmp", "massive"], default="fmp",
+                   help="Per-ticker news vendor (default fmp: far more publishers than massive)")
+    p.add_argument("--min-source-tier", choices=["high", "medium", "low", "all"], default="medium",
+                   help="Drop publishers below this reliability tier before the LLM (default medium: "
+                        "keeps wires + real journalism, drops opinion mills)")
     p.add_argument("--news-look-back", type=int, default=7, help="Window length in days when --window lookback")
     p.add_argument("--max-news-tickers", type=int, default=None)
     p.add_argument("--max-articles-per-ticker", type=int, default=50,
@@ -158,11 +163,19 @@ def main() -> int:
         timeout=args.timeout, max_tokens=args.max_tokens,
     )
 
+    from tradingagents.regime import SourceReliability
+
+    min_tier = {
+        "high": SourceReliability.HIGH, "medium": SourceReliability.MEDIUM,
+        "low": SourceReliability.LOW, "all": None,
+    }[args.min_source_tier]
+
     def work(ticker: str):
         articles = fetch_ticker_articles(
             ticker, as_of, look_back_days=args.news_look_back,
             news_start=news_start, news_end=cutoff_utc,
             max_articles_per_ticker=args.max_articles_per_ticker,
+            source=args.news_source, min_source_tier=min_tier,
         )
         evs = extract_ticker_events(ticker, as_of, articles, stage1_llm, stage2_llm)
         tag_source_reliability(evs)
