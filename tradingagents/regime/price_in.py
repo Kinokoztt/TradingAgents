@@ -1,16 +1,26 @@
-"""price-in labeling: did the market already absorb the news?
+"""price-in labeling: is the news likely already absorbed by the price?
 
-For each ``NewsEvent`` with a publication timestamp, run a small daily event
-study against real prices and decide whether the information was already priced
-in, partially priced in, fresh, or just a post-hoc recap of a move that had
-already happened.
+The ``price_in`` status is a *point-in-time* judgement made from price action
+that happened **before** the news could be traded — i.e. it uses no future
+data and could be computed live pre-market. The intuition: if a name already
+moved strongly in the news's direction over the days leading in, the
+information is probably anticipated/priced; if it was flat (or moved the other
+way), the news likely still carries un-priced information.
 
-Daily-bar limitation (honest by design): we cannot see the intraday tick when
-news hit, so the split between "before" and "after" is at the *reaction
-session* — the first session that could trade on the news (next session if the
-article published after the US close). Moves are measured in ATR units so the
-threshold adapts to each name's volatility; all parameters are returned/recorded
-so a label is reproducible.
+Direction matters: the pre-move is scored *signed against the event polarity*
+(a positive pre-move ahead of positive news = priced in). Neutral/Mixed events
+have no direction, so they fall back to the absolute pre-move magnitude. Moves
+are measured in ATR units so the threshold adapts to each name's volatility.
+
+The split point is the *reaction session* — the first session that could trade
+on the news (next session if the article published after the US close); the
+pre-window ends at the close strictly before it, so it is always past data.
+
+``post_return``/``post_volume_ratio`` are also recorded but are **retrospective
+labels** (they look at the reaction session and beyond, i.e. future data). They
+are for analysis / as a supervised target ONLY — they must NOT be used as
+point-in-time input features (that would be look-ahead leakage). They do not
+affect the ``price_in`` status.
 
 ``label_price_in`` is a pure function over a single ticker's OHLCV frame
 (injectable, no I/O) so it is unit-testable without BigQuery. ``tag_price_in``
@@ -25,7 +35,7 @@ import pandas as pd
 
 from tradingagents.market_tools import MarketDataTools, get_market_tools
 
-from .events import NewsEvent, PriceInStatus
+from .events import NewsEvent, Polarity, PriceInStatus
 
 # US equity close is 16:00 ET ~ 20:00-21:00 UTC depending on DST. News with a
 # UTC hour at/after this is treated as after-hours: its first tradable session
@@ -72,6 +82,15 @@ def _atr_pct(ohlcv: pd.DataFrame, end_idx: int, window: int) -> float | None:
     return float(atr / last_close)
 
 
+def _polarity_sign(polarity: Polarity) -> int:
+    """+1 / -1 for directional polarity; 0 for Neutral/Mixed (no direction)."""
+    if polarity is Polarity.POSITIVE:
+        return 1
+    if polarity is Polarity.NEGATIVE:
+        return -1
+    return 0
+
+
 def label_price_in(
     event: NewsEvent,
     ohlcv: pd.DataFrame,
@@ -80,13 +99,24 @@ def label_price_in(
     post_days: int = 2,
     atr_window: int = 14,
     sig_atr: float = 1.0,
+    partial_atr: float = 0.5,
 ) -> dict:
-    """Event study for one event. Returns a dict of metrics + ``price_in``.
+    """Point-in-time price-in judgement for one event, from pre-news prices only.
 
     ``ohlcv`` is a single ticker's daily bars with a ``trade_date`` column (or
     index) and open/high/low/close/volume. Returns keys: ``price_in``,
     ``pre_return``, ``post_return``, ``pre_volume_ratio``, ``post_volume_ratio``.
-    Insufficient data yields ``PriceInStatus.UNKNOWN`` with None metrics.
+
+    The ``price_in`` status uses only the pre-news window (ending at the close
+    strictly before the reaction session). The pre-move is scored signed against
+    the event polarity (Neutral/Mixed -> absolute magnitude), in ATR units:
+      - aligned move >= ``sig_atr``      -> PricedIn  (already anticipated)
+      - aligned move >= ``partial_atr``  -> Partial
+      - otherwise (flat or opposite)     -> NotPricedIn (info likely still fresh)
+
+    ``post_return``/``post_volume_ratio`` are retrospective (use the reaction
+    session onward = future data); they are recorded for analysis / as a target
+    but do NOT influence ``price_in``. Insufficient *pre* data -> UNKNOWN.
     """
     unknown = {
         "price_in": PriceInStatus.UNKNOWN,
@@ -112,8 +142,9 @@ def label_price_in(
         return unknown
     r = sessions.index(reaction)
 
-    # Need pre_days history before the reaction and post_days after it.
-    if r - pre_days < 0 or r + post_days >= len(df):
+    # The label needs only pre-news history; future bars are optional (used for
+    # the retrospective post_* fields when present).
+    if r - pre_days < 0:
         return unknown
 
     atr_pct = _atr_pct(df, r - 1, atr_window)
@@ -126,38 +157,37 @@ def label_price_in(
 
     # Move leading INTO the event (close before reaction vs pre_days earlier).
     pre_return = float(close.iloc[r - 1] / close.iloc[r - 1 - pre_days] - 1.0)
-    # Reaction: enter at reaction-session open, exit post_days later at close.
-    post_return = float(close.iloc[r + post_days] / open_.iloc[r] - 1.0)
 
     baseline_vol = float(vol.iloc[max(0, r - atr_window) : r].mean())
     pre_volume_ratio = (
         float(vol.iloc[r - pre_days : r].mean() / baseline_vol) if baseline_vol > 0 else None
     )
-    post_volume_ratio = (
-        float(vol.iloc[r : r + 1].mean() / baseline_vol) if baseline_vol > 0 else None
-    )
 
-    pre_sig = abs(pre_return) / atr_pct >= sig_atr
-    post_sig = abs(post_return) / atr_pct >= sig_atr
-
-    if post_sig and not pre_sig:
-        status = PriceInStatus.NOT_PRICED_IN
-    elif post_sig and pre_sig:
-        status = PriceInStatus.PARTIAL
-    elif pre_sig and not post_sig:
-        # Move happened before the news could be traded. After-hours publication
-        # of an already-moved name with no follow-through reads as a recap.
-        status = PriceInStatus.POST_HOC if pub_dt.hour >= _AFTER_HOURS_UTC_HOUR else PriceInStatus.PRICED_IN
-    else:
-        # Neither side moved beyond noise: nothing left to capture.
+    # Score the pre-move signed against polarity (Neutral/Mixed -> magnitude).
+    sign = _polarity_sign(event.polarity)
+    aligned_atr = (sign * pre_return / atr_pct) if sign != 0 else (abs(pre_return) / atr_pct)
+    if aligned_atr >= sig_atr:
         status = PriceInStatus.PRICED_IN
+    elif aligned_atr >= partial_atr:
+        status = PriceInStatus.PARTIAL
+    else:
+        status = PriceInStatus.NOT_PRICED_IN
+
+    # Retrospective (future) fields — only when the bars exist; never feed these
+    # as point-in-time inputs (look-ahead). They do not change ``price_in``.
+    post_return = None
+    post_volume_ratio = None
+    if r + post_days < len(df):
+        post_return = round(float(close.iloc[r + post_days] / open_.iloc[r] - 1.0), 6)
+        if baseline_vol > 0:
+            post_volume_ratio = round(float(vol.iloc[r : r + 1].mean() / baseline_vol), 4)
 
     return {
         "price_in": status,
         "pre_return": round(pre_return, 6),
-        "post_return": round(post_return, 6),
+        "post_return": post_return,
         "pre_volume_ratio": round(pre_volume_ratio, 4) if pre_volume_ratio is not None else None,
-        "post_volume_ratio": round(post_volume_ratio, 4) if post_volume_ratio is not None else None,
+        "post_volume_ratio": post_volume_ratio,
     }
 
 
@@ -170,6 +200,7 @@ def tag_price_in(
     post_days: int = 2,
     atr_window: int = 14,
     sig_atr: float = 1.0,
+    partial_atr: float = 0.5,
 ) -> list[NewsEvent]:
     """Label every event in place with its price-in status + metrics.
 
@@ -199,7 +230,8 @@ def tag_price_in(
         ohlcv = ohlcv[ohlcv["ticker"] == ticker] if "ticker" in ohlcv.columns else ohlcv
         for ev in evs:
             metrics = label_price_in(
-                ev, ohlcv, pre_days=pre_days, post_days=post_days, atr_window=atr_window, sig_atr=sig_atr
+                ev, ohlcv, pre_days=pre_days, post_days=post_days,
+                atr_window=atr_window, sig_atr=sig_atr, partial_atr=partial_atr,
             )
             ev.price_in = metrics["price_in"]
             ev.pre_return = metrics["pre_return"]

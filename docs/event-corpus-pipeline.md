@@ -84,7 +84,9 @@ flowchart LR
 
 **(e) 非 LLM 富化**：
 - `source_reliability`：按发布方打分级；
-- `price_in`：用真实日线做事件研究，判断信息是否已被price-in（见下表），并记录 `pre/post_return`、`pre/post_volume_ratio`。日线粒度的诚实局限：以「首个可交易 session」作为前/后切分（盘后稿顺延到下一 session），涨跌幅以 ATR 为单位自适应波动率。
+- `price_in`：**point-in-time** 判定（只用发布前价格、不含未来数据），可在盘前实时算出，作为 NN 的合法输入特征。逻辑：把「发布前 `pre_days` 日位移」**按消息 polarity 方向对齐**、以 ATR 为单位打分——若发布前已朝消息方向大幅移动→信息多半已被 price in；持平或反向→消息可能携带新信息。Neutral/Mixed 无方向，退化为只看位移幅度。三档：`PricedIn`(≥`sig_atr`，默认 1.0) / `Partial`(≥`partial_atr`，默认 0.5) / `NotPricedIn`(其余)，数据不足为 `Unknown`。切分点为「首个可交易 session」(盘后稿顺延到下一 session)，pre 窗口截至其前一收盘，恒为历史数据。
+  - `pre_return` / `pre_volume_ratio`：发布前位移与放量，**point-in-time 安全**，可作输入特征。
+  - `post_return` / `post_volume_ratio`：reaction session 开盘→`post_days` 日后的位移（**含未来数据**），仅作**回顾性标签**（分析 / 训练 target），**不参与 `price_in` 判定，禁止当输入特征**（否则前视泄漏）。
 
 **(f) 并发 / 断点续跑**：按票线程并发；每票完成即落盘并记进度，中断后重跑同一天会跳过已完成的票（`--no-resume` 可强制重抽）。
 
@@ -114,8 +116,9 @@ flowchart LR
 | `summary` | LLM 抽出的中性一句话 |
 | `source` / `article_url` / `published_utc` / `event_date` | 溯源信息 |
 | `source_reliability` | `High` / `Medium` / `Low` / `Unknown`（富化） |
-| `price_in` | `NotPricedIn` / `Partial` / `PricedIn` / `PostHoc` / `Unknown`（富化） |
-| `pre_return` / `post_return` / `pre_volume_ratio` / `post_volume_ratio` | price-in 数值（富化） |
+| `price_in` | `PricedIn` / `Partial` / `NotPricedIn` / `Unknown`（point-in-time，仅用发布前价格判定；`PostHoc` 已弃用不再产出） |
+| `pre_return` / `pre_volume_ratio` | 发布前位移/放量（point-in-time 安全，可作输入特征） |
+| `post_return` / `post_volume_ratio` | 事后位移（含未来数据，仅作回顾性标签，禁止当输入特征） |
 
 ### 3.2 `catalysts.jsonl`（线 1，每行一个 `Catalyst`，数值载荷打平到顶层）
 

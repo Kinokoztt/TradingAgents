@@ -264,41 +264,63 @@ def _frame(closes: list[float]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def _event_on(df: pd.DataFrame, idx: int, hour: int) -> NewsEvent:
+def _event_on(df: pd.DataFrame, idx: int, hour: int, **overrides) -> NewsEvent:
     d = df["trade_date"].iloc[idx].strftime("%Y-%m-%d")
-    return _make_event(ticker="T", published_utc=f"{d}T{hour:02d}:00:00Z")
+    return _make_event(ticker="T", published_utc=f"{d}T{hour:02d}:00:00Z", **overrides)
 
 
 def test_price_in_not_priced_in():
-    # flat through reaction (idx 16), then a large post-event jump
+    # flat going INTO the reaction (idx 16) -> positive news is not yet priced in
     closes = [100.0] * 16 + [106.67, 113.33, 120.0, 120.0]
     df = _frame(closes)
-    out = label_price_in(_event_on(df, 16, hour=13), df)
+    out = label_price_in(_event_on(df, 16, hour=13, polarity=Polarity.POSITIVE), df)
     assert out["price_in"] is PriceInStatus.NOT_PRICED_IN
+    # post_* still recorded (retrospective), but does not drive the label
     assert out["post_return"] > 0
 
 
-def test_price_in_priced_in_intraday():
-    # large pre-event ramp (idx 13-15), flat after; published intraday
+def test_price_in_priced_in_aligned_premove():
+    # large pre-event ramp (idx 13-15) aligned with positive news -> priced in
     closes = [100.0] * 13 + [106.67, 113.33, 120.0] + [120.0] * 4
     df = _frame(closes)
-    out = label_price_in(_event_on(df, 16, hour=13), df)
+    out = label_price_in(_event_on(df, 16, hour=13, polarity=Polarity.POSITIVE), df)
     assert out["price_in"] is PriceInStatus.PRICED_IN
 
 
-def test_price_in_post_hoc_after_hours():
-    # same prior move, but published after the close -> recap of a done move
+def test_price_in_opposite_premove_not_priced_in():
+    # big pre-move UP but the news is NEGATIVE -> contrary move, not priced in
     closes = [100.0] * 13 + [106.67, 113.33, 120.0] + [120.0] * 4
     df = _frame(closes)
-    out = label_price_in(_event_on(df, 16, hour=21), df)
-    assert out["price_in"] is PriceInStatus.POST_HOC
+    out = label_price_in(_event_on(df, 16, hour=13, polarity=Polarity.NEGATIVE), df)
+    assert out["price_in"] is PriceInStatus.NOT_PRICED_IN
 
 
 def test_price_in_partial():
-    closes = [100.0] * 13 + [106.67, 113.33, 120.0] + [126.67, 133.33, 140.0, 140.0]
+    # moderate aligned pre-move (between partial and full ATR thresholds)
+    closes = [100.0] * 13 + [101.5, 103.0, 104.5] + [104.5] * 4
     df = _frame(closes)
-    out = label_price_in(_event_on(df, 16, hour=13), df)
+    out = label_price_in(
+        _event_on(df, 16, hour=13, polarity=Polarity.POSITIVE), df, sig_atr=5.0, partial_atr=1.0
+    )
     assert out["price_in"] is PriceInStatus.PARTIAL
+
+
+def test_price_in_neutral_uses_magnitude():
+    # Neutral polarity: any large pre-move (either sign) reads as priced in
+    closes = [100.0] * 13 + [93.33, 86.67, 80.0] + [80.0] * 4
+    df = _frame(closes)
+    out = label_price_in(_event_on(df, 16, hour=13, polarity=Polarity.NEUTRAL), df)
+    assert out["price_in"] is PriceInStatus.PRICED_IN
+
+
+def test_price_in_label_without_future_bars():
+    # reaction is the last bar (idx 16): no post_days future bars, but the
+    # point-in-time label still resolves from the pre-move alone.
+    closes = [100.0] * 13 + [106.67, 113.33, 120.0, 120.0]  # len 17, reaction idx 16
+    df = _frame(closes)
+    out = label_price_in(_event_on(df, 16, hour=13, polarity=Polarity.POSITIVE), df)
+    assert out["price_in"] is PriceInStatus.PRICED_IN
+    assert out["post_return"] is None  # retrospective field absent, label still set
 
 
 def test_price_in_unknown_without_timestamp():
@@ -324,7 +346,7 @@ class _FakeTools:
 def test_tag_price_in_batch_in_place():
     closes = [100.0] * 16 + [106.67, 113.33, 120.0, 120.0]
     df = _frame(closes)
-    ev = _event_on(df, 16, hour=13)
+    ev = _event_on(df, 16, hour=13, polarity=Polarity.POSITIVE)
     tag_price_in([ev], tools=_FakeTools(df))
     assert ev.price_in is PriceInStatus.NOT_PRICED_IN
     assert ev.post_return is not None

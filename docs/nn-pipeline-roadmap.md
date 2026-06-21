@@ -66,9 +66,13 @@ Per event, build a feature vector:
 - `summary` -> sentence embedding (local encoder served alongside the vLLM box;
   e.g. a Qwen/BGE embedding model). Keep the embedding model **frozen and
   versioned** so features are reproducible across re-runs.
-- price-in numerics: `pre_return`, `post_return`, `pre/post_volume_ratio`, and
-  the `price_in` label one-hot (it is a strong leakage signal — an event that is
-  already `PricedIn`/`PostHoc` should carry little forward alpha).
+- price-in features — **point-in-time only**: `pre_return`, `pre_volume_ratio`,
+  and the `price_in` label one-hot (now derived purely from the pre-news move,
+  so it is safe as an input: `PricedIn` flags an already-anticipated event that
+  should carry little forward alpha).
+- **Do NOT feed** `post_return` / `post_volume_ratio` as inputs — they use the
+  reaction session onward (future data) and overlap the supervised horizon, so
+  they are look-ahead leakage. Keep them only as analysis / a candidate target.
 
 Aggregate to a (ticker, session) example by pooling that session's events
 (e.g. attention/mean over event vectors), then concatenate point-in-time

@@ -81,13 +81,14 @@ class SourceReliability(str, Enum):
 
 
 class PriceInStatus(str, Enum):
-    """Whether the market had already absorbed the info (set by price_in.py)."""
+    """Whether the info looks already absorbed, judged point-in-time from the
+    pre-news move scored against polarity (set by price_in.py, no future data)."""
 
-    NOT_PRICED_IN = "NotPricedIn"  # little pre-move, clear post-publication move
-    PARTIAL = "Partial"            # some pre-move, some residual reaction
-    PRICED_IN = "PricedIn"         # move happened before/at publication
-    POST_HOC = "PostHoc"           # news merely recaps an already-completed move
-    UNKNOWN = "Unknown"            # no/insufficient price data to judge
+    NOT_PRICED_IN = "NotPricedIn"  # flat (or opposite) pre-move -> info likely still fresh
+    PARTIAL = "Partial"            # moderate anticipatory pre-move in the news direction
+    PRICED_IN = "PricedIn"         # strong anticipatory pre-move -> already absorbed
+    POST_HOC = "PostHoc"           # deprecated: no longer produced (kept for old-data loads)
+    UNKNOWN = "Unknown"            # no/insufficient pre-news price data to judge
 
 
 class Stage1Event(BaseModel):
