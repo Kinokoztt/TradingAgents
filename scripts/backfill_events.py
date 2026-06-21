@@ -76,6 +76,32 @@ def _extract_cmd(session: str, args) -> list[str]:
     return cmd
 
 
+def _run_session_with_retries(session: str, args) -> None:
+    """Run one session, re-running on failure up to ``--retries`` times.
+
+    extract_events is per-ticker resumable, so a re-run only processes the
+    tickers that did not finish — transient BQ Storage / network blips and a
+    crashed/wedged vLLM (which die mid-range and succeed on a plain re-run)
+    self-heal here instead of aborting the whole backfill. A hung engine is
+    handled on the next attempt by --auto-serve's generation probe (it answers
+    /models but fails to generate -> ensure() restarts it).
+    """
+    import time
+
+    cmd = _extract_cmd(session, args)
+    for attempt in range(args.retries + 1):
+        try:
+            subprocess.run(cmd, check=True)
+            return
+        except subprocess.CalledProcessError as e:
+            if attempt >= args.retries:
+                raise
+            wait = min(args.retry_wait * (2 ** attempt), 300.0)
+            print(f"[{session}] attempt {attempt + 1}/{args.retries + 1} failed "
+                  f"(exit {e.returncode}); resuming in {wait:.0f}s ...", flush=True)
+            time.sleep(wait)
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--start", required=True, help="First session YYYY-MM-DD (inclusive)")
@@ -109,6 +135,12 @@ def main() -> int:
     p.add_argument("--no-resume", action="store_true", help="Re-extract every ticker (ignore per-session progress)")
 
     p.add_argument("--continue-on-error", action="store_true", help="Log and continue instead of aborting on a failed session")
+    p.add_argument("--retries", type=int, default=5,
+                   help="Re-run a failed session up to N more times before giving up. "
+                        "Each re-run resumes (skips tickers already done), so it just finishes the rest. "
+                        "Covers transient BQ/vLLM/network blips. 0 disables.")
+    p.add_argument("--retry-wait", type=float, default=30.0,
+                   help="Base seconds to wait between retries (exponential backoff, capped at 300s)")
     p.add_argument("--dry-run", action="store_true", help="Only list the sessions that would be processed")
     args = p.parse_args()
 
@@ -125,12 +157,12 @@ def main() -> int:
         for session in days:
             print(f"\n========== {session} ==========")
             try:
-                subprocess.run(_extract_cmd(session, args), check=True)
+                _run_session_with_retries(session, args)
                 done.append(session)
             except subprocess.CalledProcessError as e:
                 if not args.continue_on_error:
                     raise
-                print(f"[{session}] FAILED: exit {e.returncode}")
+                print(f"[{session}] FAILED after retries: exit {e.returncode}")
                 failed.append((session, f"exit {e.returncode}"))
     finally:
         if args.stop_after_task and args.provider == "vllm" and not args.backend_url:

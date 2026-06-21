@@ -101,6 +101,30 @@ def is_healthy(base_url: str, served_name: str | None = None) -> bool:
     return _health(base_url, served_name)
 
 
+def _can_generate(base_url: str, served_name: str, timeout: float = 30.0) -> bool:
+    """True if the engine actually completes a 1-token generation.
+
+    ``/models`` only proves the API front-end is up; a wedged EngineCore (stuck
+    on a prior request, the common "service hangs" failure) keeps answering
+    ``/models`` while never finishing a generation. This probe issues a trivial
+    completion so a hung engine reads as unhealthy and gets restarted, instead
+    of every retry reusing the same stuck service.
+    """
+    url = base_url.rstrip("/") + "/chat/completions"
+    payload = json.dumps({
+        "model": served_name,
+        "messages": [{"role": "user", "content": "ok"}],
+        "max_tokens": 1,
+        "temperature": 0,
+    }).encode()
+    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.status == 200
+    except (urllib.error.URLError, OSError, ValueError):
+        return False
+
+
 def _base_url(host: str, port: int) -> str:
     h = "localhost" if host in ("0.0.0.0", "") else host
     return f"http://{h}:{port}/v1"
@@ -233,17 +257,25 @@ def ensure(
     log_file: str | None = None,
     env_overrides: dict | None = None,
     wait_timeout: float = 600.0,
+    probe_generation: bool = True,
 ) -> ServiceState:
     """Guarantee ``model`` is the running service and return its state.
 
     - already serving ``model`` and healthy -> reuse it (no restart);
-    - a different model is running (or it's unhealthy) -> stop it, then start;
+    - a different model is running, it's unhealthy, or (when
+      ``probe_generation``) its engine can't complete a 1-token generation
+      (a wedged/hung EngineCore) -> stop it, then start fresh;
     - nothing running -> start.
     """
     spec = get_local_model(model)
     st = status()
     if st is not None:
-        if st.served_name == spec.served_name and _health(st.base_url, spec.served_name):
+        healthy = st.served_name == spec.served_name and _health(st.base_url, spec.served_name)
+        if healthy and probe_generation and not _can_generate(st.base_url, spec.served_name):
+            print(f"vLLM '{spec.served_name}' answers /models but a generation probe "
+                  f"timed out (wedged engine); restarting ...")
+            healthy = False
+        if healthy:
             return st
         stop()
     return start(

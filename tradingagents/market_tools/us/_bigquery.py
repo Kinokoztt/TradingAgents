@@ -35,13 +35,22 @@ def run_query(
 
     The BigQuery Storage Read API (gRPC) speeds up downloads on Cloud Run, but it
     does not honor a system HTTP proxy, so behind a local TUN/proxy that maps
-    domains to fake IPs (e.g. 198.18.x.x) it hangs until timeout. Set
-    ``BQ_USE_STORAGE_API=0`` to force the plain REST path in such environments.
+    domains to fake IPs (e.g. 198.18.x.x) it intermittently drops the gRPC socket
+    (``ServiceUnavailable``) or hangs. Set ``BQ_USE_STORAGE_API=0`` to force the
+    plain REST path; otherwise we try Storage once and fall back to REST on a
+    transient Storage failure (REST goes through the HTTP proxy, so it works).
     """
+    from google.api_core.exceptions import ServiceUnavailable
     from google.cloud import bigquery
 
     use_storage = os.environ.get("BQ_USE_STORAGE_API", "1").lower() not in ("0", "false", "no")
     client = bigquery.Client(project=project)
     job_config = bigquery.QueryJobConfig(query_parameters=params or [])
     result = client.query(sql, job_config=job_config)
-    return result.to_dataframe(create_bqstorage_client=use_storage)
+    if not use_storage:
+        return result.to_dataframe(create_bqstorage_client=False)
+    try:
+        return result.to_dataframe(create_bqstorage_client=True)
+    except ServiceUnavailable:
+        # Storage gRPC unreachable (e.g. fake-IP TUN proxy); REST still works.
+        return result.to_dataframe(create_bqstorage_client=False)
