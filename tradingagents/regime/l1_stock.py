@@ -71,6 +71,39 @@ def select_news_tickers(
     return ranked[:max_tickers] if max_tickers else ranked
 
 
+def _render_events(events: list) -> str:
+    """Render pre-extracted ``NewsEvent``s for one ticker into a compact typed
+    block. Primary events first; ``certainty`` / source tier / ``price_in`` are
+    kept so the model can discount already-absorbed or low-reliability items
+    instead of re-reading noisy article bodies."""
+    if not events:
+        return "(no standardized events)"
+    primary = [e for e in events if e.is_primary]
+    secondary = [e for e in events if not e.is_primary]
+
+    def line(e) -> str:
+        d = e.event_date or (e.published_utc[:10] if e.published_utc else "")
+        meta = f"certainty={e.certainty.value}, src={e.source_reliability.value}, priced_in={e.price_in.value}"
+        return f"- [{d}] {e.event_type.value}/{e.polarity.value} ({meta}): {e.summary}"
+
+    lines = [line(e) for e in primary[:20]]
+    if secondary:
+        lines.append("(secondary mentions, ticker not the main subject:)")
+        lines += [line(e) for e in secondary[:8]]
+    return "\n".join(lines)
+
+
+def _render_catalysts(catalysts: list) -> str:
+    """Render structured (deterministic, numeric) catalysts for one ticker."""
+    if not catalysts:
+        return ""
+    lines = []
+    for c in catalysts[:20]:
+        lines.append(f"- [{c.get('effective_date', '')}] "
+                     f"{c.get('catalyst_type', '')}/{c.get('polarity', '')}: {c.get('summary', '')}")
+    return "\n".join(lines)
+
+
 def _gather_context(
     ticker: str,
     as_of_date: str,
@@ -78,10 +111,21 @@ def _gather_context(
     look_back_days: int,
     with_fundamentals: bool,
     news_end: str,
+    events: list | None = None,
+    catalysts: list | None = None,
 ) -> str:
-    news_start = _days_before(as_of_date, look_back_days)
-    news = tools.get_stock_news(ticker, news_start, news_end)
-    block = [f"### {ticker}", "", "#### Recent news", news]
+    block = [f"### {ticker}", ""]
+    if events is not None:
+        # Clean-input mode: feed the standardized event corpus + structured
+        # catalysts instead of raw vendor news.
+        block += ["#### Standardized news events", _render_events(events)]
+        cat = _render_catalysts(catalysts or [])
+        if cat:
+            block += ["", "#### Structured catalysts", cat]
+    else:
+        news_start = _days_before(as_of_date, look_back_days)
+        news = tools.get_stock_news(ticker, news_start, news_end)
+        block += ["#### Recent news", news]
     if with_fundamentals:
         block += ["", "#### Fundamentals", tools.get_fundamentals(ticker, as_of_date)]
     return "\n".join(block)
@@ -95,6 +139,9 @@ decide a trading `direction` and a `catalyst_confidence` in [0,1]:
 - Block: no real catalyst, or untradable risk (halt/bankruptcy/extreme uncertainty).
 
 Confidence anchors: 0.0-0.2 none, 0.2-0.5 weak/ambiguous, 0.5-0.8 clear, 0.8-1.0 strong confirmed.
+Context may include standardized typed events (with certainty / source reliability / priced_in) and
+structured catalysts: weigh Confirmed, high-reliability, not-yet-priced-in catalysts most; discount
+already-PricedIn or low-reliability items and secondary mentions where the ticker isn't the subject.
 Return exactly one signal per ticker, with the ticker symbol verbatim and a one-line reason.
 
 Tickers and context:
@@ -110,9 +157,16 @@ def _analyze_batch(
     look_back_days: int,
     with_fundamentals: bool,
     news_end: str,
+    events_by_ticker: dict[str, list] | None = None,
+    catalysts_by_ticker: dict[str, list] | None = None,
 ) -> list[StockSignal]:
     contexts = {
-        t: _gather_context(t, as_of_date, tools, look_back_days, with_fundamentals, news_end) for t in tickers
+        t: _gather_context(
+            t, as_of_date, tools, look_back_days, with_fundamentals, news_end,
+            events=(events_by_ticker.get(t, []) if events_by_ticker is not None else None),
+            catalysts=(catalysts_by_ticker.get(t, []) if catalysts_by_ticker is not None else None),
+        )
+        for t in tickers
     }
     batch: _StockSignalBatch = structured_llm.invoke(_build_batch_prompt(contexts, as_of_date))
     requested = set(tickers)
@@ -134,6 +188,8 @@ def analyze_stocks(
     look_back_days: int = 7,
     with_fundamentals: bool = True,
     news_end: str | None = None,
+    events_by_ticker: dict[str, list] | None = None,
+    catalysts_by_ticker: dict[str, list] | None = None,
 ) -> list[StockSignal]:
     """Analyse ``tickers`` into ``StockSignal``s via concurrent batched LLM calls.
 
@@ -141,6 +197,11 @@ def analyze_stocks(
     of ``max_workers``. ``news_end`` (RFC3339 instant) caps per-stock news at a
     pre-market cutoff (defaults to ``as_of_date``). Output preserves input order
     and is deduped by ticker (first wins). ``tools``/``llm`` injectable for tests.
+
+    Clean-input mode: when ``events_by_ticker`` is given, each ticker's context
+    is built from its standardized news events (+ ``catalysts_by_ticker``) rather
+    than raw vendor news — the events are already pre-market-cut, so ``news_end``
+    is unused for those names. Fundamentals are still attached if requested.
     """
     if not tickers:
         return []
@@ -150,18 +211,16 @@ def analyze_stocks(
     tools = tools or get_market_tools(market)
 
     if llm is None:
-        import os
+        from ._llm import build_cascade_llm
 
-        from tradingagents.llm_clients import create_llm_client
-
-        client = create_llm_client(provider, model, base_url=base_url, google_api_key=os.getenv("GOOGLE_API_KEY"))
-        llm = client.get_llm()
+        llm = build_cascade_llm(provider, model, base_url)
     structured_llm = llm.with_structured_output(_StockSignalBatch)
 
     batches = [tickers[i : i + batch_size] for i in range(0, len(tickers), batch_size)]
 
     def run(batch: list[str]) -> list[StockSignal]:
-        return _analyze_batch(batch, as_of_date, tools, structured_llm, look_back_days, with_fundamentals, news_end)
+        return _analyze_batch(batch, as_of_date, tools, structured_llm, look_back_days,
+                              with_fundamentals, news_end, events_by_ticker, catalysts_by_ticker)
 
     by_ticker: dict[str, StockSignal] = {}
     with ThreadPoolExecutor(max_workers=max_workers) as pool:

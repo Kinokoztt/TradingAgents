@@ -87,6 +87,22 @@ def append_events(as_of_date: str, events: list[NewsEvent], out_dir: str = DEFAU
     return str(path)
 
 
+def load_catalysts(as_of_date: str, out_dir: str = DEFAULT_OUT_DIR) -> list[dict]:
+    """Load structured catalysts (flattened dict rows) from ``catalysts.jsonl``.
+
+    Catalysts are deterministic, numeric-payload events (earnings/grades/PT/…)
+    written by the line-1 pipeline. Returns ``[]`` when the file is absent — a
+    session can legitimately carry no structured catalysts (the news track is
+    separate). The rows are kept as raw dicts (numerics already flattened to the
+    top level) for direct rendering into the L1 context.
+    """
+    path = Path(out_dir) / as_of_date / CATALYSTS_FILE
+    if not path.exists():
+        return []
+    with path.open(encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
 def load_event_progress(as_of_date: str, out_dir: str = DEFAULT_OUT_DIR) -> set[str]:
     """Tickers already processed for this session (for resume). Empty if none."""
     path = Path(out_dir) / as_of_date / EVENTS_PROGRESS_FILE

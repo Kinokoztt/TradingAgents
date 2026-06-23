@@ -58,15 +58,26 @@ def run_regime_gate(
     with_fundamentals: bool = True,
     propagate: bool = True,
     use_llm_concepts: bool = True,
+    events_source: str | None = None,
+    gcs_bucket: str | None = None,
+    events_prefix: str = "event_corpus",
+    events_out_dir: str | None = None,
 ) -> RegimeReport:
     """Run the full cascade for trading session ``as_of_date`` and return a
     circuit-broken ``RegimeReport``.
 
     ``as_of_date`` is the **trading session** (the day being traded pre-open), not
     the data date: news is capped at that session's open (pre-market cutoff) and
-    the concept graph snapshot is read under that session. ``use_llm_concepts``
+    the concept graph snapshot is read under that session.     ``use_llm_concepts``
     toggles the LLM cluster/sector judges (S2/S3); when False the numeric
     ``aggregate_concepts`` gate feeds L3 directly. ``tools``/``llm`` injectable.
+
+    ``events_source`` ("gcs" | "local" | None) switches L1's input from raw
+    vendor news to the standardized event corpus: "gcs" pulls
+    ``events.jsonl``/``catalysts.jsonl`` for the session (needs ``gcs_bucket``)
+    into ``events_out_dir``; "local" reads them from there directly. The
+    news-active ticker set is then derived from the events themselves (ranked by
+    primary-event count), so the market-wide S0 BQ scan is skipped.
     """
     # Per-layer models: deep Pro reserved for the high-leverage L3 market verdict;
     # the high-volume L1 (per-stock) and L2 (cluster/sector) use a faster flash
@@ -81,8 +92,45 @@ def run_regime_gate(
     cutoff_utc, cutoff_fmp = premarket_cutoffs(as_of_date)
 
     # S0 + S1: news-active stocks (news capped at pre-market) -> per-stock signals.
-    # S0 is skipped when the caller pins the active names explicitly (small test runs).
-    if news_tickers is not None:
+    # In events mode L1 reads the standardized corpus and the active set is the
+    # tickers carrying events; otherwise S0 scans market-wide co-occurrence (or
+    # the caller pins names explicitly for small test runs).
+    events_by_ticker: dict[str, list] | None = None
+    catalysts_by_ticker: dict[str, list] | None = None
+    if events_source:
+        from .store import DEFAULT_OUT_DIR as REGIME_OUT_DIR
+        from .store import load_catalysts, load_events
+        from .tickers import canonical_ticker
+
+        ev_dir = events_out_dir or REGIME_OUT_DIR
+        if events_source == "gcs":
+            if not gcs_bucket:
+                raise ValueError("events_source='gcs' requires gcs_bucket")
+            from .gcs import download_catalysts, download_events
+
+            download_events(as_of_date, gcs_bucket, events_prefix, out_dir=ev_dir)
+            download_catalysts(as_of_date, gcs_bucket, events_prefix, out_dir=ev_dir)
+        elif events_source != "local":
+            raise ValueError(f"events_source must be 'gcs', 'local', or None (got {events_source!r})")
+
+        events_by_ticker = {}
+        for e in load_events(as_of_date, out_dir=ev_dir):
+            events_by_ticker.setdefault(canonical_ticker(e.ticker), []).append(e)
+        catalysts_by_ticker = {}
+        for c in load_catalysts(as_of_date, out_dir=ev_dir):
+            catalysts_by_ticker.setdefault(canonical_ticker(c.get("ticker", "")), []).append(c)
+
+        def _rank(t: str):
+            evs = events_by_ticker[t]
+            return (-sum(1 for e in evs if e.is_primary), -len(evs), t)
+
+        derived = sorted(events_by_ticker.keys(), key=_rank)
+        if news_tickers is not None:
+            pinned = {canonical_ticker(t) for t in news_tickers}
+            tickers = [t for t in derived if t in pinned]
+        else:
+            tickers = derived[:max_news_tickers] if max_news_tickers else derived
+    elif news_tickers is not None:
         tickers = news_tickers
     else:
         tickers = select_news_tickers(
@@ -92,7 +140,7 @@ def run_regime_gate(
     stock_signals = analyze_stocks(
         tickers, as_of_date, market=market, tools=tools, llm=llm, provider=provider, model=l1_model,
         base_url=base_url, batch_size=batch_size, max_workers=max_workers, with_fundamentals=with_fundamentals,
-        news_end=cutoff_utc,
+        news_end=cutoff_utc, events_by_ticker=events_by_ticker, catalysts_by_ticker=catalysts_by_ticker,
     )
 
     cluster_map = store.load_memberships(as_of_date, snapshot_dir)

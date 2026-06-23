@@ -196,12 +196,9 @@ def aggregate_concepts(
 def _resolve_structured_llm(llm, provider: str, model: str, base_url: str | None = None):
     """Bind structured output, creating a client from env if ``llm`` is None."""
     if llm is None:
-        import os
+        from ._llm import build_cascade_llm
 
-        from tradingagents.llm_clients import create_llm_client
-
-        client = create_llm_client(provider, model, base_url=base_url, google_api_key=os.getenv("GOOGLE_API_KEY"))
-        llm = client.get_llm()
+        llm = build_cascade_llm(provider, model, base_url)
     return llm.with_structured_output(_ConceptVerdict)
 
 

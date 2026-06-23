@@ -87,3 +87,51 @@ def download_report(
         raise FileNotFoundError(f"regime report missing on GCS: gs://{bucket}/{blob_path}")
     blob.download_to_filename(str(local))
     return local
+
+
+def download_events(
+    session: str,
+    bucket: str,
+    prefix: str = "event_corpus",
+    out_dir: str = DEFAULT_OUT_DIR,
+    project: str | None = None,
+) -> Path:
+    """Download the clean ``events.jsonl`` for ``session`` into the local layout.
+
+    Events are the standardized, typed news corpus the regime gate's L1 reads
+    instead of raw vendor news. Fails loudly if absent on GCS.
+    """
+    from google.cloud import storage
+
+    local = Path(out_dir) / session / EVENTS_FILE
+    local.parent.mkdir(parents=True, exist_ok=True)
+    blob_path = f"{prefix}/{session}/{EVENTS_FILE}" if prefix else f"{session}/{EVENTS_FILE}"
+    blob = storage.Client(project=project).bucket(bucket).blob(blob_path)
+    if not blob.exists():
+        raise FileNotFoundError(f"events missing on GCS: gs://{bucket}/{blob_path}")
+    blob.download_to_filename(str(local))
+    return local
+
+
+def download_catalysts(
+    session: str,
+    bucket: str,
+    prefix: str = "event_corpus",
+    out_dir: str = DEFAULT_OUT_DIR,
+    project: str | None = None,
+) -> Path | None:
+    """Download ``catalysts.jsonl`` for ``session`` if present; else return None.
+
+    Structured catalysts supplement the news events; a session may legitimately
+    have none, so a missing blob is not an error.
+    """
+    from google.cloud import storage
+
+    local = Path(out_dir) / session / CATALYSTS_FILE
+    local.parent.mkdir(parents=True, exist_ok=True)
+    blob_path = f"{prefix}/{session}/{CATALYSTS_FILE}" if prefix else f"{session}/{CATALYSTS_FILE}"
+    blob = storage.Client(project=project).bucket(bucket).blob(blob_path)
+    if not blob.exists():
+        return None
+    blob.download_to_filename(str(local))
+    return local

@@ -112,12 +112,9 @@ def analyze_regime(
     calendar = tools.get_economic_calendar(as_of_date, cal_end, cutoff=news_end)
 
     if llm is None:
-        import os
+        from ._llm import build_cascade_llm
 
-        from tradingagents.llm_clients import create_llm_client
-
-        client = create_llm_client(provider, model, base_url=base_url, google_api_key=os.getenv("GOOGLE_API_KEY"))
-        llm = client.get_llm()
+        llm = build_cascade_llm(provider, model, base_url)
 
     structured = llm.with_structured_output(_L3Verdict)
     verdict: _L3Verdict = structured.invoke(
