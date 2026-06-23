@@ -127,20 +127,32 @@ def _run_session(session: str, args, base_url: str | None, cg_bucket: str | None
     return report
 
 
+def _is_deterministic(e: BaseException) -> bool:
+    """Client/schema errors that fail identically on retry (4xx, context
+    overflow, validation). Retrying these only wastes time and hides a real bug,
+    so surface them immediately (the design rule: never retry 4xx/schema)."""
+    if getattr(e, "status_code", None) == 400:
+        return True
+    if type(e).__name__ in {"BadRequestError", "UnprocessableEntityError", "ValidationError"}:
+        return True
+    return "maximum context length" in str(e).lower()
+
+
 def _run_session_with_retries(session: str, args, base_url: str | None, cg_bucket: str | None):
     """Run one session, re-running on failure up to ``--retries`` times.
 
     A regime session isn't incrementally resumable, so a retry re-runs it whole
     (and overwrites) — fine for healing transient BQ/network/vLLM blips. Each
     retry first re-ensures vLLM (restarts a wedged engine) and returns the fresh
-    base URL.
+    base URL. Deterministic 4xx/schema errors are NOT retried (they'd fail the
+    same every time); they propagate to the session loop immediately.
     """
     last_url = base_url
     for attempt in range(args.retries + 1):
         try:
             return _run_session(session, args, last_url, cg_bucket)
         except Exception as e:  # noqa: BLE001 — retry loop heals transient failures
-            if attempt >= args.retries:
+            if _is_deterministic(e) or attempt >= args.retries:
                 raise
             wait = min(args.retry_wait * (2 ** attempt), 300.0)
             print(f"[{session}] attempt {attempt + 1}/{args.retries + 1} failed "

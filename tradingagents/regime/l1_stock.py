@@ -160,28 +160,33 @@ Tickers and context:
     return header + "\n\n".join(contexts[t] for t in contexts)
 
 
-def _analyze_batch(
-    tickers: list[str],
-    as_of_date: str,
-    tools: MarketDataTools,
-    structured_llm,
-    look_back_days: int,
-    with_fundamentals: bool,
-    news_end: str,
-    events_by_ticker: dict[str, list] | None = None,
-    catalysts_by_ticker: dict[str, list] | None = None,
-) -> list[StockSignal]:
-    contexts = {
-        t: _gather_context(
-            t, as_of_date, tools, look_back_days, with_fundamentals, news_end,
-            events=(events_by_ticker.get(t, []) if events_by_ticker is not None else None),
-            catalysts=(catalysts_by_ticker.get(t, []) if catalysts_by_ticker is not None else None),
-        )
-        for t in tickers
-    }
-    batch: _StockSignalBatch = structured_llm.invoke(_build_batch_prompt(contexts, as_of_date))
-    requested = set(tickers)
-    return [s for s in batch.signals if s.ticker in requested]
+def _estimate_tokens(text: str) -> int:
+    """Rough token count (~4 chars/token) — enough to budget batches so a prompt
+    can't exceed a self-hosted model's context window."""
+    return max(1, len(text) // 4)
+
+
+def _pack_batches(tickers: list[str], contexts: dict[str, str], batch_size: int,
+                  max_input_tokens: int) -> list[list[str]]:
+    """Greedily pack tickers into batches bounded by BOTH a ticker count and an
+    input-token budget, so a rich-context batch is split before it overflows the
+    model (the cause of HTTP 400 'maximum context length'). A single oversized
+    context is already capped by ``max_context_chars`` upstream, so it always
+    fits on its own."""
+    header = 220  # prompt header overhead, in tokens
+    batches: list[list[str]] = []
+    cur: list[str] = []
+    cur_tok = header
+    for t in tickers:
+        tok = _estimate_tokens(contexts[t]) + 4
+        if cur and (len(cur) >= batch_size or cur_tok + tok > max_input_tokens):
+            batches.append(cur)
+            cur, cur_tok = [], header
+        cur.append(t)
+        cur_tok += tok
+    if cur:
+        batches.append(cur)
+    return batches
 
 
 def analyze_stocks(
@@ -201,6 +206,9 @@ def analyze_stocks(
     news_end: str | None = None,
     events_by_ticker: dict[str, list] | None = None,
     catalysts_by_ticker: dict[str, list] | None = None,
+    max_tokens: int | None = None,
+    max_input_tokens: int = 24000,
+    max_context_chars: int = 8000,
 ) -> list[StockSignal]:
     """Analyse ``tickers`` into ``StockSignal``s via concurrent batched LLM calls.
 
@@ -213,6 +221,12 @@ def analyze_stocks(
     is built from its standardized news events (+ ``catalysts_by_ticker``) rather
     than raw vendor news — the events are already pre-market-cut, so ``news_end``
     is unused for those names. Fundamentals are still attached if requested.
+
+    Batching is token-budgeted: each name's context is capped at
+    ``max_context_chars`` and batches are packed up to ``batch_size`` tickers OR
+    ``max_input_tokens`` input tokens (whichever hits first), and the model's
+    output reservation is ``max_tokens`` — together this keeps prompts inside a
+    self-hosted model's context window instead of 400-ing on a fixed 20-pack.
     """
     if not tickers:
         return []
@@ -224,14 +238,34 @@ def analyze_stocks(
     if llm is None:
         from ._llm import build_cascade_llm
 
-        llm = build_cascade_llm(provider, model, base_url)
+        llm = build_cascade_llm(provider, model, base_url, max_tokens=max_tokens or 4096)
     structured_llm = llm.with_structured_output(_StockSignalBatch)
 
-    batches = [tickers[i : i + batch_size] for i in range(0, len(tickers), batch_size)]
+    # Build each name's context once (parallel IO), bound its size, then pack into
+    # token-budgeted batches — a fixed ticker count alone overflows a 32k model
+    # once contexts get rich (events + catalysts + fundamentals).
+    def ctx(t: str) -> tuple[str, str]:
+        c = _gather_context(
+            t, as_of_date, tools, look_back_days, with_fundamentals, news_end,
+            events=(events_by_ticker.get(t, []) if events_by_ticker is not None else None),
+            catalysts=(catalysts_by_ticker.get(t, []) if catalysts_by_ticker is not None else None),
+        )
+        if len(c) > max_context_chars:
+            c = c[:max_context_chars] + "\n…(context truncated)"
+        return t, c
+
+    contexts: dict[str, str] = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        for t, c in pool.map(ctx, tickers):
+            contexts[t] = c
+
+    batches = _pack_batches(tickers, contexts, batch_size, max_input_tokens)
 
     def run(batch: list[str]) -> list[StockSignal]:
-        return _analyze_batch(batch, as_of_date, tools, structured_llm, look_back_days,
-                              with_fundamentals, news_end, events_by_ticker, catalysts_by_ticker)
+        result: _StockSignalBatch = structured_llm.invoke(
+            _build_batch_prompt({t: contexts[t] for t in batch}, as_of_date))
+        requested = set(batch)
+        return [s for s in result.signals if s.ticker in requested]
 
     by_ticker: dict[str, StockSignal] = {}
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
