@@ -116,6 +116,7 @@ def _run_session(session: str, args, base_url: str | None, cg_bucket: str | None
         use_llm_concepts=not args.no_llm_concepts,
         events_source=events_source, gcs_bucket=args.gcs_bucket,
         events_prefix=args.events_prefix, events_out_dir=args.out_dir,
+        catalyst_look_back_days=args.catalyst_look_back, proxy=args.proxy,
     )
     save_report(session, report, out_dir=args.out_dir)
     if args.gcs_bucket:
@@ -175,6 +176,8 @@ def main() -> int:
                    help="L1 input: 'gcs' pulls events/catalysts from --gcs-bucket; 'local' reads --out-dir; "
                         "'none' uses the legacy raw-news S0 scan")
     p.add_argument("--events-prefix", default="event_corpus", help="GCS prefix for the event corpus")
+    p.add_argument("--catalyst-look-back", type=int, default=5,
+                   help="Trading-day window for structured catalysts (strictly before the session, age-tagged)")
 
     # cascade knobs
     p.add_argument("--news-look-back", type=int, default=3)

@@ -36,6 +36,53 @@ def premarket_cutoffs(session_date: str, hour: int = 9, minute: int = 0) -> tupl
     return utc_instant, et_dt.strftime("%Y-%m-%d %H:%M:%S")
 
 
+def _load_catalysts_window(
+    tools: MarketDataTools, session: str, ev_dir: str, look_back: int, proxy: str,
+    source: str, gcs_bucket: str | None, events_prefix: str,
+) -> list[dict]:
+    """Structured catalysts effective strictly BEFORE ``session``, over the last
+    ``look_back`` trading days, each tagged with ``age_sessions`` (trading days
+    since its effective date).
+
+    Strictly-before-session keeps the pre-open judgment leak-free (a same-day
+    after-open/AMC catalyst can't sneak in); the age lets L1 discount digested
+    catalysts instead of re-firing a stale earnings every session — the lasting
+    re-rating is carried by point-in-time fundamentals, not by re-injection.
+    """
+    import bisect
+    from datetime import datetime, timedelta
+
+    from .store import load_catalysts
+
+    lo = (datetime.fromisoformat(session) - timedelta(days=look_back * 2 + 10)).strftime("%Y-%m-%d")
+    df = tools.load_daily_ohlc([proxy], lo, session)
+    sess = [d.strftime("%Y-%m-%d") for d in sorted(df["trade_date"].unique())
+            if d.strftime("%Y-%m-%d") < session]
+    if not sess:
+        return []
+    window = sess[-look_back:]
+
+    def age_of(eff: str) -> int:
+        # Trading days from the catalyst's effective date to the session; a
+        # weekend catalyst maps to the next session (so age >= 1 always).
+        return max(1, len(sess) - bisect.bisect_left(sess, eff))
+
+    out: list[dict] = []
+    day = datetime.fromisoformat(window[0])
+    end = datetime.fromisoformat(session)
+    while day < end:  # window_start .. session-exclusive (calendar, to catch weekend M&A/dividends)
+        ds = day.strftime("%Y-%m-%d")
+        if source == "gcs":
+            from .gcs import download_catalysts
+
+            download_catalysts(ds, gcs_bucket, events_prefix, out_dir=ev_dir)
+        for c in load_catalysts(ds, out_dir=ev_dir):
+            c["age_sessions"] = age_of(c.get("effective_date", ds))
+            out.append(c)
+        day += timedelta(days=1)
+    return out
+
+
 def run_regime_gate(
     as_of_date: str,
     *,
@@ -62,6 +109,8 @@ def run_regime_gate(
     gcs_bucket: str | None = None,
     events_prefix: str = "event_corpus",
     events_out_dir: str | None = None,
+    catalyst_look_back_days: int = 5,
+    proxy: str = "SPY",
 ) -> RegimeReport:
     """Run the full cascade for trading session ``as_of_date`` and return a
     circuit-broken ``RegimeReport``.
@@ -99,17 +148,19 @@ def run_regime_gate(
     catalysts_by_ticker: dict[str, list] | None = None
     if events_source:
         from .store import DEFAULT_OUT_DIR as REGIME_OUT_DIR
-        from .store import load_catalysts, load_events
+        from .store import load_events
         from .tickers import canonical_ticker
 
         ev_dir = events_out_dir or REGIME_OUT_DIR
         if events_source == "gcs":
             if not gcs_bucket:
                 raise ValueError("events_source='gcs' requires gcs_bucket")
-            from .gcs import download_catalysts, download_events
+            from .gcs import download_events
 
+            # Events are the session's own overnight news window (already cut at
+            # the pre-market boundary); catalysts span a trailing trading-day
+            # window and are downloaded per effective_date inside the loader.
             download_events(as_of_date, gcs_bucket, events_prefix, out_dir=ev_dir)
-            download_catalysts(as_of_date, gcs_bucket, events_prefix, out_dir=ev_dir)
         elif events_source != "local":
             raise ValueError(f"events_source must be 'gcs', 'local', or None (got {events_source!r})")
 
@@ -117,7 +168,8 @@ def run_regime_gate(
         for e in load_events(as_of_date, out_dir=ev_dir):
             events_by_ticker.setdefault(canonical_ticker(e.ticker), []).append(e)
         catalysts_by_ticker = {}
-        for c in load_catalysts(as_of_date, out_dir=ev_dir):
+        for c in _load_catalysts_window(tools, as_of_date, ev_dir, catalyst_look_back_days,
+                                        proxy, events_source, gcs_bucket, events_prefix):
             catalysts_by_ticker.setdefault(canonical_ticker(c.get("ticker", "")), []).append(c)
 
         def _rank(t: str):

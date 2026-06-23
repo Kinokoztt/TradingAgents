@@ -94,12 +94,21 @@ def _render_events(events: list) -> str:
 
 
 def _render_catalysts(catalysts: list) -> str:
-    """Render structured (deterministic, numeric) catalysts for one ticker."""
+    """Render structured (deterministic, numeric) catalysts for one ticker.
+
+    Each carries ``age_sessions`` (trading days since its effective date): a
+    same-/prior-day catalyst is fresh, an older one is largely digested. We sort
+    freshest-first and surface the age so the model weights recency rather than
+    treating a week-old earnings the same as today's — the lasting re-rating is
+    already reflected in the Fundamentals block."""
     if not catalysts:
         return ""
+    rows = sorted(catalysts, key=lambda c: c.get("age_sessions", 0))
     lines = []
-    for c in catalysts[:20]:
-        lines.append(f"- [{c.get('effective_date', '')}] "
+    for c in rows[:20]:
+        age = c.get("age_sessions")
+        age_tag = f"{age}d ago" if age else "today"
+        lines.append(f"- [{c.get('effective_date', '')}, {age_tag}] "
                      f"{c.get('catalyst_type', '')}/{c.get('polarity', '')}: {c.get('summary', '')}")
     return "\n".join(lines)
 
@@ -140,8 +149,10 @@ decide a trading `direction` and a `catalyst_confidence` in [0,1]:
 
 Confidence anchors: 0.0-0.2 none, 0.2-0.5 weak/ambiguous, 0.5-0.8 clear, 0.8-1.0 strong confirmed.
 Context may include standardized typed events (with certainty / source reliability / priced_in) and
-structured catalysts: weigh Confirmed, high-reliability, not-yet-priced-in catalysts most; discount
-already-PricedIn or low-reliability items and secondary mentions where the ticker isn't the subject.
+structured catalysts (with an age in trading days): weigh Confirmed, high-reliability, not-yet-priced-in,
+RECENT catalysts most; discount already-PricedIn or low-reliability items, secondary mentions where the
+ticker isn't the subject, and older catalysts (a 5-day-old earnings is largely digested — its lasting
+effect already shows in Fundamentals, so don't treat it as a fresh catalyst).
 Return exactly one signal per ticker, with the ticker symbol verbatim and a one-line reason.
 
 Tickers and context:

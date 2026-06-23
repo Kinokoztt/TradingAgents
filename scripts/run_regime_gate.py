@@ -83,6 +83,9 @@ def main() -> int:
                    help="L1 input: 'gcs' pulls events.jsonl/catalysts.jsonl from --gcs-bucket; "
                         "'local' reads them from --out-dir; 'none' uses the legacy raw-news S0 scan")
     p.add_argument("--events-prefix", default="event_corpus", help="GCS prefix for the event corpus")
+    p.add_argument("--catalyst-look-back", type=int, default=5,
+                   help="Trading-day window for structured catalysts (strictly before the session, age-tagged so "
+                        "stale ones are discounted; 0 = same-day only)")
 
     # cascade knobs
     p.add_argument("--news-look-back", type=int, default=3)
@@ -159,6 +162,7 @@ def main() -> int:
             gcs_bucket=args.gcs_bucket,
             events_prefix=args.events_prefix,
             events_out_dir=args.out_dir,
+            catalyst_look_back_days=args.catalyst_look_back,
         )
     finally:
         if auto_served and args.stop_after_task:
