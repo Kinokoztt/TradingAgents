@@ -12,12 +12,21 @@ from __future__ import annotations
 import os
 
 
+def clip_text(text: str, max_chars: int) -> str:
+    """Cap a variable-length prompt block so a layer can't overflow a self-hosted
+    model's context window. Keeps the head (most feeds lead with the newest items)
+    and marks the cut so the model knows it's truncated."""
+    if text and len(text) > max_chars:
+        return text[:max_chars] + "\n…(truncated)"
+    return text
+
+
 def build_cascade_llm(
     provider: str,
     model: str,
     base_url: str | None = None,
     *,
-    max_tokens: int = 8192,
+    max_tokens: int = 2048,
     timeout: float = 300.0,
 ):
     """Build the structured-output base LLM for one cascade layer.

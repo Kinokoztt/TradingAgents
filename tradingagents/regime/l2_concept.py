@@ -25,6 +25,7 @@ from tradingagents.concept_graph.schemas import Cluster, Membership
 from tradingagents.concept_graph.sectors import normalize_sector
 from tradingagents.market_tools import MarketDataTools, get_market_tools
 
+from ._llm import clip_text
 from .schemas import ConceptSignal, Direction, StockSignal, Strength
 from .tickers import canonical_ticker
 
@@ -278,10 +279,12 @@ def judge_clusters(
         sig_lines = "\n".join(
             f"- {s.ticker}: {s.direction.value} conf={s.catalyst_confidence:.2f} — {s.reason}" for s in sigs
         )
-        news_block = "\n\n".join(
-            f"#### {s.ticker}\n{tools.get_stock_news(s.ticker, news_start, news_end)}"
+        # Cap each member's news and the assembled block so a hot cluster's
+        # refetched news can't overflow the model's context window.
+        news_block = clip_text("\n\n".join(
+            f"#### {s.ticker}\n{clip_text(tools.get_stock_news(s.ticker, news_start, news_end), 5000)}"
             for s in sigs[:news_members_top_k]
-        )
+        ), 20000)
         prompt = f"""You are a thematic equity analyst. Judge concept cluster '{label}'
 (members: {', '.join(members)}) as of {as_of_date}.
 

@@ -114,11 +114,17 @@ def analyze_regime(
     if llm is None:
         from ._llm import build_cascade_llm
 
-        llm = build_cascade_llm(provider, model, base_url)
+        llm = build_cascade_llm(provider, model, base_url, max_tokens=3072)
+
+    # Cap the variable-length blocks before prompting so a fat 10-day global-news
+    # dump can't blow the model's context window (the full macro_summary/calendar
+    # are still stored on the report for audit — only the prompt copy is clipped).
+    from ._llm import clip_text
 
     structured = llm.with_structured_output(_L3Verdict)
     verdict: _L3Verdict = structured.invoke(
-        _build_prompt(as_of_date, macro_summary, market_news, calendar, concept_signals)
+        _build_prompt(as_of_date, clip_text(macro_summary, 12000), clip_text(market_news, 24000),
+                      clip_text(calendar, 8000), concept_signals)
     )
 
     return RegimeReport(
