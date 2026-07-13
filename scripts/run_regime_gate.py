@@ -62,6 +62,10 @@ def main() -> int:
                    help="Comma-separated tickers to analyze directly, SKIPPING the S0 market-wide news scan (small test runs)")
     p.add_argument("--out-dir", default=DEFAULT_OUT_DIR, help="Where to write the regime report")
     p.add_argument("--cg-out-dir", default=CG_OUT_DIR, help="Concept graph snapshot dir to read")
+    p.add_argument("--cg-from-gcs", action="store_true",
+                   help="Decoupled mode: download the session's concept-graph snapshot from --gcs-bucket "
+                        "into --cg-out-dir before running (the concept graph is now built by a separate job)")
+    p.add_argument("--cg-gcs-prefix", default="concept_graph", help="GCS prefix to pull the concept-graph snapshot from")
     # LLM provider/endpoint. Defaults to a self-hosted vLLM (Qwen); pass
     # --provider google (+ keys) to run the cascade on a hosted API instead.
     p.add_argument("--provider", default="vllm", help="LLM provider (vllm, google, openai, ...)")
@@ -113,6 +117,17 @@ def main() -> int:
     if as_of == "latest":
         as_of = today_et.strftime("%Y-%m-%d")
         print(f"resolved --as-of latest -> session {as_of} (today ET)")
+
+    # Decoupled flow: the concept graph is materialized by its own job and lives
+    # on GCS. Pull the session snapshot into the local dir the cascade reads from.
+    if args.cg_from_gcs:
+        if not args.gcs_bucket:
+            raise ValueError("--cg-from-gcs requires --gcs-bucket")
+        from tradingagents.concept_graph.gcs import download_snapshot
+
+        download_snapshot(as_of, args.gcs_bucket, args.cg_gcs_prefix, out_dir=args.cg_out_dir)
+        print(f"downloaded concept-graph snapshot for {as_of} from "
+              f"gs://{args.gcs_bucket}/{args.cg_gcs_prefix}/{as_of}/ -> {args.cg_out_dir}")
 
     universe = None
     if args.tickers:

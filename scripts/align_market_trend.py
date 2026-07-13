@@ -93,9 +93,17 @@ def _universe_forward_returns(price_df: pd.DataFrame, proxy: str, session: str,
     return out
 
 
-def _gate_state(report, k: int) -> str:
+def _gate_call(report, k: int) -> tuple[str, float]:
+    """The gate's (state, confidence) for horizon k.
+
+    Prefer the per-horizon ``outlook`` (state + its own confidence); fall back to
+    the near-term ``market_state`` (confidence 0.0, i.e. uncalibrated) when the
+    horizon wasn't emitted — matching evaluate.py's ``graded_state``.
+    """
     outlook = report.outlook_for(k)
-    return (outlook.direction if outlook else report.market_state).value
+    if outlook:
+        return outlook.direction.value, float(outlook.confidence)
+    return report.market_state.value, 0.0
 
 
 def _confusion(rows: pd.DataFrame) -> pd.DataFrame:
@@ -132,6 +140,30 @@ def _f(x: float | None) -> str:
     return "n/a" if x is None else f"{x:.3f}"
 
 
+def _threshold_table(rows: pd.DataFrame, title: str,
+                     thresholds: tuple[float, ...]) -> None:
+    """Accuracy as a function of the gate's own confidence (calibration view).
+
+    For each cut we keep only (session, horizon) calls whose ``gate_conf`` >= cut
+    and report coverage (how many calls survive) alongside accuracy on that
+    subset. A well-calibrated gate should trade coverage for accuracy: higher
+    confidence -> fewer but more-correct calls. ``directional`` repeats the cut
+    on non-Range calls only, since a Range/Flat verdict carries no tradable side.
+    """
+    total = len(rows)
+    print(f"\n===== {title}: accuracy vs confidence threshold =====  (total calls={total})")
+    print(f"  {'conf>=':>7} {'cover':>6} {'cov%':>6} {'acc':>7} {'dir_cover':>9} {'dir_acc':>8}")
+    for c in thresholds:
+        sub = rows[rows["gate_conf"] >= c]
+        cov = len(sub)
+        acc = float((sub["gate_state"] == sub["truth_state"]).mean()) if cov else None
+        d = sub[sub["gate_state"] != MarketRegime.RANGE.value]
+        d_cov = len(d)
+        d_acc = float((d["gate_state"] == d["truth_state"]).mean()) if d_cov else None
+        print(f"  {c:>7.2f} {cov:>6d} {cov / max(total, 1) * 100:>5.1f}% {_f(acc):>7} "
+              f"{d_cov:>9d} {_f(d_acc):>8}")
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--out-dir", default=DEFAULT_OUT_DIR, help="Where the per-session reports live")
@@ -142,6 +174,8 @@ def main() -> int:
     p.add_argument("--horizons", default="1,3,5", help="Comma-separated trading-day horizons")
     p.add_argument("--dead-band", type=float, default=0.25,
                    help="Flat dead band = dead_band * cross-session sigma of mkt_ret (0 = pure sign)")
+    p.add_argument("--conf-thresholds", default="0.0,0.5,0.6,0.7,0.8,0.9",
+                   help="Comma-separated gate-confidence cuts for the accuracy-vs-confidence table")
     p.add_argument("--out", default="", help="Optional CSV path for the per-(session,horizon) table")
     args = p.parse_args()
 
@@ -175,10 +209,11 @@ def main() -> int:
         for k in horizons:
             if mkt[k] is None:
                 continue
+            state, conf = _gate_call(report, k)
             records.append({
                 "session": session, "horizon": k, "n_universe": len(universe),
                 "mkt_ret": mkt[k], "mkt_ret_bps": mkt[k] * 1e4,
-                "gate_state": _gate_state(report, k),
+                "gate_state": state, "gate_conf": conf,
             })
         elapsed = sum(1 for k in horizons if mkt[k] is not None)
         print(f"[{session}] universe={len(universe)}  horizons_elapsed={elapsed}/{len(horizons)}")
@@ -209,6 +244,11 @@ def main() -> int:
     for k in horizons:
         _report_block(df[df["horizon"] == k], f"horizon {k}d")
     _report_block(df, "POOLED (all horizons)")
+
+    conf_cuts = tuple(float(c) for c in args.conf_thresholds.split(",") if c.strip())
+    for k in horizons:
+        _threshold_table(df[df["horizon"] == k], f"horizon {k}d", conf_cuts)
+    _threshold_table(df, "POOLED (all horizons)", conf_cuts)
 
     if args.out:
         df.to_csv(args.out, index=False)
